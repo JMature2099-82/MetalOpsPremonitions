@@ -1,17 +1,35 @@
+//Vengeance Striker
 
-brightmap sprite PSTFA0 {map "Brightmaps/Weapons/Pistol/PSTFA0_BM.png"}
-brightmap sprite PSTFB0 {map "Brightmaps/Weapons/Pistol/PSTFB0_BM.png"}
-brightmap sprite PSTFC0 {map "Brightmaps/Weapons/Pistol/PSTFC0_BM.png"}
-brightmap sprite PSTFD0 {map "Brightmaps/Weapons/Pistol/PSTFD0_BM.png"}
-brightmap sprite PSTFE0 {map "Brightmaps/Weapons/Pistol/PSTFE0_BM.png"}
+//Fire
+brightmap sprite PSTFA0 {map "Brightmaps/Weapons/Pistol/PSTFA0.png"}
+brightmap sprite PSTFB0 {map "Brightmaps/Weapons/Pistol/PSTFB0.png"}
+brightmap sprite PSTFC0 {map "Brightmaps/Weapons/Pistol/PSTFC0.png"}
+brightmap sprite PSTFD0 {map "Brightmaps/Weapons/Pistol/PSTFD0.png"}
 
-brightmap sprite PSTGA0 {map "Brightmaps/Weapons/Pistol/PSTGA0_BM.png"}
+//Select
+brightmap sprite PSTDA0 {map "Brightmaps/Weapons/Pistol/PSTDA0.png"}
+brightmap sprite PSTDB0 {map "Brightmaps/Weapons/Pistol/PSTDB0.png"}
+brightmap sprite PSTDC0 {map "Brightmaps/Weapons/Pistol/PSTDC0.png"}
+brightmap sprite PSTDD0 {map "Brightmaps/Weapons/Pistol/PSTDD0.png"}
+brightmap sprite PSTDE0 {map "Brightmaps/Weapons/Pistol/PSTDE0.png"}
 
-brightmap sprite PSTDA0 {map "Brightmaps/Weapons/Pistol/PSTDA0_BM.png"}
-brightmap sprite PSTDB0 {map "Brightmaps/Weapons/Pistol/PSTDB0_BM.png"}
-brightmap sprite PSTDC0 {map "Brightmaps/Weapons/Pistol/PSTDC0_BM.png"}
-brightmap sprite PSTDD0 {map "Brightmaps/Weapons/Pistol/PSTDD0_BM.png"}
+//Kick
+brightmap sprite PSTKA0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKA0.png"}
+brightmap sprite PSTKB0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKB0.png"}
+brightmap sprite PSTKC0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKC0.png"}
+brightmap sprite PSTKD0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKD0.png"}
+brightmap sprite PSTKE0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKE0.png"}
+brightmap sprite PSTKF0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKF0.png"}
 
+//Empty Kick
+brightmap sprite PS1KA0 {map "Brightmaps/Weapons/Pistol/Kick/PS1KA0.png"}
+brightmap sprite PS1KB0 {map "Brightmaps/Weapons/Pistol/Kick/PS1KB0.png"}
+brightmap sprite PS1KC0 {map "Brightmaps/Weapons/Pistol/Kick/PS1KC0.png"}
+brightmap sprite PS1KD0 {map "Brightmaps/Weapons/Pistol/Kick/PS1KD0.png"}
+brightmap sprite PS1KE0 {map "Brightmaps/Weapons/Pistol/Kick/PS1KE0.png"}
+brightmap sprite PS1KF0 {map "Brightmaps/Weapons/Pistol/Kick/PSTKF0.png"}
+
+/*
 brightmap sprite PSR1A0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM01.png"}
 brightmap sprite PSR1B0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM02.png"}
 brightmap sprite PSR1C0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM03.png"}
@@ -35,4 +53,4 @@ brightmap sprite PSR1T0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM16.png"}
 brightmap sprite PSR1U0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM17.png"}
 brightmap sprite PSR1V0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM18.png"}
 brightmap sprite PSR1W0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM19.png"}
-brightmap sprite PSR1X0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM01.png"}
+brightmap sprite PSR1X0 {map "Brightmaps/Weapons/Pistol/PistolReload_BM01.png"}*/

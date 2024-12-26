@@ -39,7 +39,7 @@ class MO_PlayerBase : DoomPlayer
 	{
 		Player.AttackZOffset 11; //Attacks should actually hit on the same spot as the crosshair now. Thanks Gemini0! -JM
 		Player.WeaponSlot 1, "Katana";
-		Player.WeaponSlot 2, "EnforcerPistol", "MO_Submachinegun";
+		Player.WeaponSlot 2, "MO_VengeanceStriker", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", "MO_MiniGun", "MO_HeavyRifle";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
@@ -53,7 +53,7 @@ class MO_OfficerPlayer : MO_PlayerBase
 {
     Default
     {
-        Player.StartItem "EnforcerPistol";
+        Player.StartItem "MO_VengeanceStriker";
 		Player.DisplayName "Officer (Pistol Start)";
 		Player.CrouchSprite "PLYC";
 		Player.StartItem "PistolMagAmmo",18;
@@ -76,6 +76,7 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.StartItem "HeatBlastShotCount", 45;
 
 		//Never used tokens
+		Player.StartItem "NeverUsedPistol";
 		Player.StartItem "NeverUsedLAS";
 		Player.StartItem "NeverUsedPSG";
 		Player.StartItem "NeverUsedSMG";

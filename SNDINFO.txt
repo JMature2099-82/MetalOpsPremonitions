@@ -50,6 +50,10 @@ weapons/katana/miss KATCLSH
 $random weapons/pistol/fire {PistolFire1 PistolFire2}
 PistolFire1 PISTFIR1
 PistolFire2 PISTFIR2
+pistol/inspect PSINSP
+pistol/reloadlift "Sounds/Weapons/Pistol_ReloadLift.ogg"
+pistol/reloadend "Sounds/Weapons/Pistol_ReloadEnd.ogg"
+pistol/reloadendfast "Sounds/Weapons/Pistol_ReloadEndFast.ogg"
 weapons/pistol/silfire PISTSIL
 
 weapons/pistol/draw PISTDRW
