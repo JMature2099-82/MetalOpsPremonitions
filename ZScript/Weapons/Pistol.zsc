@@ -16,7 +16,7 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		Weapon.AmmoType2 "PistolMagAmmo";
 		Obituary "$OBMO_VENPISTOL";
 		+WEAPON.WIMPY_WEAPON;
-		Inventory.Pickupmessage "$GOTENFPISTOL";
+		Inventory.Pickupmessage "$GOTVENPISTOL";
 		Tag "$TAG_VENPISTOL";
 		Scale .55;
 		Inventory.PickupSound "weapons/pistol/pickup";
