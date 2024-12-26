@@ -15,7 +15,7 @@ class MO_PumpShotgun : JMWeapon
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
 		JMWeapon.inspectToken "NeverUsedPSG";
-+Weapon.NoAlert
+		+Weapon.NoAlert
     }
     States
     {
@@ -182,15 +182,26 @@ class MO_PumpShotgun : JMWeapon
             PGR1 AB 1 JM_WeaponReady(WRF_NOFIRE);
             PGR1 C 1 A_StartSound("weapons/pumpshot/load", 1);
             PISG A 0 JM_LoadShell("PumpShotgunAmmo","MO_ShotShell",1);
-			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-            PGR1 DEFGHII 1 JM_WeaponReady(WRF_NOFIRE);
-            PGR1 I 5 {
-				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(3);}
-				if(PressingFire() || PressingAltFire()) {SetWeaponState("DoneReload");}
+			PSTF A 0 A_JumpIf(invoker.OwnerHasSpeed(), 3);
+            PGR1 DE 1 JM_WeaponReady(WRF_NOFIRE);
+			PGR1 FGHII 1 
+			{
+				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
-            PISG A 0;
-            PISG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
+			PSTG A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+            PGR1 IIII 1 {
+				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
+				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
+            PISG A 0
+			{
+				if(PressingFire()) {return ResolveState("Fire");}
+				if(PressingAltFire()) {return ResolveState("AltFire");}
+				return JM_WeaponReady(WRF_NOFIRE);
+			}
             Loop;
         DoneReload:
             PSGR BA 1;

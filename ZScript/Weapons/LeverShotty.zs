@@ -184,16 +184,27 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			A_StartSound("weapons/levershotty/load", 1);
 			return JM_WeaponReady(WRF_NOFIRE);
 			}
-		PISG A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
-		W8R2 DEFGHI 1 JM_WeaponReady(WRF_NOFIRE);
-		W8R2 I 9
+		W87G A 0 JM_LoadShell("LeverShottyAmmo","MO_ShotShell",1);
+		W8R2 DE 1;
+		W8R2 FGHI 1
 		{
-			if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(6);}
-			if(PressingFire() || PressingAltFire()) {SetWeaponState("DoneReload");}
+			if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
 			return JM_WeaponReady(WRF_NOFIRE);
 		}
-		PISG A 0;
-		PISG A 0 A_JumpIf(PressingFire() || PressingAltFire(), "DoneReload");
+		W87G A 0 A_JumpIf(invoker.OwnerHasSpeed(), 3);
+		W8R2 IIIIIIIII 1 
+		{
+			if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
+			if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
+			return JM_WeaponReady(WRF_NOFIRE);
+		}
+		PISG A 0 
+		{
+			if(PressingFire()) {return ResolveState("Fire");}
+			if(PressingAltFire()) {return ResolveState("AltFire");}
+			return JM_WeaponReady(WRF_NOFIRE);
+		}
 		Loop;
 	DoneReload:
 		W8R1 QR 1 JM_WeaponReady(WRF_NOFIRE);

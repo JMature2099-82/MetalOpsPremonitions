@@ -2,14 +2,14 @@ class MO_LowCaliber : Ammo
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a low caliber magazine."; // "Picked up a clip."
+	  Inventory.PickupMessage "Picked up a low caliber magazine.";
 	  Inventory.Amount 10;
 	  Inventory.MaxAmount 150;
 	  Ammo.BackpackAmount 30;
 	  Ammo.BackpackMaxAmount 300;
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
-	  Scale 0.55;
+	  Scale 0.85;
 	 }
 	  States
 	  {
@@ -23,9 +23,8 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a box of low caliber bullets."; // "Picked up a box of bullets."
+	  Inventory.PickupMessage "Picked up a box of low caliber bullets.";
 	  Inventory.Amount 50;
-	  Scale 1.0;
 	  Inventory.PickUpSound "misc/ammobox";
 	}
 	  States
@@ -60,7 +59,7 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
  {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a box of high caliber bullets."; // "Picked up a box of bullets."
+	  Inventory.PickupMessage "Picked up a box of high caliber bullets.";
 	  Inventory.Amount 50;
 	  Inventory.PickUpSound "misc/ammobox";
 	}
