@@ -3,6 +3,7 @@
 
 ## How to Install
 - Use GZDoom 4.6 or higher. I recommend 4.8.2 or 4.11 dev builds. For Android, use Delta Touch.
+This mod will NOT work on LZDoom.
 - Using a frontend like ZDL, Doomrunner or SSGL is recommended.
 - If you're using monster mods, I recommend loading Metal Ops after the monster mods so there are no issues.
 
