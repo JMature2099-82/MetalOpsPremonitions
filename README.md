@@ -8,7 +8,7 @@ This mod will NOT work on LZDoom.
 - If you're using monster mods, I recommend loading Metal Ops after the monster mods so there are no issues.
 
 ## Bug reporting and feedback
-If you have a bug to report, please post on the Issues tab or message me on ModDB.
+If you have a bug to report, please post on the Issues tab or message me on Discord. My Discord is jmature_harmonious.
 
 Any feedback or suggestions will be appreciated.
 IF YOUR FEEDBACK IS BASED ON THE MOTION BLUR USED ON SOME SPRITES, IT IS AN ARTISTIC CHOICE I MADE.
