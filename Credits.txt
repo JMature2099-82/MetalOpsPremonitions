@@ -1,14 +1,12 @@
 Credits goes to all developers, modders, games that are used!
 Credits for sounds and weapons
 
-Pistol 
+Pistol:
 Sprites - Sonik.o.fan (aka TSF)
-Sounds - Valve (L4D2 Pistol Draw, L4D1 Reload sounds), Code Renard (Firing sounds), CGEffex (Casings)
-Pickup sprite - YukesVonFaust, torridgristle, Slax
-Casings - Captain J
-Dry Fire Sound - Mike Koenig(from Soundbible.com)
-Silencer sprites: Center frames (JoeyTD), reload silencer 1 (Dox778?, PB Team?), reload silencer 2 (Skellegant)
-Silencer attach sounds - Criterion Games, EA
+Updated Sounds - RaviK (pistol draw), Magmacow (Firing sounds), Infinity Ward (casings, reloads), Criterion Games (some foley for the inspect)
+Pickup sprite - Machinegun Cow (MG0061), Edward Marlus
+Casings - MetalMan/bluechip
+Dry Fire Sound - Navaro
 
 Lever Shotty: 
 LossForWords - sprites

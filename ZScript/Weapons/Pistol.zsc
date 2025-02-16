@@ -16,6 +16,8 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		Weapon.AmmoType2 "PistolMagAmmo";
 		Obituary "$OBMO_VENPISTOL";
 		+WEAPON.WIMPY_WEAPON;
+		+WEAPON.NO_AUTO_SWITCH;
+		+WEAPON.NOAUTOFIRE;
 		Inventory.Pickupmessage "$GOTVENPISTOL";
 		Tag "$TAG_VENPISTOL";
 		Scale .55;
@@ -48,6 +50,24 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		invoker.burstcounter++;
 	}
 
+	action void MO_FirePistol()
+	{
+		if(invoker.Ammo2.amount < 1)
+		{
+				A_StartSound("weapon/pistolempty",0);
+				SetWeaponState("Reload");
+		}
+		else
+		{
+			A_FireBullets (5.6, 0, 1, 12, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
+			A_StartSound("weapons/pistol/fire", CHAN_WEAPON);
+			A_AlertMonsters();
+			A_GunFlash();
+			A_TakeInventory("PistolMagAmmo",1,TIF_NOTAKEINFINITE);
+			JM_CheckForQuadDamage();
+		}
+	}
+
 	States
 	{
 	ContinueSelect:
@@ -67,6 +87,9 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		{
 			if(CountInv("PistolMagAmmo") == 0 && CountInv("MO_LowCaliber") > 1)
 			{return ResolveState("REload");}
+			if(PressingFire() && invoker.Ammo2.amount > 0) {
+				return ResolveState("Fire");
+			}
 			return JM_WeaponReady(WRF_ALLOWRELOAD);
 		}
 		Loop;
@@ -102,38 +125,26 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		PSTG A 0;
 		Goto ClearAudioAndResetOverlays;
 	Fire:
-		PSTG A 0 MO_CheckMag;	
-		PSTF A 1 {
-			A_FireBullets (5.6, 0, 1, 12, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
-			A_StartSound("weapons/pistol/fire", CHAN_WEAPON);
-			A_AlertMonsters();
-			A_GunFlash();
-			A_TakeInventory("PistolMagAmmo",1,TIF_NOTAKEINFINITE);
-			JM_CheckForQuadDamage();
-			}
+		PSTF A 1 MO_FirePistol;
 		PSTG A 0 {MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (26, 0, -7));}
 		PSTF B 1 JM_GunRecoil(-0.3, .06);
 		PSTF C 1 JM_GunRecoil(+0.125, .01);
 		PSTG A 0 MO_CheckMag;
 		PSTF D 1;
 		PSTD D 0;
- 		"####" "########" 1 {
+ 		PSTD DDDDDDDD 1 {
 				If(JustPressed(BT_ATTACK))
 				{return ResolveState("Fire");}
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
 			}
+		PSTG A 0 A_JumpIf(PressingFire(), "Fire");
 		Goto ReadyToFire;
 	AltFire:
-		PSTG A 0 MO_CheckMag;
-		PSTF A 1 {
-			A_FireBullets (5.6, 0, 1, 12, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
-			A_StartSound("weapons/pistol/fire", CHAN_WEAPON);
-			A_AlertMonsters();
-			A_GunFlash("Flash");
-			A_TakeInventory("PistolMagAmmo",1,TIF_NOTAKEINFINITE);
-			JM_CheckForQuadDamage();
+		PSTF A 1 
+		{
+			MO_FirePistol();
 			MO_CountBurst();
-			}
+		}
 		PSTG A 0 {MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (26, 0, -7));}
 		PSTF A 0 A_JumpIf(MO_IsMaxBurstCount(), "BurstFinished");
 		PSTF C 1 JM_GunRecoil(-0.45, .06);		
@@ -155,7 +166,9 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		{
 			MO_ResetBurstCount();
 			if(CountInv("PistolMagAmmo") >=17) {return ResolveState("ReadyToFire");}
-			if(CountInv("MO_LowCaliber") < 1) {return ResolveState("ReadyToFire");}
+			if(CountInv("MO_LowCaliber") < 1) {			
+				return ResolveState("ReadyToFire");
+			}
 			if(CountInv("PistolMagAmmo") > 1 && CountInv("PistolMagAmmo") <= 17)
 			{return ResolveState("TacticalReload");}
 			return ResolveState(null);
@@ -270,8 +283,9 @@ class MO_VengeanceStriker : JMWeapon// replaces Pistol
 		PSR4 HJK 1 JM_WeaponReady(WRF_NOFIRE);
 		Goto ReadyToFire;
 	Flash:
-		PSTF Z 1 A_AttachLightDef('GunLighting', 'GunFireLight');
-		TNT1 A 2 Bright A_RemoveLight('GunLighting');
+		PSTF Z 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+		TNT1 A 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
+		TNT1 A 2 BRIGHT A_RemoveLight('GunLighting');
 		Goto LightDone;
 
  	Spawn:
