@@ -31,7 +31,7 @@ class MOps_Handler : EventHandler
 				if(p.mo is "MO_SergeantPlayer")
 				{e.Replacement = "MO_Deagle";}
 				else
-				{e.Replacement = "EnforcerPistol";}
+				{e.Replacement = "MO_VengeanceStriker";}
 				break;
 			case 'Shotgun':
 				e.Replacement = "ShotgunDropper";

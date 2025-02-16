@@ -22,7 +22,7 @@ NCH_LABEL_HEATLEVEL = "Heat Level";
 // Used by Faspons patch.
 NCH_LABEL_ADRENALINE = "Adrenaline";
 
-// Used by MetaDoom patch.
+// Used by MetaDoom patch.f
 NCH_LABEL_POINTS = "P";
 
 // ------------------------------------------------------------------------------------------------
@@ -116,8 +116,9 @@ OB_ICEFLAMER = "%o was frozen by %k's Freezethrower.";
 GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
 
 //Pistol
-GOTENFPISTOL = "You got the Enforcer Sidearm! (Slot 2)";
-OB_PISTOL = "%o got peppered by %k's Enforcer Sidearm.";
+GOTVENPISTOL = "You got the Vengeance Striker Sidearm! (Slot 2)";
+TAG_VENPISTOL = "Vengeance Striker";
+OBMO_VENPISTOL = "%o was peppered by %k's Vengeance Striker.";
 
 //SMG
 GOTSMG = "You got the Submachine Gun! (Slot 2)";
@@ -173,6 +174,7 @@ OB_PLASMABEAM = "%o couldn't handle the energy of %k's Plasma Beam.";
 OB_HEATPLASMA = "%o was scorched %k's Super Heated Plasma Rounds.";
 
 //Rocket Launcher
+TAG_MOROCKET = "Rocket Launcher"; 
 OB_MOROCKET = "%k's rocket took %o for a ride.";
 OB_MOROCKETSPLASH = "%o couldn't dodge %k's rocket.";
 
