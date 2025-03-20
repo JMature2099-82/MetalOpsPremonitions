@@ -17,7 +17,6 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 
 	action void MO_FireSSG()
 	{
-
 		for(int i = 2; i > 0; i--) //for(int i=amount;i>0;i--)
 		{
 			A_FireProjectile("FlakChunk2",random(-2,2),0,18,16);
@@ -111,7 +110,6 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SG2A C 1 BRIGHT
             {
                 A_StartSound("weapons/ssg/altfire", 1);
-//                A_FireBullets(5.6,0,9,9, "SSGPuff");
                 MO_FireSSG3(); //Left
                 A_TakeInventory("SSGAmmo",1);
 				JM_CheckForQuadDamage();
@@ -151,7 +149,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SGR1 LMNO 1;// JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SGR1 PQRS 1;// JM_WeaponReady(WRF_NOFIRE);
-			SGR1 A 0 JM_LoadSSG("SSGAmmo","MO_ShotShell",2,1);
+			SGR1 A 0 JM_ReloadSSG(2,1);
             SGR1 T 1 
 			{
 				A_StartSound("weapons/ssg/fullinsert", 0);
@@ -190,7 +188,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             "####" GHIJK 1 JM_WeaponReady(WRF_NOFIRE);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			"####" KLMN 1 JM_WeaponReady(WRF_NOFIRE);
-			"####" A 0 JM_LoadSSG("SSGAmmo","MO_ShotShell",1);
+			"####" A 0 JM_ReloadSSG(2,1);
             "####" T 0 A_StartSound("weapons/ssg/singleinsert", 0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
             SGR7 OO 1 JM_WeaponReady(WRF_NOFIRE);
@@ -245,17 +243,15 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 
     //This is so that the shell loading of the inventory give and take is in one function.
 	//Original made for the Lever and Pump shotguns but modified for the SSG
-	action void JM_LoadSSG(name type, Class<Ammo> reserve, int c, int ca = 1)
+	action void JM_ReloadSSG(int magMax, int reserveTake)
 	{
-		if(CountInv(reserve) >= 2)
+		for(int i = 0; i < magMax; i++)
 		{
-			TakeInventory(reserve, c);
-			GiveInventory(type, c);
-		}
-		else 
-		{
-			TakeInventory(reserve, ca);
-			GiveInventory(type, ca);
+			if(invoker.Ammo1.amount < 1 || invoker.Ammo2.amount == invoker.Ammo2.MaxAmount) 
+			return;
+			
+			A_GiveInventory(Invoker.AmmoType2, 1);
+			A_TakeInventory(Invoker.AmmoType1, reserveTake, TIF_NOTAKEINFINITE);
 		}
 	}
 }
@@ -281,6 +277,7 @@ Class FlakChunk1 : Actor
     {
 	Radius 3;
 	Height 4;
+	Obituary "$OB_SUPERSHOTGUN_FLAK";
 	Speed 55;
 	DamageFunction (random(15, 21));
 	Mass 200;
@@ -317,7 +314,7 @@ Class FlakChunk1 : Actor
 			}
 			loop;
 		Death:
-			EXPL AAA 0 A_SpawnProjectile ("GunSmoke", 4, 0, random (0, 360), CMF_AIMOFFSET|CMF_BADPITCH, random (0, 360));
+			EXPL AAA 0 A_SpawnProjectile ("MO_GunSmoke", 4, 0, random (0, 360), CMF_AIMOFFSET|CMF_BADPITCH, random (0, 360));
 			Stop;
 	}
 }

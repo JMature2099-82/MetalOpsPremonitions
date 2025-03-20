@@ -103,61 +103,121 @@ PC_TARGET_COLOR = "Show target color instead of player";
 //
 //-----------------------------------------------------------------
 
+GOTPLACEHOLDER = "How did you find this? You're not supposed to see this.";
+
+//Health
+TAG_HTHBONUS = "Health Bonus";
+TAG_HTHBONUS2 = "Corrupted Health Bonus";
+TAG_HTHBONUS3 = "Spiritual Health Bonus";
+TAG_STIM = "Stimpack";
+TAG_MEDIKIT = "Medikit";
+TAG_MEDPACK = "Field Surgeon Pack";
+
+//Armor
+TAG_ARMBONUS = "Armor Shard";
+TAG_ARMBONUS2 = "Geminus Armor Shard";
+TAG_ARMBONUS3 = "Treble Armor Shard";
+TAG_LIGHTARM = "Light Combat Armor";
+TAG_HEAVYARM = "Heavy Combat Armor";
+
+//Keys
+/*
+GOTREDCARD = "Picked up a \c[Red] Red Keycard\c-.";
+GOTYELWCARD = "Picked up a \c[Yellow] Yellow Keycard\c-.";
+GOTBLUECARD = "Picked up a \c[Blue] Blue Keycard\c-.";
+GOTREDSKUL = "Picked up a \c[Red] Red Skull Key\c-.";
+GOTYELWSKUL = "Picked up a \c[Yellow] Yellow Skull Key\c-.";
+GOTBLUESKUL = "Picked up a \c[Blue] Blue Skull Key\c-.";
+ */
+
+//Ammo Tags
+TAG_LOWCALIBER = "\cdPistol Caliber Round";
+TAG_HIGHCALIBER = "\c[Yellow]Rifle Caliber Round";
+TAG_SHELL = "\cgShotgun shell";
+TAG_RCKT = "\ccRocket";
+TAG_CELL = "\cvPlasma Cell";
+TAG_FUEL = "\ciFuel";
+TAG_GRENADE = "\Grenades";
+TAG_MOLOTOV = "\Molotovs";
+
+//Chainsword
+GOTCHAINSWORD = "Picked up a Chainsword! (Slot 1)";
+OB_CHAINSWORD = "%o had a friendly talk with %k's new great communicator.";
+TAG_CHAINSWORD = "Chainsword";
+
+//Kick attack
+OB_KICK = "%k gave %o a taste of their boot.";
+OB_BERSERKKICK = "%o got Sparta kicked by %k.";
+
 //Katana
-TAG_KATANA = "Katana";
+TAG_KATA = "Katana";
 OB_KATANA = "%o got %p guts sliced and diced by %k's Katana.";
 OB_KATANA2 = "%k forced %o to commit seppuku.";
 
 //Flamethtower
 OB_FLAMER = "%o was set ablaze by %k's Flamethrower.";
 TAG_FLAMER = "Flamethrower";
-GOTFLAMER = "You got the Flamethrower! (Slot 8)";
-OB_ICEFLAMER = "%o was frozen by %k's Freezethrower.";
-GOTFLAMERGAS = "You got the gasoline from the Flamethrower!";
+GOTFLAMER = "You got the \cXFlamethrower!\c- (Slot 8)";
+OB_ICEFLAMER = "%o was frozen by %k's \cwFreezethrower.";
+GOTFLAMERGAS = "You got the gasoline from the \cXFlamethrower!";
 
 //Pistol
-GOTVENPISTOL = "You got the Vengeance Striker Sidearm! (Slot 2)";
-TAG_VENPISTOL = "Vengeance Striker";
-OBMO_VENPISTOL = "%o was peppered by %k's Vengeance Striker.";
+GOTVENPISTOL = "You got the \cdVengeance Stryker Sidearm\c-! (Slot 2)";
+TAG_VENPISTOL = "Vengeance Stryker";
+OBMO_VENPISTOL = "%o was peppered by %k's \cdSidearm.";
+
+//Deagle
+GOTHANDCANNON = "Picked up the \cuShatterhand .50AE Pocket Cannon\c-! (Slot 2)";
+OBMO_HANDCANNON = "%o got %p head splattered by %k's \c[DarkGray].50AE Pocket Cannon\c-.";
+TAG_HANDCANNON =  "Shatterhand .50AE Pocket Cannon";
 
 //SMG
-GOTSMG = "You got the Submachine Gun! (Slot 2)";
-OB_SMG = "%o got turned into swiss cheese by %k's Submachine Gun.";
+GOTSMG = "Picked up the \cdSubmachine Gun\c-! (Slot 2)";
+OBMO_SMG = "%o was pelted by %k's \cdSubmachine Gun\c-.";
 TAG_SMG = "Submachine Gun";
 
 //Lever Shotgun
-GOTLVRSHOT = "You got the Lever Action Shotgun! (Slot 3");
+GOTLVRSHOT = "Picked up the \cgLever Action Shotgun\c-! (Slot 3");
 TAG_LVRSHOT = "Lever Action Shotgun";
-OB_LVRSHOT = "%o was terminated by %k's Lever Shotgun.";
+OB_LVRSHOT = "%o was terminated by %k's \cgLever Shotgun\c-.";
 
 //Pump Shotgun
-GOTPUMPSHOTTY = "You got the Pump Action Shotgun! (Slot 3)";
+GOTPUMPSHOTTY = "Picked up the \ckPump Action Shotgun\c-! (Slot 3)";
 TAG_PUMPSHOTTY =  "Pump Shotgun";
-OB_PUMPSHOTTY = "%o got blasted away by %k's Pump Shotgun.";
+OB_PUMPSHOTTY = "%o was blasted away by %k's \ckPump Shotgun\c-.";
 
 //SSG
-OB_SUPERSHOTGUN = "%o got %p insides eviscerated by %k's SSG.";
+GOTSUPERSHOTGUN = "Picked up the \caDouble Barrel Shotgun\c-! (Slot 3)";
+OB_SUPERSHOTGUN_FLAK = "%o got %p guts eviscerated by %k's double barrel flak shots.";
+OB_SUPERSHOTGUN = "%o was split in two by %k's Double Barrel Shotgun.";
 
 //Combat Rifle
-GOTCOMBATRIFLE = "You got the Combat Rifle! (Slot 4)";
-OB_COMBATRIFLE = "%o was shot down by %k's Combat Rifle.";
-TAG_COMBATRIFLE = "Combat Rifle";
+GOTRIFLE = "Picked up the Combat Rifle! (Slot 4)";
+OBMO_RIFLE = "%o was shot down by %k's Combat Rifle.";
+TAG_RIFLE = "Combat Rifle";
 
 //Minigun
+GOTMINIGUN = "Picked up the Minigun! (Slot 4)";
 OB_MINIGUN = "%o was shredded to bits by %k's Minigun.";
 
+//Rocket Launcher
+GOTRLAUNCHER = "Picked up a Rocket Launcher (Slot 5)!";
+TAG_RLAUNCHER = "Rocket Launcher";
+OB_MOROCKET = "%k's rocket took %o for a ride.";
+OB_MOROCKETSPLASH = "%o couldn't dodge %k's rocket.";
+
 //BFG 9000
-MO_GOTBFG9000 = "You got the \cdBFG9K!\c- Hell Yeah!";
+MO_GOTBFG9000 = "Picked up the \cdBFG9K!\c- Hell Yeah!";
 TAG_MO_BFG9000 = "BFG9K";
 OBMO_BFG9000  = "\cg%o\c- felt the extreme power of \cy%k's\c- BFG9K.";
 OBMO_BFG9000SPLSH = "\cg%o\c- couldn't escape from \cy%k's\c- BFG9K.";
-OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG10K fire mode.";
+OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG10K.";
 
 //Heavy Combat Rifle
 TAG_HEAVYRIFLE = "Heavy Marksman Rifle";
 OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Marksman Rifle.";
-OB_HEAVYRIFLE_GRENADE = "%o swallowed a 40mm Grenade fired from %k's Heavy Marksman Rifle.";
-OB_HEAVYRIFLE_GRENADESPLASH = "%o almost evaded a 40mm Grenade fired from %k's Heavy Marksman Rifle.";
+OB_HEAVYRIFLE_GRENADE = "%o swallowed a Grenade fired from %k's HMR.";
+OB_HEAVYRIFLE_GRENADESPLASH = "%o almost evaded a Grenade fired from %k's HMR.";
 
 //Unmaker
 GOTUNMAKER = "You got the \caUnmaker!\c- Unleash the power of Hell itself on your foes! (Slot 7)";
@@ -167,16 +227,11 @@ OB_UNMAKER = "%o was decimated by %k's Unmaker.";
 OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker.";
 
 //Plasma Repeater
-MO_GOTPLASMA = "You got the Plasma Repeater! (Slot 6)";
+GOTPLASMAGUN = "You got the Plasma Repeater! (Slot 6)";
 TAG_PLASMA = "Plasma Repeater";
 OB_PLASMA = "%o got melted by %k's Plasma Repeater.";
 OB_PLASMABEAM = "%o couldn't handle the energy of %k's Plasma Beam.";
 OB_HEATPLASMA = "%o was scorched %k's Super Heated Plasma Rounds.";
-
-//Rocket Launcher
-TAG_MOROCKET = "Rocket Launcher"; 
-OB_MOROCKET = "%k's rocket took %o for a ride.";
-OB_MOROCKETSPLASH = "%o couldn't dodge %k's rocket.";
 
 //Secret Messages randomized
 //SECRETMESSAGE = "Secret Revealed!";

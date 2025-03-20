@@ -5,7 +5,7 @@ class MO_PumpShotgun : JMWeapon
 {
     Default
     {
-        Weapon.AmmoGive 6;
+        Weapon.AmmoGive 4;
 		Weapon.AmmoUse 0;
 		Weapon.SelectionOrder 1400;
         Weapon.AmmoType1 "MO_ShotShell";

@@ -9,10 +9,10 @@ class LeftKatanaAttack : MO_ZSToken{} //For the JM_KatanaAttack function
 class Katana: JMWeapon replaces Fist
 {
 	  Default 
-	  {
+	  {	
 	  Obituary "";
-	  Tag "Katana";
-//	  +WEAPON.WIMPY_WEAPON;
+	  Tag "$TAG_KATA";	
+	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
 	//  +WEAPON.NODEATHDESELECT;
 	  Inventory.AltHudIcon "KATAN0";

@@ -65,7 +65,15 @@ class MO_MiniGun : JMWeapon
 			invoker.isHolding = False;
 		}
 		Goto ClearAudioAndResetOverlays;
+	NewFire:
 	Fire:
+		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");
+		TNT1 A 0 A_CheckReload();
+		TNT1 A 0 A_StartSound("weapons/minigun/start",0);
+		MGNG BC 2;
+		MGNG DEFGHAB 1;
+		Goto Hold;
+	OldFire:
 		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");
 		TNT1 A 0 A_CheckReload();
 		TNT1 A 0 A_StartSound("weapons/minigun/start",0);

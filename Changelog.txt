@@ -103,4 +103,44 @@ from that. SSG still shoots flak but uses normal shell ammo pool.
 - Added customizable crosshairs in the options.
 - Flamethrower moved to Slot 8.
 - Added option to enable Discord rich presence.
-- Deagle gets a slight nerf
+
+Late 2024 to 3/20/25:
+//Pistol
+- Enforcer Sidearm is now called the Vengeance Stryker Sidearm
+- Pistol magazine count changed from 12 to 18.
+- Pistol sprites completely revamped and overhauled, with newer sprites by TSF.
+- Pistol animations have also been redone as well
+- New sounds for the pistol
+- Burst Fire is now a weapon special switch, similar to BD having it as an alt fire switch.
+- Aim down the sights is alt fire for the Pistol.
+- The Vengeance Striker tag name is slightly changed, to Vengeance Stryker.
+- Burst Fire is now a weapon special switch, similar to BD having it as an alt fire switch.
+- Alt Fire is now ADS.
+- Reloading with Haste shows the normal reload animation.
+
+
+//Deagle
+- Deagle is now called the Shatterhand Pocket Cannon.
+- Reload sounds tweaked
+- New animations for firing, kicking, and reloading. 
+- Reload animations are based on magazine count. Tactical reload is when you have more than one round 
+   (which is a visual thing), A standard reload when exactly one round is left, and an empty reload if the 
+   magazine is depleted.
+- The reload animations will also be different if you have Haste. The normal reload animation is the 
+default animation used for one or more rounds, but faster. 
+The empty reload animation when you have Haste is the same as the normal one, 
+but now has a chambering animation that is different. 
+This is inspired by the Sleight of Hand perk in Call of Duty, particularly the recent versions 
+from MW19 and later.
+- Aim down the sights is the alt fire.
+- Magazine count increased from 7 to 8 for the +1 in the chamber effect.
+- Several sounds got minor edits. While still using Magmacow's sounds for reloading, 
+portions of the MW19 Deagle reload sounds are mixed in.
+- Deagle now takes away twice the amount of reserve ammo. 
+Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
+
+
+//Misc
+- Changed some ammo sprites
+- Updated some pickup sounds.
+- Pickup messages for ammo, health and armor simplified.

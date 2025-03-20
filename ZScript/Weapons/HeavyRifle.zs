@@ -11,7 +11,7 @@ Class MO_HeavyRifle : JMWeapon
 	const PSP_MUZZLESMOKE = -2;
     Default
     {
-        Weapon.AmmoGive 20;
+        Weapon.AmmoGive 10;
         Weapon.AmmoType1 "MO_HighCaliber";
         Weapon.AmmoType2 "HCRAmmo";
         Inventory.PickupMessage "You got the Heavy Combat Rifle! (Slot 4)";
@@ -85,11 +85,11 @@ Class MO_HeavyRifle : JMWeapon
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
         ReadyToFire:
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Ready2");
-			HCRG A 0
+            HCRG A 1 
 			{
 				if(FindInventory("HCR_GLMode")) {JM_SetWeaponSprite("HCGG");}
+				return JM_WeaponReady(WRF_ALLOWRELOAD);
 			}
-            #### A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
             Loop;
         Select:
 			HCRG A 0;
@@ -476,7 +476,7 @@ Class MO_HeavyRifle : JMWeapon
 			Goto ReadyToFire;
 			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
 			HCRA A 0 MO_SetGrenade(true);
-			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1);
+			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
 			HCRH A 1  bright
 			{
 				A_StartSound("hcr/glfire",0);
@@ -550,7 +550,8 @@ Class MO_HeavyRifle : JMWeapon
 
         Reload:
 			TNT1 A 0 A_JumpIfInventory("HCRAmmo",12,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("MO_HighCaliber",1,2);
+			TNT1 A 0 A_JumpIfInventory("MO_HighCaliber",1,3);
+			AR1G A 0 A_StartSound("weapon/rifleempty",0);
 			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "NoAmmoZoomed");
 			Goto ReadyToFire;
 			HCRA A 0 {
@@ -676,12 +677,21 @@ Class HCRAmmo : Ammo
 
 Class HCRGrenade : Actor
 {
+	override string GetObituary (Actor victim, Actor inflictor, Name mod, bool playerattack)
+    {
+        if(mod == "ExplosiveImpact")
+		{
+			return "$OB_HEAVYRIFLE_GRENADESPLASH";
+		}
+        return "$OB_HEAVYRIFLE_GRENADE";
+    }
+
 	int timer;
 	Default
 	{
 	Radius 8;
 	Height 8;
-	DamageFunction (25);
+	DamageFunction (35);
 	Speed 50;
 	Scale 0.5;
 	BounceSound "hcr/grenade";
@@ -690,6 +700,7 @@ Class HCRGrenade : Actor
 	BounceFactor 0.5;
 	Obituary "$OB_HEAVYRIFLE_GRENADE";
 //	ReactionTime 30;
+	DamageType "Explosive";
 	-NOGRAVITY
     +BLOODSPLATTER
 	+EXTREMEDEATH
@@ -715,7 +726,7 @@ Class HCRGrenade : Actor
 		TNT1 A 0 A_StopSound(CHAN_7);
 		TNT1 A 0 A_StartSound("40mmExplosion");
 		TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-		TNT1 A 0 A_Explode(125, 180);
+		TNT1 A 0 A_Explode(125, 180, damagetype: "ExplosiveImpact");
 		TNT1 A 0 DESTROY();
 		Stop;
 	}
