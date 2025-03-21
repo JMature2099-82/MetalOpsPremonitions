@@ -1,7 +1,9 @@
 //Misc
 weapon/adsup ADSUP
 weapon/adsdown ADSDOWN
-DRYFIRE	DRYFIRE
+weapon/pistolempty "Sounds/EmptyClicks/DryFire_Pistol.ogg"
+weapon/rifleempty "Sounds/EmptyClicks/DryFire_Rifle.ogg"
+weapon/shotgunempty "Sounds/EmptyClicks/DryFire_Shotgun.ogg"
 
 //Slot 1 ------------------------
 //////////////////Flamethrower
@@ -93,12 +95,14 @@ weapons/deag/draw DEGSLCT
 $random weapons/deag/fire {deagfire1 deagfire2}
 deagfire1 degfir1
 deagfire2 degfir2
-
-weapons/deag/magout DEGOUT
-weapons/deag/magin DEGIN
-weapons/deag/magclick DEGCLK
-weapons/deag/slideback DEGCHBCK
-weapons/deag/slideforward DEGCHFWD
+weapons/deag/reloadraise "Sounds/Weapons/Deagle/Deagle_ReloadRaise.ogg"
+weapons/deag/reloadend "Sounds/Weapons/Deagle/Deagle_ReloadEnd.ogg"
+weapons/deag/reloadendempty "Sounds/Weapons/Deagle/Deagle_ReloadEmptyEnd.ogg"
+weapons/deag/movetoslide "Sounds/Weapons/Deagle/Deagle_MvmntToSlide.ogg"
+weapons/deag/magin "Sounds/Weapons/Deagle/Deagle_MagIn.ogg"//DEGIN
+weapons/deag/magout "Sounds/Weapons/Deagle/Deagle_MagOut.ogg"
+weapons/deag/slideback "Sounds/Weapons/Deagle/Deagle_SlideBack.ogg"
+weapons/deag/slideforward "Sounds/Weapons/Deagle/Deagle_SlideForward.ogg"
 
 RELOAD RELOAD //Only a placeholder sound when there is no reload animation.
 $VOLUME RELOAD 2
@@ -182,8 +186,6 @@ arfire2 arfire2
 weapons/ar/select ARSELCT
 weapons/ar/pickup ARPICK
 
-weapons/pistol/dryfire PISTDRY
-weapons/ar/dryfire ARDRYFIR
 weapons/ar/magout ARMAGOU
 weapons/ar/magin ARMAGIN
 weapons/ar/ReloadEnd AREND
@@ -310,6 +312,15 @@ largedrop4		"Sounds/SFX/Casings/LargeMag/LargeMagBounce4.ogg"
 largedrop5		"Sounds/SFX/Casings/LargeMag/LargeMagBounce5.ogg"
 largedrop6		"Sounds/SFX/Casings/LargeMag/LargeMagBounce6.ogg"
 $volume casings/largemag 0.8
+
+$random casings/smallmag  { smalldrop1 smalldrop2 smalldrop3 smalldrop4 smalldrop5 smalldrop6 }
+smalldrop1		"Sounds/SFX/Casings/smallMag/smallMagBounce1.ogg"
+smalldrop2		"Sounds/SFX/Casings/smallMag/smallMagBounce2.ogg"
+smalldrop3		"Sounds/SFX/Casings/smallMag/smallMagBounce3.ogg"
+smalldrop4		"Sounds/SFX/Casings/smallMag/smallMagBounce4.ogg"
+smalldrop5		"Sounds/SFX/Casings/smallMag/smallMagBounce5.ogg"
+smalldrop6		"Sounds/SFX/Casings/smallMag/smallMagBounce6.ogg"
+$volume casings/smallmag 0.8
 
 $random casings/shell {shell1 shell2 shell3}
 shell1 dsshell1

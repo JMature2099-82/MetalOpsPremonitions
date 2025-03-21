@@ -161,7 +161,7 @@ OptionMenu "CustomCrosshairsMenu"
 	Title "Customizable Crosshair Options"
 	Option "Enable custom crosshairs", "mo_customxhairs", "OnOff"
 	StaticText "Crosshair 0 is the default crosshair set by the player.", "gray"
-	StaticText "Crosshair 5 is nothing at all.", "gray"
+	StaticText "Crosshair 99 is nothing at all.", "gray"
 	StaticText "Disable the Force default crosshair option if you want to use custom crosshairs!", gray
 	StaticText "You need to exit back to the game in order for it take effect.", "gray"
 
