@@ -3,7 +3,7 @@ What to do:
 SMG:
 - Add chamber animation after reloading from a empty magazine
 - Add an inspect animation inspired by the Submachinegun in Shadow The Hedgehog? *
-- Secret reload animation
+- Secret reload animation *
 
 Unmaker:
 - Brightmaps *
@@ -18,10 +18,6 @@ Rocket Launcher:
 HCR:
 - Firing animations and reloads *
 - Grenade Launcher mode
-
-Auto Shotgun:
-- Find sprites
-- Animations
 
 MP40:
 - Find sprites

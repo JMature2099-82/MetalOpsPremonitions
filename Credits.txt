@@ -47,7 +47,6 @@ to create this
 - ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
 - Gemini0 - Player.AttackZOffset fix
-
 - Running With Scissors - Postal 2 Kicking sounds
 
 Pump Shotgun:
@@ -185,6 +184,9 @@ zrriontheinsect - Used his amazing tutorial on muzzle flashes: https://forum.zdo
 Certain muzzle flash effects from VideoCoPilot's Action Essentials 2, thanks matteus from Youtube for preserving this!
 Some muzzle flashes by Metalman, Adobe
 
+/////////////////////
+///			MISC				///
+/////////////////////
 Tharn666 - Grenade cook warning icon
 Grenade cooking and indicator inspired by Call of Duty 3 by Activision and Treyarch
 Smoke trail for grenade inspired by Black Mesa by Crowbar Collective
@@ -196,16 +198,10 @@ Night Vision goggles warning sound by sweet_trip from freesound.com
 Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, 
 DreamCatcher Interactive (THQ Nordic)
 scalliano - GLDefs code for spheres, Haste sphere
-
 Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
-
-Mega Berserk:
-Sarge945 - Previous Weapon Used Button add-on used for Mega Berserk
-Fourth sound of Horror Voice Flashbacks used for Mega Berserk end: Sound Effect from Pixabay (https://pixabay.com/sound-effects/horror-voice-flashbacks-14469/)
-Bethesda - Doom 2016 berserk end, pickup sounds and doom 3 berserk loop
-People Can Fly - Mega Berserk loop layer
-New Blood Interactive - Mega Berserk loop ambience
+EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from Command & Conquer Red Alert 3 Uprising
+Activision, id Software, Bethesda, Raven Software - Menu select, back and confirm sounds from Wolfenstein 2009.
 
 /////////////////////////////
 ///			 Flashlight++				///
