@@ -1,0 +1,13 @@
+menu/activate			"Sounds/Menu/MenuActivate.ogg"	// Activate a new menu
+menu/backup			"Sounds/Menu/MenuSelect.mp3"	// Backup to previous menu
+menu/prompt			"Sounds/Menu/MenuActivate.ogg"	// Activate a prompt "menu"
+menu/cursor			"Sounds/Menu/MenuHover.mp3"		// Move cursor up/down
+menu/change			"Sounds/Menu/MenuChange.ogg"	// Select new value for option
+menu/invalid			dsoof		// Menu not available
+menu/dismiss			"Sounds/Menu/MenuSelect.mp3"	// Dismiss a prompt message
+menu/choose			"Sounds/Menu/MenuSelect.mp3"	// Choose a menu item
+menu/clear			"Sounds/Menu/MenuExit.ogg"	// Close top menu
+
+$alias menu/advance menu/choose			// Open a submenu
+$pitchset menu/choose 1.075
+$volume menu/change 0.8

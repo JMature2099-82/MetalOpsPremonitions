@@ -1,17 +1,28 @@
 Credits goes to all developers, modders, games that are used!
 Credits for sounds and weapons
 
-Pistol:
-Sprites - Sonik.o.fan (aka TSF)
+Vengeance Stryker Sidearm:
+Sprites - Sonik.o.fan (aka TSF), jdredalert (ADS/Zoomed sprites)
 Updated Sounds - RaviK (pistol draw), Magmacow (Firing sounds), Infinity Ward (casings, reloads), Criterion Games (some foley for the inspect)
 Pickup sprite - Machinegun Cow (MG0061), Edward Marlus
 Casings - MetalMan/bluechip
 Dry Fire Sound - Navaro
+ADS Sprites - jdredalert, Obsidian Entertainment
+Foley sounds - Infinity Ward, Criterion Games, EA, Activision
+
+Shatterhand Pocket Cannon:
+Sprites: TSF (main sprites), YukesVonFaust (grip for one of the reload frames), 
+Iamcarrotmaster, Koff Zerno, Cyber/cybermonday (one of the reload frames), 
+3D Realms (magazine), Mike12 (bullet for mag), Dox778 (ADS sprites), Squig/VriskaSerket
+Other credits for the YukesVonFaust's Deagle: Vashts1985, Flamshmizer, Poux, IIopn, Rimuto, Weiss Schnee
+Sounds: Firing sound by Valve and Hidden Path Entertainment, reload sounds by Magmacow and IW.
+Pickup and select sounds by Infinity Ward
 
 Lever Shotty: 
 LossForWords - sprites
 IDDQD_1337 - Bits of the M1887 add-on for BDv21 used
 AdianoTMO69 - Spin reload animation
+JoeyTD - Pickup Sprite
 Navaro - Lever sounds
 Magmacow - Firing, shell loading
 joeytd for the 1887 lever, hamburghannes for the model and ellyklamsky for the xna conversion
@@ -36,7 +47,6 @@ to create this
 - ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
 - Gemini0 - Player.AttackZOffset fix
-
 - Running With Scissors - Postal 2 Kicking sounds
 
 Pump Shotgun:
@@ -81,17 +91,11 @@ Sprites: TSF, Green Eyesman, bullet in mag sprite by Captain J. ADS Sprites from
 
 BFG:
 Sprites by TSF
-Sounds by ID Software and Raven Software
+Sounds by ID Software, Raven Software, RaviK
 
 Unmaker:
 Sprites by Enchanter, Zaero, DeathStalker (base)
 Sounds: Soundbible (thecheeseman), People Can Fly, DreamCatcher Interactive (THQ Nordic)
-
-Desert Eagle:
-Sprites: TSF (main sprites), YukesVonFaust (grip for the reload frame) 
-Other credits for the YukesVonFaust's Deagle: Vashts1985, Flamshmizer, Poux, IIopn, Rimuto, Weiss Schnee
-Sounds: Firing sound by Valve and Hidden Path Entertainment, reload sounds by Magmacow. 
-Pickup and select sounds by Infinity Ward
 
 _______________
 Glass Bottle Break Sound Effect Sound is from Zapsplat.com
@@ -124,14 +128,13 @@ NC HUD - BlueShadow
 ////////////////////////////
 
 Shotgun shell, rifle magazine pickups by Jekyll Grim Payne
-Pistol magazine pickup by DoomNukem
+Pistol magazine pickup by TSF
 Health Kits, bonuses, Keys, and Armors by TSF
 Armor pickup sound by Rare
 Radsuit pickup sound by ScottGames, Scott Cawthon, Steel Wool Studios, Illumix, sprite by TSF
 Night vision goggles sprites by TSF, sound by Infinity Ward
 Backpack sprite from old versions of PB 3.0, credit by PB Team (if anyone knows who made it DM Me)
 Backpack sound by ID Software
-Flak Shell Box pickup sprite by Ac!d
 Power up sphere sprites (Soulsphere, Megasphere, Invulnerability,
 Invisibility, Quad Damage and Haste) by Benjamin Zuriel.
 
@@ -163,7 +166,9 @@ Most sounds - Id Software, Raven Software (Doom 3, Quake 4)
 Plasma and BFG Explosions - Wirehead Studios (Generations Arena) and some frames from jDRP
 Explosions, Special Effects sprites and Casings - from Aeons of Death (the "Half-Life" explosions, and the "Lightning Ball" explosion)
 
-Mod logo created on www.canva.com, this will be subjected to change.
+Mod logo created by brothergrounds from www.canva.com, 
+based on this one: https://www.canva.com/templates/EAFnr-bQhDg-black-orange-illustrative-esport-gaming-logo/
+Mod logo maybe subjected to change.
 Soldier skull graphic from pngegg.com
 
 Other credits and license info:
@@ -179,6 +184,9 @@ zrriontheinsect - Used his amazing tutorial on muzzle flashes: https://forum.zdo
 Certain muzzle flash effects from VideoCoPilot's Action Essentials 2, thanks matteus from Youtube for preserving this!
 Some muzzle flashes by Metalman, Adobe
 
+/////////////////////
+///			MISC				///
+/////////////////////
 Tharn666 - Grenade cook warning icon
 Grenade cooking and indicator inspired by Call of Duty 3 by Activision and Treyarch
 Smoke trail for grenade inspired by Black Mesa by Crowbar Collective
@@ -190,16 +198,10 @@ Night Vision goggles warning sound by sweet_trip from freesound.com
 Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, 
 DreamCatcher Interactive (THQ Nordic)
 scalliano - GLDefs code for spheres, Haste sphere
-
 Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
-
-Mega Berserk:
-Sarge945 - Previous Weapon Used Button add-on used for Mega Berserk
-Fourth sound of Horror Voice Flashbacks used for Mega Berserk end: Sound Effect from Pixabay (https://pixabay.com/sound-effects/horror-voice-flashbacks-14469/)
-Bethesda - Doom 2016 berserk end, pickup sounds and doom 3 berserk loop
-People Can Fly - Mega Berserk loop layer
-New Blood Interactive - Mega Berserk loop ambience
+EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from Command & Conquer Red Alert 3 Uprising
+Activision, id Software, Bethesda, Raven Software - Menu select, back and confirm sounds from Wolfenstein 2009.
 
 /////////////////////////////
 ///			 Flashlight++				///
@@ -222,7 +224,7 @@ Sound Effects---------------------------------
 • senn_twt - Resampled HL1 Flashlight sound effect
 • Lewisk3 - Alternate Flashlight sound effect 
 • IDDQD_1337 - Providing the Prey and OP4 sounds
-• DraugraK - Providing the Selaco "Clicky Clack" sounds
+• DraugraK/RaviK - Providing the Selaco "Clicky Clack" sounds
 • Caligari87 - DarkDoomZ Sound (mshahen: "Flashlight On/Off Clicks" (freesound.org, 271109, modified) CC BY 3.0)
 • Gearbox Software - HL OP4 NVG Sounds
 • Human Head Studio - Prey 2006 Lighter Sound

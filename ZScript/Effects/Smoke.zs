@@ -1,4 +1,4 @@
-Class GunSmoke : BaseVisualSFX
+Class MO_GunSmoke : BaseVisualSFX
 {
   Default
   {
@@ -75,7 +75,7 @@ class GunsmokeSpray : Actor
 class LittleGunsmokeSpray : GunsmokeSpray
 {Default{Scale 0.45;}}
 
-Class LittleGunSmoke : GunSmoke
+Class MO_LittleGunSmoke : MO_GunSmoke
 {
   Default
   {
@@ -86,7 +86,7 @@ Class LittleGunSmoke : GunSmoke
   }
 }
 
-Class BigGunSmoke : GunSmoke
+Class MO_BigGunSmoke : MO_GunSmoke
 {
   Default
   {
@@ -97,7 +97,7 @@ Class BigGunSmoke : GunSmoke
   }
 }
 
-Class ShotgunSmoke : GunSmoke
+Class MO_ShotgunSmoke : MO_GunSmoke
 {
 	Default
   {
@@ -116,7 +116,7 @@ Class ShotgunSmoke : GunSmoke
   }
 }
 
-class KickSmoke : ShotgunSmoke
+class KickSmoke : MO_ShotgunSmoke
 {
 	Default
 	{
@@ -125,7 +125,7 @@ class KickSmoke : ShotgunSmoke
 	}
 }
 
-class PlasmaCoolSmoke1 : ShotgunSmoke
+class PlasmaCoolSmoke1 : MO_ShotgunSmoke
 {
 	Default
 	{
@@ -150,12 +150,12 @@ class PlasmaCoolSmoke3 : PlasmaCoolSmoke1
 		Alpha 0.2;
 	}
 }
-Class BulletImpactSmoke : GunSmoke
+Class BulletImpactSmoke : MO_GunSmoke
 {
 		Default{Scale 0.17;}
 }
 
-Class BulletSmoke : GunSmoke
+Class BulletSmoke : MO_GunSmoke
 {
   Default
   {
@@ -165,7 +165,7 @@ Class BulletSmoke : GunSmoke
   }
 }
 
-Class EmptyCellSmoke : GunSmoke
+Class EmptyCellSmoke : MO_GunSmoke
 {
 	Default
 	{
@@ -199,7 +199,7 @@ Class RestingCellSmoke : RestingBulletSmoke
 	}
 }
 
-Class MO_PlasmaSmoke : GunSmoke
+Class MO_PlasmaSmoke : MO_GunSmoke
 {
   Default {
   Scale 0.7;

@@ -11,7 +11,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 			JM_CheckForQuadDamage();
 	}
 
-	action void MO_BFGSound()
+	action void MO_PlayBFGSound()
 	{
 			A_StartSound("weapons/bfg/startfire", 1);
 			A_StartSound("weapons/bfg/chargelayer", 0, CHANF_DEFAULT,1);
@@ -74,7 +74,7 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		B7GF A 1 BRIGHT 
 		{
 			A_GunFlash();
-			MO_BFGSound();
+			MO_PlayBFGSound();
 		}
 		B7GF B 1 BRIGHT;
 		B7GF C 1 BRIGHT;
@@ -91,8 +91,12 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
         B7GF EFGH 1 BRIGHT;
 
 		B7GF EFGHHI 1 BRIGHT;
-		B7GF A 0 A_TakeInventory("MO_Cell",40);
-        B7GF J 1 A_StartSound("weapons/bfg/FIRE", 1);
+        B7GF J 1 
+		{
+			A_StartSound("weapons/bfg/FIRE", 1);
+			if(!invoker.DepleteAmmo(false,true, 40,true))
+			return;
+		}
         B7GF K 1 A_FireProjectile("MO_BFGBall",0,0,0,0,0);
 		TNT1 A 0 JM_CheckForQuadDamage();
         B7GF L 1 JM_GunRecoil(-5.0, 1.75);

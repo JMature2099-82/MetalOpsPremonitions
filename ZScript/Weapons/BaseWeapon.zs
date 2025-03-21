@@ -10,6 +10,10 @@ class JMWeapon : Weapon
 	property InspectToken: inspectToken;
 	bool isZoomed;
 
+	const prevBobRangeX = 0.3;
+	const prevBobRangeY = 0.3;
+	const prevBobSpeed = 1.5;
+
 	//weapons should ALWAYS bob, fucking fight me -popguy
 	override void DoEffect()
 	{
@@ -42,7 +46,7 @@ class JMWeapon : Weapon
 		Weapon.BobRangeY 0.6;
 		Weapon.BobSpeed 1.5;
         +DONTGIB;
-        Inventory.PickupMessage "How did you pick this up? You're not supposed to see or use this.";
+        Inventory.PickupMessage "$GOTPLACEHOLDER";
     }
 	
 	States
@@ -54,6 +58,7 @@ class JMWeapon : Weapon
 		ClearAudioAndResetOverlays:
 			TNT1 A 1;
 			TNT1 A 0 {
+				MO_ResetBob();
 				A_StopSound(CHAN_5);
 				A_StopSound(CHAN_WEAPON);
 				A_StopSound(CHAN_6);
@@ -68,6 +73,10 @@ class JMWeapon : Weapon
 		Deselect:
 			TNT1 A 1 A_Lower();
 			Loop;
+
+		GunLightingDone:
+			TNT1 A 2 A_RemoveLight('GunLighting');
+			Stop;
 			
 		Ready:
 		FIRE:

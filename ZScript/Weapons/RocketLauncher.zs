@@ -26,6 +26,14 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 		return invoker.burstCount;
 	}
 
+	action void MO_FireRocket()
+	{		
+		A_StartSound("weapons/rocket/fire", 1);
+        A_Overlay(-5, "MuzzleFlash");
+		JM_CheckForQuadDamage();
+		A_FireProjectile("MO_Rocket",0,true,0,0,0);
+	}
+
     Default
 	{
 		Weapon.AmmoUse 1;
@@ -34,7 +42,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 		Weapon.AmmoType "MO_RocketAmmo";
 		+WEAPON.NOAUTOFIRE
 		Inventory.PickupMessage "You got the Rocket Launcher (Slot 5)!";
-		Tag "$TAG_ROCKETLAUNCHER";
+		Tag "$TAG_RLAUNCHER";
         Inventory.PickupSound "weapons/rocket/pickup";
 		Obituary "$OB_MOROCKETSPLASH";
 	}
@@ -72,13 +80,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			Wait;
         Fire:
 			RLAS A 0 A_CheckReload();
-            RLAF A 1 BRIGHT
-            {
-				A_StartSound("weapons/rocket/fire", 4, starttime: 0.05);
-                A_Overlay(-5, "MuzzleFlash");
-				JM_CheckForQuadDamage();
-				A_FireProjectile("MO_Rocket",0,true,0,0,0);
-            }
+            RLAF A 1 BRIGHT MO_FireRocket();
             RLAF BCD 1 BRIGHT JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
@@ -133,7 +135,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 				A_Overlay(-5, "MuzzleFlash");
 				JM_CheckForQuadDamage();
 				MO_CountRLBurst();
-				A_TakeInventory("MO_RocketAmmo",1);
+				A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
             }
             RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(MO_GetBurstCount() == maxBurst, "BurstDone");
@@ -143,7 +145,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             RLAF A 1 BRIGHT
             {
                 A_FireProjectile("MO_Rocket",0,0,0,0,0);
-				A_TakeInventory("MO_RocketAmmo",1);
+				A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/rocket/fire", 1);
             }
             RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
@@ -153,7 +155,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             RLAF A 1 BRIGHT
             {
                 A_FireProjectile("MO_Rocket",0,0,0,0,0);
-				A_TakeInventory("MO_RocketAmmo",1);
+				A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
                 A_StartSound("weapons/rocket/fire", 1, starttime: 0.1);
             }
             RLAF B 1 BRIGHT JM_GunRecoil(-0.95, .05);
@@ -217,7 +219,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
 			MUZR D 1 BRIGHT A_RemoveLight('GunLighting'); 
 			Stop;
-
+/*
 		ActionSpecial:
 			TNT1 A 0 A_JumpIfInventory("MiniNukeMode",1,"ActionBackToNormal");
 			RLAS F 1;// A_StartSound("weapons/rocket/special1",0);
@@ -270,7 +272,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			Goto ReadyTofire;
 		NukeOverlayIdle:
 			RNUK A 1;
-			Stop;
+			Stop;*/
 		FlashKick:
 			RNAK A 0 A_JumpIfInventory("MiniNukeMode",1,2);
 			RLAK A 0;
@@ -290,6 +292,15 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 
 Class MO_Rocket : Rocket// replaces rocket
 {
+	override string GetObituary (Actor victim, Actor inflictor, Name mod, bool playerattack)
+    {
+        if(mod == "ExplosiveImpact")
+		{
+			return "$OB_MOROCKETSPLASH";
+		}
+        return "$OB_MOROCKET";
+    }
+
     Default
     {
         Speed 40;
@@ -318,119 +329,12 @@ Class MO_Rocket : Rocket// replaces rocket
             TNT1 A 0 A_StopSound(CHAN_7);
 			TNT1 A 0 A_StartSound("rocket/explosion");
 			TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			TNT1 A 0 A_Explode(200, 180);
+			TNT1 A 0 A_Explode(200, 180, damagetype: "ExplosiveImpact");
 			TNT1 A 1;
 			Stop;
     }
 }
 
-Class MO_MiniNukeRocket : MO_Rocket
-{
-	Default
-	{
-		Speed 25;
-		Scale 1.1;
-		DamageFunction(3000);
-		Obituary "%o was nuked by %k's mini-nuke.";
-		DeathSound "NULLSND";
-	}
-	States
-	{
-		Spawn:
-			NMIS A 1;
-			NMIS A 1 BRIGHT A_StartSound("rocket/flyloop", CHAN_7, CHANF_LOOPING);
-		FlyLoop:
-			NMIS ABCD 1 BRIGHT
-			{
-				if(waterlevel < 1) {
-					A_SpawnItemEx("MO_NukeRocketSmokeTrail",-3,0,0,-1,0,0);
-				}
-			}
-            Loop;
-		Death:
-            TNT1 A 0 A_StopSound(CHAN_7);
-			TNT1 A 1;
-			TNT1 A 0 A_StartSound("rocket/nukeexplosion",CHAN_5, CHANF_DEFAULT,2, ATTN_NORM );
-			TNT1 A 0 A_StartSound("rocket/nukeexplosionfar",CHAN_6, CHANF_DEFAULT,1, ATTN_NONE);
-			TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnProjectile ("MO_MiniNukeFlamesImpact", 5, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (0, 10));
-			TNT1 A 0 A_SpawnProjectile ("MO_SpawnedExplosionNuke2", 30, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random(80, 90));
-			//TNT1 AAA 0 A_CustomMissile ("lONGExplosionSpawner", 30, 0, random (0, 360), 2, 90)
-			TNT1 AA 0  A_SpawnItemEx("MO_SpawnedExplosionNuke", random (-600, 600), random (-600, 600), random (0, 100));
-			TNT1 AAAAAAAAAAAAAA 0  A_SpawnItemEx("MO_SpawnedExplosionNuke", random (-500, 500), random (-600, 600), random (0, 50));
-			EXPL A 0 Radius_Quake (9, 100, 0, 150, 0);
-			TNT1 AAA 0 A_SpawnItemEx("MO_MiniNukeFlare", random (-500, 500), random (-600, 600), random (0, 100));
-			TNT1 AAA 1 A_SpawnItemEx("MO_MiniNukeFlare", random (-500, 500), random (-600, 600), random (0, 100));
-			TNT1 A 0 A_Explode(200, 1300, 1, 1, 4000);
-//			TNT1 A 0 A_PlaySound("NUKEEXP", 1);
-			TNT1 A 0 A_Explode(750,250, 1, 1, 1);
-			TNT1 A 0 A_SpawnItemEx("NukeCloud",0,0,0,0,0,0,SXF_NOCHECKPOSITION);
-			TNT1 A 0 A_SpawnItemEx("NukeExplosionFX",0,0,200,0,0,3,SXF_NOCHECKPOSITION);
-			TNT1 A 2 A_SpawnItemEx("MO_MiniNukeFlare", 0, 0, 300);
-			TNT1 A 2 A_SpawnItemEx("MO_MiniNukeFlare", 0, 0, 400);
-			TNT1 A 2 A_SpawnItemEx("MO_MiniNukeFlare", 0, 0, 450);
-			TNT1 A 2 A_SpawnItemEx("MO_MiniNukeFlare", 0, 0, 500);
-			TNT1 AAAAA 2 A_SpawnItemEx("MO_MiniNukeFlare", 0, 0, 500);
-			EXPL A 0 Radius_Quake (6, 100, 0, 150, 0);
-			TNT1 A 45;
-			TNT1 A 1000;
-			Stop;
-    }
-}
-
-Class NukeCloud : Actor
-{
-	States
-	{
-	Spawn:
-		TNT1 A 1 {
-				A_SpawnItemEx("MO_NukeSmoke",-40,-100,20);
-				A_SpawnItemEx("MO_NukeSmoke",-30,-70,20);
-				A_SpawnItemEx("MO_NukeSmoke",-20,-40,20);
-				A_SpawnItemEx("MO_NukeSmoke",-10,-10,20);
-				A_SpawnItemEx("MO_NukeSmoke",0,20,20);
-				A_SpawnItemEx("MO_NukeSmoke",10,50,20);
-				A_SpawnItemEx("MO_NukeSmoke",20,80,20);
-				A_SpawnItemEx("MO_NukeSmoke",30,110,20);
-				A_SpawnItemEx("MO_NukeSmoke",40,140,20);
-				A_SpawnItemEx("MO_NukeSmoke",50,170,20);
-				}
-			TNT1 AAAAAAAAAAAAAA 0  A_SpawnProjectile ("MO_NukeSmoke", random (50, 400), 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random(80, 90));
-//			TNT1 AAA 0  A_SpawnProjectile ("MO_NukeSmokeBig", 1400, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random(80, 90));
-			TNT1 A 0 A_SpawnItemEx("MO_NukeSmokeBig",10,-8,600);
-			TNT1 A 0 A_SpawnItemEx("MO_NukeSmokeBig",8,-16,625);
-			TNT1 A 0 A_SpawnItemEx("MO_NukeSmokeBig",6,0,670);
-			TNT1 A 0 A_SpawnItemEx("MO_NukeSmokeBig",-2,8,700);
-			TNT1 A 0 A_SpawnItemEx("MO_NukeSmokeBig",-4,-16,725);
-			Stop;
-	}
-}
-
-Class NukeExplosionFX : Actor
-{
-	Default
-	{
-		Radius 0;
-		Height 0;
-		RenderStyle 'Add';
-		Alpha 1;
-		Scale 2.5;
-		Speed 3;
-	  +NOGRAVITY;
-	  +NOINTERACTION;
-	  +NOBLOCKMAP;
-	  +NOTELEPORT;
-	  +ForceXYBillboard;
-	  +CLIENTSIDEONLY;
-	}
-	States
-	{
-		Spawn:
-		NKE1 ABCDE 10;
-		NKE1 FGHIJKL 7;
-		NKE1 MNOPQRST 7;
-		Stop;
-	}
-}
 /*
 Class LaserGuide : Actor
 { 

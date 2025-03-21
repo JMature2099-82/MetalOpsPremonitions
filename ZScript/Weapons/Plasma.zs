@@ -110,10 +110,10 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	Default
 	{
 		Weapon.AmmoUse 0;
-		Weapon.AmmoGive 60;
+		Weapon.AmmoGive 20;
 		Weapon.AmmoType1 "MO_Cell";
 		Weapon.AmmoType2 "PlasmaAmmo";
-		Inventory.PickupMessage "$MO_GOTPLASMA";
+		Inventory.PickupMessage "$GOTPLASMAGUN";
 		Inventory.PickupSound "weapons/plasma/pickup";
 		Obituary "$OB_PLASMABEAM";
 		Tag "$TAG_PLASMA";
@@ -213,7 +213,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			}
 			A_AlertMonsters();
 			A_GunFlash();
-			A_TakeInventory("PlasmaAmmo",1);
+			A_TakeInventory("PlasmaAmmo",1, TIF_NOTAKEINFINITE);
 			A_GiveInventory("PlasmaRifleCooldownCount",1);		
 		}
 		"####" B 1 JM_GunRecoil(-1.1,+.03);
@@ -329,7 +329,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PRGA A 3;
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 	HoldBeam:
-		TNT1 A 0 MO_CheckMag(1,"StopBeam");
+		TNT1 A 0 MO_CheckMag(where: "StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGG A 0 A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 		PRGG A 0 A_AttachLightDef('GunLighting', 'PlasmaWepLight');

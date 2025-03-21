@@ -55,10 +55,10 @@ extend class JMWeapon
 	action bool PressingFire(){return player.cmd.buttons & BT_ATTACK;}
     action bool PressingAltfire(){return player.cmd.buttons & BT_ALTATTACK;}
 
-	action state MO_CheckMag(int m = 1, statelabel st = "Reload")
+	action state MO_CheckMag(int m = 1, statelabel where = "Reload")
 	{
-		if(CountInv(invoker.ammotype2) < m)
-			return ResolveState(st);
+		if(invoker.Ammo2.amount  < m)
+			return ResolveState(where);
 		return ResolveState(Null);
 	}
 
@@ -84,6 +84,20 @@ extend class JMWeapon
 				theOwner.TakeInventory(invoker.inspectToken,1);
 				theOwner.player.SetPSprite(PSP_WEAPON,wep.FindState("Inspect"));
 			}
+	}
+
+	action void MO_ZoomBob()
+	{
+		invoker.BobRangeX = .1;
+		invoker.BobRangeY = .1;
+		invoker.BobSpeed = .5;
+	}
+
+	action void MO_ResetBob()
+	{
+		invoker.BobRangeX = prevBobRangeX;
+		invoker.BobRangeY = prevBobRangeY;
+		invoker.BobSpeed = prevBobSpeed;
 	}
 				
 	//By Matt. Perfect to go around the Return state/ResolveState headache
