@@ -22,7 +22,7 @@ class ChexReplacementHandler : EventHandler
 			if(p.mo is "MO_SergeantPlayer")
 			e.Replacement = "MO_Deagle";
 			else
-			e.Replacement = "EnforcerPistol";
+			e.Replacement = "MO_VengeanceStryker";
 			break;
 		case 'LargeZorcher': e.Replacement = "Shotgun"; break;
 		case 'SuperLargeZorcher': e.Replacement = "SuperShotgun"; break;
