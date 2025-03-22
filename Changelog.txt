@@ -154,5 +154,9 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 	- Spiritual: +4 HP
 
 3/21/25:
-- Pickup messages simplified.
-- Fuel ammo for the Flamethrower now randomly spawns in place of cells and cell packs.
+- Pickup messages for items, armor, health and ammo simplified. They now just display the name, and what amount is given.
+- Fixed bugs with the Pistol, mainly the ADS being buggy when out of reserve ammo, and burst count resets properly after reloading.
+- Fuel has pick up sounds
+- Fuel ammo spawns randomly in place of the Cells and Cellpacks
+- Fuel ammo has new pickup sprites, sprites by Cescade.
+- Heavy Marksman Rifle buffed.

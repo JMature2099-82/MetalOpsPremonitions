@@ -175,7 +175,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperFire");
 			TNT1 A 0 MO_CheckMag(1);
             HC2G B 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 30, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 45, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 1,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/fire", 0);
 				A_Overlay(-5, "ZOOMEDFLASH");
@@ -235,7 +235,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0 MO_CheckMag(1);
 			TNT1 A 0 MO_CheckMag(3, "LowSniperCount");
             HC2Z D 1 BRIGHT {
-                A_FireBullets(5.6, 0, 1, 85, "UpdatedBulletPuff",FBF_NORANDOM);
+                A_FireBullets(5.6, 0, 1, 100, "UpdatedBulletPuff",FBF_NORANDOM);
                 A_TakeInventory("HCRAmmo", 3,TIF_NOTAKEINFINITE);
                 A_StartSound("hcr/sniperfire", 0);
 	//			A_SpawnItemEx("ShotGunSmoke",20, zofs: 40, xvel: 2);
