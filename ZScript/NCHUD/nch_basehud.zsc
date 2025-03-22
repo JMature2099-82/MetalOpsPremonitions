@@ -533,12 +533,12 @@ class NCH_BaseHUD : BaseStatusBar
 
 	virtual void NCHF_AddAmmos () 
 	{
-			NCHF_AddSingleAmmo("MO_Gasoline");
 			NCHF_AddSingleAmmo("MO_LowCaliber");
 			NCHF_AddSingleAmmo("MO_HighCaliber");
 			NCHF_AddSingleAmmo("MO_ShotShell");
 			NCHF_AddSingleAmmo("MO_RocketAmmo");
 			NCHF_AddSingleAmmo("MO_Cell");
+			NCHF_AddSingleAmmo("MO_Fuel");
 	}
 
 	// -------------------------------------------------------------------------------------------------

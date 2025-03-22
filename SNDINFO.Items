@@ -32,18 +32,14 @@ ammo3 AMMOPCK3
 misc/ammobox ABOXPICK
 misc/rocket RCKTPICK
 misc/rocketbox RCKTBOX
-
 misc/backpack BACKPCK
-
 misc/cell CELLPICK
 misc/cellpak CELL_PAK
-
+$random misc/fuel {fuel1 fuel2 fuel3}
+fuel1 FUELPCK1
+fuel2 FUELPCK2
+fuel3 FUELPCK3
 misc/zerkpak BSERKPCK
-megazerk/ambienceloop "sounds/items/powerups/MegaBers_LoopAmb.ogg"
-megazerk/looplayer "sounds/items/powerups/MegaBers_LoopLayer.ogg"
-megazerk/screaming "sounds/items/powerups/MegaBers_LoopScreams.ogg"
-megazerk/warn BSERKWRN
-megazerk/end BSERKEND
 
 powerupwearoff wearoff
 powerup/haste "sounds/items/powerups/Haste_Pickup.ogg"

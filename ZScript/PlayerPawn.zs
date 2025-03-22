@@ -1,6 +1,57 @@
 //Player class mainly for weapons
 class SergeantClassToken : MO_ZSToken{}
 
+//Shortcut Player start item giver because too many Player.StartItem for mulitple classes is unreliable.
+class PlayerStartItemGiver : CustomInventory
+{
+	Default
+	{
+		Inventory.PickupMessage "$GOTPLACEHOLDER";
+		-INVENTORY.INVBAR
+		+INVENTORY.UNDROPPABLE
+		+INVENTORY.AUTOACTIVATE
+		-INVENTORY.ALWAYSPICKUP
+		-INVENTORY.UNTOSSABLE
+		Inventory.MaxAmount 1;
+	}
+	States
+	{
+		Spawn:
+		AMMO A -1;
+		Stop;
+
+		Pickup: Use:
+		TNT1 A 1
+		{
+			//Ammo start for both classes
+			A_SetInventory("MO_Fuel", 100);
+			A_SetInventory("MO_LowCaliber",50);
+			A_SetInventory("MO_HighCaliber",50);
+			A_SetInventory("LeverShottyAmmo",7);
+			A_SetInventory("PumpShotgunAmmo", 8);
+			A_SetInventory("ARAmmo",31);
+			A_SetInventory("HCRAmmo",12);
+			A_SetInventory("SMGAmmo",35);
+			A_SetInventory("SSGAmmo",2);
+			A_SetInventory("PlasmaAmmo",60);
+			A_GiveInventory("Katana");
+			A_SetInventory("MOLOTOVAMMO",4);
+			A_SetInventory("GrenadeAmmo", 4);
+			A_SetInventory("FragSelected",1);
+			A_SetInventory("HeatBlastFullyCharged",1);
+			A_SetInventory("HeatBlastLevel",3);
+			A_SetInventory("HeatBlastShotCount", 45);
+
+			//Never used tokens
+			A_GiveInventory("NeverUsedLAS");
+			A_GiveInventory("NeverUsedPSG");
+			A_GiveInventory("NeverUsedSMG");
+			A_GiveInventory("NeverUsedHCR");
+		}
+		Fail;
+	}
+}
+
 class MO_PlayerBase : DoomPlayer
 {
 	override Void Tick()
@@ -39,7 +90,7 @@ class MO_PlayerBase : DoomPlayer
 	{
 		Player.AttackZOffset 11; //Attacks should actually hit on the same spot as the crosshair now. Thanks Gemini0! -JM
 		Player.WeaponSlot 1, "Katana";
-		Player.WeaponSlot 2, "MO_VengeanceStriker", "MO_Submachinegun";
+		Player.WeaponSlot 2, "MO_VengeanceStryker", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", "MO_MiniGun", "MO_HeavyRifle";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
@@ -53,34 +104,12 @@ class MO_OfficerPlayer : MO_PlayerBase
 {
     Default
     {
-        Player.StartItem "MO_VengeanceStriker";
+        Player.StartItem "MO_VengeanceStryker";
 		Player.DisplayName "Officer (Pistol Start)";
 		Player.CrouchSprite "PLYC";
 		Player.StartItem "PistolMagAmmo",18;
-		Player.StartItem "MO_Gasoline", 200;
-		Player.StartItem "MO_LowCaliber",50;
-		Player.StartItem "MO_HighCaliber",50;
-		Player.StartItem "LeverShottyAmmo",7;
-		Player.StartItem "PumpShotgunAmmo", 8;
-		Player.StartItem "ARAmmo",30;
-		Player.StartItem "HCRAmmo",12;
-		Player.StartItem "SMGAmmo",40;
-		Player.StartItem "SSGAmmo",2;
-		Player.StartItem "PlasmaAmmo",60;
-		Player.StartItem "Katana";
-		Player.StartItem "MOLOTOVAMMO",4;
-		Player.StartItem "GrenadeAmmo", 4;
-		Player.StartItem "FragSelected",1;
-		Player.StartItem "HeatBlastFullyCharged";
-		Player.StartItem "HeatBlastLevel",3;
-		Player.StartItem "HeatBlastShotCount", 45;
-
-		//Never used tokens
+		Player.StartItem "PlayerStartItemGiver";
 		Player.StartItem "NeverUsedPistol";
-		Player.StartItem "NeverUsedLAS";
-		Player.StartItem "NeverUsedPSG";
-		Player.StartItem "NeverUsedSMG";
-		Player.StartItem "NeverUsedHCR";
     }
 }
 
@@ -92,30 +121,7 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.DisplayName "Sergeant (Deagle Start)";
 		Player.CrouchSprite "PLYC";
 		Player.WeaponSlot 2, "MO_Deagle", "MO_Submachinegun";
-		Player.StartItem "SergeantClass", 1;
-		Player.StartItem "MODeagleAmmo",7;
-		Player.StartItem "MO_Gasoline", 200;
-		Player.StartItem "MO_LowCaliber",50;
-		Player.StartItem "MO_HighCaliber",50;
-		Player.StartItem "LeverShottyAmmo",7;
-		Player.StartItem "PumpShotgunAmmo", 8;
-		Player.StartItem "ARAmmo",30;
-		Player.StartItem "SMGAmmo",40;
-		Player.StartItem "SSGAmmo",2;
-		Player.StartItem "HCRAmmo",12;
-		Player.StartItem "PlasmaAmmo",60;
-		Player.StartItem "Katana";
-		Player.StartItem "MOLOTOVAMMO",4;
-		Player.StartItem "GrenadeAmmo", 4;
-		Player.StartItem "FragSelected",1;
-		Player.StartItem "HeatBlastFullyCharged";
-		Player.StartItem "HeatBlastLevel",3;
-		Player.StartItem "HeatBlastShotCount", 45;
-
-		//Never used tokens
-		Player.StartItem "NeverUsedLAS";
-		Player.StartItem "NeverUsedPSG";
-		Player.StartItem "NeverUsedSMG";
-		Player.StartItem "NeverUsedHCR";
+		Player.StartItem "MODeagleAmmo",8;
+		Player.StartItem "PlayerStartItemGiver";
     }
 }

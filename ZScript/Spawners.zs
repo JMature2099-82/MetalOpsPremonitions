@@ -1,4 +1,4 @@
-class ShotgunDropper : Inventory
+class ShotgunDropper : Inventory// replaces Shotgun
 {
 	Default{+DROPPED}
 	States
@@ -109,22 +109,6 @@ class ClipboxSpawner : RandomSpawner replaces Clipbox
 	}
 }
 
-class ShellSpawner : RandomSpawner replaces Shell
-{
-	Default
-	{
-		DropItem "MO_ShotShell";
-	}
-}
-
-class ShellboxSpawner : RandomSpawner replaces ShellBox
-{
-	Default
-	{
-		DropItem "MO_ShellBox";
-	}
-}
-
 class BFGSpawner : RandomSpawner replaces BFG9000
 {
 	Default
@@ -133,44 +117,6 @@ class BFGSpawner : RandomSpawner replaces BFG9000
 		DropItem "MO_Unmaker", 255, 1;
 	}
 }
-
-/*
-class FlamethrowerSpawner : CustomInventory replaces Chainsaw
-{
-	Default
-	{
-//		+COUNTITEM;
-		+FLOORCLIP;
-		+DONTGIB;
-		Scale 0.42;
-		Inventory.PickupSound "weapons/flamer/pickup";
-        Inventory.PickupMessage "";
-	}
-	States
-	{
-		Spawn:
-			TNT1 A 0;
-			F1MC A -1;
-			Stop;
-		Pickup:
-			TNT1 A 0 A_JumpIfInventory("MO_Flamethrower",1,"PickupGas");
-			TNT1 A 1
-			{
-				A_GiveInventory("MO_Flamethrower",1);
-				A_GiveInventory("MO_Gasoline",75);
-				A_Log("You got the Flamethrower! (Slot 1)");
-			}
-			Stop;
-		PickupGas:
-			TNT1 A 1
-			{
-				A_GiveInventory("MO_Gasoline",75);
-				A_Log("You got the gasoline from the Flamethrower! +90 Gas");
-			}
-			Stop;
-	}
-}
-*/
 
 //Items and Powerups
 Class BerserkPackSpawner: RandomSpawner replaces Berserk
@@ -184,7 +130,7 @@ Class BerserkPackSpawner: RandomSpawner replaces Berserk
 
 Class InvulSphereSpawner : RandomSpawner replaces InvulnerabilitySphere
 {
-	Default
+	Default 
 	{
 		DropItem "MO_Invulnerability",255,3;
 		DropItem "MO_QuadDMGSphere",255,1;
@@ -195,9 +141,9 @@ Class ArmorBonusSpawner : RandomSpawner replaces ArmorBonus
 {
 	Default
 	{
-		DropItem "MO_ArmorBonus",255,3;
-		DropItem "MO_GeminusBonus",255, 1;
-		DropItem "MO_TrebleBonus",255,1;
+		DropItem "MO_ArmorBonus",255,5;
+		DropItem "MO_GeminusArmorBonus",255, 3;
+		DropItem "MO_TrebleArmorBonus",255,1;
 	}
 }
 
@@ -206,8 +152,8 @@ Class HealthBonusSpawner : RandomSpawner replaces HealthBonus
 {
 	Default
 	{
-		DropItem "MO_HealthBonus",255,3;
-		DropItem "MO_DoubleHealthBonus",255, 1;
-		DropItem "MO_TripleHealthBonus",255,1;
+		DropItem "MO_HealthBonus",255,5;
+		DropItem "MO_CorruptedHealthBonus",255, 3;
+		DropItem "MO_SpiritualHealthBonus",255,1;
 	}
 }

@@ -1,4 +1,4 @@
-class MO_KeyClass : Key
+class MO_KeyClass : Key abstract
 {
 	Default
 	{
@@ -8,6 +8,14 @@ class MO_KeyClass : Key
 	Height 16;
 	Inventory.pickupsound "misc/keycard";
 	Inventory.InterHubAmount 0;
+	}
+}
+
+class MO_SkullKeyClass : MO_KeyClass
+{
+	Default
+	{
+		Inventory.PickUpSound "misc/skullkey";
 	}
 }
 
@@ -62,11 +70,10 @@ class MO_BlueCard : MO_KeyClass replaces BlueCard
 	}
 }
 
-class MO_RedSkull : MO_KeyClass replaces RedSkull
+class MO_RedSkull : MO_SkullKeyClass replaces RedSkull
 {
 	Default
 	{
-	Inventory.pickupsound "misc/skullkey";
 	Inventory.PickupMessage "$GOTREDSKUL";
 	Species "RedSkull";
 	Inventory.Icon "SKLRA0";
@@ -80,11 +87,10 @@ class MO_RedSkull : MO_KeyClass replaces RedSkull
 	}
 }
 
-class MO_BlueSkull : MO_KeyClass replaces BlueSkull
+class MO_BlueSkull : MO_SkullKeyClass replaces BlueSkull
 {
 	Default
 	{
-	Inventory.pickupsound "misc/skullkey";
 	Inventory.PickupMessage "$GOTBLUESKUL";
 	Species "BlueSkull";
 	Inventory.Icon "SKLBA0";
@@ -98,12 +104,11 @@ class MO_BlueSkull : MO_KeyClass replaces BlueSkull
 	}
 }
 
-class MO_YellowSkull : MO_KeyClass replaces YellowSkull
+class MO_YellowSkull : MO_SkullKeyClass replaces YellowSkull
 {
 	Default
 	{
 	Inventory.PickupMessage "$GOTYELWSKUL";
-	Inventory.pickupsound "misc/skullkey";
 	Species "YellowSkull";
 	Inventory.Icon "SKLYA0";
 	}

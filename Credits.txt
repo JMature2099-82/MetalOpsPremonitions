@@ -47,6 +47,7 @@ to create this
 - ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
 - Gemini0 - Player.AttackZOffset fix
+
 - Running With Scissors - Postal 2 Kicking sounds
 
 Pump Shotgun:
@@ -137,6 +138,7 @@ Backpack sprite from old versions of PB 3.0, credit by PB Team (if anyone knows 
 Backpack sound by ID Software
 Power up sphere sprites (Soulsphere, Megasphere, Invulnerability,
 Invisibility, Quad Damage and Haste) by Benjamin Zuriel.
+Fuel pickups by Cescade, sounds by Valve and ZNB
 
 
 /////////////////////////////
@@ -187,6 +189,7 @@ Some muzzle flashes by Metalman, Adobe
 /////////////////////
 ///			MISC				///
 /////////////////////
+
 Tharn666 - Grenade cook warning icon
 Grenade cooking and indicator inspired by Call of Duty 3 by Activision and Treyarch
 Smoke trail for grenade inspired by Black Mesa by Crowbar Collective

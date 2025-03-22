@@ -16,7 +16,7 @@ mixin class MO_PowerUpWarning
 			case 105:
 			case 70:
 			case 35:
-			Owner.A_StartSound(expiresnd, 40, CHANF_OVERLAP, 1.0, ATTN_NONE);
+			Owner.A_StartSound(expiresnd, 1000, CHANF_OVERLAP, 1.0, ATTN_NONE);
 			Owner.A_Print(str, 1);
 			Owner.A_SetBlend(blend, .6, 10);
 			break;

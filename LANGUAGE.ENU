@@ -106,19 +106,19 @@ PC_TARGET_COLOR = "Show target color instead of player";
 GOTPLACEHOLDER = "How did you find this? You're not supposed to see this.";
 
 //Health
-TAG_HTHBONUS = "Health Bonus";
-TAG_HTHBONUS2 = "Corrupted Health Bonus";
-TAG_HTHBONUS3 = "Spiritual Health Bonus";
-TAG_STIM = "Stimpack";
-TAG_MEDIKIT = "Medikit";
-TAG_MEDPACK = "Field Surgeon Pack";
+TAG_HTHBONUS = "\c[Blue]Health Bonus";
+TAG_HTHBONUS2 = "\c[Red]Corrupted Health Bonus";
+TAG_HTHBONUS3 = "\c[Cyan]Spiritual Health Bonus";
+TAG_STIM = "\c[Green]Stimpack";
+TAG_MEDIKIT = "\c[DarkGreen]Medikit";
+TAG_MEDPACK = "\c[DarkGreen]Field Surgeon Pack";
 
 //Armor
-TAG_ARMBONUS = "Armor Shard";
-TAG_ARMBONUS2 = "Geminus Armor Shard";
-TAG_ARMBONUS3 = "Treble Armor Shard";
-TAG_LIGHTARM = "Light Combat Armor";
-TAG_HEAVYARM = "Heavy Combat Armor";
+TAG_ARMBONUS = "\c[Green]Armor Shard";
+TAG_ARMBONUS2 = "\c[Gold]Geminus Armor Shard";
+TAG_ARMBONUS3 = "\c[Purple]Treble Armor Shard";
+TAG_LIGHTARM = "\c[White]Light Battle Armor";
+TAG_HEAVYARM = "\c[Darkgray]Heavy Combat Armor";
 
 //Keys
 /*
@@ -135,14 +135,14 @@ TAG_LOWCALIBER = "\cdPistol Caliber Round";
 TAG_HIGHCALIBER = "\c[Yellow]Rifle Caliber Round";
 TAG_SHELL = "\cgShotgun shell";
 TAG_RCKT = "\ccRocket";
-TAG_CELL = "\cvPlasma Cell";
+TAG_CELL = "\cvEnergy Cell";
 TAG_FUEL = "\ciFuel";
-TAG_GRENADE = "\Grenades";
-TAG_MOLOTOV = "\Molotovs";
+TAG_GRENADE = "\[Tan]Grenade";
+TAG_MOLOTOV = "\[Brown]Molotov Cocktail";
 
 //Chainsword
 GOTCHAINSWORD = "Picked up a Chainsword! (Slot 1)";
-OB_CHAINSWORD = "%o had a friendly talk with %k's new great communicator.";
+OB_CHAINSWORD = "%o had a friendly talk with %k's newest great communicator, the Chainsword!";
 TAG_CHAINSWORD = "Chainsword";
 
 //Kick attack

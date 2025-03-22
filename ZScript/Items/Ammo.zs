@@ -1,8 +1,47 @@
-class MO_LowCaliber : Ammo
+class MO_AmmoBase : Ammo abstract
+{
+	string Pk;
+	name type;
+	property AmmoType: type;
+
+
+	override String PickupMessage()
+	{
+		CheckAmmoCount();
+		return String.Format(Pk,GetTag(), amount);
+	}
+
+	void CheckAmmoCount()
+	{
+		if(amount > 1 && type != 'gas') 
+		Pk = "%ss \c-(+%d)";
+		else Pk = "%s \c-(+%d)";
+	}
+
+	override Class<Ammo> GetParentAmmo ()
+	{
+		class<Object> type = GetClass();
+
+		while (type.GetParentClass() != "MO_AmmoBase" && type.GetParentClass() != NULL)
+		{
+			type = type.GetParentClass();
+		}
+		return (class<Ammo>)(type);
+	}
+
+	Default
+	{
+		+DONTGIB
+		+FLOORCLIP
+		+INVENTORY.IGNORESKILL
+	}
+}
+
+class MO_LowCaliber : MO_AmmoBase
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a low caliber magazine.";
+	  Tag "$TAG_LOWCALIBER";
 	  Inventory.Amount 10;
 	  Inventory.MaxAmount 150;
 	  Ammo.BackpackAmount 30;
@@ -10,6 +49,7 @@ class MO_LowCaliber : Ammo
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
 	  Scale 0.85;
+	  MO_AmmoBase.AmmoType 'pistolcal';
 	 }
 	  States
 	  {
@@ -19,11 +59,10 @@ class MO_LowCaliber : Ammo
 	}
  }
  
-class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
+class MO_LowCalBox : MO_LowCaliber
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a box of low caliber bullets.";
 	  Inventory.Amount 50;
 	  Inventory.PickUpSound "misc/ammobox";
 	}
@@ -35,17 +74,18 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 	  }
 }
  
- class MO_HighCaliber : Ammo
+ class MO_HighCaliber : MO_AmmoBase
 {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a high caliber magazine.";
+	  Tag "$TAG_HIGHCALIBER";
 	  Inventory.Amount 10;
 	  Inventory.MaxAmount 200;
 	  Ammo.BackpackAmount 30;
 	  Ammo.BackpackMaxAmount 400;
 	  Inventory.Icon "CLIPA0";
 	  Inventory.PickUpSound "misc/ammopickup";
+	 MO_AmmoBase.AmmoType 'riflecal';
 	 }
 	  States
 	  {
@@ -55,11 +95,10 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 	}
  }
  
- class MO_HighCalBox : MO_HighCaliber// replaces Clipbox
+ class MO_HighCalBox : MO_HighCaliber
  {
 	Default
 	{
-	  Inventory.PickupMessage "Picked up a box of high caliber bullets.";
 	  Inventory.Amount 50;
 	  Inventory.PickUpSound "misc/ammobox";
 	}
@@ -71,36 +110,19 @@ class MO_LowCalBox : MO_LowCaliber// replaces Clipbox
 	  }
 }
 
-class MO_Gasoline : Ammo
-{
-	Default
-	{
-	  Inventory.PickupMessage "Picked up a gasoline jerry can.";
-	  Inventory.Amount 35;
-	  Inventory.MaxAmount 300;
-	  Ammo.BackpackAmount 90;
-	  Ammo.BackpackMaxAmount 600;
-	  Inventory.Icon "GASLN0";
-	 }
-	  States
-	  {
-	  Spawn:
-		GASL N -1;
-		Stop;
-	}
-}
 
-class MO_ShotShell : Ammo 
+class MO_ShotShell : MO_AmmoBase 
 {
 	Default
 	{
-	  Inventory.PickupMessage "$GOTSHELLS";
+	 Tag "$TAG_SHELL";
 	  Inventory.Amount 4;
 	  Inventory.MaxAmount 50;
 	  Ammo.BackpackAmount 8;
 	  Ammo.BackpackMaxAmount 100;
 	  Inventory.Icon "SHELA0";
 	  Inventory.PickUpSound "misc/shells";
+	 MO_AmmoBase.AmmoType 'shell';
 	  }
 	  States
 	  {
@@ -114,7 +136,6 @@ Class MO_ShellBox : MO_ShotShell
 {
 	Default
 	{
-	  Inventory.PickupMessage "$GOTSHELLBOX"; // "Picked up a box of shotgun shells."
 	  Inventory.Amount 20;
 	  Inventory.PickUpSound "misc/shellbox";
 	}
@@ -126,18 +147,19 @@ Class MO_ShellBox : MO_ShotShell
   }
 }
 
-Class MO_RocketAmmo : Ammo replaces RocketAmmo
+Class MO_RocketAmmo : MO_AmmoBase replaces RocketAmmo
 {
 	Default
 	{
-	  Inventory.PickupMessage "$GOTROCKET"; // "Picked up a rocket."
+	  Tag "$TAG_RCKT";
 	  Inventory.Amount 1;
 	  Inventory.MaxAmount 50;
-	  Ammo.BackpackAmount 1;
+	  Ammo.BackpackAmount 2;
 	  Ammo.BackpackMaxAmount 100;
 	  Inventory.Icon "R0CKA0";
 	  Inventory.PickUpSound "misc/rocket";
 	  Scale 0.45;
+	  MO_AmmoBase.AmmoType 'rocket';
 	}
 	  States
 	  {
@@ -147,12 +169,11 @@ Class MO_RocketAmmo : Ammo replaces RocketAmmo
 	  }
 }
 
-
 Class MO_RocketBox : MO_RocketAmmo replaces RocketBox
 {
 	Default
 	{
-	Inventory.PickupMessage "$GOTROCKBOX";
+	Tag "$TAG_RCKT";
 	Inventory.Amount 6;
 	Inventory.PickUpSound "misc/rocketbox";
 	Scale 1;
@@ -165,17 +186,19 @@ Class MO_RocketBox : MO_RocketAmmo replaces RocketBox
 	}
 }
 
-Class MO_Cell : Ammo replaces Cell
+
+Class MO_Cell : MO_AmmoBase
 {
   Default
   {
-  Inventory.PickupMessage "$GOTCELL";
+  Tag "$TAG_CELL";
   Inventory.Amount 20;
   Inventory.MaxAmount 300;
-  Ammo.BackpackAmount 20;
+  Ammo.BackpackAmount 40;
   Ammo.BackpackMaxAmount 600;
   Inventory.Icon "CEL1A0";
   inventory.pickupsound "misc/cell";
+  MO_AmmoBase.AmmoType 'cell';
   }
   States
   {
@@ -185,11 +208,10 @@ Class MO_Cell : Ammo replaces Cell
   }
 }
 
-Class MO_CellPack: MO_Cell replaces Cellpack
+Class MO_CellPack: MO_Cell
 {
   Default
   {
-  Inventory.PickupMessage "$GOTCELLBOX";
   Inventory.Amount 100;
   inventory.pickupsound "misc/cellpak";
   }
@@ -199,4 +221,39 @@ Class MO_CellPack: MO_Cell replaces Cellpack
     CE1P ABCD 3;
     Loop;
   }
+}
+
+class MO_Fuel : MO_AmmoBase
+{
+	Default
+	{
+	  Tag "$TAG_FUEL";
+	  Inventory.Amount 20;
+	  Inventory.MaxAmount 300;
+	  Ammo.BackpackAmount 40;
+	  Ammo.BackpackMaxAmount 600;
+	  Inventory.Icon "JRYCB0";
+	  Inventory.PickupSound "misc/fuel";
+	  MO_AmmoBase.AmmoType 'gas';
+	 }
+	  States
+	  {
+	  Spawn:
+		JRYP A -1;
+		Stop;
+	}
+}
+
+class MO_LargeFuelCan: MO_Fuel
+{
+	Default
+	{
+		Inventory.Amount 80;
+	}
+	States
+	{
+	  Spawn:
+		JRYC A -1;
+		Stop;
+	}
 }

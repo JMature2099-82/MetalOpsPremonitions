@@ -1,15 +1,21 @@
+class MO_BaseHealth : Health abstract
+{
+	override String PickupMessage()
+	{
+		return String.Format("%s \c-(+%d HP)",GetTag(), Amount);
+	}
+}
 
-class MO_HealthBonus : HealthBonus// replaces HealthBonus
+class MO_HealthBonus : MO_BaseHealth// replaces HealthBonus
 {
 	Default
 	{
 	  +COUNTITEM;
 	  +INVENTORY.ALWAYSPICKUP;
-	  Inventory.Amount 1;
+	  Inventory.Amount 2;
 	  Inventory.MaxAmount 300;
-	  Inventory.PickupMessage "$GOTHTHBONUS"; // "Picked up a health bonus."
+	  Tag "$TAG_HTHBONUS";
 	  Inventory.PickupSound "misc/healthbonus";
-	  Health.LowMessage 25, "Picked up a health bonus. It's not much, but hey you needed it.";
 	}
 	States
 	{
@@ -19,14 +25,13 @@ class MO_HealthBonus : HealthBonus// replaces HealthBonus
 	 }
 }
 
-class MO_DoubleHealthBonus : MO_HealthBonus
+class MO_CorruptedHealthBonus : MO_HealthBonus
 {
 	Default
 	{
-	  Inventory.Amount 2;
-	  Inventory.PickupMessage "Picked up a stronger health bonus."; // "Picked up a health bonus."
+	  Inventory.Amount 3;
 	  Inventory.PickupSound "doublehealth";
-	  Health.LowMessage 25, "Picked up a stronger health bonus. Not much but was necessary.";
+	  Tag "$TAG_HTHBONUS2";
 	}
 	States
 	{
@@ -36,14 +41,13 @@ class MO_DoubleHealthBonus : MO_HealthBonus
 	 }
 }
 
-class MO_TripleHealthBonus : MO_HealthBonus
+class MO_SpiritualHealthBonus : MO_HealthBonus
 {
 	Default
 	{
-	  Inventory.Amount 3;
-	  Inventory.PickupMessage "Picked up a greater health bonus."; // "Picked up a health bonus."
+	  Inventory.Amount 4;
 	  Inventory.PickupSound "triplehealth";
-	  Health.LowMessage 25, "Picked up a greater health bonus. You needed it, despite it not being enough.";
+	  Tag "$TAG_HTHBONUS3";
 	}
 	States
 	{
@@ -53,13 +57,12 @@ class MO_TripleHealthBonus : MO_HealthBonus
 	 }
 }
 
-Class MO_Stimpack: Stimpack replaces Stimpack
+Class MO_Stimpack: MO_BaseHealth replaces Stimpack
 {
 	Default
 	{
 	  Inventory.Amount 15;
-	  Inventory.PickupMessage "$GOTSTIM"; // "Picked up a stimpack."
-	  Health.LowMessage 25, "Picked up a stimpack. It's not a medkit, but this will do.";
+	  Tag "$TAG_STIM";
 	  Inventory.PickupSound "misc/stim";
 	 }
   States
@@ -70,13 +73,12 @@ Class MO_Stimpack: Stimpack replaces Stimpack
   }
 }
 
-Class MO_Medikit : Medikit replaces Medikit
+Class MO_Medikit : MO_BaseHealth replaces Medikit
 {
 	Default
 	{
 	  Inventory.Amount 30;
-	  Inventory.PickupMessage "$GOTMEDIKIT";
-	  Health.LowMessage 25, "$GOTMEDINEED";
+	  Tag "$TAG_MEDIKIT";
 	  Inventory.PickupSound "misc/medpack";
 	}
   States

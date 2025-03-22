@@ -14,8 +14,6 @@ class MOps_Handler : EventHandler
 	override void PlayerDied(PlayerEvent e) //destroy gun lighting on Death
 	{
 		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
-//		let plrWep = JMWeapon(pl.readyweapon);
-
 		if(pl)
 		{
 			pl.A_RemoveLight('GunLighting');
@@ -31,7 +29,7 @@ class MOps_Handler : EventHandler
 				if(p.mo is "MO_SergeantPlayer")
 				{e.Replacement = "MO_Deagle";}
 				else
-				{e.Replacement = "MO_VengeanceStriker";}
+				{e.Replacement = "MO_VengeanceStryker";}
 				break;
 			case 'Shotgun':
 				e.Replacement = "ShotgunDropper";
@@ -40,6 +38,38 @@ class MOps_Handler : EventHandler
 			case 'Minigun':
 				e.Replacement = "ChaingunDropper";
 				break;
+
+			//Ammo
+			case 'Shell':
+				e.Replacement = "MO_ShotShell";
+				break;
+			case 'Shellbox':
+				e.Replacement = "MO_ShellBox";
+				break;
+
+			case 'Cell':
+			if(random(0,9) >= 5)
+			{
+				e.Replacement = "MO_Fuel";
+				break;
+			}
+			else
+			{
+				e.Replacement = "MO_Cell";
+				break;
+			}
+
+			case 'Cellpack':
+			if(random(0,9) >= 5)
+			{
+				e.Replacement = "MO_LargeFuelCan";
+				break;
+			}
+			else
+			{
+				e.Replacement = "MO_CellPack";
+				break;
+			}
 		}
 		e.isFinal = false;
 	}
@@ -109,10 +139,11 @@ class MOps_Handler : EventHandler
 					
 					let wp = pl.player.readyweapon;
 					State Kick = wp.FindState("Kick");
+					State FlashKick = wp.FindState("FlashKick");
 					if(Kick != Null && !mo_wep.isZoomed)
 					{
 						pl.player.SetPSprite(-999, wp.FindState("Kick"));
-						if((players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
+						if(FlashKick != NULL && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
 						{
 								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashKick"));
 						}

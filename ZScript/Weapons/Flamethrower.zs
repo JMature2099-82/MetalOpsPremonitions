@@ -27,16 +27,29 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 			A_AttachLightDef('GunLighting', flight);
 	}	
 
+	action void MO_DepleteFuel()
+	{
+		if (!invoker.DepleteAmmo(invoker.bAltFire, true))
+		{
+			return;
+		}
+	}
+
+//	action void MO_CheckFuel
+
     Default
     {
-        Weapon.AmmoUse1 0;
-       Weapon.AmmoGive1 50;
-		Weapon.SelectionOrder 2200;
-        Weapon.AmmoType1 "MO_Gasoline";
+        Weapon.AmmoUse 2;
+       Weapon.AmmoGive 50;
+		Weapon.SelectionOrder 3000;
+        Weapon.AmmoType1 "MO_Fuel";
         Inventory.PickupSound "weapons/flamer/pickup";
         Inventory.PickupMessage "$GOTFLAMER";
 		Tag "$TAG_FLAMER";
         +FLOORCLIP;
+		+WEAPON.NOALERT
+		+WEAPON.NOAUTOFIRE;
+		+WEAPON.AMMO_OPTIONAL;
 		Scale 0.42;
 		Obituary "%o was burnt to a crisp by %k's Flamethrower.";
     }
@@ -51,6 +64,7 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		}
         FLMS ABCD 1;
     ReadyToFire:
+		FLMG A 0 A_JumpIf(PressingFire(), "Fire");
         F1MG A 1 JM_WeaponReady();
         Loop;
     Deselect:
@@ -66,17 +80,17 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 		Goto Ready;
     Fire:
-		FLMG A 0 A_CheckReload();
         F1MG A 1 A_WeaponOffset(0,34);
         F1MG A 1 A_WeaponOffset(0,38);
 		FLMG A 0
 		{
-			if(waterlevel > 1 || CountInv("MO_Gasoline") < 4) {return ResolveState("DontFire");}
+			if(waterlevel > 1 || invoker.Ammo1.amount < 2) {return ResolveState("DontFire");}
 			if(MO_GetFlamerMode() == FreezeMode) {return ResolveState("FireIcethrower");}
 			return ResolveState(null);
 		}
         TNT1 A 0 A_StartSound("Weapons/flamer/startfire", 2);
         F1MG A 1 {
+			A_AlertMonsters();
             A_WeaponOffset(0,42);
         }
         F1MG A 1 {
@@ -94,21 +108,23 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
         TNT1 A 0 A_StartSound("weapons/flamer/fireloop", 1, CHANF_LOOPING);
 		FLMG A 0 JM_CheckForQuadDamage();
 	HoldingFire:
-		FLMG A 0 A_JumpIf(waterlevel > 1 || CountInv("MO_Gasoline") < 4, "StopFire");
+		FLMG A 0 A_JumpIf(waterlevel > 1 || invoker.Ammo1.amount < 2, "StopFire");
 		FLMG A 0 A_GunFlash();
         FTF1 ABCD 1 {
             A_WeaponOffset(random(-3,3), random(32, 36));
-            A_FireProjectile("FlamethrowerAttack",0,0,0,4);
+            A_FireProjectile("FlamethrowerAttack",0,false,0,4);
 			JM_GunRecoil(-.1,0);
-			if(waterlevel > 1 || CountInv("MO_Gasoline") < 4) {return ResolveState("StopFire");}
+			invoker.CheckAmmo(PrimaryFire, true);
+			if(waterlevel > 1 || invoker.Ammo1.amount < 2) {return ResolveState("StopFire");}
 			return ResolveState(null);
-			}
-		TNT1 A 0 A_TakeInventory("MO_Gasoline", 4);
+		}
+	
+		TNT1 A 0 MO_DepleteFuel();
         SAWG B 0 A_JumpIf(PressingFire(), "HoldingFire");
 	StopFire:
-		SAWG A 0 A_StopSound(1);
-		SAWG A 0 A_StopSound(7);
-		SAWG A 0 A_StartSound("weapons/flamer/end",1);
+		FLMG A 0 A_StopSound(1);
+		FLMG A 0 A_StopSound(7);
+		FLMG A 0 A_StartSound("weapons/flamer/end",1);
 	StopAnimation:
 		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
         F1MG A 1 {
@@ -148,6 +164,7 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 	FireIcethrower:
         TNT1 A 0 A_StartSound("Weapons/flamer/startice", 2);
         F1MG A 1 {
+			A_AlertMonsters();
             A_WeaponOffset(0,42);
         }
         F1MG A 1 {
@@ -166,16 +183,16 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		TNT1 A 0 A_StartSound("weapons/flamer/icelooplayer", 6, CHANF_LOOPING,0.2);
 		FLMG A 0 JM_CheckForQuadDamage();
 	HoldingFireIce:
-		FLMG A 0 A_JumpIf(waterlevel > 1 || CountInv("MO_Gasoline") < 4, "StopFireIce");
+		FLMG A 0 A_JumpIf(waterlevel > 1 || invoker.Ammo1.amount < 2, "StopFireIce");
 		FLMG A 0 A_GunFlash();
         FTF2 ABCD 1 {
             A_WeaponOffset(random(-3,3), random(32, 36));
-            A_FireProjectile("IcethrowerAttack",0,0,0,4);
+            A_FireProjectile("IcethrowerAttack",0,false,0,4);
 			JM_GunRecoil(-.1,0);
-			if(waterlevel > 1 || CountInv("MO_Gasoline") < 4) {return ResolveState("StopFireIce");}
+			if(waterlevel > 1 || invoker.Ammo1.amount < 2) {return ResolveState("StopFireIce");}
 			return ResolveState(null);
 			}
-		TNT1 A 0 A_TakeInventory("MO_Gasoline", 4);
+		TNT1 A 0 MO_DepleteFuel();
         SAWG B 0 A_JumpIf(PressingFire(), "HoldingFireIce");
 	StopFireIce:
 		SAWG A 0 A_StopSound(1);

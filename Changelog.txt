@@ -144,3 +144,15 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - Changed some ammo sprites
 - Updated some pickup sounds.
 - Pickup messages for ammo, health and armor simplified.
+- Armor bonus AP increased:
+	- Normal: +2 AP
+	- Geminus: +3 AP
+	- Treble: +4 AP
+- Health Bonus HP increased:
+	- Normal: +2 HP
+	- Corrupted: +3 HP
+	- Spiritual: +4 HP
+
+3/21/25:
+- Pickup messages simplified.
+- Fuel ammo for the Flamethrower now randomly spawns in place of cells and cell packs.

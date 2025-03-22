@@ -1,14 +1,32 @@
+//Combat Armors
+class MO_BaseArmor : BasicArmorPickup abstract
+{
+	override String PickupMessage()
+	{
+		return String.Format("%s \c-(+%d AP, %d%% protection)",GetTag(), SaveAmount, SavePercent);
+	}
+}
 
-class MO_ArmorBonus : BasicArmorBonus// replaces ArmorBonus
+//Armor Bonuses
+class MO_BaseArmor2 : BasicArmorBonus abstract
+{
+	override String PickupMessage()
+	{
+		return String.Format("%s \c-(+%d AP)",GetTag(), SaveAmount);
+	}
+}
+
+
+class MO_ArmorBonus : MO_BaseArmor2
 {
 	Default
 	{
 	  Radius 20;
 	  Height 16;
-	  Inventory.PickupMessage "$GOTARMBONUS";
+	  Tag "$TAG_ARMBONUS";
 	  Inventory.Icon "ARM1A0";
 	  Armor.SavePercent 33.335;
-	  Armor.SaveAmount 1;
+	  Armor.SaveAmount 2;
 	  Armor.MaxSaveAmount 300; // 300 so that it doesn't break item count
 	  +COUNTITEM;
 	  inventory.pickupsound "misc/armorbonus";
@@ -22,12 +40,12 @@ class MO_ArmorBonus : BasicArmorBonus// replaces ArmorBonus
 	  }
 }
 
-class MO_GeminusBonus : MO_ArmorBonus
+class MO_GeminusArmorBonus : MO_ArmorBonus
 {
 	Default
 	{
-		Inventory.PickupMessage "Picked up a Gemnius Armor Shard.";
-		Armor.SaveAmount 2;
+		 Tag "$TAG_ARMBONUS2";
+		Armor.SaveAmount 3;
 		inventory.pickupsound "gemarmorbonus";
 	}
 	States
@@ -38,12 +56,12 @@ class MO_GeminusBonus : MO_ArmorBonus
 	}
 }
 
-class MO_TrebleBonus : MO_ArmorBonus
+class MO_TrebleArmorBonus : MO_ArmorBonus
 {
 	Default
 	{
-		Inventory.PickupMessage "Picked up a Treble Armor Shard.";
-		Armor.SaveAmount 3;
+		Tag "$TAG_ARMBONUS3";
+		Armor.SaveAmount 4;
 		inventory.pickupsound "trebarmorbonus";
 	}
 	States
@@ -55,13 +73,13 @@ class MO_TrebleBonus : MO_ArmorBonus
 }
 		
 
-class MO_LightArmor : GreenArmor replaces GreenArmor
+class MO_LightArmor : MO_BaseArmor replaces GreenArmor
 {
 	Default
 	{
 	 Radius 20;
 	  Height 16;
-	  Inventory.PickupMessage "Picked up the light combat armor.";
+	  Tag "$TAG_LIGHTARM";
 	  Inventory.Icon "ARM1A0";
 	  Armor.SavePercent 33.335;
 	  Armor.SaveAmount 100;
@@ -75,13 +93,13 @@ class MO_LightArmor : GreenArmor replaces GreenArmor
 	  }
 }
 
-class MO_HeavyArmor : BlueArmor replaces BlueArmor
+class MO_HeavyArmor : MO_BaseArmor replaces BlueArmor
 {
 	Default
 	{
 	 Radius 20;
 	  Height 16;
-	  Inventory.PickupMessage "Picked up the heavy combat armor.";
+	  Tag "$TAG_HEAVYARM";
 	  Inventory.Icon "ARM2A0";
 	  Armor.SavePercent 50;
 	  Armor.SaveAmount 200;

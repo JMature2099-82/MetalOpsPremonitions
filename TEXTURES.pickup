@@ -121,4 +121,28 @@ Sprite "SBOXA0", 128, 48
 	Patch "SBOX1", 0, 0
 }
 
+Sprite "JRYCA0", 42, 58
+{
+	XScale 2.350
+	YScale 2.350
+	Offset 21, 56
+	Patch "FUEL1", 0, 0
+}
+
+Sprite "JRYCB0", 42, 58
+{
+	XScale 3.800
+	YScale 3.800
+	Patch "FUEL2", 0, 0
+}
+
+Sprite "JRYPA0", 38, 56
+{
+	XScale 3.100
+	YScale 3.100
+	Offset 19, 54
+	Patch "FUEL2", 0, 0
+}
+
+
 // End of texture definitions
