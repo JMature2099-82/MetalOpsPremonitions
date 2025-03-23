@@ -73,7 +73,7 @@ Class MO_Goggles : Infrared replaces Infrared
 	  +INVENTORY.AUTOACTIVATE;
 	  +INVENTORY.ALWAYSPICKUP;
 	  Inventory.MaxAmount 0;
-	  Powerup.Type "MO_NightVision";
+	  Powerup.Type "MO_PowerLightAmp";
 	  Inventory.PickupMessage "Tactical Night Vision Goggles";
 	  inventory.pickupsound "misc/goggles";
 	  Inventory.AltHudIcon "PVISA0";
@@ -87,7 +87,7 @@ Class MO_Goggles : Infrared replaces Infrared
   }
 }
 
-Class MO_NightVision : PowerLightAmp
+Class MO_PowerLightAmp : PowerLightAmp
 {
 	mixin MO_PowerUpWarning;
 	override void DoEffect ()
@@ -124,7 +124,7 @@ Class MO_NightVision : PowerLightAmp
 }
 
 //Modified from Hideous Destructor
-extend class MO_NightVision
+extend class MO_PowerLightAmp
 {
 	transient CVar NVGStyle;
 	int style;
@@ -171,7 +171,7 @@ Class MO_RadSuit : RadSuit replaces Radsuit
 	  +INVENTORY.ALWAYSPICKUP;
 	  Inventory.MaxAmount 0;
 	  Inventory.PickupMessage "Radiation/Hazardous Environment Suit"; // "Radiation Shielding Suit"
-	  Powerup.Type "MO_SuitPower";
+	  Powerup.Type "MO_PowerIronFeet";
 	  Inventory.PickupSound "misc/suit";
 	  Inventory.AltHudIcon "SUITA0";
   }
@@ -183,7 +183,7 @@ Class MO_RadSuit : RadSuit replaces Radsuit
   }
 }
 
-Class MO_SuitPower : PowerIronFeet
+Class MO_PowerIronFeet : PowerIronFeet
 {
 	mixin MO_PowerUpWarning;
 	

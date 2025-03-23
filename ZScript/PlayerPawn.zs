@@ -58,7 +58,7 @@ class MO_PlayerBase : DoomPlayer
 	{
 		Super.Tick();
 		//Destroy the night vision shader if a new level is started or if player dies.
-		If(!FindInventory("MO_NightVision"))
+		If(!FindInventory("MO_PowerLightAmp"))
 		{
 			Shader.SetEnabled(Player,"NiteVis",false);
 		}

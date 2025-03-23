@@ -1,0 +1,64 @@
+class HACXReplacementHandler : EventHandler
+{
+    override void CheckReplacement(replaceEvent e)
+    {
+        let cls = e.Replacee.GetClassName();
+		PlayerInfo p = players[consoleplayer];
+        switch (cls)
+        {
+		//Chex Ammo
+        case 'HacxRounds':	e.Replacement = "ClipSpawner";	break;
+        case 'HacxRoundsCase':	e.Replacement = "ClipboxSpawner";	break;
+        case 'HacxCartridges':	e.Replacement = "Shell";	break;
+		case 'HacxCartridgesCase':	e.Replacement = "Shellbox";	 break;
+		case 'HacxTorpedo': e.Replacement = "MO_RocketAmmo";  break;
+		case 'HacxTorpedoCase':  e.Replacement = "MO_RocketBox";	break;
+		case 'HacxMolecules': e.Replacement = "Cell"; break;
+		case 'HacxMoleculesTank': e.Replacement = "Cellpack";	break;
+		
+		 //Weapons
+		case 'HacxReznator': e.Replacement = "MO_Flamethrower"; break;
+		case 'HacxPistol':	
+			if(p.mo is "MO_SergeantPlayer")
+			e.Replacement = "MO_Deagle";
+			else
+			e.Replacement = "MO_VengeanceStryker";
+			break;
+		case 'HacxTazer': e.Replacement = "Shotgun"; break;
+		case 'HacxCryogun': e.Replacement = "MO_SSG"; break;
+		case 'HacxUzi': e.Replacement = "Chaingun"; break;
+		case 'HacxPhotonZooka': e.Replacement = "MO_RocketLauncher";	break;
+		case 'HacxAntigun': e.Replacement = "JM_PlasmaRifle"; break;
+		case 'HacxNuker': e.Replacement = "BFGSpawner";	break;
+			
+		//Powerups
+		case 'HacxSIArrayMap':	e.Replacement = "MO_AllMap";	break;
+		case 'HacxVulcanBoots': e.Replacement = "MO_RadSuit"; break;
+		case 'HacxInfraredVisor': e.Replacement = "MO_Goggles"; break;
+		case 'HacxCentrophenoxine': e.Replacement = "MO_Soulsphere"; break;
+		case 'HacxBodyArmor': e.Replacement = "MO_Megasphere"; break;
+		case 'HacxForceField': e.Replacement = "InvulSphereSpawner"; break;
+		case 'Blursphere': case 'HacxENKBlind': e.Replacement = "MO_Blursphere"; break;
+		case 'HacxValise': e.Replacement = "MO_BackPack"; break;
+		case 'HacxMicrotel': e.Replacement = "BerserkPackSpawner"; break;
+		
+		//Health
+		case 'HacxMicroKit': e.Replacement = "HealthBonusSpawner"; break;
+		case 'HacxInhaler': e.Replacement = "MO_Stimpack"; break;
+		case 'HacxHypo': e.Replacement = "MO_Medikit"; break;
+		
+		//Armor
+		case 'HacxDampener': e.Replacement = "ArmorBonusSpawner"; break;
+		case 'HacxKevlarVest': e.Replacement = "MO_LightArmor"; break;
+		case 'HacxSuperKevlarVest': e.Replacement = "MO_HeavyArmor"; break;
+
+		//Keys
+		case 'HacxKeyCard': e.Replacement = "MO_BlueCard"; break;
+		case 'HacxCKey': e.Replacement = "MO_YellowCard"; break;
+		case 'HacxPassword': e.Replacement = "MO_RedCard"; break;
+		case 'HacxBlueZKey': e.Replacement = "MO_BlueSkull"; break;
+		case 'HacxYellowZKey': e.Replacement = "MO_YellowSkull"; break;
+		case 'HacxRedZKey': e.Replacement = "MO_RedSkull"; break;
+        }
+    }
+}

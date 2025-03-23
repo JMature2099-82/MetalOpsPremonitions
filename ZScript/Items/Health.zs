@@ -96,7 +96,7 @@ Class MO_Berserk : CustomInventory// replaces Berserk
 	{
 		+COUNTITEM;
 		+INVENTORY.ALWAYSPICKUP;
-		Inventory.PickupMessage "$GOTBERSERK"; // "Berserk!"
+		Inventory.PickupMessage "$GOTZERK";
 		Inventory.PickupSound "misc/zerkpak";
 	}
 	States

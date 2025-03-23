@@ -47,7 +47,7 @@ to create this
 - ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
 - Gemini0 - Player.AttackZOffset fix
-
+- XxSwag masterxX - New mod logo! THANKS!
 - Running With Scissors - Postal 2 Kicking sounds
 
 Pump Shotgun:
@@ -168,9 +168,7 @@ Most sounds - Id Software, Raven Software (Doom 3, Quake 4)
 Plasma and BFG Explosions - Wirehead Studios (Generations Arena) and some frames from jDRP
 Explosions, Special Effects sprites and Casings - from Aeons of Death (the "Half-Life" explosions, and the "Lightning Ball" explosion)
 
-Mod logo created by brothergrounds from www.canva.com, 
-based on this one: https://www.canva.com/templates/EAFnr-bQhDg-black-orange-illustrative-esport-gaming-logo/
-Mod logo maybe subjected to change.
+Mod logo created by XxSwag masterxX
 Soldier skull graphic from pngegg.com
 
 Other credits and license info:

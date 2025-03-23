@@ -7,4 +7,5 @@
 gameinfo
 {
 	StatusBarClass = "NCH_HacxStatusBar"
+	AddEventHandlers = "HACXReplacementHandler"
 }

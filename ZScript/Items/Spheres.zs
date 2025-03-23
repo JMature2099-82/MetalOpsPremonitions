@@ -6,7 +6,7 @@ Class MO_Soulsphere : CustomInventory replaces SoulSphere
 		+COUNTITEM
 		+INVENTORY.ALWAYSPICKUP
 		+INVENTORY.AUTOACTIVATE
-		Inventory.PickupMessage "Soulsphere!";
+		Inventory.PickupMessage "$GOTSUPER";
 		Inventory.PickupSound "powerup/soulsphere";
 		+floatbob;
 		Renderstyle "Translucent";
@@ -35,7 +35,7 @@ Class MO_Megasphere : CustomInventory replaces MegaSphere
 		+COUNTITEM
 		+INVENTORY.ALWAYSPICKUP
 		+INVENTORY.AUTOACTIVATE
-		Inventory.PickupMessage "$GOTMSPHERE";
+		Inventory.PickupMessage "$GOTMEGA";
 		Inventory.PickupSound "powerup/megasphere";
 		+floatbob;
 		Renderstyle "Translucent";
@@ -130,7 +130,7 @@ Class MO_Invulnerability : PowerUpGiver// replaces InvulnerabilitySphere
 	  +INVENTORY.BIGPOWERUP;
 	  Inventory.MaxAmount 0;
 	  Powerup.Type "MO_PowerInvul";
-	  Inventory.PickupMessage "$GOTINVUL";
+	  Inventory.PickupMessage "$GOTINVULN";
 	  Inventory.PickupSound "powerup/invul";
 	  +floatbob;
 		Renderstyle "Translucent";
@@ -186,6 +186,7 @@ Class MO_BlurSphere: BlurSphere replaces BlurSphere
 		Inventory.PickupSound "powerup/invis";
 		+FLOATBOB;
 		Powerup.Type "MO_PowerInvis";
+		Inventory.PickupMessage "$GOTINVISI";
 	}
 }
 
@@ -282,5 +283,3 @@ Class MO_PowerQuadDMG : PowerDamage
 		DamageFactor "normal",4;
 	}
 }
-
-//Class MO_BloodrushSphere : CustomInventory

@@ -121,14 +121,23 @@ TAG_LIGHTARM = "\c[White]Light Battle Armor";
 TAG_HEAVYARM = "\c[Darkgray]Heavy Combat Armor";
 
 //Keys
-/*
+
 GOTREDCARD = "Picked up a \c[Red] Red Keycard\c-.";
 GOTYELWCARD = "Picked up a \c[Yellow] Yellow Keycard\c-.";
 GOTBLUECARD = "Picked up a \c[Blue] Blue Keycard\c-.";
 GOTREDSKUL = "Picked up a \c[Red] Red Skull Key\c-.";
 GOTYELWSKUL = "Picked up a \c[Yellow] Yellow Skull Key\c-.";
 GOTBLUESKUL = "Picked up a \c[Blue] Blue Skull Key\c-.";
- */
+ 
+
+//Power Ups
+GOTSUPER = "Soulsphere!";
+GOTMEGA = "Megasphere!";
+GOTINVULN = "Invulnerability!";
+GOTINVISI = "Partial Invisibility";
+GOTQUAD = "Quad Damage!";
+GOTLIGHTAMP = "Tactical Night Vision Goggles";
+GOTZERK = "BERSERK!";
 
 //Ammo Tags
 TAG_LOWCALIBER = "\cdPistol Caliber Round";
