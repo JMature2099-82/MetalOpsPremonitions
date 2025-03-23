@@ -340,7 +340,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
 	Reload.NormalAnimation:
 		PSTG A 0 A_JumpIf(invoker.IsZoomed, "Reload.Zoomed");
 		PSTG A 0 A_ZoomFactor(1.0);
-		PSTG A 0 A_SetCrosshair(invoker.GetXHair(0));
+		PSTG A 0 A_SetCrosshair(invoker.GetXHair(1));
 		DGLR ABCD 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DGLR E 1 JM_WeaponReady(WRF_NOFIRE);
