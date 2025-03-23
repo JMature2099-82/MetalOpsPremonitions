@@ -159,4 +159,8 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - Fuel has pick up sounds
 - Fuel ammo spawns randomly in place of the Cells and Cellpacks
 - Fuel ammo has new pickup sprites, sprites by Cescade.
-- Heavy Marksman Rifle buffed.
+- Heavy Marksman Rifle buffed
+
+3/23/25:
+- New mod logo thanks to XxSwag masterxX! Thanks man!
+- HACX compatibility added. It's not perfect yet, but it plays good.
