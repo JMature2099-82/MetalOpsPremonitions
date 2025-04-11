@@ -29,40 +29,33 @@ class Katana: JMWeapon replaces Fist
 
 		return messages[Random(0, messages.Size() - 1)];
 	}
-		
-	  action bool PlayerHasBerserk()
-	  {
-		return CheckInventory("MO_PowerStrength",1);
-	  }
 	
 	  action void JM_KatanaAttack()
 	  {
-			int dmg; 
+			int dmg = 25; 
 			Class<Actor> puff;
 			bool leftSwing = FindInventory("LeftKatanaAttack");
 			
-			if(PlayerHasBerserk()) {
+			if(invoker.OwnerHasBerserk()) {
 				if(health < 30) 
-				{dmg = 60;}
-				else {dmg = 30;}
+				dmg = dmg * 4;
+				else dmg = dmg * 2;
 				}
-			else {dmg = 5;}
 			
 			if(leftSwing) {puff = "KatanaPuff2";}
 			else {puff = "KatanaPuff";}
-			A_CustomPunch(dmg * random(1,8), TRUE, CPF_NOTURN, puff, 96, 0, 0, "none", "weapons/katana/hit");
+			A_CustomPunch(dmg * random(1,3), TRUE, CPF_NOTURN, puff, 96, 0, 0, "none", "weapons/katana/hit");
 	  }
 
 	 action void JM_KatanaAltFire()
 	 {
-			int dmg; 
-			if(PlayerHasBerserk()) {
+			int dmg = 75; 
+			if(invoker.OwnerHasBerserk()) {
 				if(health < 30) 
-				{dmg = 100;}
-				else {dmg = 60;}
+				dmg = dmg * 4;
+				else dmg = dmg * 2;
 				}
-			else {dmg = 15;}
-			A_CustomPunch(dmg * random(1,6), TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
+			A_CustomPunch(dmg * random(1,3), TRUE, CPF_NOTURN, "KatanaPuff", 96, 0, 0, "none", "weapons/katana/hit");
 	}
 
 	  States

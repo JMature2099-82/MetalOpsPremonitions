@@ -104,26 +104,15 @@ class JMWeapon : Weapon
 			{
 				SetPlayerProperty(0,1,0);
 				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
+				A_OverlayFlags(-999, PSPF_ADDWEAPON, FALSE);
+				A_OverlayOffset(-999, -1, 32);
 				If(invoker.OwnerHasSpeed()) {return ResolveState("KickFaster");}
 				{return ResolveState(Null);}
 			}
 			KCK1 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK1 DEF 1;
-			KCK1 G 1
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					if(health < 25)
-					{A_CustomPunch(65 * 3, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-					else
-					{A_CustomPunch(65, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-				}
-				else
-				{
-					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
+			KCK1 G 1 MO_KickAttack;
 			KCK1 GHG 1;
 			KCK1 FEDCBA 1;
 			TNT1 A 0 A_OverlayFlags(-999,PSPF_PLAYERTRANSLATED,FALSE);
@@ -134,20 +123,7 @@ class JMWeapon : Weapon
 			KCK1 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK1 DF 1;
-			KCK1 G 1
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					if(health < 25)
-					{A_CustomPunch(65 * 3, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-					else
-					{A_CustomPunch(65, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-				}
-				else
-				{
-					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
+			KCK1 G 1 MO_KickAttack;
 			KCK1 HG 1;
 			KCK1 FEDCA 1;
 			TNT1 A 0 A_OverlayFlags(-999,PSPF_PLAYERTRANSLATED,FALSE);
@@ -155,25 +131,17 @@ class JMWeapon : Weapon
 			Stop;
 		AirKick: //16 frames
 			"####" A 0 ThrustThing(angle * 256 / 360, 3, 0, 0);
-			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
-			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"AirKickFaster");
+			"####" A 0 
+			{
+				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
+				A_OverlayFlags(-999, PSPF_ADDWEAPON, FALSE);
+				A_OverlayOffset(-999, -1, 32);
+			}
+			"####" A 0 A_JumpIf(invoker.OwnerHasSpeed(), "AirKickFaster");
 			KCK2 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK2 DE 1;
-			KCK2 F 1 
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					if(health < 25)
-					{A_CustomPunch(65 * 3, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-					else
-					{A_CustomPunch(65, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-				}
-				else
-				{
-					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
+			KCK2 F 1 MO_KickAttack;
 			KCK2 GGHHI 1;
 			KCK2 JKLMN 1;
 			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
@@ -183,20 +151,7 @@ class JMWeapon : Weapon
 			KCK2 ABC 1;
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK2 DE 1;
-			KCK2 F 1 
-			{
-				if(CountInv("PowerStrength") == 1)
-				{
-					if(health < 25)
-					{A_CustomPunch(65 * 3, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-					else
-					{A_CustomPunch(65, TRUE, CPF_NOTURN, "BerserkKickPuff", 80, 0, 0, "none", "playerkick/hit");}
-				}
-				else
-				{
-					A_CustomPunch(30, TRUE, CPF_NOTURN, "KickingPuff", 80, 0, 0, "none", "playerkick/hit");
-				}
-			}
+			KCK2 F 1 MO_KickAttack;
 			KCK2 GGHI 1;
 			KCK2 JKLN 1;
 			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
@@ -329,9 +284,9 @@ class JMWeapon : Weapon
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			GRE1 DEFG 1;
 			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
+			GRE1 HI 1;
 			TNT1 A 4
 			{
-				A_StartSound("Molotov/Lit",1);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");
@@ -345,3 +300,5 @@ class JMWeapon : Weapon
 			Goto ReallyReady;
 		}
 }
+
+class MO_Weapon : JMWeapon{}

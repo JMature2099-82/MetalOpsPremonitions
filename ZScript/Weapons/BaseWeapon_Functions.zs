@@ -15,6 +15,12 @@ extend class JMWeapon
         return !(player.cmd.buttons & which) && player.oldbuttons & which;
     }
 
+	bool OwnerHasBerserk()
+	{
+		return (owner.FindInventory("MO_PowerStrength"));
+	}
+
+
     //Based on IsPressingInput from Project Brutality
     action bool PressingWhichInput(int which)
     {
@@ -27,6 +33,32 @@ extend class JMWeapon
 		{
 			A_StartSound("powerup/quadfiring",70, CHANF_DEFAULT,3.0,ATTN_NONE);
 		}
+	}
+
+	action void MO_KickAttack()
+	{
+		FTranslatedLineTarget t;
+		int dmg = 35;
+		double ang = angle + Random2() * (5.625 / 256);
+        double pitch = AimLineAttack(ang, 64, null, 0., ALF_CHECK3D);
+		
+		if(invoker.OwnerHasBerserk())
+		{	
+			if(health < 30)
+			LineAttack(ang, 75, pitch, dmg * 3, 'ExtremePunches', "BerserkKickPuff", LAF_ISMELEEATTACK,t);
+			else
+			 LineAttack(ang, 75, pitch, dmg * 2, 'ExtremePunches', "BerserkKickPuff", LAF_ISMELEEATTACK,t);
+		}
+		else
+		{
+			LineAttack(ang, 75, pitch, dmg, 'Kick', "KickingPuff", LAF_ISMELEEATTACK,t);
+		}
+		
+        if (t.linetarget)
+        {
+             A_StartSound("playerkick/hit",1);
+        }
+
 	}
 
 //Holy shit I can't believe I got this working
