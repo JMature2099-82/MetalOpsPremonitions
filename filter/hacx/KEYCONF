@@ -1,0 +1,4 @@
+//HACX uses KEYCONF for it's original player class, so it needs to be done here too.
+clearplayerclasses
+addplayerclass MO_OfficerPlayer
+addplayerclass MO_SergeantPlayer
