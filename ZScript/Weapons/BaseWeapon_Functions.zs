@@ -56,7 +56,11 @@ extend class JMWeapon
 		
         if (t.linetarget)
         {
-             A_StartSound("playerkick/hit",1);
+			Actor victim = t.linetarget;
+			 if(victim.bISMONSTER)
+				A_StartSound("playerkick/hit",1);
+			else
+				A_StartSound("playerkick/footwall",1);
         }
 
 	}
@@ -91,6 +95,17 @@ extend class JMWeapon
 	{
 		if(invoker.Ammo2.amount  < m)
 			return ResolveState(where);
+		return ResolveState(Null);
+	}
+
+	action state MO_JumpIfLessAmmo(int m = 1, statelabel where = "Reload")
+	{
+		let wep = player.readyweapon;
+		State JumpTo = wep.FindState(where);
+		if(JumpTo != NULL && invoker.Ammo1.amount  < m)
+		{
+			return ResolveState(where);
+		}
 		return ResolveState(Null);
 	}
 
@@ -142,11 +157,6 @@ extend class JMWeapon
 	action state JM_WeaponReady(int wpflags = 0)
 	{	
 		A_WeaponReady(wpflags);
-		if(JustPressed(BT_USER1))
-		{
-			if(CheckIfInReady())
-			return ResolveState("TossThrowable");
-		}
 		if(JustPressed(BT_USER4) && CheckIfInReady())
 		{
 			State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
@@ -177,15 +187,14 @@ extend class JMWeapon
 		return false;
 	}
 	
-	action void JM_ReloadGun(name magammo, name reserve, int magMax, int reserveTake)
+	action void JM_ReloadGun(Class<Inventory> magPool, Class<Inventory> reservePool, int magMax, int reserveTake)
 	{
 		for(int i = 0; i < magMax; i++)
 		{
-			if(CountInv(reserve) < 1 || CountInv(magammo) == magMax) 
-			return;
-			
-			A_GiveInventory(magammo, 1);
-			A_TakeInventory(reserve, reserveTake, TIF_NOTAKEINFINITE);
+			if(CountInv(reservePool) < 1 || CountInv(magPool) == magMax) 
+			return;	
+			A_GiveInventory(magPool, 1);
+			A_TakeInventory(reservePool, reserveTake, TIF_NOTAKEINFINITE);
 		}
 	}
 	

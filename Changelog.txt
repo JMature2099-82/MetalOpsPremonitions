@@ -164,3 +164,9 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 3/23/25:
 - New mod logo thanks to XxSwag masterxX! Thanks man!
 - HACX compatibility added. It's not perfect yet, but it plays good.
+
+4/7/25 - Present:
+- Kick sprites separated from weapon offsets, now they don't look weird of using Offset or A_WeaponOffset.
+- Throwing equipment doesn't suck anymore, responds better and is now an event handler.
+- Ammo1 is now the magazine pool for some weapons (Pistol and Rifle for now).
+- A_Eject from Beautiful Doom is implemented for some weapons, which will replace the ZWL spawns.
