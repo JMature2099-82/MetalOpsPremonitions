@@ -72,6 +72,7 @@ NCH_OPTION_BGCOLOR = "Backgrounds";
 NCH_OPTION_HICOLOR = "Highlight";
 HUD_WARN1 = "Press = to switch the HUD to fullscreen.";
 HUD_WARN2 = "Make sure alternative HUD is disabled!";
+NCH_AMMOLISTSHORT = "Override ammo list shortcut and draw all";
 
 //------------------------------------------------------------------
 //	Precise Crosshair stuff
@@ -168,7 +169,7 @@ OB_FLAMER = "%o was set ablaze by %k's Flamethrower.";
 TAG_FLAMER = "Flamethrower";
 GOTFLAMER = "You got the \cXFlamethrower!\c- (Slot 8)";
 OB_ICEFLAMER = "%o was frozen by %k's \cwFreezethrower.";
-GOTFLAMERGAS = "You got the gasoline from the \cXFlamethrower!";
+GOTFLAMERGAS = "You got fuel from the \cXFlamethrower!";
 
 //Pistol
 GOTVENPISTOL = "You got the \cdVengeance Stryker Sidearm\c-! (Slot 2)";

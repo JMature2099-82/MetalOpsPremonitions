@@ -1,4 +1,4 @@
-Class UpdatedBulletPuff : BulletPuff //Inherits from base BulletPuff to fix a sound glitch with the Revenant Tracer playing the riochet sound repeatedly
+Class MO_BulletPuff : BulletPuff //Inherits from base BulletPuff to fix a sound glitch with the Revenant Tracer playing the riochet sound repeatedly
 {
 	Default
 	{
@@ -42,6 +42,8 @@ Class UpdatedBulletPuff : BulletPuff //Inherits from base BulletPuff to fix a so
 	}
 }
 
+Class UpdatedBulletPuff : MO_BulletPuff{}
+
 Class KatanaPuff : UpdatedBulletPuff
 {
 	Default
@@ -59,14 +61,10 @@ Class KatanaPuff : UpdatedBulletPuff
 		TNT1 CD 4;
 		Stop;
 		
+		Death:
 		Crash:
-			TNT1 A 0 A_StartSound("Weapons/Katana/Miss", 3);
-			TNT1 A 0
-			{
-				A_SpawnDebris("Sparky");
-				//A_SprayDecal("SwordSlashMark");
-//				ACS_NamedExecute("SwordDecalSpawner",0,0,0,0);
-			}
+			TNT1 A 0 A_StartSound("Weapons/Katana/Miss");
+			TNT1 A 0 A_SpawnDebris("Sparky");
 			TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
 			TNT1 AA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
 			TNT1 A 0 A_SpawnProjectile("EnhancedHitSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
@@ -121,7 +119,7 @@ class ShotgunPuff20GA : ShotgunShellPuff
 	}
 }
 
-class SSGPuff : UpdatedBulletPuff
+class MO_SSGPuff : UpdatedBulletPuff
 {
 	Default
 	{
@@ -137,6 +135,7 @@ class KickingPuff : UpdatedBulletPuff
 		+NODECAL;
 		-ALLOWPARTICLES;
 		ProjectileKickback 300;
+		Obituary "%k gave %o a taste of %p boot.";
 	} 
 	States
 	{
@@ -146,7 +145,7 @@ class KickingPuff : UpdatedBulletPuff
 		Stop;
 
 		Melee:
-			TNT1 A 1 A_RadiusThrust(3, -1, RTF_NOTMISSILE);
+			TNT1 A 1 A_RadiusThrust(3, -1, RTF_NOTMISSILE|RTF_NOIMPACTDAMAGE);
 			Stop;
 		Crash:
 			TNT1 A 0 A_SpawnItemEx("KickSmoke");
@@ -174,9 +173,11 @@ Class PlasmaBeamPuff : UpdatedBulletPuff
 		Scale 0.07;
 		DamageType "Plasma";
 	}
+	
 	States
 	{
 	Spawn:
+	Crash:
 		TNT1 AAA 0 A_SpawnItemEx("BlueLightningMini", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 64);
 		TNT1 AA 0 A_SpawnItemEx("BlueLightningTiny", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 128);
 		TNT1 A 0 A_SpawnItemEx("BlueLightningSmall", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 192);

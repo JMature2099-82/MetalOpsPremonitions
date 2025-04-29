@@ -38,13 +38,11 @@ class HACXReplacementHandler : EventHandler
 		case 'HacxCentrophenoxine': e.Replacement = "MO_Soulsphere"; break;
 		case 'HacxBodyArmor': e.Replacement = "MO_Megasphere"; break;
 		case 'HacxForceField': e.Replacement = "InvulSphereSpawner"; break;
-		case 'Blursphere': case 'HacxENKBlind': 
-//		if (StringTable.Localize(Inventory(GetDefaultByType(e.Replacee)).pickupMsg) == "You are EnK Blind!  ")
-		e.Replacement = "MO_Blursphere"; break;
+		case 'HacxSpeedHack': case 'Blursphere':
+		e.Replacement = "MO_HasteSphere"; break;
 		case 'HacxValise': e.Replacement = "MO_BackPack"; break;
 		case 'HacxMicrotel':     
-//		if (StringTable.Localize(Inventory(GetDefaultByType(e.Replacee)).pickupMsg) == "007Microtel")
-		e.Replacement = "BerserkPackSpawner"; break;
+		e.Replacement = "MO_Berserk"; break;
 		
 		//Health
 		case 'HacxMicroKit': e.Replacement = "HealthBonusSpawner"; break;
@@ -54,15 +52,16 @@ class HACXReplacementHandler : EventHandler
 		//Armor
 		case 'HacxDampener': e.Replacement = "ArmorBonusSpawner"; break;
 		case 'HacxKevlarVest': e.Replacement = "MO_LightArmor"; break;
+		case 'HacxLightKevlarVest': e.Replacement = "MO_WeakArmor"; break;
 		case 'HacxSuperKevlarVest': e.Replacement = "MO_HeavyArmor"; break;
 
 		//Keys
-//		case 'HacxKeyCard': e.Replacement = "MO_BlueCard"; break;
-//		case 'HacxCKey': e.Replacement = "MO_YellowCard"; break;
-//		case 'HacxPassword': e.Replacement = "MO_RedCard"; break;
-//		case 'HacxBlueZKey': e.Replacement = "MO_BlueSkull"; break;
-//		case 'HacxYellowZKey': e.Replacement = "MO_YellowSkull"; break;
-//		case 'HacxRedZKey': e.Replacement = "MO_RedSkull"; break;
+		case 'MO_BlueCard': e.Replacement = "HacxKeyCard"; break;
+		case 'MO_YellowCard': e.Replacement = "HacxGoldKey"; break;
+		case 'MO_RedCard': e.Replacement = "HacxPassword"; break;
+		case 'MO_BlueSkull': e.Replacement = "HacxBlueZKey"; break;
+		case 'MO_YellowSkull': e.Replacement = "HacxYellowZKey"; break;
+		case 'MO_RedSkull': e.Replacement = "HacxRedZKey"; break;
         }
     }
 }

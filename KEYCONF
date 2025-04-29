@@ -15,6 +15,7 @@ addmenukey "Weapon Action Special" +user4
 defaultbind X +user4
 
 alias mo_xhairs_defaultpreset "set mo_xhairpistol 20; set MO_XHairDeagle 25; set mo_xhairSMG 22; set MO_XHairLAS 71; set MO_XHairPSG 69; set MO_XHairSSG 41; set MO_XHairRifle 56; set MO_XHairHMR 52; set MO_XHairHMR_GL 89; set MO_XHairChaingun 75; set MO_XHairRL 43; set MO_XHairPlasma 39; set MO_XHairHeatPlasma 44; set MO_XHairBFG 95; set MO_XHairBFG10K 90; set MO_XHairUnmaker 98; set MO_XHairFlamer 91"
+alias nchud_ammolistpreset "set nchud_toggleammo 2; set nchud_allowammolistoverride true;"
 
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
 
