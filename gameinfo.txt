@@ -1,3 +1,4 @@
-STARTUPTITLE = "Metal Ops: Premonitions v2.1"
+STARTUPTITLE = "Metal Ops: Premonitions v2.2 beta"
 STARTUPCOLORS = "#8E8E8E", "#000000"
 NoRandomPlayerClasses = true 
+StartUpType = "Hexen"

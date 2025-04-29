@@ -10,3 +10,11 @@ version "3.2.5"
 class NCH_HacxStatusBar : NCH_BaseHUD
 {
 }
+
+class MO_WeakArmor : MO_LightArmor
+{
+	Default
+	{
+	  Armor.SaveAmount 50;
+	}
+}
