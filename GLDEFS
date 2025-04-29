@@ -145,7 +145,7 @@ object HeatedPlasmaExplosion
 pointlight FlamerFlames
 {
 	color 0.9 0.3 0.0
-	size 64
+	size 36
 }
 
 pulselight BFGBallLight
