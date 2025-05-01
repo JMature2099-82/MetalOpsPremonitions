@@ -120,6 +120,7 @@ TAG_ARMBONUS2 = "\c[Gold]Geminus Armor Shard";
 TAG_ARMBONUS3 = "\c[Purple]Treble Armor Shard";
 TAG_LIGHTARM = "\c[White]Light Battle Armor";
 TAG_HEAVYARM = "\c[Darkgray]Heavy Combat Armor";
+TAG_WEAKARM = "\c[Black]Cheap Tactical Vest";
 
 //Keys
 

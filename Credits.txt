@@ -49,6 +49,7 @@ to create this
 - Gemini0 - Player.AttackZOffset fix
 - XxSwag masterxX - New mod logo! THANKS!
 - Running With Scissors - Postal 2 Kicking sounds
+- PellissierJP - Loading screen background
 
 Pump Shotgun:
 Sprites - Sonik.o.fan (aka TSF), Sergeant Mark IV (shell frame for the pumping), 
