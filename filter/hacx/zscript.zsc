@@ -15,6 +15,14 @@ class MO_WeakArmor : MO_LightArmor
 {
 	Default
 	{
+	  Tag "$TAG_WEAKARM";
 	  Armor.SaveAmount 50;
 	}
+
+	States
+	  {
+	  Spawn:
+		4RM1 A -1;
+		Stop;
+	  }
 }

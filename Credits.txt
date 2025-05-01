@@ -49,6 +49,7 @@ to create this
 - Gemini0 - Player.AttackZOffset fix
 - XxSwag masterxX - New mod logo! THANKS!
 - Running With Scissors - Postal 2 Kicking sounds
+- PellissierJP - Loading screen background
 
 Pump Shotgun:
 Sprites - Sonik.o.fan (aka TSF), Sergeant Mark IV (shell frame for the pumping), 
@@ -203,6 +204,7 @@ Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
 EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from Command & Conquer Red Alert 3 Uprising
 Activision, id Software, Bethesda, Raven Software - Menu select, back and confirm sounds from Wolfenstein 2009.
+Tekila - Loading bar fill graphic (NOTCH.png)
 
 /////////////////////////////
 ///			 Flashlight++				///
