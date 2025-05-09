@@ -350,8 +350,12 @@ Class EmptyCell : BaseMagazine
    }
 }
 
-Class SMGMagazine : BaseMagazine
+Class EmptySMGMagazine : BaseMagazine
 {
+	Default
+	{
+		BounceSound "casings/smallmag";
+	}
 	States
 	{
 		Spawn:
@@ -362,5 +366,13 @@ Class SMGMagazine : BaseMagazine
 		#### I 0 A_SetRoll(0);
 		#### B 1 {bXFLIP = random(0,1);}
 		Goto CompletelyRest;
+	}
+}
+
+Class EmptySMGMag_SpecialReload : EMptySMGMagazine
+{
+	Default
+	{
+		Speed 14;
 	}
 }
