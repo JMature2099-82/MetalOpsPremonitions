@@ -4,10 +4,6 @@ class MiniNukeMode :  Inventory {Default{Inventory.MaxAmount 1;}}
 class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 {
 	
-/*	action void MO_LaserPointer(class<Actor> laseractor)
-	{
-		LineAttack(angle,8192,pitch,0,'None', "LaserGuide", LAF_NORANDOMPUFFZ|LAF_NOINTERACT,t);
-*/
 	int burstCount;
 	const maxBurst = 3;
 
@@ -43,7 +39,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 		+WEAPON.NOAUTOFIRE
 		Inventory.PickupMessage "You got the Rocket Launcher (Slot 5)!";
 		Tag "$TAG_RLAUNCHER";
-        Inventory.PickupSound "weapons/rocket/pickup";
+        Inventory.PickupSound "weapons/rocket/draw";
 		Obituary "$OB_MOROCKETSPLASH";
 	}
 

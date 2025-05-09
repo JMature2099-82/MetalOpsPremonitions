@@ -88,6 +88,9 @@ class JMWeapon : Weapon
 			TNT1 A 1 
 			{
 				State SelectAnim = player.readyweapon.FindState("SelectAnimation");
+				State TossFlashEnd = player.readyweapon.FindState("FlashEquipmentTossEnd");
+				if(TossFlashEnd != NULL)
+					{return ResolveState("FlashEquipmentTossEnd");}
 				if(SelectAnim != NULL)
 					{return ResolveState("SelectAnimation");}
 				return ResolveState(Null);
@@ -184,14 +187,30 @@ class JMWeapon : Weapon
 			}
 			Goto Ready;
 			
+		FlashEquipmentToss:
+			TNT1 A 1;
+		ThrowThatShitForReal:
+			TNT1 A 1;
+			TNT1 A 0
+			{
+				if(CountInv("ThrowableType") == 1)
+				{return ResolveState("ActuallyThrowMolotov");}
+				else
+				{return ResolveState("ActuallyThrowGrenade");}
+				return resolvestate(null);
+			}
+			Goto Ready;
+			
+			
 		ThrowMolotov:
 			"####" "#" 0;
 			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, 2);
+			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, "FlashEquipmentToss");
 			"####" "#" 0 A_Print("No Molotov Cocktails left");
 			Goto ReallyReady;
+		ActuallyThrowMolotov:
 			TNT1 AAA 0;
 			TNT1 A 0 A_WeaponOffset(0,32);
 			MTOV AB 1;
@@ -232,7 +251,7 @@ class JMWeapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowMolotov");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowMolotov");
 			Goto BackToWeapon;
 		
 		CookingGrenade:
@@ -261,14 +280,15 @@ class JMWeapon : Weapon
 			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, 2);
+			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, "FlashEquipmentToss");
 			"####" "#" 0 A_Print("No Frag Grenades left");
 			Goto ReallyReady;
+		ActuallyThrowGrenade:
 			TNT1 AAA 0;
 			TNT1 A 0 A_WeaponOffset(0,32);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			GREP AABCD 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			GREP AABCD 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			GREP EFGII 1;
 			TNT1 A 0 A_StartSound("FragGrenade/Pin",0);
 			GREP K 1;
@@ -292,7 +312,7 @@ class JMWeapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowGrenade");
 			Goto BackToWeapon;
 		}
 }

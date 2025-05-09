@@ -41,17 +41,17 @@ Class AssaultRifle : JMWeapon
     States
     {
 		ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		Goto Ready;
+		TNT1 A 0 MO_Raise();
+		Goto SelectAnimation;
 		
         Spawn:
             AR1W A -1;
             STOP;
-        Ready:
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/ar/select",0);
             AR1S ABCD 1;
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
+		Ready:
         ReadyToFire:
             AR1G A 1 
 			{

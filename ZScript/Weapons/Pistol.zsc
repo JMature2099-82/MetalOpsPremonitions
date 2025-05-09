@@ -75,9 +75,9 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 	States
 	{
 	ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		TNT1 A 0 MO_ResetBurstCount;
-		Goto Ready;
+		TNT1 A 0 MO_Raise;
+		TNT1 A 0 JM_CheckInspectIfDone;
+		Goto SelectAnimation;
 	Ready:
 		//Load sprites into memory
 		PS1K ABCDEF 0;
@@ -92,14 +92,19 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		PSTF E 0;
 		#### # 1 
 		{
-			if(invoker.isZoomed) {return ResolveState("Ready2");}
-//			if(invoker.Ammo1.amount  <= 0 && invoker.Ammo2.amount >= 1)
-//			{return ResolveState("REload");}
-			if(PressingFire() && invoker.Ammo1.amount > 0) {
-				return ResolveState("Fire");
+			if(invoker.isZoomed) {
+			return ResolveState("Ready2");
 			}
-			if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
-			return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
+			if(PressingAltFire() && invoker.ADSMode >= 1) {
+			return ResolveState("AltFire");
+			}
+			if(JustPressed(BT_ALTATTACK) && invoker.ADSMode < 1) {
+			return ResolveState("AltFire");
+			}
+			if(PressingFire() && invoker.Ammo1.amount > 0) {
+			return ResolveState("Fire");
+			}
+			return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 		}
 		Loop;
 	Inspect:
@@ -150,7 +155,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 			return ResolveState(null);
 		}
 		PSTF A 1 MO_FirePistol();
-		PSTG A 0 MO_EjectCase("PistolCasing",26, 0, 10, 0, frandom(3, 5), frandom(3,4));//{MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (26, 0, -7));}
+		PSTG A 0 MO_EjectCase("PistolCasing",26, 0, 9, 0, frandom(3, 5), frandom(3,4));
 		PSTF B 1 JM_GunRecoil(-0.3, .06);
 		PSTF C 1 JM_GunRecoil(+0.125, .01);
 		PSTG A 0 MO_JumpIfLessAmmo();
@@ -168,7 +173,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		PSTG A 0 MO_JumpIfLessAmmo(where: "Empty");
 		PSTG A 0 A_JumpIf(MO_GetBurstMode(), "BurstFire2");
 		PSZG B 1 MO_FirePistol;
-		PSTG A 0 MO_EjectCase("PistolCasing",28,2, 3, 0, frandom(3, 5), frandom(3,4));//{MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (21, 0, -5));}
+		PSTG A 0 MO_EjectCase("PistolCasing",28,2, 3, 0, frandom(3, 5), frandom(3,4));
 	Fire2.Animation:
 		PSZG C 1 JM_GunRecoil(-0.2, .06);
 		PSZG D 1 JM_GunRecoil(+0.05, .01);
@@ -230,7 +235,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		PSTF A 0 A_JumpIf(MO_IsMaxBurstCount(), "BurstFire2Finished");
 		PSZG D 1 
 		{
-			MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (21, 0, -5));
+			MO_EjectCase("PistolCasing",28,2, 3, 0, frandom(3, 5), frandom(3,4));
 			JM_GunRecoil(-0.275, .06);		
 		}
 		Loop;
@@ -305,7 +310,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 			PSZG # 1 
 			{
 				if(!PressingAltFire()) {return ResolveState("UnZoom");}
-				if(PressingFire() || JustPressed(BT_ATTACK) && invoker.Ammo1.amount > 0) {
+				if(PressingFire() && invoker.Ammo1.amount > 0) {
 				return ResolveState("Fire2");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
@@ -345,7 +350,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 			MO_FirePistol();
 			MO_CountBurst();
 		}
-		PSTG A 0 {MO_EjectCasing("PistolCasing", false, speed: frandom(4, 7), offset: (26, 0, -7));}
+		PSTG A 0 MO_EjectCase("PistolCasing",26, 0, 9, 0, frandom(3, 5), frandom(3,4));
 		PSTF A 0 A_JumpIf(MO_IsMaxBurstCount(), "BurstFinished");
 		PSTF C 1 JM_GunRecoil(-0.45, .06);		
 		Loop;
@@ -567,6 +572,9 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		#### FFFF 1;
 		#### FEDCBA 1;
 		Goto ReadyToFire;
+	FlashEquipmentToss:
+		PSTD CBA 1;
+		Goto ThrowThatShitForReal;
 	}
 }
 

@@ -4,15 +4,18 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 {
     Default
     {
-        Weapon.AmmoUse 0;
-        Weapon.AmmoGive 8;
-        Weapon.AmmoType1 "MO_ShotShell";
-		Weapon.AmmoType2 "SSGAmmo";
+        Weapon.AmmoUse1 1;
+        Weapon.AmmoGive2 8;
+//		Weapon.AmmoUse2 1;
+        Weapon.AmmoType1 "SSGAmmo";
+		Weapon.AmmoType2 "MO_ShotShell";
         Inventory.PickupMessage "You got the Double Barrel Flak Shotgun! (Slot 3)";
         Obituary "$OB_MPSSHOTGUN";
         Tag "Double Barrel Flak Shotgun";
 		Inventory.PickupSound "weap/ssg/pickup";
 		Weapon.SelectionOrder 400;
+		+WEAPON.NOAUTOSWITCHTO
+		+WEAPON.AMMO_OPTIONAL;
     }
 
 	action void MO_FireSSG()
@@ -70,13 +73,15 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 			 TNT1 A 0 A_Lower(12);
 			 Wait;
         Fire:
-            SG2S A 0 MO_CheckMag;
+            SG2S A 0 MO_JumpIfLessAmmo;
             SG2S A 0 A_JumpIfInventory("SSGAmmo",2,1);
             Goto AltFire2;
             SG2F A 1 BRIGHT
             {
+				for(int i = 2; i > 0; --i)
+				{if (!invoker.DepleteAmmo(false, true,  forceammouse: true)) {return;}}
                 A_StartSound("weapons/ssg/fire", 1);
-                A_TakeInventory("SSGAmmo",2);
+//                A_TakeInventory("SSGAmmo",2);
 				JM_CheckForQuadDamage();
                 MO_FireSSG();
             }
@@ -89,14 +94,14 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SG2S A 0 A_JumpIfInventory("MO_ShotShell", 1, "Reload");
             Goto ReadyToFire;
         AltFire:
-            SG2S A 0 MO_CheckMag;
+            SG2S A 0 MO_JumpIfLessAmmo;
             SG2S A 0 A_JumpIfInventory("SSGAmmo",2,1);
             Goto AltFire2;
             SG2A A 1 BRIGHT
             {
                 A_StartSound("weapons/ssg/altfire", 1);
                 MO_FireSSG2(); //Left
-                A_TakeInventory("SSGAmmo",1);
+                {if (!invoker.DepleteAmmo(false, true)) {return;}}
 				JM_CheckForQuadDamage();
             }
             SG2A B 1 BRIGHT JM_GunRecoil(-1.1, .12);
@@ -149,7 +154,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SGR1 LMNO 1;// JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SGR1 PQRS 1;// JM_WeaponReady(WRF_NOFIRE);
-			SGR1 A 0 JM_ReloadSSG(2,1);
+			SGR1 A 0 JM_ReloadGun("SSGAmmo", invoker.AmmoType2, invoker.Ammo1.MaxAmount,1);
             SGR1 T 1 
 			{
 				A_StartSound("weapons/ssg/fullinsert", 0);

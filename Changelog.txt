@@ -170,3 +170,10 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - Throwing equipment doesn't suck anymore, responds better and is now an event handler.
 - Ammo1 is now the magazine pool for some weapons (Pistol and Rifle for now).
 - A_Eject from Beautiful Doom is implemented for some weapons, which will replace the ZWL spawns.
+- Base Weapon changes, Ammo use changes.
+- Deagle and SMG have been overhauled with new animations. Functionality is mainly the same as before,
+ but more features may get added to them later.
+- Flamethrower flames and cryo flames are faster.
+- Sniper bullets on Heavy Marksman Rifle sniper zoom scrapped. They were honestly terrible and ate ammo like a motherfucker.
+- Reworked ammo check for Reload and no ammo again.
+- Rocket Launcher has a new draw sound

@@ -109,15 +109,16 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 
 	Default
 	{
-		Weapon.AmmoUse 0;
-		Weapon.AmmoGive 20;
-		Weapon.AmmoType1 "MO_Cell";
-		Weapon.AmmoType2 "PlasmaAmmo";
+		Weapon.AmmoUse1 1;
+		Weapon.AmmoGive2 20;
+		Weapon.AmmoType1 "PlasmaAmmo";
+		Weapon.AmmoType2 "MO_Cell";
 		Inventory.PickupMessage "$GOTPLASMAGUN";
 		Inventory.PickupSound "weapons/plasma/pickup";
 		Obituary "$OB_PLASMABEAM";
 		Tag "$TAG_PLASMA";
 		+WEAPON.NOALERT;
+		+WEAPON.AMMO_OPTIONAL
 		Weapon.SelectionOrder 100;
 	}
 	
@@ -131,6 +132,28 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				else 
 				{A_SetCrossHair(invoker.GetXHair(12));}
 		}
+	}
+
+	action void MO_FirePlasma()
+	{		
+			if (!invoker.DepleteAmmo(false, true)){return;}
+			A_AlertMonsters();
+			A_GunFlash();
+			A_GiveInventory("PlasmaRifleCooldownCount",1);
+			if(CountInv("HeatedRoundsReady") == 1)
+			{
+				A_StartSound("weapons/plasma/superheatfire", CHAN_AUTO,CHANF_DEFAULT,0.6,ATTN_NORM);
+				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE);
+				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlashHeated");
+				JM_AddHeatBlastCharge();
+				A_GiveInventory("HeatBlastShotCount",1);
+			}
+			Else
+			{
+				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
+				A_FireProjectile("JM_PlasmaBall", 0, FALSE);
+				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
+			}		
 	}
 
 	States
@@ -183,10 +206,10 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		Goto ReadyToFire;
 		
 	Fire:
-		TNT1 A 0 MO_CheckMag;
+		TNT1 A 0 MO_JumpIfLessAmmo;
 		TNT1 A 0 JM_CheckForQuadDamage();
 	FireContinue:
-		TNT1 A 0 MO_CheckMag;
+		TNT1 A 0 MO_JumpIfLessAmmo;
 		3RGF A 0; //Initialize the sprite name into memory
 		PRGF A 0
 		{
@@ -195,33 +218,13 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 				JM_SetWeaponSprite("3RGF");
 			}
 		}
-		"####" A 1 
-		{
-			if(CountInv("HeatedRoundsReady") == 1)
-			{
-				A_StartSound("weapons/plasma/superheatfire", CHAN_AUTO,CHANF_DEFAULT,0.6,ATTN_NORM);
-				A_FireProjectile("JM_HeatedPlasmaBall", 0, FALSE);
-				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlashHeated");
-				JM_AddHeatBlastCharge();
-				A_GiveInventory("HeatBlastShotCount",1);
-			}
-			Else
-			{
-				A_StartSound("weapons/plasma/fire", CHAN_AUTO,CHANF_DEFAULT,1,ATTN_NORM,1.2);
-				A_FireProjectile("JM_PlasmaBall", 0, FALSE);
-				A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
-			}
-			A_AlertMonsters();
-			A_GunFlash();
-			A_TakeInventory("PlasmaAmmo",1, TIF_NOTAKEINFINITE);
-			A_GiveInventory("PlasmaRifleCooldownCount",1);		
-		}
-		"####" B 1 JM_GunRecoil(-1.1,+.03);
+		"####" A 1 MO_FirePlasma;
+		"####" B 1 JM_GunRecoil(-0.7,+.012);
 		"####" C 1;
 		"####" A 0 A_JumpIf(PressingFire(), "FireContinue");
 		"####" A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",25,"Cooldown");
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
-		"####" A 0 MO_CheckMag;
+		"####" A 0 MO_JumpIfLessAmmo;
 		Goto ReadyToFire;
 
 	Flash:
@@ -307,7 +310,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 	
 	AltFire:
 		TNT1 A 0;
-		TNT1 A 0 MO_CheckMag;
+		TNT1 A 0 MO_JumpIfLessAmmo;
 		TNT1 A 0 {
 			if(CountInv("HeatedRoundsReady") >=1 && CountInv("HeatBlastLevel") >= 1)
 			{
@@ -329,7 +332,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 		PRGA A 3;
 		TNT1 A 0 A_JumpIf(JustReleased(BT_ALTATTACK), "CheckForCooldown");
 	HoldBeam:
-		TNT1 A 0 MO_CheckMag(where: "StopBeam");
+		TNT1 A 0 MO_JumpIfLessAmmo(where: "StopBeam");
 		PRGG A 0 A_StartSound("plasma/laser/fireloop",4);
 		PRGG A 0 A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 		PRGG A 0 A_AttachLightDef('GunLighting', 'PlasmaWepLight');
@@ -341,7 +344,7 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			A_OverlayOffset(PSP_MUZZLEFLASH, 0, 18);
 			A_AlertMonsters();
 		}
-		PRGG A 0 JM_GunRecoil(-0.9, .09);
+		PRGG A 0 JM_GunRecoil(-0.45,+.005);
 		PRGG A 0 A_Overlay(PSP_MUZZLEFLASH, "MuzzleFlash");
 		PRGA CC 1
 		{
@@ -414,15 +417,15 @@ class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
 			A_TakeInventory("HeatBlastFullyCharged",1);
 			A_TakeInventory("HeatBlastShotCount",45);
 		}
-		3RGF B 1 JM_GunRecoil(-2.15,+.03);
-		2RGA A 1 JM_GunRecoil(-2.15,+.03);
-		2RGA BCD 1 JM_GunRecoil(-1.75,+.03);
+		3RGF B 1 JM_GunRecoil(-1.65,+.03);
+		2RGA A 1 JM_GunRecoil(-1.45,+.03);
+		2RGA BCD 1 JM_GunRecoil(-0.96,+.03);
 		2RGA EFF 1;
 		2RGA EDCBA 1;
 		Goto Cooldown;
 	Reload:
 		PSTG A 0 A_JumpIfInventory("PlasmaRifleCooldownCount",25,"Cooldown");
-		PSTG A 0 A_JumpIfInventory("PlasmaAmmo",60,"ReadyToFire");
+		PSTG A 0 A_JumpIfInventory("PlasmaAmmo",invoker.Ammo1.MaxAmount,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_Cell",1,1);
 		goto ReadyToFire;
 		PRL1 A 0

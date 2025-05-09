@@ -5,8 +5,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 {
 	Default
 	{
-		Weapon.AmmoUse 0;
 		Weapon.AmmoGive 4;
+		Weapon.AmmoUse2 1;
 		Weapon.AmmoType1 "MO_ShotShell";
         Weapon.AmmoType2 "LeverShottyAmmo";
 		Inventory.PickupMessage "$GOTLVRSHOT";
@@ -19,6 +19,28 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		+Weapon.NoAlert
 		+Weapon.NoAutoFire
 	}
+
+	action void MO_FireLVShotgun()
+	{
+		if (!invoker.DepleteAmmo(true, true))
+		{
+			if(invoker.Ammo2.amount < 1 && invoker.Ammo1.amount < 1)
+			{
+					A_StartSound("weapon/shotgunempty",0);
+					SetWeaponState("NoAmmo");
+					return;
+			}
+			SetWeaponState("Reload");
+			return;
+		}
+		A_FireBullets (random(3, 6), frandom(2,5), 9, 15, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
+		A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
+		 JM_CheckForQuadDamage();
+		A_AlertMonsters();
+		A_GunFlash();
+		SetInventory("Levering",1);
+	}
+
 	States
 	{
 	Inspect:
@@ -45,8 +67,8 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87G A 1 
 		{
 				if(PressingFire() && invoker.Ammo2.amount > 0) {Return ResolveState("Fire");}
-				else if(PressingAltFire() && invoker.Ammo2.amount > 0) {Return ResolveState("AltFire");}
-				return JM_WeaponReady(WRF_ALLOWRELOAD);
+				else if(JustPressed(BT_ALTATTACK)) {Return ResolveState("AltFire");}
+				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 		}
 		Loop;
 	Deselect:
@@ -55,21 +77,17 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 	DeselectFast:
 		TNT1 A 0 A_Lower(12);
 		Wait;
+
+	NoAmmo:
+		W87G A 1;
+		Goto ReadyToFire;
 	
 	Select:
 		TNT1 A 0;
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(4));
 		Goto ClearAudioAndResetOverlays;
 	Fire:
-		PSTG A 0 MO_CheckMag;
-		W87F A 1 BRIGHT {
-			A_FireBullets (random(3, 6), frandom(2,5), 9, 15, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
-			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
-			JM_UseAmmo("LeverShottyAmmo",1);
-			 JM_CheckForQuadDamage();
-			A_AlertMonsters();
-			A_GunFlash();
-		}
+		W87F A 1 BRIGHT MO_FireLVShotgun;
 		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		 W87F C 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		//possible recoil
@@ -131,19 +149,13 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 			Stop;
 	
 	AltFire:
-		PSTG A 0 MO_CheckMag;
-		W87F A 1 BRIGHT {
-			A_FireBullets (random(3, 6), frandom(2,6.7), 9, 15, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
-			A_StartSound ("weapons/levershotty/fire", CHAN_WEAPON);
-			JM_UseAmmo("LeverShottyAmmo",1);
-			 JM_CheckForQuadDamage();
-			A_AlertMonsters();
-			A_GunFlash();
-		}
+		W87G A 0 MO_FireLVShotgun;
+		W87F A 1 BRIGHT A_FireBullets(random(3, 6), frandom(2,7.5), 9, 15, "ShotgunShellPuff", FBF_NORANDOM,0,"MO_BulletTracer",0);
 		W87F B 1 BRIGHT JM_GunRecoil(-1.2,.09);
 		 W87A A 1 JM_GunRecoil(-1.2,.09);
 		W87A B 1 JM_GunRecoil(+0.4,.09);
 		W87A C 1 JM_GunRecoil(+0.1,.09);
+		W87G A 0 SetInventory("Levering",0);
 		W87A D 1;// A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W87A E 1;
 		TNT1 A 0 A_SpawnItemEx("ShotgunCasing",28, -3, random(17,20), random(-5,0), random(-5,-2), random(8,12));
@@ -156,12 +168,13 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		W87A C 1 A_StartSound("weapons/levershotty/up", CHAN_AUTO);
 		W87A BA 1;
 		PSTG A 0 MO_CheckMag;
+		PSTG A 0 A_JumpIf(PressingAltFire(), "AltFire");
 		Goto ReadyToFire;
 	Reload:
 		PSTG A 0 A_JumpIfInventory("LeverShottyAmmo",6,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_ShotShell",1,2);
-		PSTG A 0 A_StartSound("weapon/shotgunempty",0);
 		goto ReadyToFire;
+		W87G AAA 0;
 		W8R1 A 1 JM_WeaponReady(WRF_NOFIRE);
 		W87J A 0 A_StartSound("weapons/levershotty/down", CHAN_AUTO);
 		W8R1 BC 1 JM_WeaponReady(WRF_NOFIRE);

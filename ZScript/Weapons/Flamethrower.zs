@@ -279,7 +279,7 @@ Class FlamethrowerAttack : Actor
     default {
 		Radius 12;
 		Height 8;
-		Speed 12;
+		Speed 20;
 		DamageFunction (random(24, 28));
 		+NOBLOCKMAP;
 		+NOTELEPORT;

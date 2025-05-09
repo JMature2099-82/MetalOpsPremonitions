@@ -4,32 +4,12 @@ weapon/adsdown ADSDOWN
 weapon/pistolempty "Sounds/EmptyClicks/DryFire_Pistol.ogg"
 weapon/rifleempty "Sounds/EmptyClicks/DryFire_Rifle.ogg"
 weapon/shotgunempty "Sounds/EmptyClicks/DryFire_Shotgun.ogg"
+weapon/inspectfoley1 INSFOL1
+weapon/inspectfoley2 INSFOL2
+weapon/inspectfoley3 INSFOL3
+weapon/inspectfoley4 INSFOL4
 
 //Slot 1 ------------------------
-//////////////////Flamethrower
-smallflames/loop FIRELOP1
-
-weapons/flamer/pickup FLMPKUP
-weapons/flamer/draw FLMSLCT
-weapons/flamer/startfire FLMSTRT
-weapons/flamer/flameon FLMSTRT2
-weapons/flamer/fireloop FLMLOOP
-weapons/flamer/end FLMCOOL
-Weapons/flamer/inwater FLNOFIR
-
-//Flamethrower Cryo mode
-weapons/flamer/iceloop FRZLOOP
-weapons/flamer/icelooplayer FRZLYRLP
-weapons/flamer/startice FRZSTR
-weapons/flamer/fireicebegin FRZFRS1
-weapons/flamer/iceend FRZDWN
-weapons/flamer/icelooplayer FRZLYRLP
-weapons/flamer/icedraw FRZUP
-
-weapons/flamer/icemodeactive FRZACT
-weapons/flamer/firemodeactive FLMMODE
-weapons/flamer/special1 FLMSPC1
-weapons/flamer/special2 FLMSPC2
 
 /////////////////////////////Katana
 weapons/katana/draw KATDRW
@@ -53,9 +33,9 @@ $random weapons/pistol/fire {PistolFire1 PistolFire2}
 PistolFire1 PISTFIR1
 PistolFire2 PISTFIR2
 pistol/inspect PSINSP
-pistol/reloadlift "Sounds/Weapons/Pistol/Pistol_ReloadLift.ogg"
-pistol/reloadend "Sounds/Weapons/Pistol/Pistol_ReloadEnd.ogg"
-pistol/reloadendfast "Sounds/Weapons/Pistol/Pistol_ReloadEndFast.ogg"
+pistol/reloadlift "Sounds/Weapons/Slot2/Pistol/Pistol_ReloadLift.ogg"
+pistol/reloadend "Sounds/Weapons/Slot2/Pistol/Pistol_ReloadEnd.ogg"
+pistol/reloadendfast "Sounds/Weapons/Slot2/Pistol/Pistol_ReloadEndFast.ogg"
 weapons/pistol/silfire PISTSIL
 
 weapons/pistol/draw PISTDRW
@@ -88,6 +68,9 @@ weapons/smg/inspect2 SMGINS2
 weapons/smg/inspect3 SMGINS3 //Shadow The Hedgehog like cocking animation, sound by Needed Sound Effects
 weapons/smg/inspect4 SMGINS4
 weapons/smg/modeswitch SMGSWTC
+smg/akreloadhit "Sounds/Weapons/Slot2/SMG/SMG_MagHit.ogg"
+SMG/Pump1 SMGPMP1
+SMG/Pump2 SMGPMP2
 
 
 //Deagle
@@ -95,18 +78,22 @@ weapons/deag/draw DEGSLCT
 $random weapons/deag/fire {deagfire1 deagfire2}
 deagfire1 degfir1
 deagfire2 degfir2
-weapons/deag/reloadraise "Sounds/Weapons/Deagle/Deagle_ReloadRaise.ogg"
-weapons/deag/reloadend "Sounds/Weapons/Deagle/Deagle_ReloadEnd.ogg"
-weapons/deag/reloadendempty "Sounds/Weapons/Deagle/Deagle_ReloadEmptyEnd.ogg"
-weapons/deag/movetoslide "Sounds/Weapons/Deagle/Deagle_MvmntToSlide.ogg"
-weapons/deag/magin "Sounds/Weapons/Deagle/Deagle_MagIn.ogg"//DEGIN
-weapons/deag/magout "Sounds/Weapons/Deagle/Deagle_MagOut.ogg"
-weapons/deag/slideback "Sounds/Weapons/Deagle/Deagle_SlideBack.ogg"
-weapons/deag/slideforward "Sounds/Weapons/Deagle/Deagle_SlideForward.ogg"
+weapons/deag/reloadraise "Sounds/Weapons/Slot2/Deagle/DE_ReloadRaise.ogg"
+weapons/deag/reloadend "Sounds/Weapons/Slot2/Deagle/DE_ReloadEnd.ogg"
+weapons/deag/reloadendempty "Sounds/Weapons/Slot2/Deagle/DE_ReloadEmptyEnd.ogg"
+weapons/deag/slidefull "Sounds/Weapons/Slot2/Deagle/DE_SlideFull.ogg"
+weapons/deag/movetoslide "Sounds/Weapons/Slot2/Deagle/DE_MvmntToSlide.ogg"
+weapons/deag/magin "Sounds/Weapons/Slot2/Deagle/DE_MagIn.ogg"
+weapons/deag/magout "Sounds/Weapons/Slot2/Deagle/DE_MagOut.ogg"
+weapons/deag/slideback "Sounds/Weapons/Slot2/Deagle/DE_SlideBack.ogg"
+weapons/deag/slideforward "Sounds/Weapons/Slot2/Deagle/DE_SlideForward.ogg"
+deag/flip "Sounds/Weapons/Slot2/Deagle/DE_Flip.ogg"
+deag/pickup DEGPICK
 
 RELOAD RELOAD //Only a placeholder sound when there is no reload animation.
 $VOLUME RELOAD 2
 
+//Slot 3 -------------------
 /////////////////////////////Lever Action Shotgun
 $random weapons/levershotty/fire {LeverFire1 LeverFire2 LeverFire3}
 LeverFire1 M87FIR1
@@ -142,14 +129,14 @@ weapons/pumpshot/pumpback PSGPMPB
 weapons/pumpshot/pumpforward PSGPMPF
 weapons/pumpshot/pickup PSGPCKUP
 
-//Double Barrel Flak Shotgun
+//Double Barrel  Shotgun
 weapons/ssg/fire SSGFIRE
 weapons/ssg/altfire SSGALT
 weapons/ssg/draw SSGDRAW
 weapons/ssg/opengas SSGGAS
 weapons/ssg/opengun SSGOPEN
-weapons/ssg/singleinsert "Sounds/Weapons/DoubleBarrel/SSG_SingleInsert.ogg"
-weapons/ssg/fullinsert "sounds/Weapons/DoubleBarrel/SSG_FullInsert.ogg"
+weapons/ssg/singleinsert "Sounds/Weapons/Slot3/DoubleBarrel/SSG_SingleInsert.ogg"
+weapons/ssg/fullinsert "sounds/Weapons/Slot3/DoubleBarrel/SSG_FullInsert.ogg"
 weapons/ssg/closegun SSGCLOS
 weap/ssg/pickup SSGPICK
 
@@ -176,48 +163,46 @@ molotoss3 MOL_TS3
 MOLPKUP MOLPKUP
 MOLTHRW MOLTHRW
 
-$random weapons/ar/fire {arfire1 arfire2}
-arfire1 arfire1
-arfire2 arfire2
-
 //Slot 4 ------------------------
 
 //////////////////Combat Rifle
 weapons/ar/select ARSELCT
 weapons/ar/pickup ARPICK
-
+$random weapons/ar/fire {arfire1 arfire2}
+arfire1 arfire1
+arfire2 arfire2
 weapons/ar/magout ARMAGOU
 weapons/ar/magin ARMAGIN
 weapons/ar/ReloadEnd AREND
-weapons/ar/arflipstart "Sounds/Weapons/AssaultRifle/AR_Reload_Empty_Rotate.ogg"
-weapons/ar/arflipend "Sounds/Weapons/AssaultRifle/AR_Reload_Empty_Rotate_End.ogg"
-weapons/ar/magflipsound "Sounds/Weapons/AssaultRifle/AR_Empty_Mag_Flip.ogg"
+weapons/ar/arflipstart "Sounds/Weapons/Slot4/AssaultRifle/AR_Reload_Empty_Rotate.ogg"
+weapons/ar/arflipend "Sounds/Weapons/Slot4/AssaultRifle/AR_Reload_Empty_Rotate_End.ogg"
+weapons/ar/magflipsound "Sounds/Weapons/Slot4/AssaultRifle/AR_Empty_Mag_Flip.ogg"
 
 weapons/ar/chamberbck ARCHMBK
 weapons/ar/chamberfwd ARCHMFW
 
 //////////////////Heavy Combat Rifle
-hcr/draw "Sounds/Weapons/HeavyRifle/HCR_Draw.ogg"
-hcr/inspectRaise "Sounds/Weapons/HeavyRifle/HCR_InspectRaise.ogg"
-hcr/inspect2 "Sounds/Weapons/HeavyRifle/HCR_InspectEnd.ogg"
-hcr/boltback "Sounds/Weapons/HeavyRifle/HCR_BoltPull.ogg"
-hcr/boltfwd "Sounds/Weapons/HeavyRifle/HCR_BoltRelease.ogg"
-hcr/magbutton "Sounds/Weapons/HeavyRifle/HCR_MagRelease.ogg"
-hcr/magout "Sounds/Weapons/HeavyRifle/HCR_MagOut.ogg"
-hcr/magin "Sounds/Weapons/HeavyRifle/HCR_MagIn.ogg"
-hcr/reloadRaise "Sounds/Weapons/HeavyRifle/HCR_ReloadUp.ogg"
-hcr/reloadend "Sounds/Weapons/HeavyRifle/HCR_ReloadEnd.ogg"
+hcr/draw "Sounds/Weapons/Slot4/HeavyRifle/HCR_Draw.ogg"
+hcr/inspectRaise "Sounds/Weapons/Slot4/HeavyRifle/HCR_InspectRaise.ogg"
+hcr/inspect2 "Sounds/Weapons/Slot4/HeavyRifle/HCR_InspectEnd.ogg"
+hcr/boltback "Sounds/Weapons/Slot4/HeavyRifle/HCR_BoltPull.ogg"
+hcr/boltfwd "Sounds/Weapons/Slot4/HeavyRifle/HCR_BoltRelease.ogg"
+hcr/magbutton "Sounds/Weapons/Slot4/HeavyRifle/HCR_MagRelease.ogg"
+hcr/magout "Sounds/Weapons/Slot4/HeavyRifle/HCR_MagOut.ogg"
+hcr/magin "Sounds/Weapons/Slot4/HeavyRifle/HCR_MagIn.ogg"
+hcr/reloadRaise "Sounds/Weapons/Slot4/HeavyRifle/HCR_ReloadUp.ogg"
+hcr/reloadend "Sounds/Weapons/Slot4/HeavyRifle/HCR_ReloadEnd.ogg"
 
 $random hcr/fire {hfire1 hfire2 hfire3}
-hfire1 "Sounds/Weapons/HeavyRifle/HCR_Fire1.ogg"
-hfire2 "Sounds/Weapons/HeavyRifle/HCR_Fire2.ogg"
-hfire3 "Sounds/Weapons/HeavyRifle/HCR_Fire3.ogg"
+hfire1 "Sounds/Weapons/Slot4/HeavyRifle/HCR_Fire1.ogg"
+hfire2 "Sounds/Weapons/Slot4/HeavyRifle/HCR_Fire2.ogg"
+hfire3 "Sounds/Weapons/Slot4/HeavyRifle/HCR_Fire3.ogg"
 
 //////////////////Heavy Combat Rifle UBGL
 $random hcr/glfire {gfire1 gfire2 gfire3}
-gfire1 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire1.ogg"
-gfire2 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire2.ogg"
-gfire3 "Sounds/Weapons/HeavyRifle/GL/HCR_GLFire3.ogg"
+gfire1 "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLFire1.ogg"
+gfire2 "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLFire2.ogg"
+gfire3 "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLFire3.ogg"
 
 $random hcr/grenade  { bounce1 bounce2 }
 bounce1      hgrenb1a
@@ -230,12 +215,12 @@ $random 40mmExplosion  { 40expl1 40expl2 40expl3 }
 
 hcr/sniperzoom SNIP_ZM
 hcr/sniperunzoom SNIP_UZ
-hcr/sniperfire "Sounds/Weapons/HeavyRifle/HMR_SniperFire.ogg"
+hcr/sniperfire "Sounds/Weapons/Slot4/HeavyRifle/HMR_SniperFire.ogg"
 
-hcr/grenadeopen "Sounds/Weapons/HeavyRifle/GL/HCR_GLOpen.ogg"
-hcr/grenadeload "Sounds/Weapons/HeavyRifle/GL/HCR_GLLoad.ogg"
-hcr/grenadeshellin "Sounds/Weapons/HeavyRifle/GL/HCR_GLShellIn.ogg"
-hcr/grenadeclose "Sounds/Weapons/HeavyRifle/GL/HCR_GLClose.ogg"
+hcr/grenadeopen "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLOpen.ogg"
+hcr/grenadeload "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLLoad.ogg"
+hcr/grenadeshellin "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLShellIn.ogg"
+hcr/grenadeclose "Sounds/Weapons/Slot4/HeavyRifle/GL/HCR_GLClose.ogg"
 
 //////////////////Minigun
 weapons/minigun/fire DSMINIGF
@@ -252,7 +237,9 @@ weapons/minigun/pickup MGPICK
 //Slot 5 --------------------------------
 
 //////////////////Rocket Launcher
-weapons/rocket/fire RLFIRE
+$random weapons/rocket/fire {RLFIRE1 RLFIRE2}
+RLFIRE1 RLFIRE1
+RLFIRE2 RLFIRE2
 weapons/rocket/draw RLDRAW
 weapons/rocket/pickup RLPICK
 weapons/rocket/altfire RLAFIRE
@@ -396,7 +383,7 @@ bfg/10explfar BFGALPP
 $limit bfg/10expl 3
 $limit bfg/10explfar 3
 
-$rolloff weapons/bfg/explosionfar 4500 8000
+$rolloff weapons/bfg/explosionfar 2500 5000
 $attenuation bfg/10expl 0.55
 $attenuation weapons/bfg/explosion 0.5
 $volume weapons/bfg/idleloop 0.75
@@ -412,6 +399,33 @@ UNMFIR2 UNMFIR2
 weapons/unmaker/afire UNMFIRE
 
 weapons/unmaker/pick UNMPICK
+
+//Slot 8 ------------------------
+//////////////////Flamethrower
+smallflames/loop FIRELOP1
+
+weapons/flamer/pickup FLMPKUP
+weapons/flamer/draw FLMSLCT
+weapons/flamer/startfire FLMSTRT
+weapons/flamer/flameon FLMSTRT2
+weapons/flamer/fireloop FLMLOOP
+weapons/flamer/end FLMCOOL
+Weapons/flamer/inwater FLNOFIR
+
+//Flamethrower Cryo mode
+weapons/flamer/iceloop FRZLOOP
+weapons/flamer/icelooplayer FRZLYRLP
+weapons/flamer/startice FRZSTR
+weapons/flamer/fireicebegin FRZFRS1
+weapons/flamer/iceend FRZDWN
+weapons/flamer/icelooplayer FRZLYRLP
+weapons/flamer/icedraw FRZUP
+
+weapons/flamer/icemodeactive FRZACT
+weapons/flamer/firemodeactive FLMMODE
+weapons/flamer/special1 FLMSPC1
+weapons/flamer/special2 FLMSPC2
+
 
 FragGrenade/pin FRAGPIN
 FragGrenade/Throw FRGTOSS

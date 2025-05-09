@@ -20,6 +20,19 @@ extend class JMWeapon
 		return (owner.FindInventory("MO_PowerStrength"));
 	}
 
+//No more TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise()!
+	action void MO_Raise()
+	{
+		A_Raise(12);
+		A_WeaponOffset(0,32);
+	}
+
+//No more if statement checks
+	action void MO_SetHasteTics(int tics)
+	{
+		if(invoker.OwnerHasSpeed())
+		A_SetTics(tics);
+	}
 
     //Based on IsPressingInput from Project Brutality
     action bool PressingWhichInput(int which)
@@ -62,7 +75,6 @@ extend class JMWeapon
 			else
 				A_StartSound("playerkick/footwall",1);
         }
-
 	}
 
 //Holy shit I can't believe I got this working
