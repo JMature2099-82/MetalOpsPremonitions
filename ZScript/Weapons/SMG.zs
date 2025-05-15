@@ -441,33 +441,31 @@ Class MO_SubMachineGun : JMWeapon
 				}
 				return ResolveState(null);
 			}
-			SMRZ AB 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 AB 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			SMRZ CDE 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 CDE 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			SMRZ F 1 JM_WeaponReady(WRF_NOFIRE);
-			SMRZ G 7 
+			SZ01 F 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 G 5 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
 				MO_SetHasteTics(3);
 			}
-			SMRZ H 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
-			SMRZ IIJJ 1 JM_WeaponReady(WRF_NOFIRE);
-			SMRZ J 1 JM_WeaponReady(WRF_NOFIRE);
-			SMR1 A 0 A_JumpIf(CountInv("SMGAmmo") >= 1, 2);
-			SMR1 A 0; //A_SpawnItemEx('SMGMagazine', 25, 7, 29, random(-1,2), random(-6,-4), random(2,5));
-			SMRZ J 4 
+			SZ01 H 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
+			SZ01 IIJK 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 L 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 L 4 
 			 {
 				JM_WeaponReady(WRF_NOFIRE);
 				MO_SetHasteTics(2);
 			}
-			SMRZ IHG 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 MNO 1 JM_WeaponReady(WRF_NOFIRE);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			SMRZ K 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 P 1 JM_WeaponReady(WRF_NOFIRE);
 			SMR1 A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
-			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			SMRZ LL 1 JM_WeaponReady(WRF_NOFIRE);
-			SMRZ MN 1 JM_WeaponReady(WRF_NOFIRE);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SZ01 QQ 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 R 1 JM_WeaponReady(WRF_NOFIRE);
 			TNT1 A 0
 			{
 				if(invoker.Ammo1.amount < 1)
@@ -481,17 +479,18 @@ Class MO_SubMachineGun : JMWeapon
 			}
 	DoneReloadZoomed:
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			SMRZ OONML 1;
+			SZ01 RQQPO 1;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-			SMRZ KKKKP 1;
+			SZ01 OOP 1;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-            SMRZ QR 1;
-			SMRZ A 0 A_ZoomFactor(1.3);
+            SZ01 Q 1;
+			SM5G A 0 A_ZoomFactor(1.3);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-            SMRZ S 1;
-			SMRZ A 1 A_OverlayOffset(PSP_WEAPON , 0,39); 
-			SMRZ A 1 A_OverlayOffset(PSP_WEAPON ,0,35);
-			SMRZ A 1 A_OverlayOffset(PSP_WEAPON ,0,32);
+            SZ01 R 1;
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SZ01 STUV 1;
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SZ01 WXY 1;
 			SM5G A 0 A_JumpIfInventory("SMGIsEmpty",1,"ChamberZoomed");
 			SM5G A 0 A_JumpIf(invoker.isHoldingAim == true, "ADSHold");
             Goto ReadyToFire;

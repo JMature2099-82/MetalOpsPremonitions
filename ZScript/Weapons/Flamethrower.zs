@@ -35,11 +35,9 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		}
 	}
 
-//	action void MO_CheckFuel
-
     Default
     {
-        Weapon.AmmoUse 2;
+       Weapon.AmmoUse 2;
        Weapon.AmmoGive 50;
 		Weapon.SelectionOrder 3000;
         Weapon.AmmoType1 "MO_Fuel";
@@ -93,17 +91,10 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 			A_AlertMonsters();
             A_WeaponOffset(0,42);
         }
-        F1MG A 1 {
-            A_WeaponOffset(0,46);
-        }
+        F1MG A 1 A_WeaponOffset(0,46);
 		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-        F1MG A 1 
-        {
-            A_WeaponOffset(0,41);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,38);
-        }
+        F1MG A 1  A_WeaponOffset(0,41);
+        F1MG A 1 A_WeaponOffset(0,38);
 		TNT1 A 0 A_StartSound("weapons/flamer/flameon",7, CHANF_DEFAULT, 0.6);
         TNT1 A 0 A_StartSound("weapons/flamer/fireloop", 1, CHANF_LOOPING);
 		FLMG A 0 JM_CheckForQuadDamage();
