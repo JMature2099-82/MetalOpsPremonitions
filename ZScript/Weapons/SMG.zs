@@ -134,7 +134,7 @@ Class MO_SubMachineGun : JMWeapon
 			{
 				JM_GunRecoil(-0.2, .03);
 				JM_WeaponReady(WRF_NOFIRE);
-				MO_EjectCase('PistolCasing',31, -2, 7, random(0,2),random(3,5),random(3,4));
+				MO_EjectCase('PistolCasing',31, -2, 7, frandom(-1,2), frandom(3,5), frandom(3,4));
 			}
             SM5Z G 1;
 			SM5G A 0 MO_JumpIfLessAmmo;
@@ -368,18 +368,19 @@ Class MO_SubMachineGun : JMWeapon
 					JM_WeaponReady(WRF_NOFIRE);
 					MO_SetHasteTics(2);
 			}
-			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMR3 STUV 1 JM_WeaponReady(WRF_NOFIRE);
-			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			SMR3 WXY 1;
+			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SMR3 WXYY 1;
 			TNT1 A 0 JM_ReloadGun("SMGAmmo","MO_LowCaliber",34,1);
 			SMR3 Z 1 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			SMR3 Z 1;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			//Chamber the round.
-			SMR4 A 1;
+			SMR4 A 2;
 			SM5G AAA 0;
-			SMR4 B 9 MO_SetHasteTics(5);
-			SMR4 C 1 A_StartSound("weapons/smg/inspect2",0);
+			SMR4 B 7 MO_SetHasteTics(4);
+			SMR4 C 2 A_StartSound("weapons/smg/inspect2",0);
 			SM5G A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
 			SMR4 D 1;
 			SMR4 E 1;
@@ -420,9 +421,9 @@ Class MO_SubMachineGun : JMWeapon
 			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			SMZ1 RSTU 1;
 			TNT1 A 0 JM_ReloadGun("SMGAmmo","MO_LowCaliber",34,1);
-			SMZ1 T 1 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			TNT1 A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			SMZ1 TUV 2 MO_SetHasteTics(1);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-			SMZ1 UV 2;
 			SMZ1 WWXXYZ 1;
 			SM5G AAA 0 A_ZoomFactor(1.3);
 			SMZ1 "[\]" 1;
