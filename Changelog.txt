@@ -177,3 +177,7 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - Sniper bullets on Heavy Marksman Rifle sniper zoom scrapped. They were honestly terrible and ate ammo like a motherfucker.
 - Reworked ammo check for Reload and no ammo again.
 - Rocket Launcher has a new draw sound
+- SMG now has 35 bullets instead of 40.
+- Deagle ADS reload animations completed.
+- SMG ADS reload animations completed and reworked
+- SMG has a random empty reload animation that is inspired by the AK-47 mag bump reload animations.
