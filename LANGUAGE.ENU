@@ -151,11 +151,6 @@ TAG_FUEL = "\ciFuel";
 TAG_GRENADE = "\[Tan]Grenade";
 TAG_MOLOTOV = "\[Brown]Molotov Cocktail";
 
-//Chainsword
-GOTCHAINSWORD = "Picked up a Chainsword! (Slot 1)";
-OB_CHAINSWORD = "%o had a friendly talk with %k's newest great communicator, the Chainsword!";
-TAG_CHAINSWORD = "Chainsword";
-
 //Kick attack
 OB_KICK = "%k gave %o a taste of their boot.";
 OB_BERSERKKICK = "%o got Sparta kicked by %k.";
