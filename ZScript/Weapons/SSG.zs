@@ -50,6 +50,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 		A_FireProjectile("FlakChunk2",random(-2,2),0,-15,12);
 		A_FireProjectile("FlakChunk3",random(-2,2),0,-18,6);
 	}
+
     States
     {
 		ContinueSelect:
@@ -193,7 +194,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             "####" GHIJK 1 JM_WeaponReady(WRF_NOFIRE);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			"####" KLMN 1 JM_WeaponReady(WRF_NOFIRE);
-			"####" A 0 JM_ReloadSSG(2,1);
+			"####" A 0 JM_ReloadGun("SSGAmmo", invoker.AmmoType2, invoker.Ammo1.MaxAmount,1);
             "####" T 0 A_StartSound("weapons/ssg/singleinsert", 0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
             SGR7 OO 1 JM_WeaponReady(WRF_NOFIRE);
