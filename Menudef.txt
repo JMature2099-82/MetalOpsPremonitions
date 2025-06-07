@@ -2,12 +2,11 @@ LISTMENU "MainMenu"
 {
 	IfGame(Doom, Chex)
 	{
-		LineSpacing 16	// This must account for some single-graphic replacements, so it cannot be widened
-		StaticPatch 94, 2, "M_DOOM"
+		StaticPatch 72, -56, "M_DOOM"
 		Position 97, 72
 		IfOption(ReadThis)
 		{
-			Position 97, 64
+			Position 97, 73
 		}
 	}
 	IfGame(Strife)

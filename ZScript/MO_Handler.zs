@@ -1,3 +1,4 @@
+
 class MOps_Handler : EventHandler
 {
 	int kicktimer;
@@ -6,7 +7,7 @@ class MOps_Handler : EventHandler
     override void WorldTick()
     {
         PlayerInfo plyr = players[consoleplayer];
-
+		
 		if(kicktimer > 0)
 			kicktimer--;
     }
@@ -18,6 +19,19 @@ class MOps_Handler : EventHandler
 		{
 			pl.A_RemoveLight('GunLighting');
 		}
+	}
+	
+// Key bind code by m8f
+	private static ui bool isKeyForCommand(int key, string command)
+	{
+		Array<int> keys;
+		bindings.getAllKeysForCommand(keys, command);
+		uint nKeys = keys.size();
+		for (uint i = 0; i < nKeys; ++i)
+		{
+		  if (keys[i] == key) return true;
+		}
+		return false;
 	}
 	
 	override void CheckReplacement(replaceEvent e)
@@ -74,9 +88,28 @@ class MOps_Handler : EventHandler
 		e.isFinal = false;
 	}
 
+	override bool InputProcess(InputEvent e) 
+	{
+		int KeyBind = e.KeyScan;
+		for(int i = 0; i <= 10; ++i)
+		{
+			if (isKeyForCommand(KeyBind, "+User1") && e.type == InputEvent.Type_KeyDown) 
+			{
+				EventHandler.SendNetworkEvent("ThrowEquipment");
+			}
+
+			if (isKeyForCommand(KeyBind, "+Zoom") && e.type == InputEvent.Type_KeyDown) 
+			{
+				Console.PrintF("You pressed the Zoom key");
+				//EventHandler.SendNetworkEvent("ThrowEquipment");
+			}
+		}
+		return false;
+	}
+
     override void NetworkProcess(ConsoleEvent e)
     {
-        let pl = players[e.Player].mo;
+        PlayerPawn pl = players[e.Player].mo;
         if(!pl)
          return;
 
@@ -119,6 +152,18 @@ class MOps_Handler : EventHandler
             }
         }*/
 
+		if(e.Name ~== "ThrowEquipment")
+		{
+			let mo_wep = JMWeapon(pl.player.readyweapon);
+			if(!mo_wep) return;
+			
+			State TossThrowable = mo_wep.FindState("TossThrowable");
+			if(TossThrowable != Null && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
+			{
+				pl.player.SetPSprite(PSP_WEAPON, mo_wep.FindState("TossThrowable"));
+			}
+		}
+
 		if (e.Name ~== "KickEm")
 		{	
 			if(kicktimer == 0)
@@ -138,13 +183,19 @@ class MOps_Handler : EventHandler
 					kicktimer = kickcooldown;
 					
 					let wp = pl.player.readyweapon;
+					if(!wp)
+					return;
 					State Kick = wp.FindState("Kick");
 					State FlashKick = wp.FindState("FlashKick");
+					State FlashAirKick = wp.FindState("FlashAirKick");
 					if(Kick != Null && !mo_wep.isZoomed)
 					{
 						pl.player.SetPSprite(-999, wp.FindState("Kick"));
 						if(FlashKick != NULL && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
 						{
+								if(FlashAirKick != Null && pl.Vel.Z != 0)
+								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashAirKick"));
+								else
 								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashKick"));
 						}
 					}

@@ -42,7 +42,7 @@ Class SpecialAction2 : MO_ZSToken{}
 
 //Slot 2
 Class NeverUsedSMG : MO_ZSToken{}
-Class NeverUsedDeagle : MO_ZSToken{}
+Class NeverUsedPocketCannon : MO_ZSToken{}
 
 //Slot 3
 Class NeverUsedPSG : MO_ZSToken{}

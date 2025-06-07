@@ -200,6 +200,9 @@ Night Vision goggles warning sound by sweet_trip from freesound.com
 Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, 
 DreamCatcher Interactive (THQ Nordic)
 scalliano - GLDefs code for spheres, Haste sphere
+Jekyll Grim Payne - A_Eject (MO_EjectCasing) from Beautiful Doom
+Marisa the Magacian - Mk_matrix. Marisa can fuck herself for the horrible things she did (she is a pedo), but her code is an exception. Separate the art from the artist. 
+New World Interactive - ADS sounds from Insurgency
 Yoo-toob-FX - Rad suit off sound
 Pixabay - Rad suit hiss sound
 EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from Command & Conquer Red Alert 3 Uprising

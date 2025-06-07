@@ -88,6 +88,9 @@ class JMWeapon : Weapon
 			TNT1 A 1 
 			{
 				State SelectAnim = player.readyweapon.FindState("SelectAnimation");
+				State TossFlashEnd = player.readyweapon.FindState("FlashEquipmentTossEnd");
+				if(TossFlashEnd != NULL)
+					{return ResolveState("FlashEquipmentTossEnd");}
 				if(SelectAnim != NULL)
 					{return ResolveState("SelectAnimation");}
 				return ResolveState(Null);
@@ -129,7 +132,7 @@ class JMWeapon : Weapon
 			TNT1 A 0 A_OverlayFlags(-999,PSPF_PLAYERTRANSLATED,FALSE);
 			TNT1 A 0 SetPlayerProperty(0,0,0);
 			Stop;
-		AirKick: //16 frames
+		AirKick: //18 frames
 			"####" A 0 ThrustThing(angle * 256 / 360, 3, 0, 0);
 			"####" A 0 
 			{
@@ -142,7 +145,7 @@ class JMWeapon : Weapon
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK2 DE 1;
 			KCK2 F 1 MO_KickAttack;
-			KCK2 GGHHI 1;
+			KCK2 GHHHHII 1;
 			KCK2 JKLMN 1;
 			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
 			Stop;
@@ -152,12 +155,13 @@ class JMWeapon : Weapon
 			"####" A 0 A_StartSound("playerkick",0);
 			KCK2 DE 1;
 			KCK2 F 1 MO_KickAttack;
-			KCK2 GGHI 1;
+			KCK2 GHHII 1;
 			KCK2 JKLN 1;
 			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
 			Stop;
 				
 		FlashKick:
+		FlashAirKick:
 				TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
 				TNT1 A 16;
 				Goto ReallyReady;
@@ -183,18 +187,37 @@ class JMWeapon : Weapon
 			}
 			Goto Ready;
 			
+		FlashEquipmentToss:
+			TNT1 A 1;
+		ThrowThatShitForReal:
+			TNT1 A 1;
+			TNT1 A 0
+			{
+				if(CountInv("ThrowableType") == 1)
+				{return ResolveState("ActuallyThrowMolotov");}
+				else
+				{return ResolveState("ActuallyThrowGrenade");}
+				return resolvestate(null);
+			}
+			Goto Ready;
+			
+			
 		ThrowMolotov:
-		"####" "#" 0 A_ZoomFactor(1.0);
+			"####" "#" 0;
+			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 1 A_JumpIfInventory("MolotovAmmo", 1, 2);
+			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, "FlashEquipmentToss");
 			"####" "#" 0 A_Print("No Molotov Cocktails left");
 			Goto ReallyReady;
+		ActuallyThrowMolotov:
+			TNT1 AAA 0;
+			TNT1 A 0 A_WeaponOffset(0,32);
 			MTOV AB 1;
 			TNT1 A 0 A_StartSound("Molotov/Open",0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			MTOV CDE 1;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			MTOV FG 1;
 			MTOV H 2 {
 				A_StartSound("Molotov/Lit",1);
@@ -226,10 +249,9 @@ class JMWeapon : Weapon
 			MTOV TUVW 1;
 			TNT1 A 5
 			{
-//				A_StartSound("Molotov/Lit",1);
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowMolotov");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowMolotov");
 			Goto BackToWeapon;
 		
 		CookingGrenade:
@@ -258,12 +280,15 @@ class JMWeapon : Weapon
 			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 1 A_JumpIfInventory("GrenadeAmmo", 1, 2);
+			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, "FlashEquipmentToss");
 			"####" "#" 0 A_Print("No Frag Grenades left");
 			Goto ReallyReady;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			GREP AABCD 1;
+		ActuallyThrowGrenade:
+			TNT1 AAA 0;
+			TNT1 A 0 A_WeaponOffset(0,32);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			GREP AABCD 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
 			GREP EFGII 1;
 			TNT1 A 0 A_StartSound("FragGrenade/Pin",0);
 			GREP K 1;
@@ -272,9 +297,7 @@ class JMWeapon : Weapon
 			GREP LMNOPQ 1;
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "CookingGrenade");
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
-//			MOLO FG 2 A_SpawnItemEx ("FlameTrails",cos(pitch)*1,0,0-(sin(pitch))*-10,cos(pitch)*20,0,-sin(pitch)*20,0,SXF_NOCHECKPOSITION);
 			TNT1 AAAAA 1;
-			//HND1 I 2
 		TossTheGrenade:
 			TNT1 A 0 ACS_Terminate(2098,0);
 			GRE1 AB 1;
@@ -289,15 +312,8 @@ class JMWeapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowGrenade");
 			Goto BackToWeapon;
-		
-		//Failsafe just in case there are no flash kick states
-		FlashKick:
-		FlashAirKick:
-		FlashSlideKick:
-			"####" "#" 16;
-			Goto ReallyReady;
 		}
 }
 

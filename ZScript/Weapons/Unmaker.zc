@@ -15,6 +15,7 @@ class MO_Unmaker : JMWeapon
     Default
     {
         Weapon.AmmoGive 50;
+		Weapon.AmmoUse 3;
         Weapon.AmmoType "MO_Cell";
         Inventory.PickupMessage "$GOTUNMAKER";
         Tag "$TAG_UNMAKER";
@@ -44,8 +45,7 @@ class MO_Unmaker : JMWeapon
 			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 3, "ReadyToFire");
             TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.85);
 			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
-            TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,0,0,5,0,0);
-			TNT1 A 0 A_TakeInventory("MO_Cell",3);
+            TNT1 A 0 A_FireProjectile("UnmakerProjectile",0,true,0,5,0,0);
 			TNT1 A 0 JM_CheckForQuadDamage();
 		//	TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.3);
             UNHF F 1 BRIGHT A_WeaponOffset(0,32);
@@ -59,11 +59,11 @@ class MO_Unmaker : JMWeapon
             Goto ReadyToFire;
 			
 		AltFire:
-			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 10, "ReadyToFire");
+			TNT1 A 0 A_JumpIf(invoker.Ammo1.amount < 9, "ReadyToFire");
             TNT1 A 0 A_StopSound(chan_6);
             UNHF ABCDE 1;
         AltHold:
-			TNT1 A 0 A_JumpIf(CountInv("MO_Cell") < 10, "ReadyToFire");
+			TNT1 A 0 A_JumpIf(invoker.Ammo1.amount < 9, "ReadyToFire");
             TNT1 A 0 A_StartSOund("weapons/unmaker/fire", 7, CHANF_DEFAULT,1,ATTN_NORM, 0.85);
 			TNT1 A 0 A_StartSOund("weapons/unmaker/afire", 2);
             TNT1 A 0 
@@ -73,8 +73,14 @@ class MO_Unmaker : JMWeapon
 				A_FireProjectile("UnmakerProjectile",3,0,0,5,0,0);
 				JM_CheckForQuadDamage();
 			}
-//		TNT1 A 0 A_RailAttack(1, 0, 0, "", "red", RGF_NOPIERCING | RGF_SILENT | RGF_CENTERZ | RGF_FULLBRIGHT, 0, "", 0, 0, 9999, 1, 0.5);
-			TNT1 A 0 A_TakeInventory("MO_Cell",10);
+			TNT1 A 0
+			{
+			for(int i = 3; i > 0; --i)
+			{
+				if(!invoker.DepleteAmmo(false,true))
+				return;
+			}
+			}
             UNHF F 1 BRIGHT A_WeaponOffset(0,32);
             UNHF GH 1 JM_GunRecoil(-.5,+.04);
 			UNHF IJ 1 BRIGHT JM_GunRecoil(+.11,-.04);

@@ -20,6 +20,19 @@ extend class JMWeapon
 		return (owner.FindInventory("MO_PowerStrength"));
 	}
 
+//No more TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise()!
+	action void MO_Raise()
+	{
+		A_Raise(12);
+		A_WeaponOffset(0,32);
+	}
+
+//No more if statement checks
+	action void MO_SetHasteTics(int tics)
+	{
+		if(invoker.OwnerHasSpeed())
+		A_SetTics(tics);
+	}
 
     //Based on IsPressingInput from Project Brutality
     action bool PressingWhichInput(int which)
@@ -56,9 +69,12 @@ extend class JMWeapon
 		
         if (t.linetarget)
         {
-             A_StartSound("playerkick/hit",1);
+			Actor victim = t.linetarget;
+			 if(victim.bISMONSTER)
+				A_StartSound("playerkick/hit",1);
+			else
+				A_StartSound("playerkick/footwall",1);
         }
-
 	}
 
 //Holy shit I can't believe I got this working
@@ -91,6 +107,17 @@ extend class JMWeapon
 	{
 		if(invoker.Ammo2.amount  < m)
 			return ResolveState(where);
+		return ResolveState(Null);
+	}
+
+	action state MO_JumpIfLessAmmo(int m = 1, statelabel where = "Reload")
+	{
+		let wep = player.readyweapon;
+		State JumpTo = wep.FindState(where);
+		if(JumpTo != NULL && invoker.Ammo1.amount  < m)
+		{
+			return ResolveState(where);
+		}
 		return ResolveState(Null);
 	}
 
@@ -142,11 +169,6 @@ extend class JMWeapon
 	action state JM_WeaponReady(int wpflags = 0)
 	{	
 		A_WeaponReady(wpflags);
-		if(JustPressed(BT_USER1))
-		{
-			if(CheckIfInReady())
-			return ResolveState("TossThrowable");
-		}
 		if(JustPressed(BT_USER4) && CheckIfInReady())
 		{
 			State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
@@ -177,15 +199,14 @@ extend class JMWeapon
 		return false;
 	}
 	
-	action void JM_ReloadGun(name magammo, name reserve, int magMax, int reserveTake)
+	action void JM_ReloadGun(Class<Inventory> magPool, Class<Inventory> reservePool, int magMax, int reserveTake)
 	{
 		for(int i = 0; i < magMax; i++)
 		{
-			if(CountInv(reserve) < 1 || CountInv(magammo) == magMax) 
-			return;
-			
-			A_GiveInventory(magammo, 1);
-			A_TakeInventory(reserve, reserveTake, TIF_NOTAKEINFINITE);
+			if(CountInv(reservePool) < 1 || CountInv(magPool) == magMax) 
+			return;	
+			A_GiveInventory(magPool, 1);
+			A_TakeInventory(reservePool, reserveTake, TIF_NOTAKEINFINITE);
 		}
 	}
 	

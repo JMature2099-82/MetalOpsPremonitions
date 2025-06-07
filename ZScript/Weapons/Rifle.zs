@@ -6,11 +6,10 @@ Class AssaultRifle : JMWeapon
 {
     Default
     {
-        Weapon.AmmoGive 10;
-		Weapon.AmmoUse 0;
-		Weapon.AmmoUse2 1;
-        Weapon.AmmoType1 "MO_HighCaliber";
-        Weapon.AmmoType2 "ARAmmo";
+		Weapon.AmmoUse1 1;
+        Weapon.AmmoType1 "ARAmmo";
+        Weapon.AmmoType2 "MO_HighCaliber";
+		Weapon.AmmoGive2 10;
 		Weapon.SelectionOrder 800;
         Inventory.PickupMessage "$GOTRIFLE";
         Obituary "$OBMO_RIFLE";
@@ -19,7 +18,7 @@ Class AssaultRifle : JMWeapon
 		+INVENTORY.TOSSED
 		+WEAPON.NOALERT
 		+WEAPON.NOAUTOFIRE;
-//		+WEAPON.PRIMARY_USES_BOTH
+		+WEAPON.AMMO_OPTIONAL;
     }
 
 	override void PostBeginPlay()
@@ -29,39 +28,30 @@ Class AssaultRifle : JMWeapon
 	}
 
 	action void MO_FireRifle()
-	{		
-			if (!invoker.DepleteAmmo(true, true))
-			{
-				if(invoker.Ammo2.amount < 1 && invoker.Ammo1.amount < 1)
-				{
-						A_StartSound("weapon/rifleempty",0);
-						SetWeaponState("ReadyToFire");
-						return;
-				}
-				SetWeaponState("Reload");
-				return;
-			}
-			A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
-            A_StartSound("weapons/ar/fire", 0);
-		    A_GunFlash();
-			JM_CheckForQuadDamage();
-			A_AlertMonsters();
+	{
+		if (!invoker.DepleteAmmo(false, true)){return;}
+		A_FireBullets(5.6, 0, 1, 18, "UpdatedBulletPuff",FBF_NORANDOM,0,"MO_BulletTracer",0);
+        A_StartSound("weapons/ar/fire", 0);
+		A_GunFlash();
+		JM_CheckForQuadDamage();
+		A_AlertMonsters();
 	}
+
 
     States
     {
 		ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		Goto Ready;
+		TNT1 A 0 MO_Raise();
+		Goto SelectAnimation;
 		
         Spawn:
             AR1W A -1;
             STOP;
-        Ready:
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/ar/select",0);
             AR1S ABCD 1;
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
+		Ready:
         ReadyToFire:
             AR1G A 1 
 			{
@@ -72,7 +62,7 @@ Class AssaultRifle : JMWeapon
 				if(JustPressed(BT_ALTATTACK) && invoker.ADSMode < 1) {
 				return ResolveState("AltFire");
 				}
-				if(PressingFire() && invoker.Ammo2.amount > 0) {
+				if(PressingFire() && invoker.Ammo1.amount > 0) {
 				return ResolveState("Fire");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
@@ -89,10 +79,11 @@ Class AssaultRifle : JMWeapon
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(7));
 			Goto ClearAudioAndResetOverlays;
         Fire:
+			AR1G A 0 MO_JumpIfLessAmmo(where: "Empty");
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");
             AR1F A 1 BRIGHT MO_FireRifle;
 			AR1F A 0 {
-				if(invoker.Ammo2.amount < 1)
+				if(invoker.Ammo1.amount < 1)
 					{A_SetInventory("ARIsEmpty",1);}
 			}
             AR1F B 1 BRIGHT 
@@ -107,14 +98,14 @@ Class AssaultRifle : JMWeapon
 				JM_GunRecoil(-0.45, .04);
 			}
 			AR1F D 1 JM_WeaponReady(WRF_NOPRIMARY);
-			TNT1 A 0 MO_CheckMag;
+			AR1G A 0 MO_JumpIfLessAmmo();
 			AR1G A 0 A_JumpIfInventory("ARSemiAuto",1, "SemiFireFinished");
             AR1F A 0 A_ReFire();
             Goto ReadyToFire;
 		
 		SemiFireFinished:
 			AR1Z E 0 A_JumpIf(invoker.isZoomed, "SemiFireFinishedADS");
-			AR1G AAAAA 1 A_JumpIf(JustPressed(BT_ATTACK), "Fire");
+			AR1G A 1 A_JumpIf(JustPressed(BT_ATTACK), "Fire");
 			AR1G A 0 A_JumpIf(!PressingFire(), "ReadyToFire");
 			Loop;
 		
@@ -152,7 +143,7 @@ Class AssaultRifle : JMWeapon
 			SMGR A 0 
 			{
 				invoker.isZoomed = True;
-				A_ZoomFactor(1.4);
+				A_ZoomFactor(1.85);
 				A_StartSound("weapon/adsup",0);
 				A_SetCrosshair(99);
 			}
@@ -164,18 +155,28 @@ Class AssaultRifle : JMWeapon
 			AR1Z EEEEE 1 
 			{
 				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
-				if(PressingFire() && invoker.Ammo2.amount > 0) {
+				if(PressingFire() && invoker.Ammo1.amount > 0) {
 				return ResolveState("Fire");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOFIRE);
 			}
 			TNT1 A 0 A_JumpIf(invoker.ADSMode == 2 && PressingAltFire() , "ADSHold");
+			Goto ADSToggle;
+
+		Empty:
+		AR1Z E 0 A_JumpIf(invoker.isZoomed, 2);
+		AR1G A 0;
+		#### ## 0;
+		#### # 0 A_JumpIf(invoker.ammo2.amount >= 1, "Reload");
+		#### # 0 A_StartSound("weapon/rifleempty",0);
+		#### # 1;
+		Goto ReadyToFire;
 
 		ADSToggle:
 			AR1Z E 1 
 			{
 				if(JustPressed(BT_ALTATTACK)) {return ResolveState("UnZoom");}
-				if(PressingFire() && invoker.Ammo2.amount > 0) {
+				if(PressingFire() && invoker.Ammo1.amount > 0) {
 				return ResolveState("Fire");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
@@ -187,7 +188,7 @@ Class AssaultRifle : JMWeapon
 			AR1Z E 1 
 			{
 				if(!PressingAltFire()) {return ResolveState("UnZoom");}
-				if(PressingFire() && invoker.Ammo2.amount > 0) {
+				if(PressingFire() && invoker.Ammo1.amount > 0) {
 				return ResolveState("Fire");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
@@ -207,7 +208,8 @@ Class AssaultRifle : JMWeapon
 			Goto ReadyToFire;
 
 		Fire2:
-			  AR1Z F 1 BRIGHT MO_FireRifle;
+			AR1G A 0 MO_JumpIfLessAmmo(where: "Empty");
+			AR1Z F 1 BRIGHT MO_FireRifle;
             AR1Z G 1 BRIGHT 
 			{
 				JM_GunRecoil(-0.38, .04);
@@ -224,7 +226,7 @@ Class AssaultRifle : JMWeapon
 				if(CountInv("ARAmmo") < 1)
 					{A_SetInventory("ARIsEmpty",1);}
 			}
-			TNT1 A 0 MO_CheckMag;
+			TNT1 A 0 MO_JumpIfLessAmmo;
 			TNT1 A 0 A_Jumpif(CountInv("ARSemiAuto") >= 1, "SemiFireFinishedADS");
 			AR1F A 0
 			{
@@ -271,8 +273,8 @@ Class AssaultRifle : JMWeapon
 			Goto Ready2;
         
         Reload:
-			TNT1 A 0 A_JumpIfInventory("ARAmmo",30,"ReadyToFire");
-			TNT1 A 0 A_JumpIf(invoker.Ammo1.amount >= 1,2);
+			TNT1 A 0 A_JumpIf(invoker.Ammo1.amount >= 30, "ReadyToFire");
+			TNT1 A 0 A_JumpIf(invoker.Ammo2.amount >= 1,2);
 			Goto ReadyToFire;
 			TNT1 AAA 0;
 			AR10 A 0 A_JumpIf(Invoker.isZoomed, "ReloadZoomed");
@@ -372,7 +374,7 @@ Class AssaultRifle : JMWeapon
 			Goto ReadyToFire;
 
 		ReloadZoomed:
-			TNT1 A 0 A_ZoomFactor(1.275);
+			TNT1 A 0 A_ZoomFactor(1.575);
 			AR1Z E 1 JM_WeaponReady(WRF_NOFIRE);
 			ARZR AB 1 JM_WeaponReady(WRF_NOFIRE);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
@@ -405,7 +407,7 @@ Class AssaultRifle : JMWeapon
 			ARZR PQR 1 JM_WeaponReady(WRF_NOFIRE);
 			AR11 A 0 A_JumpIf(CountInv("ARIsEmpty") >= 1, "Chamber");
 			AR10 A 0 JM_ReloadGun("ARAmmo", "MO_HighCaliber",31,1);
-			TNT1 A 0 A_ZoomFactor(1.4);
+			TNT1 A 0 A_ZoomFactor(1.85);
 			AR1F A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			ARZR STU 1 JM_WeaponReady(WRF_NOFIRE);
 			AR11 J 0 A_StartSound("weapons/ar/ReloadEnd",1);
@@ -452,7 +454,7 @@ Class AssaultRifle : JMWeapon
 			ARZS EEFG 1;
 			AR11 N 0 A_StartSound("weapons/ar/chamberfwd",2);
 			ARZS HIJ 1;
-			TNT1 A 0 A_ZoomFactor(1.4);
+			TNT1 A 0 A_ZoomFactor(1.85);
 			ARZR STUBA 1;
 			GOTO ReadyToFire;
 		

@@ -1,7 +1,27 @@
-//From ZScript Weapons Library.
-
+//A_Eject from Beautiful Doom by Jekyll Grim Payne
 extend class JMWeapon
 {
+	//Casing spawn function with math by Marisa Kirisame (see mk_matrix)
+	action actor MO_EjectCase(class<Actor> itemtype, double xofs = 0, double yofs = 0, double zofs = 0, double xvel = 0, double yvel = 0, double zvel = 0) {
+		if (!player || !player.mo)
+			return null;
+		PlayerInfo plr = player;
+		PlayerPawn pmo = player.mo;
+		Vector3 ofs = pmo.pos+(0,0,plr.viewheight-GetFloorTerrain().footclip);
+		Vector3 x, y, z;
+		[x, y, z] = Matrix4.getaxes(pmo.pitch,pmo.angle,pmo.roll);
+		let targofs = ofs+x*xofs+y*yofs-z*zofs;
+		if (!Level.IsPointInLevel(targofs))
+			return null;
+		let c = Spawn(itemtype,targofs);
+		if (c) {
+			c.vel = x*xvel+y*yvel+z*zvel;
+			c.target = self;
+			c.angle = angle;
+			return c;
+		}
+		return null;
+	}
 	  /*
     Ejects a bullet casing to the side.
     Params:
@@ -12,6 +32,7 @@ extend class JMWeapon
      - accuracy: Random spread, in degrees.
      - offset: Offset from which casing is ejected, relative to center of view.
     */
+//From ZScript Weapons Library.
     action void MO_EjectCasing(class<Actor> casingType, bool left = false, double ejectPitch = -45, double speed = 4,
                                 double accuracy = 8, Vector3 offset = (24, 0, -10))
     {

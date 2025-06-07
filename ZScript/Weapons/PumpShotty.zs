@@ -6,7 +6,7 @@ class MO_PumpShotgun : JMWeapon
     Default
     {
         Weapon.AmmoGive 4;
-		Weapon.AmmoUse 0;
+		Weapon.AmmoUse2 1;
 		Weapon.SelectionOrder 1400;
         Weapon.AmmoType1 "MO_ShotShell";
         Weapon.AmmoType2 "PumpShotgunAmmo";
@@ -17,6 +17,26 @@ class MO_PumpShotgun : JMWeapon
 		JMWeapon.inspectToken "NeverUsedPSG";
 		+Weapon.NoAlert
     }
+
+	action void MO_FireShotgun()
+	{
+		if (!invoker.DepleteAmmo(true, true))
+		{
+			if(invoker.Ammo2.amount < 1 && invoker.Ammo1.amount < 1)
+			{
+					A_StartSound("weapon/shotgunempty",0);
+					SetWeaponState("ReadyToFire");
+					return;
+			}
+			SetWeaponState("Reload");
+			return;
+		}
+        A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
+		A_GunFlash();
+		JM_CheckForQuadDamage();
+		A_AlertMonsters();
+	}
+
     States
     {
 		Inspect:
@@ -28,7 +48,6 @@ class MO_PumpShotgun : JMWeapon
             PGR2 CCD 1 JM_WeaponReady();
 			PGR2 A 0 A_StartSound("weapons/pumpshot/load", 1);
             PGR2 EF 1 JM_WeaponReady();
-//			PGR2 A 0 JM_LoadShell("PumpShotgunAmmo","Shell",1);
             PGR2 GHIJKKKKKK 1 JM_WeaponReady();
             PGR2 A 0 A_StartSound("weapons/pumpshot/pumpforward", 0);
             PGR2 KLM 1 JM_WeaponReady();
@@ -46,11 +65,12 @@ class MO_PumpShotgun : JMWeapon
         ReadyToFire:
             PSGG A 1 
 			{
-				if(CountInv("SGPumping") >= 1) {SetWeaponState("Pump");}
-				if(CountInv("AltPumping") >= 1) {SetWeaponState("AltPump");}
-				if(CountInv("PumpShotgunAmmo") == 0 && CountInv("MO_ShotShell") > 1)
-				{SetWeaponState("REload");}
-				return JM_WeaponReady(WRF_ALLOWRELOAD);
+				if(CountInv("SGPumping") >= 1) {return ResolveState("Pump");}
+				if(CountInv("AltPumping") >= 1) {return ResolveState("AltPump");}
+				if(invoker.Ammo2.amount <= 0 && invoker.Ammo1.amount > 1)
+				{return ResolveState("REload");}
+				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
+				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 			}
             Loop;
         Deselect:
@@ -69,13 +89,9 @@ class MO_PumpShotgun : JMWeapon
             PSTG A 0 MO_CheckMag;
             PSGF A 1 
             {
-                A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
-                A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
-                A_TakeInventory("PumpShotgunAmmo",1, TIF_NOTAKEINFINITE);
-				A_GunFlash();
+				MO_FireShotgun();
+				A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
 				A_SetInventory("SGPumping",1);
-				JM_CheckForQuadDamage();
-				A_AlertMonsters();
 		    }
             PSGF BC 1 JM_GunRecoil(-1.2,.09);
             PSGF D 1 JM_GunRecoil(0.3,.09);
@@ -99,12 +115,9 @@ class MO_PumpShotgun : JMWeapon
 				MO_EjectCasing("ShotgunCasing20ga", ejectpitch: frandom(-55, -45), speed: frandom(5, 7), accuracy: 5, offset:(28, -8, -14));
 			}
 			TNT1 A 0 JM_WeaponReady(WRF_NOFIRE); //Quick switch	
-			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
             PSGM IJKL 1 JM_WeaponReady(WRF_NOFIRE);
 			W87A A 0 A_StartSound("weapons/pumpshot/pumpforward", 0);
-			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			PSGM LKJ 1 JM_WeaponReady(WRF_NOFIRE);
-			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
             PSGM IHGFEDCBA 1 JM_WeaponReady(WRF_NOFIRE);
             PSGG A 1 A_JumpIf(PressingFire(), "Fire");
             Goto ReadyToFire;
@@ -186,20 +199,14 @@ class MO_PumpShotgun : JMWeapon
             PGR1 DE 1 JM_WeaponReady(WRF_NOFIRE);
 			PGR1 FGHII 1 
 			{
-				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
+				if(JustPressed(BT_ATTACK)) {return ResolveState("DoneReload");}
+				if(JustPressed(BT_ALTATTACK)) {return ResolveState("DoneReload");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
 			PSTG A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
             PGR1 IIII 1 {
-				if(JustPressed(BT_ATTACK)) {return ResolveState("Fire");}
-				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
-				return JM_WeaponReady(WRF_NOFIRE);
-			}
-            PISG A 0
-			{
-				if(PressingFire()) {return ResolveState("Fire");}
-				if(PressingAltFire()) {return ResolveState("AltFire");}
+				if(JustPressed(BT_ATTACK)) {return ResolveState("DoneReload");}
+				if(JustPressed(BT_ALTATTACK)) {return ResolveState("DoneReload");}
 				return JM_WeaponReady(WRF_NOFIRE);
 			}
             Loop;
