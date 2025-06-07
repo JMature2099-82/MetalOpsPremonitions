@@ -12,3 +12,5 @@ If you have a bug to report, please post on the Issues tab or message me on Disc
 
 Any feedback or suggestions will be appreciated.
 IF YOUR FEEDBACK IS BASED ON THE MOTION BLUR USED ON SOME SPRITES, IT IS AN ARTISTIC CHOICE I MADE.
+
+Metal Ops: Premonitions is now on itch.io! More stable builds will be there: [Itch.io download](https://jmature99.itch.io/metal-ops-premonitions)
