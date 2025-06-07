@@ -1,6 +1,6 @@
 //Bullet decals by Sergeant Mark IV
 
-decal JMBulletChip1
+decal MO_BulletChip1
 {
 	pic CHIZ1
 	x-scale 0.75
@@ -8,7 +8,7 @@ decal JMBulletChip1
 	randomflipx
 }
 
-decal JMBulletChip2
+decal MO_BulletChip2
 {
 	pic CHIZ2
 	x-scale 0.6
@@ -16,7 +16,7 @@ decal JMBulletChip2
 	randomflipx
 }
 
-decal JMBulletChip3
+decal MO_BulletChip3
 {
 	pic CHIZ3
 	x-scale 0.6
@@ -24,7 +24,7 @@ decal JMBulletChip3
 	randomflipx
 }
 
-decal JMBulletChip4
+decal MO_BulletChip4
 {
 	pic CHIZ4
 	x-scale 0.7
@@ -35,10 +35,10 @@ decal JMBulletChip4
 
 decalgroup BulletChip
 {
-	JMBulletChip1	1
-	JMBulletChip2	1
-	JMBulletChip3	1
-	JMBulletChip4	1
+	MO_BulletChip1	1
+	MO_BulletChip2	1
+	MO_BulletChip3	1
+	MO_BulletChip4	1
 }
 
 fader FreezeScorchFader

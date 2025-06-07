@@ -5,36 +5,46 @@ class MO_PumpShotgun : JMWeapon
 {
     Default
     {
-        Weapon.AmmoGive 4;
-		Weapon.AmmoUse2 1;
+        Weapon.AmmoGive2 4;
+		Weapon.AmmoUse1 1;
 		Weapon.SelectionOrder 1400;
-        Weapon.AmmoType1 "MO_ShotShell";
-        Weapon.AmmoType2 "PumpShotgunAmmo";
+        Weapon.AmmoType1 "PumpShotgunAmmo";
+        Weapon.AmmoType2 "MO_ShotShell";
         Inventory.PickupMessage "You got the Pump Action Shotgun! (Slot 3)";
         Obituary "%o got blasted away by %k's Pump Shotgun.";
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
 		JMWeapon.inspectToken "NeverUsedPSG";
 		+Weapon.NoAlert
+		+Weapon.Ammo_Optional
+		+Weapon.NoAutoFire
     }
+
+	action void MO_UseSGAmmo(int a = 1)
+	{
+		for(int i = a; i > 0; --i)
+		if (!invoker.DepleteAmmo(false, true)){return;}
+	}
 
 	action void MO_FireShotgun()
 	{
-		if (!invoker.DepleteAmmo(true, true))
-		{
-			if(invoker.Ammo2.amount < 1 && invoker.Ammo1.amount < 1)
-			{
-					A_StartSound("weapon/shotgunempty",0);
-					SetWeaponState("ReadyToFire");
-					return;
-			}
-			SetWeaponState("Reload");
-			return;
-		}
+		MO_UseSGAmmo(1);
         A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON);
 		A_GunFlash();
 		JM_CheckForQuadDamage();
 		A_AlertMonsters();
+		A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
+		A_SetInventory("SGPumping",1);
+	}
+
+	action void MO_FireDoubleShot()
+	{
+		 MO_UseSGAmmo(2);
+		 A_FireBullets (random(4, 8), frandom(3,15), 40, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
+		 A_GunFlash();
+		 JM_CheckForQuadDamage();
+		 A_SetInventory("AltPumping",1);
+		 A_AlertMonsters();
 	}
 
     States
@@ -67,12 +77,20 @@ class MO_PumpShotgun : JMWeapon
 			{
 				if(CountInv("SGPumping") >= 1) {return ResolveState("Pump");}
 				if(CountInv("AltPumping") >= 1) {return ResolveState("AltPump");}
-				if(invoker.Ammo2.amount <= 0 && invoker.Ammo1.amount > 1)
+				if(invoker.Ammo1.amount <= 0 && invoker.Ammo2.amount > 1)
 				{return ResolveState("REload");}
 				if(JustPressed(BT_ALTATTACK)) {return ResolveState("AltFire");}
 				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 			}
             Loop;
+
+		Empty:
+		PSTG A 0;
+		PSTG A 0 A_JumpIf(invoker.ammo2.amount >= 1, "Reload");
+		PSTG A 0 A_StartSound("weapon/shotgunempty",0);
+		PSGG A 1;
+		Goto ReadyToFire;
+
         Deselect:
 			PSTG A 0 A_SetCrosshair(invoker.GetXHair(5));
 			PSGS EDCBA 1;
@@ -86,13 +104,8 @@ class MO_PumpShotgun : JMWeapon
 			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
 			Goto Ready;
         Fire:
-            PSTG A 0 MO_CheckMag;
-            PSGF A 1 
-            {
-				MO_FireShotgun();
-				A_FireBullets (random(3, 6), frandom(3,7), 20, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
-				A_SetInventory("SGPumping",1);
-		    }
+            PSTG A 0 MO_JumpIfLessAmmo(Where: "Empty");
+            PSGF A 1 MO_FireShotgun();
             PSGF BC 1 JM_GunRecoil(-1.2,.09);
             PSGF D 1 JM_GunRecoil(0.3,.09);
 			PSGF E 1 JM_GunRecoil(0.1,.09);
@@ -101,7 +114,7 @@ class MO_PumpShotgun : JMWeapon
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 MO_CheckMag;
+			TNT1 A 0 MO_JumpIfLessAmmo;
             Goto Pump;
         Pump:
             W87A A 0 SetInventory("SGPumping",1);
@@ -123,18 +136,10 @@ class MO_PumpShotgun : JMWeapon
             Goto ReadyToFire;
 			
 		AltFire:
-			PSTG A 0 MO_CheckMag(2);
+			PSTG A 0 MO_JumpIfLessAmmo(2, "Fire");
 			TNT1 A 0 A_StartSound ("weapons/pumpshot/fire", CHAN_WEAPON, CHANF_DEFAULT, 0.85);
 			TNT1 A 0 A_StartSound("weapons/pumpshot/altfire",CHAN_7);
-			PSGF A 1 
-            {
-                 A_FireBullets (random(4, 8), frandom(3,15), 40, 6, "ShotgunPuff20GA", FBF_NORANDOM,0,"MO_BulletTracer",0);
-                A_TakeInventory("PumpShotgunAmmo",2, TIF_NOTAKEINFINITE);
-				A_GunFlash();
-				JM_CheckForQuadDamage();
-				A_SetInventory("AltPumping",1);
-				A_AlertMonsters();
-		    }
+			PSGF A 1 MO_FireDoubleShot();
             PSGF B 1 JM_GunRecoil(-2.25,.09);
 			PSGF C 1 JM_GunRecoil(-1.6,.09);
 			PSGF C 1 JM_GunRecoil(.6,.09);
@@ -142,7 +147,7 @@ class MO_PumpShotgun : JMWeapon
             PSGF E 4;
 			PSGG A 1;
 			TNT1 A 0 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 MO_CheckMag;
+			TNT1 A 0 MO_JumpIfLessAmmo();
             PSGG A 9
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(5);}
@@ -151,7 +156,6 @@ class MO_PumpShotgun : JMWeapon
             Goto AltPump;
 		
 		AltPump:
- //           W87A A 0 A_JumpIf(CountInv("LeverShottyAmmo") < 1, "TerminatorLever");
             PSGM ABC 1;		
 			PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			PSGM DEFG 1;

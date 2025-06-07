@@ -134,8 +134,7 @@ Class MO_HeavyRifle : JMWeapon
             TNT1 B 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				MO_EjectCase("HeavyRifleBrass",30,2,11, random(-1,1), random(4,7), random(3,6));
-//				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-55, -35), speed: frandom(6, 9), offset:(30, 2, -14));
+				MO_EjectCase("HeavyRifleBrass",26,2,13, random(-1,1), random(4,7), random(3,6));
 				JM_GunRecoil(-1.1, .04);
 			}
 		ResumeFire:
@@ -201,7 +200,7 @@ Class MO_HeavyRifle : JMWeapon
             HC2G C 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-45, -35), speed: frandom(6, 8),  offset:(15, 2, -6));
+				MO_EjectCase("HeavyRifleBrass",26,-1,11, random(0,1), random(4,6), random(4,6));
 				JM_GunRecoil(-1.1, .04);
 			}
             HC2G D 1 
@@ -258,7 +257,7 @@ Class MO_HeavyRifle : JMWeapon
             HC2Z D 1 BRIGHT 
 			{
 				JM_WeaponReady(WRF_NOFIRE);
-				MO_EjectCasing("HeavyRifleBrass", ejectpitch: frandom(-45, -35), speed: frandom(6, 8),  offset:(15, 2, -6));
+				MO_EjectCase("HeavyRifleBrass",26,-1,17, random(0,1), random(3,6), random(3,6));
 				JM_GunRecoil(-1.1, .04);
 			}
 			HC2Z DD 1 
@@ -512,7 +511,7 @@ Class MO_HeavyRifle : JMWeapon
 			TNT1 A 0;
 			HRG1 I 1;
 			TNT1 AA 0;
-			TNT1 A 0 {MO_EjectCasing("EmptyGrenadeShell",true, -5, frandom(0,1), offset: (22,8,-11));}
+			TNT1 A 0 MO_EjectCase("EmptyGrenadeShell", 15, 9, 10, -1, -1, -1);
 			HRG1 JKLM 1;
 			HRG1 N 12 {if(invoker.OwnerHasSpeed()) A_SetTics(6);}
 			HRG1 OP 1;

@@ -1,4 +1,4 @@
-class JM_PlasmaRifle : JMWeapon Replaces PlasmaRifle
+class MO_PlasmaRifle : JMWeapon
 {
 	const PSP_MUZZLEFLASH = -60;
 	action void JM_AddHeatBlastCharge()

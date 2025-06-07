@@ -31,5 +31,5 @@ brightmap sprite FTF2C0 {map "Brightmaps/Weapons/Flamethrower/FTF2C0_BM.png" Dis
 brightmap sprite FTF2D0 {map "Brightmaps/Weapons/Flamethrower/FTF2D0_BM.png" DisableFullBright}
 
 //Deagle
-brightmap sprite DGLFA0 {map "Brightmaps/Weapons/DGLFA0_BM.png" DisableFullBright}
-brightmap sprite DGLFB0 {map "Brightmaps/Weapons/DGLFB0_BM.png" DisableFullBright}
+brightmap sprite DGLGB0 {map "Brightmaps/Weapons/DGLGB0.png" DisableFullBright}
+brightmap sprite DGLGC0 {map "Brightmaps/Weapons/DGLGC0.png" DisableFullBright}

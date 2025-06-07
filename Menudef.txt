@@ -2,7 +2,7 @@ LISTMENU "MainMenu"
 {
 	IfGame(Doom, Chex)
 	{
-		StaticPatch 72, -56, "M_DOOM"
+		StaticPatch 72, -53, "M_DOOM"
 		Position 97, 72
 		IfOption(ReadThis)
 		{

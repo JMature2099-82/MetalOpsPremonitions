@@ -28,7 +28,7 @@ class HACXReplacementHandler : EventHandler
 		case 'HacxCryogun': e.Replacement = "MO_SSG"; break;
 		case 'HacxUzi': e.Replacement = "Chaingun"; break;
 		case 'HacxPhotonZooka': e.Replacement = "MO_RocketLauncher";	break;
-		case 'HacxAntigun': e.Replacement = "JM_PlasmaRifle"; break;
+		case 'HacxAntigun': e.Replacement = "PlasmaRifle"; break;
 		case 'HacxNuker': e.Replacement = "BFGSpawner";	break;
 			
 		//Powerups

@@ -5,53 +5,15 @@ brightmap sprite SM5SA0 {MAP "Brightmaps/Weapons/SMG/SM5SA0_BM.png"}
 brightmap sprite SM5SB0 {MAP "Brightmaps/Weapons/SMG/SM5SB0_BM.png"}
 brightmap sprite SM5SC0 {MAP "Brightmaps/Weapons/SMG/SM5SC0_BM.png"}
 brightmap sprite SM5SD0 {MAP "Brightmaps/Weapons/SMG/SM5SD0_BM.png"}
-brightmap sprite SM5GA0 {MAP "Brightmaps/Weapons/SMG/SM5GA0_BM.png"}
+brightmap sprite SM5GA0 {MAP "Brightmaps/Weapons/SMG/SM5GA0.png"}
 
 //Fire
 brightmap sprite SM5FA0 {MAP "Brightmaps/Weapons/SMG/Fire/SM5FA0_BM.png" disablefullbright}
 brightmap sprite SM5FB0 {MAP "Brightmaps/Weapons/SMG/Fire/SM5FB0_BM.png" disablefullbright}
 brightmap sprite SM5FC0 {MAP "Brightmaps/Weapons/SMG/Fire/SM5FC0_BM.png"}
 
-//Inspect
-brightmap sprite SM5IA0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IA0_BM.png"}
-brightmap sprite SM5IB0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IB0_BM.png"}
-brightmap sprite SM5IC0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IC0_BM.png"}
-brightmap sprite SM5ID0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5ID0_BM.png"}
-brightmap sprite SM5IE0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IE0_BM.png"}
-brightmap sprite SM5IF0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IF0_BM.png"}
-brightmap sprite SM5IG0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IG0_BM.png"}
-brightmap sprite SM5IH0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IH0_BM.png"}
-brightmap sprite SM5II0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5II0_BM.png"}
-brightmap sprite SM5IJ0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IJ0_BM.png"}
-brightmap sprite SM5IK0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IK0_BM.png"}
-brightmap sprite SM5IL0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IL0_BM.png"}
-brightmap sprite SM5IM0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IM0_BM.png"}
-brightmap sprite SM5IN0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IN0_BM.png"}
-brightmap sprite SM5IO0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IO0_BM.png"}
-brightmap sprite SM5IP0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IP0_BM.png"}
-brightmap sprite SM5IQ0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IQ0_BM.png"}
-brightmap sprite SM5IR0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IR0_BM.png"}
-brightmap sprite SM5IS0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IS0_BM.png"}
-brightmap sprite SM5IT0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IT0_BM.png"}
-brightmap sprite SM5IU0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IU0_BM.png"}
-brightmap sprite SM5IV0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IV0_BM.png"}
-brightmap sprite SM5IW0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IW0_BM.png"}
-brightmap sprite SM5IX0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IX0_BM.png"}
-brightmap sprite SM5IY0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IX0_BM.png"}
-brightmap sprite SM5IZ0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IX0_BM.png"}
-brightmap sprite SM51A0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM5IX0_BM.png"}
-brightmap sprite SM51B0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51B0_BM.png"}
-brightmap sprite SM51C0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51C0_BM.png"}
-brightmap sprite SM51D0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51D0_BM.png"}
-brightmap sprite SM51E0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51E0_BM.png"}
-brightmap sprite SM51F0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51F0_BM.png"}
-brightmap sprite SM51G0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51G0_BM.png"}
-brightmap sprite SM51H0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51I0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51J0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51K0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51L0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51M0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51H0_BM.png"}
-brightmap sprite SM51N0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51N0_BM.png"}
-brightmap sprite SM51O0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51O0_BM.png"}
-brightmap sprite SM51P0 {MAP "Brightmaps/Weapons/SMG/Inspect/SM51P0_BM.png"}
+//Reload pumping
+brightmap sprite SM5RA0 {MAP SM5RAB}
+brightmap sprite SM5RB0 {MAP SM5RBB}
+brightmap sprite SM5RC0 {MAP SM5RCB}
+brightmap sprite SM5RD0 {MAP SM5RCB}

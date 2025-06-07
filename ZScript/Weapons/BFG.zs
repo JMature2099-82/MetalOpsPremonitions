@@ -32,7 +32,8 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 	Default
 	{
 		Height 20;
-		Weapon.AmmoGive 40;
+		Weapon.AmmoUse1 10;
+		Weapon.AmmoGive1 40;
 		Weapon.AmmoType "MO_Cell";
 		+WEAPON.NOAUTOFIRE;
 		Inventory.PickupMessage "$MO_GOTBFG9000";
@@ -94,8 +95,11 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
         B7GF J 1 
 		{
 			A_StartSound("weapons/bfg/FIRE", 1);
-			if(!invoker.DepleteAmmo(false,true, 40,true))
-			return;
+			for(int i = 4; i > 0; --i)
+			{
+				if(!invoker.DepleteAmmo(false,true))
+				return;
+			}
 		}
         B7GF K 1 A_FireProjectile("MO_BFGBall",0,0,0,0,0);
 		TNT1 A 0 JM_CheckForQuadDamage();
@@ -157,7 +161,6 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 		Goto ReadyToFire;
 		B7GA A 0
 		{
-			A_TakeInventory("MO_CELL",10, TIF_NOTAKEINFINITE);
 			MO_FireBFG10KShot();
 			A_GunFlash("BFG10KFlash");
 			A_WeaponOffset(0,32);

@@ -6,7 +6,7 @@ class MOps_Handler : EventHandler
 	const fastkickcooldown = 15;
     override void WorldTick()
     {
-        PlayerInfo plyr = players[consoleplayer];
+        PlayerInfo plyr = players[ConsolePlayer];
 		
 		if(kicktimer > 0)
 			kicktimer--;
@@ -17,6 +17,7 @@ class MOps_Handler : EventHandler
 		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
 		if(pl)
 		{
+			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
 		}
 	}
@@ -52,6 +53,9 @@ class MOps_Handler : EventHandler
 			case 'Minigun':
 				e.Replacement = "ChaingunDropper";
 				break;
+			case 'PlasmaRifle':
+				e.Replacement = "MO_PlasmaRifle";
+				break;
 
 			//Ammo
 			case 'Shell':
@@ -72,6 +76,18 @@ class MOps_Handler : EventHandler
 				e.Replacement = "MO_Cell";
 				break;
 			}
+	
+			case 'ID24Fuel':
+				e.Replacement = "MO_Fuel";
+				break;
+			
+			case 'ID24FuelTank':
+				e.Replacement = "MO_LargeFuelCan";
+				break;
+
+			case 'ID24Incinerator':
+				e.Replacement = "MO_Flamethrower";
+				break;
 
 			case 'Cellpack':
 			if(random(0,9) >= 5)

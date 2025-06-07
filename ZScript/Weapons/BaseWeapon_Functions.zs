@@ -5,6 +5,11 @@ extend class JMWeapon
 		return (owner.CountInv("MO_PowerSpeed") >= 1);
 	}
 
+	bool OwnerHasInfiniteAmmo()
+	{
+		return (owner.FindInventory("PowerInfiniteAmmo") || GetCvar("sv_infiniteammo"));
+	}
+
 	 //Credits: Matt
     action bool JustPressed(int which) // "which" being any BT_* value, mentioned above or not
     {
@@ -108,6 +113,35 @@ extend class JMWeapon
 		if(invoker.Ammo2.amount  < m)
 			return ResolveState(where);
 		return ResolveState(Null);
+	}
+
+	//Put this function in the reload state. This replaces the old ammo checks that Metal Ops once used, similar to BD.
+	//How doees this function work?
+	//maxMag = The maximum amount of ammo for the gun magazine. Invoker.Ammo1.MaxAmount could be used.
+	//EqualReserve = The reserve ammo that each gun uses per bullet.
+	//emptyreload = The state used if the weapon has a different reload animation. Pass Null (without "") if this isn't the case.
+	//partReload = The state used if the weapon has a partial reload, such as a tactical reload. Pass Null (without "") if this isn't the case.
+	//fullOrEmpty = The state used if the weapon has no ammo or is full. Example: ReadyToFire, Empty, Ready.Empty
+	action state MO_CheckReload(int maxMag, int EqualReserve, statelabel emptyreload, statelabel partReload, statelabel fullOrEmpty)
+	{
+		Ammo MagazineAmmo = invoker.Ammo1;
+		Ammo ReserveAmmo = invoker.Ammo2;
+		int magCount = MagazineAmmo.amount;
+		int reserveCount = ReserveAmmo.amount;
+
+		if(magCount >= maxMag)
+		return ResolveState(fullOrEmpty);
+
+		if(!invoker.OwnerHasSpeed() && magCount > EqualReserve || magCount >= maxMag)
+		return ResolveState(partReload);
+
+		if(reserveCount < EqualReserve)
+		return ResolveState(fullOrEmpty);
+
+		if(magCount <= 0)
+		return ResolveState(emptyreload);
+
+		return ResolveState(null);
 	}
 
 	action state MO_JumpIfLessAmmo(int m = 1, statelabel where = "Reload")
@@ -215,6 +249,7 @@ extend class JMWeapon
 	{
 		A_TakeInventory(ammotype, count, TIF_NOTAKEINFINITE);
 	}
+
 
 	action void JM_GunRecoil(float gunPitch, float gunAngle)
 	{

@@ -255,20 +255,10 @@ Class MO_SubMachineGun : JMWeapon
             Wait;
         
         Reload:
-			TNT1 A 0 A_JumpIfInventory("SMGAmmo",34,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("MO_LowCaliber",1,2);
-			Goto ReadyToFire;
 			TNT1 AAA 0;
+			TNT1 A 0 MO_CheckReload(34,1,"DoAnEmptyReload", null, "ReadyToFire");
+		NormalReloadAnimation:
 			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "ReloadZoomed");
-			TNT1 A 0
-			{
-				if(invoker.Ammo1.amount <= 0)
-				{
-					A_SetInventory("SMGIsEmpty",1);
-					return A_Jump(128, "AKReload");
-				}
-				return ResolveState(null);
-			}
 			TNT1 A 0 
 			{
 				invoker.isZoomed = False;
@@ -335,7 +325,13 @@ Class MO_SubMachineGun : JMWeapon
 			SM5G A 0 A_JumpIfInventory("SMGIsEmpty",1,"Chamber");
             Goto ReadyToFire;
 
+	DoAnEmptyReload:
+		SM5G A 0 A_SetInventory("SMGIsEmpty",1);
+		SM5G A 0 A_Jump(128, "AKReload");
+		Goto NormalReloadAnimation;
+
 	AKReload: //Random reload animation based on the AK-47 style reload
+			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "ZoomedAKReload");
 			TNT1 A 0 
 			{
 				invoker.isZoomed = False;
@@ -432,16 +428,7 @@ Class MO_SubMachineGun : JMWeapon
 
 	ReloadZoomed:
 			TNT1 AAA 0;
-			TNT1 A 0
-			{
-				A_ZoomFactor(1.2);
-				if(invoker.Ammo1.amount <= 0)
-				{
-					A_SetInventory("SMGIsEmpty",1);
-					return A_Jump(128, "ZoomedAKReload");
-				}
-				return ResolveState(null);
-			}
+			TNT1 A 0 A_ZoomFactor(1.2);
 			SZ01 AB 1 JM_WeaponReady(WRF_NOFIRE);
 			SM5G A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			SZ01 CDE 1 JM_WeaponReady(WRF_NOFIRE);
@@ -498,12 +485,12 @@ Class MO_SubMachineGun : JMWeapon
 
 			Chamber:
 				TNT1 A 0 A_SetInventory("SMGIsEmpty",0);
-				SMR2 B 3;
+				SMR2 B 2;
 				SMR5 A 0 A_StartSound("smg/pump1",0); //pump 
 				SM5R A 1 Offset(0,31);
 				SM5R B 1;
 				SM5R C 1 Offset(0,30);
-				SM5R D 4 Offset(0,30);
+				SM5R D 3 Offset(0,30);
 				SM5R C 1 A_StartSound("smg/pump2",0); //pump Forward 
 				SM5R B 1 Offset(0,30);
 				SM5R A 1 Offset(0,31);
@@ -512,11 +499,11 @@ Class MO_SubMachineGun : JMWeapon
 
 		ChamberZoomed:
 				TNT1 A 0 A_SetInventory("SMGIsEmpty",0);
-				SM5Z D 3;
+				SM5Z D 2;
 				SMR5 A 0 A_StartSound("smg/pump1",0); //pump 
 				SMRZ T 1;
 				SMRZ UV 1;
-				SMRZ W 4;
+				SMRZ W 3;
 				SMRZ V 1 A_StartSound("smg/pump2",0); //pump Forward 
 				SMRZ UT 1;
 				SM5Z D 1 A_WeaponOffset(0,32);

@@ -15,46 +15,61 @@ Sprite "F1MCB0", 150, 40
 	Patch "F1MCA0", 0, 0
 }
 
-Sprite "GRE1A0", 269, 198
+Sprite "NOPEA0", 269, 198
 {
 	Offset -231, 6
 	Patch "TOSS1", -8, 1
 }
 
-Sprite "GRE1B0", 269, 198
+Sprite "NOPEB0", 269, 198
 {
 	Offset -198, -10
 	Patch "TOSS1", -8, 1
 }
 
-Sprite "GRE1C0", 269, 198
+Sprite "NOPEC0", 269, 198
 {
 	Offset -182, -19
 	Patch "TOSS2", -15, 11
 }
 
-Sprite "GRE1D0", 248, 180
+Sprite "NOPED0", 248, 180
 {
 	Offset -132, -85
 	Patch "TOSS3", 0, 0
 }
 
-Sprite "GRE1E0", 248, 180
+Sprite "NOPEE0", 248, 180
 {
 	Offset -76, -73
 	Patch "TOSS3", 15, 46
 }
 
-Sprite "GRE1F0", 248, 180
+Sprite "NOPEF0", 248, 180
 {
 	Offset -38, -77
 	Patch "TOSS3", 19, 61
 }
 
-Sprite "GRE1G0", 248, 180
+Sprite "NOPEG0", 248, 180
 {
 	Offset -8, -91
 	Patch "TOSS3", 17, 61
+}
+
+Sprite "SM5RAB", 138, 100
+{
+	Patch "Brightmaps/Weapons/SMG/SM5GA0.png", 5, 3
+}
+
+Sprite "SM5RBB", 138, 106
+{
+	Patch "Brightmaps/Weapons/SMG/SM5GA0.png", 5, 9
+}
+
+Sprite "SM5RCB", 146, 97
+{
+	Patch "Brightmaps/Weapons/SMG/SM5GA0.png", 13, 0
 }
 
 Graphic "XHAIRB99", 1, 1

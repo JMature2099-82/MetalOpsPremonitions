@@ -30,7 +30,7 @@ ACTOR GroundFlameSpawner
 		
 		StopBurning:
 			TNT1 A 0 A_StopSound(CHAN_BODY)
-			TNT1 AAAAAAAA 2 Light("FlamerFlames")
+			TNT1 AAAAAAAA 2
 			Stop
     }
 }

@@ -54,6 +54,7 @@ class PlayerStartItemGiver : CustomInventory
 
 class MO_PlayerBase : DoomPlayer
 {
+	int specialtimer;
 	override Void Tick()
 	{
 		Super.Tick();
@@ -94,7 +95,7 @@ class MO_PlayerBase : DoomPlayer
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", "MO_MiniGun", "MO_HeavyRifle";
 		Player.WeaponSlot 5, "MO_RocketLauncher";
-		Player.WeaponSlot 6, "JM_PlasmaRifle";
+		Player.WeaponSlot 6, "MO_PlasmaRifle";
 		Player.WeaponSlot 7, "MO_BFG9000", "MO_Unmaker";
 		Player.WeaponSlot 8, "MO_Flamethrower";
 	}
@@ -123,5 +124,6 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.WeaponSlot 2, "MO_Deagle", "MO_Submachinegun";
 		Player.StartItem "MODeagleAmmo",8;
 		Player.StartItem "PlayerStartItemGiver";
+		Player.StartItem "NeverUsedPocketCannon";
     }
 }

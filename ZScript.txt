@@ -29,5 +29,3 @@ Class ThrowableType : Inventory
 	}
 }
 
-Class GoActionSpecial : MO_ZSToken{}
-
