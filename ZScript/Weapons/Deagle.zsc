@@ -19,7 +19,7 @@ class MO_Deagle : JMWeapon// replaces Pistol
  	Default
 	{
 		Weapon.AmmoUse1 1;
-		Weapon.AmmoGive1 4;
+		Weapon.AmmoGive2 4;
 		Weapon.AmmoType1 "MODeagleAmmo";
 		Weapon.AmmoType2 "MO_LowCaliber";
 		Obituary "$OBMO_HANDCANNON";

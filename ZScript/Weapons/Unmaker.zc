@@ -14,7 +14,7 @@ class MO_Unmaker : JMWeapon
 
     Default
     {
-        Weapon.AmmoGive 50;
+        Weapon.AmmoGive 40;
 		Weapon.AmmoUse 3;
         Weapon.AmmoType "MO_Cell";
         Inventory.PickupMessage "$GOTUNMAKER";
