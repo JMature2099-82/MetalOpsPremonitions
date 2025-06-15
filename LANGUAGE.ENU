@@ -169,12 +169,12 @@ GOTFLAMERGAS = "You got fuel from the \cXFlamethrower!";
 
 //Pistol
 GOTVENPISTOL = "You got the \cdVengeance Stryker Sidearm\c-! (Slot 2)";
-TAG_VENPISTOL = "Vengeance Stryker";
+TAG_VENPISTOL = "Vengeance Stryker Sidearm";
 OBMO_VENPISTOL = "%o was peppered by %k's \cdSidearm.";
 
 //Deagle
 GOTHANDCANNON = "Picked up the \cuShatterhand .50AE Pocket Cannon\c-! (Slot 2)";
-OBMO_HANDCANNON = "%o got %p head splattered by %k's \c[DarkGray].50AE Pocket Cannon\c-.";
+OBMO_HANDCANNON = "%o got %p head splattered by %k's \c[DarkGray] Pocket Cannon\c-.";
 TAG_HANDCANNON =  "Shatterhand .50AE Pocket Cannon";
 
 //SMG
@@ -189,10 +189,11 @@ OB_LVRSHOT = "%o was terminated by %k's \cgLever Shotgun\c-.";
 
 //Pump Shotgun
 GOTPUMPSHOTTY = "Picked up the \ckPump Action Shotgun\c-! (Slot 3)";
-TAG_PUMPSHOTTY =  "Pump Shotgun";
+TAG_PUMPSHOTTY =  "Pump Action Shotgun";
 OB_PUMPSHOTTY = "%o was blasted away by %k's \ckPump Shotgun\c-.";
 
 //SSG
+TAG_SUPERSHOTGUN = "Double Barrel Shotgun";
 GOTSUPERSHOTGUN = "Picked up the \caDouble Barrel Shotgun\c-! (Slot 3)";
 OB_SUPERSHOTGUN_FLAK = "%o got %p guts eviscerated by %k's double barrel flak shots.";
 OB_SUPERSHOTGUN = "%o was split in two by %k's Double Barrel Shotgun.";
@@ -205,6 +206,7 @@ TAG_RIFLE = "Combat Rifle";
 //Minigun
 GOTMINIGUN = "Picked up the Minigun! (Slot 4)";
 OB_MINIGUN = "%o was shredded to bits by %k's Minigun.";
+TAG_MINIGUN = "Vulcan Minigun";
 
 //Rocket Launcher
 GOTRLAUNCHER = "Picked up a Rocket Launcher (Slot 5)!";
@@ -215,12 +217,14 @@ OB_MOROCKETSPLASH = "%o couldn't dodge %k's rocket.";
 //BFG 9000
 MO_GOTBFG9000 = "Picked up the \cdBFG9K!\c- Hell Yeah!";
 TAG_MO_BFG9000 = "BFG9K";
+MO_XHAIR_BFG10KMODE = "BFG9K 10K Mode";
 OBMO_BFG9000  = "\cg%o\c- felt the extreme power of \cy%k's\c- BFG9K.";
 OBMO_BFG9000SPLSH = "\cg%o\c- couldn't escape from \cy%k's\c- BFG9K.";
 OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG10K.";
 
 //Heavy Combat Rifle
 TAG_HEAVYRIFLE = "Heavy Marksman Rifle";
+MO_XHAIR_HEAVYRIFLE_GRENADE = "Heavy Marksman Rifle UBGL";
 OB_HEAVYRIFLE = "%o got sniped by %k's Heavy Marksman Rifle.";
 OB_HEAVYRIFLE_GRENADE = "%o swallowed a Grenade fired from %k's HMR.";
 OB_HEAVYRIFLE_GRENADESPLASH = "%o almost evaded a Grenade fired from %k's HMR.";
@@ -235,6 +239,7 @@ OB_UNMAKER2 = "%o got a taste of Hell's power from %k's Unmaker.";
 //Plasma Repeater
 GOTPLASMAGUN = "You got the Plasma Repeater! (Slot 6)";
 TAG_PLASMA = "Plasma Repeater";
+MO_XHAIR_HEATPLASMA = "Plasma Heated Rounds";
 OB_PLASMA = "%o got melted by %k's Plasma Repeater.";
 OB_PLASMABEAM = "%o couldn't handle the energy of %k's Plasma Beam.";
 OB_HEATPLASMA = "%o was scorched %k's Super Heated Plasma Rounds.";
@@ -249,24 +254,38 @@ SECRETMESSAGE4 = "You found a secret area!";
 //Metal Ops Options
 MNU_MOSETTINGS = "Metal Ops Settings";
 MO_MOPSETTINGS = "Metal Ops: Premonitions Settings";
+MO_SHORTCUTS = " ----------------------------------- Mod and GZDOOM Shortcuts -----------------------------------";
+MO_PREFERENCE = "----------------------------------- Preferences -----------------------------------";
+MO_GAMEPLAY = "----------------------------------- Gameplay Options -----------------------------------";
+
+//Shortcuts
+MO_SHORTCUT_DISABLEGZNIGHT = "Disable GZDoom's enhanced night vision";
+MO_SHORTCUT_GZNIGHTTIP = "Click this option in order for the Night Vision shaders to work!";
+MO_SHORTCUT_AMMOLISTTIP = "Click on this to get the reserve ammo bars!";
+MO_SHORTCUT_CLEANMENUTIP = "Turn this option off to scale title screen properly, and leave this option off.";
+
+//Preference Options
+MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
+MO_CROSSHAIR_SLIDER = "Crosshair Settings";
+
+//Gameplay Options and tips
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
 MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
-MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
+MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
+
+MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want to.";
 MO_ADSOPT = "ADS/Minigun Spin Control Type";
 MO_ADSTIP = "Toggle: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \nHold: Click alt fire to aim down the sights, release to unzoom. \nHybrid: Based on BDv21's system that combines both Toggle and Hold." ;
-MO_ADSTIP_CHAINGUN = "Chaingun: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
+MO_ADSTIP_CHAINGUN = "\nChaingun: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
 MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
 MO_RICOCHET = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
 MO_DISCORD_PRESENCE = "Enable Discord rich presence";
-MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
-MO_CROSSHAIR_SLIDER = "Crosshair Settings";
 MO_RECOIL = "Disables recoil on shootable weapons. \nIf you're not using mouse look, this MUST be turned on!";
-MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
 MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
 

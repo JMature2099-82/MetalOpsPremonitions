@@ -1,1 +1,8 @@
+Graphic "M_DOOM", 160, 110
+{
+	XScale 0.850
+	YScale 0.850
+	Patch "TNT1A0", 0, 0
+}
+
 REMAP M_DOOM MDOM_MOP
