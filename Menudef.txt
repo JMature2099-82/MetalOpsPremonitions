@@ -2,11 +2,11 @@ LISTMENU "MainMenu"
 {
 	IfGame(Doom, Chex)
 	{
-		StaticPatch 72, -53, "M_DOOM"
-		Position 97, 72
+		StaticPatch 62, -36, "M_DOOM"
+		Position 97, 74
 		IfOption(ReadThis)
 		{
-			Position 97, 73
+			Position 97, 72
 		}
 	}
 	IfGame(Strife)
@@ -66,12 +66,15 @@ LISTMENU "MainMenu"
 OptionMenu "MetalOpsMenu"
 {
 	class TF_TooltipOptionMenu
-	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+	TooltipGeometry 0.0, 0.45, 2.0, 1.0, 0.5
 	TooltipAppearance "", "", "tfttbg"
 	Title "$MO_MOPSETTINGS"
+
+	StaticText ""
+	StaticText "$MO_PREFERENCE", Yellow
 	StaticText ""
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
-	ToolTip "Metal Ops: Premonitions HUD Options (NCHUD by BlueShadow)."
+	ToolTip "Metal Ops: Premonitions HUD Options \cn(NCHUD by BlueShadow)"
 	StaticText ""
 	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
 	ToolTip "Flashlight++ options (by GenericNameGuy)"
@@ -79,15 +82,24 @@ OptionMenu "MetalOpsMenu"
 	SubMenu "Customizable Crosshairs", "CustomCrosshairsMenu"
 	ToolTip "Customizable Crosshairs option menu"
 	StaticText ""
-	Command "$NCH_AMMOLISTSHORT", "nchud_ammolistpreset"
-	StaticText "Click on this to get the reserve ammo bars!", "yellow"
+	SubMenu "$PC_TITLE", pc_Menu
+	ToolTip "Precise Crosshairs option menu \cd(by m8f)"
 	StaticText ""
-	Command "Disable GZDoom's enhanced night vision", "gl_enhanced_nightvision false"
-	StaticText "Click this option in order for the Night Vision shaders to work!", "yellow"
+
+	StaticText "$MO_SHORTCUTS", Yellow
+	StaticText ""
+	Command "$NCH_AMMOLISTSHORT", "nchud_ammolistpreset"
+	ToolTip "$MO_SHORTCUT_AMMOLISTTIP"
+	StaticText ""
+	Command "$MO_SHORTCUT_DISABLEGZNIGHT", "gl_enhanced_nightvision false"
+	ToolTip "$MO_SHORTCUT_GZNIGHTTIP"
 	StaticText ""
 	ToolTip""
-	SubMenu "$PC_TITLE", pc_Menu
-	ToolTip "Precise Crosshairs option menu"
+	Option "$MISCMNU_CLEANMENU",				"m_cleanscale", "OffOn"
+	ToolTip "$MO_SHORTCUT_CLEANMENUTIP"
+	StaticText ""
+
+	StaticText "$MO_GAMEPLAY", Yellow
 	StaticText ""
 	Option "SSG randomly replaces Shotgun spawn", "mo_ssgrandomizer", "yesno"
 	ToolTip "$MO_SSGTIP"
@@ -160,46 +172,61 @@ OptionMenu pc_Menu
 
 OptionMenu "CustomCrosshairsMenu"
 {
-	Title "Customizable Crosshair Options"
+	Title "Customizable Crosshair Options"	
+	StaticText ""
 	Option "Enable custom crosshairs", "mo_customxhairs", "OnOff"
-	StaticText "Crosshair 0 is the default crosshair set by the player.", "gray"
-	StaticText "Crosshair 99 is nothing at all.", "gray"
-	StaticText "Disable the Force default crosshair option if you want to use custom crosshairs!", gray
-	StaticText "You need to exit back to the game in order for it take effect.", "gray"
+	StaticText "Crosshair 0 is the default crosshair set by the player.", "yellow"
+	StaticText "Crosshair 99 is nothing at all.", "white"
+	StaticText "Disable the Force default crosshair option if you want to use custom crosshairs!", yellow
+	StaticText "You need to exit back to the game in order for it take effect.", "yellow"
 
 	StaticText ""
-	StaticText "$MO_CROSSHAIR_SHORTCUT", "white"
-	StaticText "---------------------------------------------------------------------------------", white
+	StaticText "$MO_CROSSHAIR_SHORTCUT", yellow
+	StaticText "---------------------------------------------------------------------------------", yellow
+	StaticText ""
 	Submenu    "$OPTMNU_HUD"         , HUDOptions
 	StaticText ""
-	StaticText "$MO_CROSSHAIR_SLIDER", white
-	StaticText "---------------------------------------------------------------------------------", white
+	StaticText "$MO_CROSSHAIR_SLIDER", yellow
+	StaticText "---------------------------------------------------------------------------------", yellow
+	StaticText ""
 	SafeCommand "Reset Default Crosshairs",  "mo_xhairs_defaultpreset"
 	StaticText ""
-	StaticText "Slot 2"
-	Slider "Pistol", "mo_xhairpistol", 0, 99, 1
-	Slider "Deagle", "mo_xhairDeagle", 0, 99, 1
-	Slider "Submachine Gun", "MO_XHairSMG", 0, 99, 1
-	StaticText "Slot 3"
-	Slider "Lever Action Shotgun", "mo_xhairLAS", 0, 99, 1
-	Slider "Pump Action Shotgun", "mo_xhairPSG", 0, 99, 1
-	Slider "Super Shotgun", "mo_xhairSSG", 0, 99, 1
-	StaticText "Slot 4"
-	Slider "Combat Rifle", "MO_XHairRIFLE", 0, 99, 1
-	Slider "Vulcan Minigun", "MO_XHairChaingun", 0, 99, 1
-	Slider "Heavy Marksman Rifle", "MO_XHairHMR", 0, 99, 1
-	Slider "Heavy Marksman Rifle UBGL", "MO_XHairHMR_GL", 0, 99, 1
-	StaticText "Slot 5"
-	Slider "Rocket Launcher", "mo_xhairRL", 0, 99, 1
-	StaticText "Slot 6"
-	Slider "Plasma Repeater", "MO_XHairPlasma", 0, 99, 1
-	Slider "Plasma Heated Rounds", "MO_XHairHeatPlasma", 0, 99, 1
-	StaticText "Slot 7"
-	Slider "BFG9K", "MO_XHairBFG", 0, 99, 1
-	Slider "BFG9K 10K Mode", "MO_XHairBFG10K", 0, 99, 1
-	Slider "Unmaker", "MO_XHairUnmaker", 0, 99, 1
-	StaticText "Slot 8"
-	Slider "Flamethrower", "MO_XHairFlamer", 0, 99, 1
+	StaticText "Slot 2", green
+	Slider "$TAG_VENPISTOL", "mo_xhairpistol", 0, 99, 1
+	Slider "$TAG_HANDCANNON", "mo_xhairDeagle", 0, 99, 1
+	Slider "$TAG_SMG", "MO_XHairSMG", 0, 99, 1
+	StaticText ""
+
+	StaticText " Slot 3 ", brick
+	Slider "$TAG_LVRSHOT", "mo_xhairLAS", 0, 99, 1
+	Slider "$TAG_PUMPSHOTTY", "mo_xhairPSG", 0, 99, 1
+	Slider "$TAG_SUPERSHOTGUN", "mo_xhairSSG", 0, 99, 1
+	StaticText ""
+
+	StaticText " Slot 4 ", yellow
+	Slider "$TAG_RIFLE", "MO_XHairRIFLE", 0, 99, 1
+	Slider "$TAG_MINIGUN", "MO_XHairChaingun", 0, 99, 1
+	Slider "$TAG_HEAVYRIFLE", "MO_XHairHMR", 0, 99, 1
+	Slider "$MO_XHAIR_HEAVYRIFLE_GRENADE", "MO_XHairHMR_GL", 0, 99, 1
+	StaticText ""
+
+	StaticText " Slot 5 ", darkgray
+	Slider "$TAG_RLAUNCHER", "mo_xhairRL", 0, 99, 1
+	StaticText ""
+
+	StaticText " Slot 6 ", cyan
+	Slider "$TAG_PLASMA", "MO_XHairPlasma", 0, 99, 1
+	Slider "$MO_XHAIR_HEATPLASMA", "MO_XHairHeatPlasma", 0, 99, 1
+	StaticText ""
+
+	StaticText " Slot 7 ", darkgreen
+	Slider "$TAG_MO_BFG9000", "MO_XHairBFG", 0, 99, 1
+	Slider "$MO_XHAIR_BFG10KMODE", "MO_XHairBFG10K", 0, 99, 1
+	Slider "$TAG_UNMAKER", "MO_XHairUnmaker", 0, 99, 1
+	StaticText ""
+
+	StaticText "  Slot 8 ", orange
+	Slider "$TAG_FLAMER", "MO_XHairFlamer", 0, 99, 1
 }
 
 OptionValue "MO_NightVisionColors"
