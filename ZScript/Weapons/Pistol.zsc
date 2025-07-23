@@ -4,7 +4,7 @@ Class PistolIsEmpty : MO_ZSToken{}
 
 Class NeverUsedPistol : MO_ZSToken{}
 
-class MO_VengeanceStryker : JMWeapon// replaces Pistol
+class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 {
 	int burstcounter;
 	const MaxBurst = 3;
@@ -27,7 +27,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		Inventory.ForbiddenTo "MO_SergeantPlayer";
 		Inventory.RestrictedTo "MO_OfficerPlayer";
 		+WEAPON.NOALERT;
-		JMWeapon.InspectToken "NeverUsedPistol";
+		MO_Weapon.InspectToken "NeverUsedPistol";
 	}
 
 	override void PostBeginPlay()
@@ -72,21 +72,14 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		JM_CheckForQuadDamage();
 	}
 
+	action void MO_SetSpriteIfEmpty(string lump)
+	{
+		if(invoker.Ammo1.amount < 1) {MO_SetWeaponSprite(lump, OverlayID());}
+	}
+		
 	States
 	{
-	ContinueSelect:
-		TNT1 A 0 MO_Raise;
-		TNT1 A 0 JM_CheckInspectIfDone;
-		Goto SelectAnimation;
 	Ready:
-		//Load sprites into memory
-		PS1K ABCDEF 0;
-		PSR2 A 0;
-		PSZE ABC 0;
-		TNT1 A 0 JM_CheckInspectIfDone;
-	SelectAnimation:
-		TNT1 A 0 A_StartSound("weapons/pistol/draw",1);
-		PSTD ABC 1;
 	ReadyToFire:
 		PSTD D 0 A_JumpIfInventory("PistolMagAmmo",1,2);
 		PSTF E 0;
@@ -107,8 +100,9 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 			return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 		}
 		Loop;
+
 	Inspect:
-			TNT1 A 6;
+			TNT1 A 8;
 			TNT1 A 0 A_StartSound("pistol/inspect",0);
 			PS1I ABCDEFGHIIJJJJJJ 1 JM_WeaponReady();
 			TNT1 A 0 A_StartSound("weapons/pistol/magout",0);
@@ -131,6 +125,22 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 			PS1I F 1  A_StartSound("pistol/reloadend",0);
 			PSR1 EDCBA 1 JM_WeaponReady();
 			Goto ReadyToFire;
+
+	Select:
+		PSTG A 0;
+		PSTG A 0 A_SetCrosshair(invoker.GetXHair(0));
+	ContinueSelect:
+		//Load sprites into memory
+		PS1K ABCDEF 0;
+		PSR2 A 0;
+		PSZE ABC 0;
+		TNT1 A 1 MO_Raise;
+		TNT1 A 0 JM_CheckInspectIfDone;
+	SelectAnimation:
+		TNT1 A 0 A_StartSound("weapons/pistol/draw",1);
+		PSTD ABC 1;
+		Goto Ready;
+
 	Deselect:
 		PSTG A 0 A_SetCrosshair(invoker.GetXHair(0));
 		TNT1 A 0 
@@ -142,10 +152,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		PSTD CBA 1;
 		PSTG A 0 A_Lower(12);
 		Wait;
-	Select:
-		PSTG A 0;
-		PSTG A 0 A_SetCrosshair(invoker.GetXHair(0));
-		Goto ClearAudioAndResetOverlays;
+
 	Fire:
 		PSTG A 0 MO_JumpIfLessAmmo(where: "Empty");
 		PSTG A 0
@@ -269,10 +276,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 	AltFire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "UnZoom");
 		Zoom:
-			PSZA A 0
-			{
-				if(invoker.Ammo1.amount < 1) {JM_SetWeaponSprite("PSZE");}
-			}
+			PSZA A 0 MO_SetSpriteIfEmpty("PSZE");
 			#### A 0 {invoker.isZoomed = true;}
 			#### A 0 A_StartSound("weapon/adsup",0);
 			#### A 0 MO_ZoomBob();
@@ -324,10 +328,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 				invoker.isHoldingAim = False;
 				MO_ResetBob();
 			}
-			PSZA A 0
-			{
-				if(invoker.Ammo1.amount < 1) {JM_SetWeaponSprite("PSZE");}
-			}
+			PSZA A 0 MO_SetSpriteIfEmpty("PSZE");
 			#### A 0 A_StartSound("weapon/adsdown",0);
 			#### A 0 A_ZoomFactor(1.0);
 			#### A 0 A_SetCrosshair(invoker.GetXHair(0));
@@ -377,10 +378,7 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 
 
 	ActionSpecial:
-		PSTK A 0
-		{
-			if(CountInv("PistolMagAmmo") < 1) {JM_SetWeaponSprite("PS1K");}
-		}
+		PSTK A 0 MO_SetSpriteIfEmpty("PS1K");
 		#### A 0
 		{
 			if(!MO_GetBurstMode()) 
@@ -530,9 +528,9 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		PISN A -1;
 		Stop;
 	FlashKick:
-		PSTK A 0
+		PSTK A 0 MO_SetSpriteIfEmpty("PS1K");
+		#### A 0 
 		{
-			if(CountInv("PistolMagAmmo") < 1) {JM_SetWeaponSprite("PS1K");}
 			If(invoker.OwnerHasSpeed()) {return ResolveState("FlashKickFast");}
 			return ResolveState(null);
 		}
@@ -547,9 +545,9 @@ class MO_VengeanceStryker : JMWeapon// replaces Pistol
 		"####" FEDCBA 1;
 		Goto ReadyToFire;
 	FlashAirKick:
-		PSTK A 0
+		PSTK A 0 MO_SetSpriteIfEmpty("PS1K");
+		---- A 0
 		{
-			if(CountInv("PistolMagAmmo") < 1) {JM_SetWeaponSprite("PS1K");}
 			If(invoker.OwnerHasSpeed()) {return ResolveState("FlashAirKickFast");}
 			return ResolveState(null);
 		}

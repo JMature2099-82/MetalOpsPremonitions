@@ -1,4 +1,4 @@
-extend class JMWeapon
+extend class MO_Weapon
 {
 	bool OwnerHasSpeed()
 	{
@@ -25,14 +25,35 @@ extend class JMWeapon
 		return (owner.FindInventory("MO_PowerStrength"));
 	}
 
-//No more TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise()!
+
+//This is a custom function that replaces A_Raise for Metal Ops weapns!
+//This function gets rid of the need for TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise(),
+//the ClearAudioAndResetOverlays and ContinueSelect state, and also frees up the Ready state.
+//This was added to simplify the weapons.
 	action void MO_Raise()
 	{
 		A_Raise(12);
 		A_WeaponOffset(0,32);
+	
+//This was originally from the ClearAudioAndResetOverlays state.
+		MO_ResetBob();
+		A_StopSound(CHAN_5);
+		A_StopSound(CHAN_WEAPON);
+		A_StopSound(CHAN_6);
+		A_STOPSOUND(CHAN_7);
+		invoker.isZoomed = false;
+		invoker.isHoldingAim = false;
+		A_SetInventory("MinigunSpin",0);
+		A_ZoomFactor(1);
+		SetPlayerProperty(0,0,0);
+		A_ClearOverlays(-8,8);
+		A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
+		A_RemoveLight('GunLighting');
 	}
 
-//No more if statement checks
+//Shortcut function for Haste when reloading. No more using
+//if statements with A_SetTics. Use this for reloading if you have
+//lines of code with more than one tic.
 	action void MO_SetHasteTics(int tics)
 	{
 		if(invoker.OwnerHasSpeed())
@@ -102,6 +123,13 @@ extend class JMWeapon
 	{
 		if(!player) return;
 		 let psp = player.GetPSprite(PSP_WEAPON);
+		 psp.sprite = GetSpriteIndex(s);
+	}
+
+	action void MO_SetWeaponSprite(string s, int overlay)
+	{
+		if(!player) return;
+		 let psp = player.GetPSprite(overlay);
 		 psp.sprite = GetSpriteIndex(s);
 	}
 	

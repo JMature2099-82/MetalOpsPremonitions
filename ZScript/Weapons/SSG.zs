@@ -1,6 +1,6 @@
 //SuperShotgun
 
-class MO_SSG : JMWeapon replaces SuperShotgun
+class MO_SSG : MO_Weapon replaces SuperShotgun
 {
 	int shotCount; //only here if infinite ammo cheats or powerup is detected
     Default
@@ -75,26 +75,29 @@ class MO_SSG : JMWeapon replaces SuperShotgun
 
     States
     {
+		Ready:
+        ReadyToFire:
+            SG2S D 1 JM_WeaponReady(WRF_ALLOWRELOAD);
+            Loop;
+
+		Select:
+			TNT1 A 0;
+			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(6));
 		ContinueSelect:
-		MGNG AAAAAAAAAAAAAAAAAA 0 A_Raise();
-        Ready:
-        SelectAnimation:
+			MGNG A 0 MO_Raise();
+		SelectAnimation:
 			TNT1 A 0 A_JumpIf(CountInv("SSGAmmo") < 1,"ReloadAnimation");
 		JustSelectTheSSG:
             TNT1 A 0 A_StartSound("weapons/ssg/draw", 0);
             SG2S ABCD 1;
-        ReadyToFire:
-            SG2S D 1 JM_WeaponReady(WRF_ALLOWRELOAD);
-            Loop;
-		Select:
-			TNT1 A 0;
-			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(6));
-			Goto ClearAudioAndResetOverlays;
+			Goto Ready;
+
 		Deselect:
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(6));
 			 SG2S DCBA 1;
 			 TNT1 A 0 A_Lower(12);
 			 Wait;
+
         Fire:
             SG2S A 0 MO_JumpIfLessAmmo(2, "AltFire2");
 			SG2S AAA 0;
@@ -116,6 +119,7 @@ class MO_SSG : JMWeapon replaces SuperShotgun
             SG2S A 0 A_JumpIfInventory("MO_ShotShell", 1, "Reload");
 			SG2S A 0 A_JumpIf(MO_CheckShotCount() >= 2, "Reload");
             Goto ReadyToFire;
+
         AltFire:
             SG2S A 0 MO_JumpIfLessAmmo(2, "AltFire2");
 			SG2S AAA 0;

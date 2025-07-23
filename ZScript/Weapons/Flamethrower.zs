@@ -3,7 +3,7 @@
 //   Sprites by VriskaSerket  	//
 ///////////////////////////////////
 
-class MO_Flamethrower : JMWeapon replaces Chainsaw
+class MO_Flamethrower : MO_Weapon replaces Chainsaw
 {
 	bool altFlameMode;
 
@@ -35,6 +35,13 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		}
 	}
 
+	action void MO_PlayFlamerRaiseSound()
+	{
+		if(MO_GetFlamerMode() == FreezeMode)
+			{A_StartSound("Weapons/flamer/icedraw",0);}
+			else{	A_StartSound("weapons/flamer/draw", 0);}
+	}
+
     Default
     {
        Weapon.AmmoUse 2;
@@ -54,29 +61,27 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
     States
     {
     Ready:
-	SelectAnimation:
-        TNT1 A 0 {
-			if(MO_GetFlamerMode() == FreezeMode)
-			{A_StartSound("Weapons/flamer/icedraw",1);}
-			else{	A_StartSound("weapons/flamer/draw", 1);}
-		}
-        FLMS ABCD 1;
     ReadyToFire:
 		FLMG A 0 A_JumpIf(PressingFire(), "Fire");
         F1MG A 1 JM_WeaponReady();
         Loop;
+
     Deselect:
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(16));
         FLMS DCBA 1;
 		TNT1 A 0 A_Lower(12);
         Wait;
+
     Select:
         TNT1 A 0;
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(16));
-        Goto ClearAudioAndResetOverlays;
     ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
+		TNT1 A 0 MO_Raise();
+	SelectAnimation:
+        TNT1 A 0 MO_PlayFlamerRaiseSound();
+        FLMS ABCD 1;
 		Goto Ready;
+
     Fire:
         F1MG A 1 A_WeaponOffset(0,34);
         F1MG A 1 A_WeaponOffset(0,38);
@@ -118,38 +123,18 @@ class MO_Flamethrower : JMWeapon replaces Chainsaw
 		FLMG A 0 A_StartSound("weapons/flamer/end",1);
 	StopAnimation:
 		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-        F1MG A 1 {
-            A_WeaponOffset(0,42);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,46);
-        }
-        F1MG A 1 
-        {
-            A_WeaponOffset(0,41);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,38);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,34);
-        }
+        F1MG A 1 A_WeaponOffset(0,42);
+        F1MG A 1 A_WeaponOffset(0,46);
+        F1MG A 1  A_WeaponOffset(0,41);
+        F1MG A 1 A_WeaponOffset(0,38);
+        F1MG A 1 A_WeaponOffset(0,34);
         Goto ReadyToFire;
 	DontFire:
 		 TNT1 A 0 A_StartSound("Weapons/flamer/inwater", 2);
-		  F1MG A 1 {
-            A_WeaponOffset(0,42);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,46);
-        }
-        F1MG A 1 
-        {
-            A_WeaponOffset(0,41);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,38);
-        }
+		 F1MG A 1 A_WeaponOffset(0,42);
+		 F1MG A 1 A_WeaponOffset(0,46);
+         F1MG A 1  A_WeaponOffset(0,41);
+         F1MG A 1 A_WeaponOffset(0,38);
 		Goto StopAnimation;
 	
 	FireIcethrower:

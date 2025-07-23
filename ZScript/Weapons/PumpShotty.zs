@@ -1,7 +1,7 @@
 Class AltPumping : MO_ZSToken{}
 Class SGPumping: MO_ZSToken{}
 
-class MO_PumpShotgun : JMWeapon
+class MO_PumpShotgun : MO_Weapon
 {
     Default
     {
@@ -14,7 +14,7 @@ class MO_PumpShotgun : JMWeapon
         Obituary "%o got blasted away by %k's Pump Shotgun.";
         Tag "Pump Shotgun";
 		Inventory.PickupSound "weapons/pumpshot/pump";
-		JMWeapon.inspectToken "NeverUsedPSG";
+		MO_Weapon.inspectToken "NeverUsedPSG";
 		+Weapon.NoAlert
 		+Weapon.Ammo_Optional
 		+Weapon.NoAutoFire
@@ -68,10 +68,6 @@ class MO_PumpShotgun : JMWeapon
 			PGR2 M 6 JM_WeaponReady();
             Goto DoneReload;
         Ready:
-		SelectAnimation:
-            PSGS A 0 A_StartSound("weapons/pumpshot/draw", CHAN_AUTO);
-            PSGS ABCDE 1;
-			TNT1 A 0 JM_CheckInspectIfDone;
         ReadyToFire:
             PSGG A 1 
 			{
@@ -96,13 +92,18 @@ class MO_PumpShotgun : JMWeapon
 			PSGS EDCBA 1;
             SHTG A 0 A_Lower(12);
             WAIT;
+
         Select:
             TNT1 A 0;
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(5));
-            Goto ClearAudioAndResetOverlays;
 		ContinueSelect:
-			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
+			TNT1 A 0 MO_Raise();
+		SelectAnimation:
+            PSGS A 0 A_StartSound("weapons/pumpshot/draw", CHAN_AUTO);
+            PSGS ABCDE 1;
+			TNT1 A 0 JM_CheckInspectIfDone;
 			Goto Ready;
+
         Fire:
             PSTG A 0 MO_JumpIfLessAmmo(Where: "Empty");
             PSGF A 1 MO_FireShotgun();

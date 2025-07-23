@@ -1,7 +1,7 @@
 //BFG
 class MO_BFG10KFire : MO_ZSToken{}
 
-class MO_BFG9000 : JMWeapon// replaces BFG9000
+class MO_BFG9000 : MO_Weapon// replaces BFG9000
 {
 	action void MO_FireBFG10KShot()
 	{
@@ -44,30 +44,31 @@ class MO_BFG9000 : JMWeapon// replaces BFG9000
 	}
 	States
 	{
-	Ready:
-		
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/bfg/draw",1);
 		B7SS ABCDEF 1;
+	Ready:
 	ReadyToFire:
 		B7GG A 0 A_StartSound("weapons/bfg/idleloop", 6, CHANF_LOOPING);
 	ReadyLoop:
 		BF7G A 0 JM_WeaponReady;
 		B7GG AABBCCDDEE 1 JM_WeaponReady;
 		Loop;
+
 	Deselect:
 		TNT1 A 0 MO_SetBFGCrosshair;
 		TNT1 A 0 A_StopSound(6);
 		B7SS FEDCBA 1;
 		B7GG A 0 A_Lower;
 		Wait;
+
 	Select:
 		TNT1 A 0;	
 		TNT1 A 0 MO_SetBFGCrosshair;
-		Goto ClearAudioAndResetOverlays;
 	ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		Goto Ready;
+		TNT1 A 0 MO_Raise();
+		Goto SelectAnimation;
+
 	Fire:
 		BFGA A 0 A_JumpIfInventory("MO_BFG10KFire",1,"Fire2");
 		BFGA A 0 A_JumpIfInventory("MO_Cell",40,1);

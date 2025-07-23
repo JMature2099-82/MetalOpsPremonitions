@@ -1,5 +1,5 @@
 //A_Eject from Beautiful Doom by Jekyll Grim Payne
-extend class JMWeapon
+extend class MO_Weapon
 {
 	//Casing spawn function with math by Marisa Kirisame (see mk_matrix)
 	action actor MO_EjectCase(class<Actor> itemtype, double xofs = 0, double yofs = 0, double zofs = 0, double xvel = 0, double yvel = 0, double zvel = 0) {

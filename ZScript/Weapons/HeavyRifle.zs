@@ -5,7 +5,7 @@ Class HCR_GLMode : MO_ZSToken{}
 Class HCR_3XZoom : MO_ZSToken{}
 Class HCR_6XZoom : MO_ZSToken{}
 
-Class MO_HeavyRifle : JMWeapon
+Class MO_HeavyRifle : MO_Weapon
 {
 	bool hcrFiredGrenade;
 	const PSP_MUZZLESMOKE = -2;
@@ -22,7 +22,7 @@ Class MO_HeavyRifle : JMWeapon
 		Weapon.SlotNumber 4;
 		Inventory.PickupSound "weapons/ar/pickup";
 		Scale 0.55;
-		JMWeapon.inspectToken "NeverUsedHCR";
+		MO_Weapon.inspectToken "NeverUsedHCR";
 		+INVENTORY.TOSSED
 		+WEAPON.NOALERT
 		+WEAPON.NOAUTOFIRE
@@ -61,12 +61,13 @@ Class MO_HeavyRifle : JMWeapon
 		A_AlertMonsters();
 	}
 
+	action void MO_SetEmptyHMRSprite(string lump)
+	{
+		if(invoker.Ammo1.amount < 1) {MO_SetWeaponSprite(lump, OverlayID());}
+	}
+
     States
     {
-		ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		Goto Ready;
-		
 		Inspect:
 			HCRI A 1 A_StartSound("hcr/inspectRaise", 0); //Inspect Raise
 			HCRI BCDEFGHI 1;
@@ -84,18 +85,15 @@ Class MO_HeavyRifle : JMWeapon
         Spawn:
             HCRC A -1;
             STOP;
-        Ready:
-			HCGG A 0;
-			HCRG A 0;
+
 		SelectAnimation:
-			TNT1 A 0;
 			TNT1 A 0 JM_CheckInspectIfDone;
             HCRI A 1 A_StartSound("hcr/draw", 0);
-			HCRI BCD 1;
+			HCRI BCD 1 A_WeaponOffset(0,38);
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
+		Ready:
         ReadyToFire:
-			HCRG A 0 A_JumpIf(invoker.isZoomed, "Ready2");
-            HCRG A 1 
+            HCRG A 1
 			{
 				if(invoker.isZoomed) {return ResolveState("Ready2");}
 				if(PressingAltFire() && invoker.ADSMode >= 1) {
@@ -121,7 +119,14 @@ Class MO_HeavyRifle : JMWeapon
 				A_ZoomFactor(1.0);
 				MO_SetHMRCrosshair();
 			}
-			Goto ClearAudioAndResetOverlays;
+			TNT1 A 0 MO_Raise();
+		ContinueSelect:
+			//Initialize empty sprite frames into memory
+			HCGG A 0;
+			HCRG A 0;
+			HR4R A 0; 
+			Goto SelectAnimation;
+
         Fire:
 			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "Fire2");
 			TNT1 A 0 MO_JumpIfLessAmmo(1, "NoAmmo");
@@ -402,7 +407,10 @@ Class MO_HeavyRifle : JMWeapon
 				A_ZoomFactor(1.85);
 				A_SetCrosshair(99);
 			}
-			HCRZ ABCDEF 1;
+			HCRZ AB 1;
+			HCRZ CD 1 A_WeaponOffset(0,36);
+			HCRZ E 1 A_WeaponOffset(0,34);
+			HCRZ F 1 A_WeaponOffset(0,32);
 		Ready2:
 			TNT1 A 0 A_JumpIf(CountInv("HCR_3XZoom") || CountInv("HCR_6XZoom") >= 1, "SniperReady");
 			TNT1 A 0 A_JumpIf(invoker.ADSMode <= 0, "ADSToggle");
@@ -569,11 +577,8 @@ Class MO_HeavyRifle : JMWeapon
 			Goto Ready2;
 
         Reload:
-			TNT1 A 0 A_JumpIfInventory("HCRAmmo",12,"ReadyToFire");
-			TNT1 A 0 A_JumpIfInventory("MO_HighCaliber",1,3);
-			AR1G A 0 A_StartSound("weapon/rifleempty",0);
-			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "NoAmmoZoomed");
-			Goto ReadyToFire;
+			AR1G A 0 MO_CheckReload(12,1, "DoAnEmptyReload", null, "ReadyToFire");
+		ReloadAnimation:
 			HCRA A 0 {
 				invoker.isZoomed = false;
 				invoker.isHoldingAim = false;
@@ -582,12 +587,8 @@ Class MO_HeavyRifle : JMWeapon
 				A_SetInventory("HCR_6XZoom",0);
 				MO_SetHMRCrosshair();
 			}
-			AR1F A 0 {
-				if(CountInv("HCRAmmo") < 1)
-					{A_SetInventory("HCRIsEmpty",1);}
-			}
 			TNT1 A 0 A_StartSound("hcr/reloadRaise", 7);
-			HR4R A 0; //Initialize empty reload sprite frames into memory
+			
 			HCRR ABCD 1 JM_WeaponReady(WRF_NOFIRE);
 			HCRA A 0 A_JumpIf(invoker.OwnerHasSpeed(), 1);
 			HCRR EF 1;
@@ -606,14 +607,11 @@ Class MO_HeavyRifle : JMWeapon
 			HCRR OP 1;
 			HCRR P 4 {if(invoker.OwnerHasSpeed()) A_SetTics(2);}
 			HCRR Q 1 A_StartSound("hcr/magout", CHAN_AUTO);
-			HCRR RS 1 {
-				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRIsEmpty") >= 1) {JM_SetWeaponSprite("HR4R");}
-			}
-			HCRR TU 1 {
-				JM_WeaponReady(WRF_NOFIRE);
-				if(CountInv("HCRIsEmpty") >= 1) {JM_SetWeaponSprite("HR4R");}
-			}
+
+			HCRR A 0 MO_SetEmptyHMRSprite("HR4R");//Set empty reload sprite
+			#### RS 1 JM_WeaponReady(WRF_NOFIRE);
+			#### TU 1 JM_WeaponReady(WRF_NOFIRE);
+
 			AR12 A 0 A_JumpIf(CountInv("HCRAmmo") >= 1, 2);
 			HCRR A 0 {MO_EjectCasing("ARMagazine", ejectpitch: frandom(-20, -15), speed: frandom(4, 5),  offset:(28, 16, -13));}
 			HCRR V 16 {if(invoker.OwnerHasSpeed()) A_SetTics(8);}
@@ -646,6 +644,10 @@ Class MO_HeavyRifle : JMWeapon
 			1CRR OPQ 1;
 			HCRR BA 1;
             Goto ReadyToFire;
+
+		DoAnEmptyReload:
+			TNT1 A 0 A_SetInventory("HCRIsEmpty",1);
+			Goto ReloadAnimation;
 
 		Chamber:
 			HCRA A 0 A_SetInventory("HCRIsEmpty",0);

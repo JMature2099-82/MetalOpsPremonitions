@@ -1,7 +1,7 @@
 
 class DeagleIsEmpty : MO_Token{}
 
-class MO_Deagle : JMWeapon// replaces Pistol
+class MO_Deagle : MO_Weapon// replaces Pistol
 {
 	const PSP_MUZZLE = -10;
 
@@ -33,13 +33,10 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		Inventory.PickupSound "deag/pickup";
 		Inventory.ForbiddenTo "MO_OfficerPlayer";
 		VisibleToPlayerClass "MO_SergeantPlayer";
-		JMWeapon.InspectToken "NeverUsedPocketCannon";
+		MO_Weapon.InspectToken "NeverUsedPocketCannon";
 	}
 	States
 	{
-	ContinueSelect:
-		TNT1 A 0 MO_Raise();
-		TNT1 A 0 JM_CheckInspectIfDone;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/deag/draw",1);
 		DGLS ABCD 1;
@@ -77,11 +74,8 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		Goto ReadyToFire;
 
 	Empty: //Made this to prevent an infinite loop crash
-		DGZ1 A 0;
-		DGLG A 0
-		{
-			if(invoker.isZoomed) {JM_SetWeaponSprite("DGZ1");}		
-		}
+		DGZ1 A 0 A_JumpIf(invoker.isZoomed == true, 2);
+		DGLG A 0;
 		#### AA 0;
 		#### A 0 A_JumpIf(invoker.ammo2.amount >= 2, "Reload");
 		#### A 0 A_StartSound("weapon/pistolempty",0);
@@ -93,10 +87,15 @@ class MO_Deagle : JMWeapon// replaces Pistol
 		DGLS DCBA 1;
 		PSTG A 0 A_Lower(12);
 		Wait;
+
 	Select:
 		TNT1 A 0;
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(1));
-		Goto ClearAudioAndResetOverlays;
+	ContinueSelect:
+		TNT1 A 0 MO_Raise();
+		TNT1 A 0 JM_CheckInspectIfDone;
+		Goto SelectAnimation;
+
 	Fire:
 		PSTG A 0 MO_JumpIfLessAmmo(1, "Empty");
 		PSTG A 0 A_JumpIf(invoker.isZoomed, "Fire2");
@@ -300,45 +299,36 @@ class MO_Deagle : JMWeapon// replaces Pistol
 	
 	MuzzleFlash:
 		TNT1 A 0 A_JumpIf(invoker.isZoomed, "MuzzleFlash.Zoomed");
+		TNT1 A 0 
+		{
+			A_OverlayPivot(PSP_MUZZLE, -0.2, 0.1);
+			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
+			A_OverlayScale(PSP_MUZZLE, 0.9);
+		}
 		DGLZ A 1 BRIGHT
 		{
 			A_AttachLightDef('GunLighting', 'GunFireLight');
-			A_OverlayPivot(PSP_MUZZLE, -0.14, 0.1);
-			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
-			A_OverlayScale(PSP_MUZZLE, 0.9);
-			A_OverlayOffset(PSP_MUZZLE, 0,2);
+			A_OverlayOffset(PSP_MUZZLE, 3,0);
 		}
-		DGLZ B 1 BRIGHT
-		{
-			A_OverlayPivot(PSP_MUZZLE, -0.14, 0.1);
-			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
-			A_OverlayScale(PSP_MUZZLE, 0.9);
-			A_OverlayOffset(PSP_MUZZLE, 1,4);
-		}
+		DGLZ B 1 BRIGHT A_OverlayOffset(PSP_MUZZLE, 1,2);
 		Goto GunLightingDone;
 
 	MuzzleFlash.Zoomed:
+		TNT1 A 0 
+		{
+			A_OverlayPivot(PSP_MUZZLE, -0.1, 0.1);
+			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
+			A_OverlayScale(PSP_MUZZLE, 1.30);
+		}
 		DGLZ A 1 BRIGHT 
 		{
 			A_AttachLightDef('GunLighting', 'GunFireLight');
-			A_OverlayPivot(PSP_MUZZLE, -0.14, 0.1);
-			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
-			A_OverlayScale(PSP_MUZZLE, 1.30);
-			A_OverlayOffset(PSP_MUZZLE, -2,12);
+			A_OverlayOffset(PSP_MUZZLE, -5,2);
 		}
-		DGLZ B 1 BRIGHT
-		{
-			A_OverlayPivot(PSP_MUZZLE, -0.14, 0.1);
-			A_OverlayPivotAlign(PSP_MUZZLE, PSPA_CENTER, PSPA_CENTER);
-			A_OverlayScale(PSP_MUZZLE, 1.30);
-			A_OverlayOffset(PSP_MUZZLE, -2,12);
-		}
+		DGLZ B 1 BRIGHT A_OverlayOffset(PSP_MUZZLE, -3,2);
 		Goto GunLightingDone;
 
 	Reload:
-//		PSTG A 0 A_JumpIfInventory(invoker.AmmoType1, invoker.Ammo1.MaxAmount-1,"ReadyToFire");
-//		PSTG A 0 A_JumpIfInventory(invoker.AmmoType2,1,1);
-//		Goto ReadyToFire;
 		TNT1 AAA 0;
 		TNT1 A 0 A_WeaponOffset(0,32);
 		PSTG A 0 MO_CheckReload(7,2, "EmptyReload", "PartialReload", "ReadyToFire");

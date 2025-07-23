@@ -1,4 +1,4 @@
-class MO_PlasmaRifle : JMWeapon
+class MO_PlasmaRifle : MO_Weapon
 {
 	const PSP_MUZZLEFLASH = -60;
 	action void JM_AddHeatBlastCharge()
@@ -31,6 +31,11 @@ class MO_PlasmaRifle : JMWeapon
 			A_AttachLightDef('GunLighting', hlight);
 		else
 			A_AttachLightDef('GunLighting', plight);
+	}
+
+	action void MO_SetHeatedSprite(string lump)
+	{
+		if(FindInventory("HeatedRoundsReady")) {MO_SetWeaponSprite(lump, OverlayID());}
 	}
 	//MO_DummyPuff
 //From PB.
@@ -158,52 +163,37 @@ class MO_PlasmaRifle : JMWeapon
 
 	States
 	{
+	Ready:
 	ReadyToFire:
 		2RGG A 0; //Initialize the sprite name into memory
-		PRGG A 0 
-		{
-			if(CountInv("HeatedRoundsReady") == 1)
-			{JM_SetWeaponSprite("2RGG");}
-		}
+		PRGG A 0 MO_SetHeatedSprite("2RGG");
 	ReadyLoop:
 		"####" A 1 JM_WeaponReady(WRF_ALLOWRELOAD);
 		Loop;
+
 	Deselect:
 		PSTG A 0 MO_SetPRCrosshair;
-		PRGS DCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-				JM_SetWeaponSprite("1RGS");
-			}
-		} 
+		PRGS DCBA 1 MO_SetHeatedSprite("1RGS");
 		PRGS A 0 A_Lower(12);
 		Wait;
+
 	Select:
 		PRGG A 0;
+		TNT1 A 0 MO_Raise;
 		TNT1 A 0 MO_SetPRCrosshair;
-		Goto ClearAudioAndResetOverlays;
-		
 	ContinueSelect:
 		PRGG A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-		Goto Ready;
-		
-	Ready:
-		1RL1 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0; //Initialize the sprite name into memory
-		1RL2 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0; //Initialize the sprite name into memory
-		1RL3 A 0; //Initialize the sprite name into memory
+	//Initialize these sprite names into memory
+		1RL1 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0; 
+		1RL2 ABCDEFGHIJKLMNOPQRSTUVWXYZ 0;
+		1RL3 ABC 0; 
 		1RGS ABCD 0;
+		2RGN ABCDEFGHIJKLMNOPQ 0;
+		3RGF ABC 0;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/plasma/equip",1);
-		PRGS ABCD 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-				JM_SetWeaponSprite("1RGS");
-			}
-		}
-		Goto ReadyToFire;
+		PRGS ABCD 1 MO_SetHeatedSprite("1RGS");
+		Goto Ready;
 		
 	Fire:
 		TNT1 A 0 MO_JumpIfLessAmmo;
@@ -211,13 +201,7 @@ class MO_PlasmaRifle : JMWeapon
 	FireContinue:
 		TNT1 A 0 MO_JumpIfLessAmmo;
 		3RGF A 0; //Initialize the sprite name into memory
-		PRGF A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-				JM_SetWeaponSprite("3RGF");
-			}
-		}
+		PRGF A 0 MO_SetHeatedSprite("3RGF");
 		"####" A 1 MO_FirePlasma;
 		"####" B 1 JM_GunRecoil(-0.7,+.012);
 		"####" C 1;
@@ -237,14 +221,7 @@ class MO_PlasmaRifle : JMWeapon
 		Stop;
 	
 	Cooldown:
-		2RGN ABCDEFGHIJKLMNOPQ 0; //Initialize the sprite name into memory
-		PRGN A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-				JM_SetWeaponSprite("2RGN");
-			}
-		}
+		PRGN A 0 MO_SetHeatedSprite("2RGN");
 		"####" A 0 A_SetInventory("PlasmaRifleCooldownCount",0);
 		"####" A 0 {
 			A_StartSound("weapons/plasma/overheat",1);
@@ -373,13 +350,7 @@ class MO_PlasmaRifle : JMWeapon
 	ActionSpecial:
 		TNT1 A 0;
 		1RGW A 0; //Initialize the sprite name into memory
-		PRGW A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-				JM_SetWeaponSprite("1RGW");
-			}
-		}
+		PRGW A 0 MO_SetHeatedSprite("1RGW");
 //		TNT1 A 0 A_JumpIfInventory("HeatedPlasmaMode", "SwitchToNormal")
 		"####" ABCDEF 1;
 		"####" G 1 A_StartSound("plasma/beep",0);
@@ -428,23 +399,11 @@ class MO_PlasmaRifle : JMWeapon
 		PSTG A 0 A_JumpIfInventory("PlasmaAmmo",invoker.Ammo1.MaxAmount,"ReadyToFire");
 		PSTG A 0 A_JumpIfInventory("MO_Cell",1,1);
 		goto ReadyToFire;
-		PRL1 A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 A 0 MO_SetHeatedSprite("1RL1");
 		"####" AB 1;
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		"####" DE 1; 
-		PRL3 A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL3");
-			}
-		}
+		PRL3 A 0 MO_SetHeatedSprite("1RL3");
 		"####" AB 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,5);
 		"####" CDE 1 JM_WeaponReady(WRF_NOFIRE);
@@ -475,122 +434,37 @@ class MO_PlasmaRifle : JMWeapon
 	DoneReload:
 		PRL1 PQ 1 JM_WeaponReady(WRF_NOFIRE);
 		PRL1 R 1 A_StartSound("weapons/plasma/poweredon", 4);
-		PRL1 A 0
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 A 0 MO_SetHeatedSprite("1RL1");
 		"####" STUVWX 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,5);
 		"####" YYYYYYYYZ 1 JM_WeaponReady(WRF_NOFIRE);
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-		PRL2 ABCD 1
-		{
-			JM_WeaponReady(WRF_NOFIRE);
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL2");
-			}
-		}
+		PRL2 ABCD 1 MO_SetHeatedSprite("1RL2");
 		Goto ReadyToFire;
 		
 	FlashKick:
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"FlashKickFast");
-		PRL1 ABCDE 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
-		PRL3 ABCCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL3");
-			}
-		}
-		PRL1 EDCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 ABCDE 1 MO_SetHeatedSprite("1RL1");
+		PRL3 ABCCBA 1 MO_SetHeatedSprite("1RL3");
+		PRL1 EDCBA 1 MO_SetHeatedSprite("1RL1");
 		Goto ReadyToFire;
 	FlashAirKick:
 		"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,"FlashAirKickFast");
-		PRL1 ABCDE 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
-		PRL3 ABCCCCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL3");
-			}
-		}
-		PRL1 EDCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 ABCDE 1 MO_SetHeatedSprite("1RL1");
+		PRL3 ABCCCCBA 1 MO_SetHeatedSprite("1RL3");
+		PRL1 EDCBA 1 MO_SetHeatedSprite("1RL1");
 		Goto ReadyToFire;
 	
 	FlashKickFast:
-		PRL1 ABCDE 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
-		PRL3 ABCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL3");
-			}
-		}
-		PRL1 DCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 ABCDE 1 MO_SetHeatedSprite("1RL1");
+		PRL3 ABCBA 1 MO_SetHeatedSprite("1RL3");
+		PRL1 DCBA 1 MO_SetHeatedSprite("1RL1");
 		Goto ReadyToFire;
 	
 	FlashAirKickFast:
-		PRL1 ABCDE 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
-		PRL3 ABCCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL3");
-			}
-		}
-		PRL1 EDCBA 1
-		{
-			if(CheckInventory("HeatedRoundsReady",1))
-			{
-			JM_SetWeaponSprite("1RL1");
-			}
-		}
+		PRL1 ABCDE 1 MO_SetHeatedSprite("1RL1");
+		PRL3 ABCCBA 1 MO_SetHeatedSprite("1RL3");
+		PRL1 EDCBA 1 MO_SetHeatedSprite("1RL1");
 		Goto ReadyToFire;
 		
 	MuzzleFlash:

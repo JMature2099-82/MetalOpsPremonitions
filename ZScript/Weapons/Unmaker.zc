@@ -1,6 +1,6 @@
 //Unmaker
 
-class MO_Unmaker : JMWeapon
+class MO_Unmaker : MO_Weapon
 {
 	override string PickupMessage()
 	{
@@ -25,12 +25,10 @@ class MO_Unmaker : JMWeapon
 
     States
     {
-		ContinueSelect:
-			TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise();
-        Ready:
         SelectAnimation:
             TNT1 A 0 A_StartSound("weapons/unmaker/raise", CHAN_WEAPON);
             UHSD ABCDEF 1;
+		Ready:
         ReadyToFire:
             TNT1 A 0 A_StartSound("weapons/unmaker/idle", CHAN_6, CHANF_LOOPING);
         ReadyLoop:
@@ -93,7 +91,9 @@ class MO_Unmaker : JMWeapon
         Select:
 			TNT1 A 0;
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(15));
-			Goto ClearAudioAndResetOverlays;
+		ContinueSelect:
+			TNT1 A 0 MO_Raise();
+			Goto SelectAnimation;
 
         Deselect:
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(15));

@@ -1,7 +1,7 @@
 //Rawket Lawnchair
 class MiniNukeMode :  Inventory {Default{Inventory.MaxAmount 1;}}
 
-class MO_RocketLauncher : JMWeapon replaces RocketLauncher
+class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
 {
 	
 	int burstCount;
@@ -48,24 +48,27 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
         Spawn:
             LAUN A -1;
             Stop;
-        ContinueSelect:
-		MGNG AAAAAAAAAAAAAAAAAA 0 A_Raise();
-        Ready:
+       
         SelectAnimation:
             TNT1 A 0 A_StartSound("weapons/rocket/draw", 0);
             RLAS A 1;
 			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
 			RLAS A 0;
 			"####" BCDEF 1;
+		Ready:
         ReadyToFire:
 			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
 			RLAS A 0;
             "####" F 1 JM_WeaponReady;
             Loop;
+
 		Select:
 			TNT1 A 0;
 			TNT1 A 0 A_SETCROSSHAIR(Invoker.GetXHair(10));
-			Goto ClearAudioAndResetOverlays;
+		 ContinueSelect:
+			MGNG A 0 MO_Raise();
+			Goto SelectAnimation;
+
 		Deselect:
 			TNT1 A 0 A_SETCROSSHAIR(Invoker.GetXHair(10));
 			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
@@ -74,6 +77,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			RLAS A 1;
 			TNT1 A 0 A_lower(12);
 			Wait;
+
         Fire:
 			RLAS A 0 A_CheckReload();
             RLAF A 1 BRIGHT MO_FireRocket();
@@ -82,6 +86,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
 			TNT1 AAA 0;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+		RecoilFrames:
             RLAF E 1;
 			RLAF FFG 1 JM_GunRecoil(-0.2, .04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -89,13 +94,13 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			RLAF H 2 
 			{
 				A_WeaponOffset(2,36);
-				A_OverlayPivot(PSP_WEAPON, 0.3, flags: WOF_KEEPY);
+				A_OverlayPivot(PSP_WEAPON, 0.15, flags: WOF_KEEPY);
 				A_OverlayScale(PSP_WEAPON, 1.06, 0);
 				A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
 			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			RLAF HHHH 1{
-				A_WeaponOffset(1,36);
+				A_WeaponOffset(1,35);
 				JM_GunRecoil(-0.075, +.04);
 				A_OverlayScale(PSP_WEAPON, 1.03, 0);
 			}
@@ -118,7 +123,7 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			if(CountInv("MO_powerspeed") == 1)
 			{A_SetTics(3);}
 			}
-			TNT1 A 0 A_JumpIf(PressingFire(), "Fire");
+			TNT1 A 0 A_Refire();
             Goto REadyToFire;
 
         AltFire:
@@ -161,7 +166,8 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
             RLAF CD 1 JM_GunRecoil(-0.95, .05);
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,2);
 			RLAF A 0 A_StartSound("weapons/rocket/loading",6);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			TNT1 AAA 0;
+			Goto RecoilFrames;
             RLAF E 1;
 			RLAF FFG 1 JM_GunRecoil(-0.2, .04);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -169,19 +175,19 @@ class MO_RocketLauncher : JMWeapon replaces RocketLauncher
 			RLAF H 2 
 			{
 				A_WeaponOffset(2,36);
-				A_OverlayPivot(PSP_WEAPON, 0.3, flags: WOF_KEEPY);
+				A_OverlayPivot(PSP_WEAPON, 0.15, flags: WOF_KEEPY);
 				A_OverlayScale(PSP_WEAPON, 1.06, 0);
 				A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
 			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 			RLAF HHHH 1{
-				A_WeaponOffset(1,36);
+				A_WeaponOffset(1,35);
 				JM_GunRecoil(-0.075, +.04);
 				A_OverlayScale(PSP_WEAPON, 1.03, 0);
 			}
 			RLAF H 0
 			{
-				A_WeaponOffset(0,34);
+				A_WeaponOffset(0,33);
 				A_OverlayScale(PSP_WEAPON, 1, 0);
 			}
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);

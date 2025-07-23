@@ -131,7 +131,7 @@ class MOps_Handler : EventHandler
 
         if (e.Name ~== "PrevThrowable")
         {
-            let moweap = JMWeapon(pl.player.readyweapon);
+            let moweap = MO_Weapon(pl.player.readyweapon);
 
             int throwType = pl.CountInv("ThrowableType");
 
@@ -153,7 +153,7 @@ class MOps_Handler : EventHandler
 		/*
 		if (e.Name ~== "NextThrowable")
         {
-            let moweap = JMWeapon(pl.player.readyweapon);
+            let moweap = MO_Weapon(pl.player.readyweapon);
 
             int throwType = pl.CountInv("ThrowableType");
 
@@ -170,7 +170,7 @@ class MOps_Handler : EventHandler
 
 		if(e.Name ~== "ThrowEquipment")
 		{
-			let mo_wep = JMWeapon(pl.player.readyweapon);
+			let mo_wep = MO_Weapon(pl.player.readyweapon);
 			if(!mo_wep) return;
 			
 			State TossThrowable = mo_wep.FindState("TossThrowable");
@@ -188,7 +188,7 @@ class MOps_Handler : EventHandler
 				//If the Player is alive, do the kick attack. If dead, do nothing.
 				if((players[e.Player].playerstate == PST_LIVE))
 				{
-					let mo_wep = JMWeapon(pl.player.readyweapon);
+					let mo_wep = MO_Weapon(pl.player.readyweapon);
 					if(!mo_wep)
 					return;
 	

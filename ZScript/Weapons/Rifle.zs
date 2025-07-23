@@ -2,7 +2,7 @@
 
 Class ARSemiAuto : MO_ZSToken{} 
 
-Class AssaultRifle : JMWeapon
+Class AssaultRifle : MO_Weapon
 {
     Default
     {
@@ -40,13 +40,11 @@ Class AssaultRifle : JMWeapon
 
     States
     {
-		ContinueSelect:
-		TNT1 A 0 MO_Raise();
-		Goto SelectAnimation;
-		
+
         Spawn:
             AR1W A -1;
             STOP;
+
 		SelectAnimation:
 			TNT1 A 0 A_StartSound("weapons/ar/select",0);
             AR1S ABCD 1;
@@ -68,6 +66,7 @@ Class AssaultRifle : JMWeapon
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
             Loop;
+
         Select:
 			TNT1 A 0;
 			TNT1 A 0 
@@ -77,7 +76,10 @@ Class AssaultRifle : JMWeapon
 				A_ZoomFactor(1);
 			}
 			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(7));
-			Goto ClearAudioAndResetOverlays;
+		ContinueSelect:
+			TNT1 A 0 MO_Raise();
+			Goto SelectAnimation;
+		
         Fire:
 			AR1G A 0 MO_JumpIfLessAmmo(where: "Empty");
 			TNT1 A 0 A_JumpIf(invoker.isZoomed, "Fire2");

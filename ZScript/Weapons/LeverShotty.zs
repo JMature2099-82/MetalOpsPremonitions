@@ -1,7 +1,7 @@
 //////////////////////////////////
 // LEVER ACTION SHOTGUN	//
 /////////////////////////////////
-class LeverShotgun : JMWeapon //replaces Shotgun
+class LeverShotgun : MO_Weapon //replaces Shotgun
 {
 	Default
 	{
@@ -15,7 +15,7 @@ class LeverShotgun : JMWeapon //replaces Shotgun
 		Tag "$TAG_LVRSHOT";
 		Inventory.PickupSound "weapons/levershotty/pickup";
 		Inventory.AltHUDIcon "W87CA0";
-		JMWeapon.inspectToken "NeverUsedLAS";
+		MO_Weapon.inspectToken "NeverUsedLAS";
 		+Weapon.NoAlert
 		+Weapon.NoAutoFire
 	}

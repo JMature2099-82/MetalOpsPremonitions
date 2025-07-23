@@ -4,7 +4,7 @@ Class SMGBurstMode : MO_ZSToken{}
 
 Class SMGIsEmpty : MO_ZSToken{}
 
-Class MO_SubMachineGun : JMWeapon
+Class MO_SubMachineGun : MO_Weapon
 {
     Default
     {
@@ -17,7 +17,7 @@ Class MO_SubMachineGun : JMWeapon
         Obituary "$OBMO_SMG";
         Tag "$TAG_SMG";
 		Inventory.PickupSound "weapons/smg/pickup";
-		JMWeapon.InspectToken "NeverUsedSMG";
+		MO_Weapon.InspectToken "NeverUsedSMG";
 		+WEAPON.NOALERT
 		+WEAPON.NOAUTOFIRE
 		+INVENTORY.TOSSED
@@ -42,9 +42,6 @@ Class MO_SubMachineGun : JMWeapon
 
     States
     {
-		ContinueSelect:
-		TNT1 A 0 MO_Raise();
-		Goto SelectAnimation;
 		
 		Inspect:
 			TNT1 A 3;
@@ -78,6 +75,7 @@ Class MO_SubMachineGun : JMWeapon
         Spawn:
             SUBM A -1;
             STOP;
+
 		SelectAnimation:
 			TNT1 A 0 JM_CheckInspectIfDone;
 			SM5G A 0 A_StartSound("weapons/smg/select",0);
@@ -102,6 +100,7 @@ Class MO_SubMachineGun : JMWeapon
 				return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 			}
             Loop;
+
         Select:
 			TNT1 A 0;
 			TNT1 A 0
@@ -111,7 +110,10 @@ Class MO_SubMachineGun : JMWeapon
 				A_ZoomFactor(1.0);
 				A_SetCrosshair(invoker.GetXHair(3));
 			}
-			Goto ClearAudioAndResetOverlays;
+		ContinueSelect:
+			TNT1 A 0 MO_Raise();
+			Goto SelectAnimation;
+
         Fire:
 			SM5G A 0 MO_JumpIfLessAmmo(1,"Empty");
 			SM5G A 0 A_JumpIf(invoker.isZoomed, "Fire2");

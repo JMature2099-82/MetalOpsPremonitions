@@ -1,6 +1,6 @@
 //Minigun
 
-class MO_MiniGun : JMWeapon
+class MO_MiniGun : MO_Weapon
 {
 
 	action void MO_SpawnMinigunCasings(string c1, string c2, vector3 ofs = (24, 0, -10))
@@ -32,14 +32,13 @@ class MO_MiniGun : JMWeapon
 
 	States
 	{
-	ContinueSelect:
-		MGNG AAAAAAAAAAAAAAAAAA 0 A_Raise();
-	Ready:
+	
 	SelectAnimation:
 		TNT1 A 0 SetInventory("MinigunSpin",0);
 		MGNG A 0 A_StartSound("weapons/minigun/pickup",0);
 		MGNS ABCDEFGH 1;
 	ReadyToFire:
+	Ready:
 		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"ReadyToFire2");
 		MGNG A 1 JM_WeaponReady();
 		Loop;
@@ -64,7 +63,10 @@ class MO_MiniGun : JMWeapon
 			A_SetCrosshair(invoker.GetXHair(9));
 			invoker.isHolding = False;
 		}
-		Goto ClearAudioAndResetOverlays;
+	ContinueSelect:
+		MGNG A 0 MO_Raise();
+		Goto SelectAnimation;
+
 	NewFire:
 	Fire:
 		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");
@@ -73,60 +75,6 @@ class MO_MiniGun : JMWeapon
 		MGNG BC 2;
 		MGNG DEFGHAB 1;
 		Goto Hold;
-	OldFire:
-		TNT1 A 0 A_JumpIf(CountInv("MinigunSpin") == 1, "Hold");
-		TNT1 A 0 A_CheckReload();
-		TNT1 A 0 A_StartSound("weapons/minigun/start",0);
-		MGNG BBB 1;
-		MGNF C 1 BRIGHT{
-			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
-			A_StartSound("weapons/minigun/startfire",2);
-			JM_CheckForQuadDamage();
-			}
-		TNT1 A 0 JM_GunRecoil(-0.4,0);
-        MGNG CDDEEF 1;
-		TNT1 A 0 A_CheckReload();
-		MGNF F 1 BRIGHT{
-			A_FireBullets(5.6, 0, 1, 20, "MinigunPuff", FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
-			A_StartSound("weapons/minigun/startfire",2);
-			JM_CheckForQuadDamage();
-			}
-		TNT1 A 0 JM_GunRecoil(-0.4,0);
-		MGNG GGGH 1;
-		TNT1 A 0 A_CheckReload();
-		MGNF H 1 BRIGHT{
-			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
-			A_StartSound("weapons/minigun/startfire",2);
-			JM_CheckForQuadDamage();
-			}
-		TNT1 A 0 JM_GunRecoil(-0.4,0);
-		MGNG HAB 1;
-		TNT1 A 0 A_CheckReload();
-		MGNF C 1 BRIGHT{
-			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
-			A_StartSound("weapons/minigun/startfire",2);
-			JM_CheckForQuadDamage();
-			}
-		TNT1 A 0 JM_GunRecoil(-0.4,0);
-		MGNF DE 1;
-		TNT1 A 0 A_CheckReload();
-		MGNF F 1 BRIGHT{
-			A_FireBullets(5.6, 0, 1, 20, "MiniGunPuff",FBF_USEAMMO|FBF_NORANDOM, 0,"MO_BulletTracer",0);
-			A_Overlay(-5, "MuzzleFlash");
-			MO_SpawnMinigunCasings("EmptyRifleBrass", "MinigunBeltLink", (37, -10, -17));
-			A_StartSound("weapons/minigun/startfire",2);
-			JM_CheckForQuadDamage();
-			}
-		TNT1 A 0 JM_GunRecoil(-0.4,0);
-        MGNG GH 1;
 	Hold:
 		TNT1 A 0 A_CheckReload();
 		TNT1 A 0 A_StartSound("weapons/minigun/fire",1,CHANF_LOOP);

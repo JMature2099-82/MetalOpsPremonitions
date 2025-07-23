@@ -6,7 +6,7 @@ class KatanaBeamMode : MO_ZSToken{}
 
 class LeftKatanaAttack : MO_ZSToken{} //For the JM_KatanaAttack function
 
-class Katana: JMWeapon replaces Fist
+class Katana: MO_Weapon replaces Fist
 {
 	  Default 
 	  {	
@@ -60,15 +60,12 @@ class Katana: JMWeapon replaces Fist
 
 	  States
 	  {
+
 	  Ready:
-	  SelectAnimation:
-		TNT1 A 2;
-		TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
-		KTAG PONMLKJI 1;
-		KTAG GFECB 1;
 	  ReadyToFire:
 		KTAG A 1 JM_WeaponReady();
 		Loop;
+
 	  Deselect:
 		TNT1 A 0 A_SetCrosshair(99);
 		TNT1 A 0 A_JumpIfHealthLower(0, "DeadDeselect");
@@ -79,20 +76,26 @@ class Katana: JMWeapon replaces Fist
 		TNT1 A 5;
 		KTAG A 0 A_Lower(12);
 		WAIT;
+
 	  Select:
-	  TNT1 A 0;
-	  TNT1 A 0 A_SetCrosshair(99);
-	  Goto ClearAudioAndResetOverlays;
+		  TNT1 A 0;
+		  TNT1 A 0 A_SetCrosshair(99);
+	ContinueSelect:
+		  TNT1 A 0 MO_Raise(); 
+	 SelectAnimation:
+		TNT1 A 2;
+		TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
+		KTAG PONMLKJI 1;
+		KTAG GFECB 1;
+		Goto Ready;
 	
-		DeadDeselect:
+	DeadDeselect:
 		KTAK ABCDEF 1;
 		TNT1 A 1;
 		KTAG A 0 A_Lower(12);
 		WAIT;
 
-	  ContinueSelect:
-		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise(); 
-		Goto Ready;
+
 	  Fire:
 		KTAF ABCD 1;
 	  Swing1:

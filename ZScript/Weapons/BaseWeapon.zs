@@ -1,4 +1,4 @@
-class JMWeapon : Weapon
+class MO_Weapon : Weapon
 {
 	bool isFirstTime;
 	property firstTime: isFirstTime;
@@ -317,4 +317,4 @@ class JMWeapon : Weapon
 		}
 }
 
-class MO_Weapon : JMWeapon{}
+class JMWeapon : MO_Weapon{}
