@@ -89,7 +89,7 @@ Class MO_HeavyRifle : MO_Weapon
 		SelectAnimation:
 			TNT1 A 0 JM_CheckInspectIfDone;
             HCRI A 1 A_StartSound("hcr/draw", 0);
-			HCRI BCD 1 A_WeaponOffset(0,38);
+			HCRI BCD 1;
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
 		Ready:
         ReadyToFire:
@@ -457,7 +457,7 @@ Class MO_HeavyRifle : MO_Weapon
 				{
 					invoker.isZoomed = false;
 					invoker.isHoldingAim = false;
-					SetWeaponState("SniperUnZoom");
+					return ResolveState("SniperUnZoom");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
@@ -471,7 +471,7 @@ Class MO_HeavyRifle : MO_Weapon
 				{
 					invoker.isZoomed = false;
 					invoker.isHoldingAim = false;
-					SetWeaponState("SniperUnZoom");
+					return ResolveState("SniperUnZoom");
 				}
 				return JM_WeaponReady(WRF_ALLOWRELOAD|WRF_NOSECONDARY);
 			}
