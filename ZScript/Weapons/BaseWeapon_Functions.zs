@@ -235,7 +235,7 @@ extend class MO_Weapon
 	{	
 		A_WeaponReady(wpflags);
 		State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
-		if(ActionSpecial != NULL && FindInventory("SpecialAction"))
+		if(ActionSpecial != NULL && FindInventory("SpecialAction") && CheckIfInReady())
 			return ResolveState('ActionSpecial');
 		else	
 			A_SetInventory("SpecialAction",0);

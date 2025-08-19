@@ -81,7 +81,7 @@ Class MO_HeavyRifle : MO_Weapon
 			HCRI Z 1 A_StartSound("hcr/inspectEnd", 6);
 			HCRI "[\]" 1;
 			1CRI AB 1;
-			Goto ReadyToFire;
+			Goto Ready;
         Spawn:
             HCRC A -1;
             STOP;
@@ -92,6 +92,7 @@ Class MO_HeavyRifle : MO_Weapon
 			HCRI BCD 1;
 			HCRG A 0 A_JumpIf(invoker.isZoomed, "Zoom");
 		Ready:
+			TNT1 A 0 A_SetInventory("SpecialAction",0);
         ReadyToFire:
             HCRG A 1
 			{
@@ -167,7 +168,7 @@ Class MO_HeavyRifle : MO_Weapon
 			}
 			TNT1 A 0 MO_JumpIfLessAmmo(1);
 			TNT1 A 0 A_ReFire;
-            Goto ReadyToFire;
+            Goto Ready;
 
 		Flash:
 			TNT1 A 0 A_AttachLightDef('GunLighting', 'GunFireLight');

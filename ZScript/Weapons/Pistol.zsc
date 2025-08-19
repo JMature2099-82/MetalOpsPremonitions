@@ -124,7 +124,8 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 			2S1I Z 5 JM_WeaponReady();
 			PS1I F 1  A_StartSound("pistol/reloadend",0);
 			PSR1 EDCBA 1 JM_WeaponReady();
-			Goto ReadyToFire;
+			TNT1 A 0 A_SetInventory("SpecialAction",0);
+			Goto Ready;
 
 	Select:
 		PSTG A 0;
@@ -184,7 +185,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
 			}
 		PSTG A 0 A_JumpIf(PressingFire(), "Fire");
-		Goto ReadyToFire;
+		Goto Ready;
 
 	Fire2: //ADS Fire
 		PSTG A 0 MO_JumpIfLessAmmo(where: "Empty");
@@ -231,7 +232,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 				{if(PressingFire()) {return ResolveState("Fire2");}}
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
 		}
-		Goto Ready2;
+		Goto Ready;
 
 	Empty:
 		PSZG F 0 A_JumpIf(invoker.ammo1.amount < 1 && invoker.isZoomed, 2);
