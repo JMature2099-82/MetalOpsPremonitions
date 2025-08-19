@@ -66,7 +66,7 @@ class MOps_Handler : EventHandler
 				break;
 
 			case 'Cell':
-			if(random(0,9) >= 5)
+			if(random(1,256) > 168)
 			{
 				e.Replacement = "MO_Fuel";
 				break;
@@ -90,7 +90,7 @@ class MOps_Handler : EventHandler
 				break;
 
 			case 'Cellpack':
-			if(random(0,9) >= 5)
+			if(random(1,256) > 168)
 			{
 				e.Replacement = "MO_LargeFuelCan";
 				break;
@@ -104,7 +104,7 @@ class MOps_Handler : EventHandler
 		e.isFinal = false;
 	}
 
-	override bool InputProcess(InputEvent e) 
+	/*override bool InputProcess(InputEvent e) 
 	{
 		int KeyBind = e.KeyScan;
 		for(int i = 0; i <= 10; ++i)
@@ -113,15 +113,9 @@ class MOps_Handler : EventHandler
 			{
 				EventHandler.SendNetworkEvent("ThrowEquipment");
 			}
-
-			if (isKeyForCommand(KeyBind, "+Zoom") && e.type == InputEvent.Type_KeyDown) 
-			{
-				Console.PrintF("You pressed the Zoom key");
-				//EventHandler.SendNetworkEvent("ThrowEquipment");
-			}
 		}
 		return false;
-	}
+	}*/
 
     override void NetworkProcess(ConsoleEvent e)
     {

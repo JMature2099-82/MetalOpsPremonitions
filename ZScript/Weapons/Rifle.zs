@@ -251,7 +251,7 @@ Class AssaultRifle : MO_Weapon
 				A_ZoomFactor(1);
 				A_SetCrosshair(invoker.GetXHair(7));
 			}
-            AR1S DCBA 1;
+            AR1S EFGH 1;
             TNT1 A 0 A_Lower(12);
             Wait;
 		
@@ -426,7 +426,8 @@ Class AssaultRifle : MO_Weapon
 			AR1K ABCDEFGGG 1;// JM_WeaponReady();
 			TNT1 A 0 A_StartSound("weapons/smg/modeswitch",0);
 			AR1K GGG 1;
-			AR1K FEDCBA 1 JM_WeaponReady();
+			AR1K FEDCBA 1;
+			AR10 A 0 A_SetInventory("SpecialAction",0);
 			Goto ReadyToFire;
 
 		Chamber:

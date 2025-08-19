@@ -84,30 +84,49 @@ class MO_Flamethrower : MO_Weapon replaces Chainsaw
 
     Fire:
         F1MG A 1 A_WeaponOffset(0,34);
-        F1MG A 1 A_WeaponOffset(0,38);
+        F1MG A 1 
+		{
+			A_OverlayPivot(PSP_WEAPON, 0.08, flags: WOF_KEEPY);
+			A_OverlayPivotAlign(PSP_WEAPON, PSPA_CENTER, PSPA_BOTTOM);
+			A_WeaponOffset(-1,37);
+			A_OverlayScale(PSP_WEAPON, 1.03, 0);
+		}
 		FLMG A 0
 		{
 			if(waterlevel > 1 || invoker.Ammo1.amount < 2) {return ResolveState("DontFire");}
-			if(MO_GetFlamerMode() == FreezeMode) {return ResolveState("FireIcethrower");}
 			return ResolveState(null);
 		}
-        TNT1 A 0 A_StartSound("Weapons/flamer/startfire", 2);
+        TNT1 A 0 {
+			if(MO_GetFlamerMode() == FreezeMode)
+				{A_StartSound("Weapons/flamer/startice", 2);}
+			else
+			{A_StartSound("Weapons/flamer/startfire", 2);}
+		}
         F1MG A 1 {
 			A_AlertMonsters();
-            A_WeaponOffset(0,42);
+            A_WeaponOffset(-2,38);
+			A_OverlayScale(PSP_WEAPON, 1.06, 0);
         }
-        F1MG A 1 A_WeaponOffset(0,46);
-		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-        F1MG A 1  A_WeaponOffset(0,41);
-        F1MG A 1 A_WeaponOffset(0,38);
+        F1MG A 1 
+		{
+			A_OverlayScale(PSP_WEAPON, 1.09, 0);
+			A_WeaponOffset(-3,40);
+		}
+        F1MG A 1 
+		{
+			A_OverlayScale(PSP_WEAPON, 1.14, 0);
+			A_WeaponOffset(-5,44);
+		}
+        F1MG A 1 A_WeaponOffset(-6,45);
+		FLMG A 0 JM_CheckForQuadDamage();
+		FLMG A 0 A_JumpIf(MO_GetFlamerMode() == FreezeMode, "FireIceThrower");
 		TNT1 A 0 A_StartSound("weapons/flamer/flameon",7, CHANF_DEFAULT, 0.6);
         TNT1 A 0 A_StartSound("weapons/flamer/fireloop", 1, CHANF_LOOPING);
-		FLMG A 0 JM_CheckForQuadDamage();
 	HoldingFire:
 		FLMG A 0 A_JumpIf(waterlevel > 1 || invoker.Ammo1.amount < 2, "StopFire");
 		FLMG A 0 A_GunFlash();
         FTF1 ABCD 1 {
-            A_WeaponOffset(random(-3,3), random(32, 36));
+            A_WeaponOffset(random(-6,0), random(45, 49));
             A_FireProjectile("FlamethrowerAttack",0,false,0,4);
 			JM_GunRecoil(-.1,0);
 			invoker.CheckAmmo(PrimaryFire, true);
@@ -122,12 +141,11 @@ class MO_Flamethrower : MO_Weapon replaces Chainsaw
 		FLMG A 0 A_StopSound(7);
 		FLMG A 0 A_StartSound("weapons/flamer/end",1);
 	StopAnimation:
-		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-        F1MG A 1 A_WeaponOffset(0,42);
-        F1MG A 1 A_WeaponOffset(0,46);
-        F1MG A 1  A_WeaponOffset(0,41);
-        F1MG A 1 A_WeaponOffset(0,38);
-        F1MG A 1 A_WeaponOffset(0,34);
+        F1MG A 1 {A_WeaponOffset(-5,42); A_OverlayScale(PSP_WEAPON, 1.11, 0);}
+        F1MG A 1  {A_WeaponOffset(-4,38); A_OverlayScale(PSP_WEAPON, 1.09, 0);}
+        F1MG A 1 {A_WeaponOffset(-3,36); A_OverlayScale(PSP_WEAPON, 1.06, 0);}
+        F1MG A 1 {A_WeaponOffset(-2,33); A_OverlayScale(PSP_WEAPON, 1.03, 0);}
+		F1MG A 1 {A_WeaponOffset(0,32); A_OverlayScale(PSP_WEAPON, 1.00, 0);}
         Goto ReadyToFire;
 	DontFire:
 		 TNT1 A 0 A_StartSound("Weapons/flamer/inwater", 2);
@@ -138,31 +156,14 @@ class MO_Flamethrower : MO_Weapon replaces Chainsaw
 		Goto StopAnimation;
 	
 	FireIcethrower:
-        TNT1 A 0 A_StartSound("Weapons/flamer/startice", 2);
-        F1MG A 1 {
-			A_AlertMonsters();
-            A_WeaponOffset(0,42);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,46);
-        }
-		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-        F1MG A 1 
-        {
-            A_WeaponOffset(0,41);
-        }
-        F1MG A 1 {
-            A_WeaponOffset(0,38);
-        }
 		TNT1 A 0 A_StartSound("Weapons/flamer/fireicebegin", 7);
         TNT1 A 0 A_StartSound("weapons/flamer/iceloop", 1, CHANF_LOOPING);
 		TNT1 A 0 A_StartSound("weapons/flamer/icelooplayer", 6, CHANF_LOOPING,0.2);
-		FLMG A 0 JM_CheckForQuadDamage();
 	HoldingFireIce:
 		FLMG A 0 A_JumpIf(waterlevel > 1 || invoker.Ammo1.amount < 2, "StopFireIce");
 		FLMG A 0 A_GunFlash();
         FTF2 ABCD 1 {
-            A_WeaponOffset(random(-3,3), random(32, 36));
+            A_WeaponOffset(random(-6,0), random(45, 49));
             A_FireProjectile("IcethrowerAttack",0,false,0,4);
 			JM_GunRecoil(-.1,0);
 			if(waterlevel > 1 || invoker.Ammo1.amount < 2) {return ResolveState("StopFireIce");}
@@ -222,6 +223,7 @@ class MO_Flamethrower : MO_Weapon replaces Chainsaw
 		FLMK D 1 A_WeaponOffset(-4, 36);
 		FLMG A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		FLMK CBA 1 A_WeaponOffset(0,32);
+		FLMG A 0 A_SetInventory("SpecialAction",0);
 		Goto ReadyToFire;
 
 	Flash:
