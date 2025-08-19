@@ -44,6 +44,7 @@ extend class MO_Weapon
 		invoker.isZoomed = false;
 		invoker.isHoldingAim = false;
 		A_SetInventory("MinigunSpin",0);
+		A_SetInventory("SpecialAction",0);
 		A_ZoomFactor(1);
 		SetPlayerProperty(0,0,0);
 		A_ClearOverlays(-8,8);
@@ -228,17 +229,18 @@ extend class MO_Weapon
     }
 // Don't complain if this is an action state rather than an action void
 // I found it easier an action state in terms of returning to state labels.
+//Edit: IDK if i need this anymore since I converted almost every action into event handlers to be more
+//responsive. I'll probably keep this for now in the future though.
 	action state JM_WeaponReady(int wpflags = 0)
 	{	
 		A_WeaponReady(wpflags);
-		if(JustPressed(BT_USER4) && CheckIfInReady())
-		{
-			State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
-			if(ActionSpecial != NULL)
-				return ResolveState('ActionSpecial');
-			else	
+		State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
+		if(ActionSpecial != NULL && FindInventory("SpecialAction"))
+			return ResolveState('ActionSpecial');
+		else	
+			A_SetInventory("SpecialAction",0);
 			return null;		
-		}	
+		
 		return null;
 	}
 	
@@ -277,7 +279,6 @@ extend class MO_Weapon
 	{
 		A_TakeInventory(ammotype, count, TIF_NOTAKEINFINITE);
 	}
-
 
 	action void JM_GunRecoil(float gunPitch, float gunAngle)
 	{

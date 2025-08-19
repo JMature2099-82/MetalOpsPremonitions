@@ -143,6 +143,7 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		TNT1 A 0 MO_SetBFGCrosshair;
 		B7GA A 0 A_StartSound("bfg/switch",1); 
 		B7GG FFGHIJ 2;
+		TNT1 A 0 A_SetInventory("SpecialAction",0);
 		Goto ReadyToFire;
 	ReturnTo9K:
 		TNT1 A 0 A_Print("Classic BFG Fire", 1);

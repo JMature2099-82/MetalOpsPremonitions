@@ -324,9 +324,13 @@ Class MO_HeavyRifle : MO_Weapon
 			TNT1 A 0 A_JumpIf(invoker.isZoomed == true, "ZoomSniper");
 			TNT1 A 0 A_StartSound("weapons/smg/modeswitch",0);
 			TNT1 A 0 A_JumpIfInventory("HCR_GLMode",1,"DeselectUBGL");
-			TNT1 A 0 A_Print("Underbarrel Grenade Launcher Alt Fire");
-			HCRG A 0 A_SetCrossHair(invoker.GetXHair(17));
-			TNT1 A 0 A_SetInventory("HCR_GLMode",1);
+			TNT1 A 0 
+			{
+				A_Print("Underbarrel Grenade Launcher Alt Fire");
+				A_SetCrossHair(invoker.GetXHair(17));
+				A_SetInventory("HCR_GLMode",1);
+				A_SetInventory("SpecialAction",0);
+			}
 			Goto ReadyToFire;
 
 		ZoomSniper:
@@ -342,6 +346,7 @@ Class MO_HeavyRifle : MO_Weapon
 			}
 			HC2G A 1;
 			HC2Z ABC 1;
+			FLMG A 0 A_SetInventory("SpecialAction",0);
 			Goto SniperReady;
 
 		Zoom6X:
@@ -351,6 +356,7 @@ Class MO_HeavyRifle : MO_Weapon
 					A_SetInventory("HCR_6XZoom",1);
 					A_Print("6x Sniper Zoom");
 					A_ZoomFactor(6.8);
+					A_SetInventory("SpecialAction",0);
 			}
 			Goto SniperReady;
 
@@ -365,19 +371,9 @@ Class MO_HeavyRifle : MO_Weapon
 			}
 		SniperUnzoomAnimation:
 			HC2Z CBA 1;
-			HC2G A 4;
+			HC2G A 1;
+			TNT1 A 0 A_SetInventory("SpecialAction",0);
 			Goto Ready2;
-
-	LowSniperCount:
-		TNT1 A 0
-		{
-				A_StartSound("hcr/sniperunzoom");
-				A_SetInventory("HCR_3XZoom",0);
-				A_SetInventory("HCR_6XZoom",0);
-				A_Print("Returning to normal ADS, not enough rounds.");
-				A_ZoomFactor(1.85);
-		}
-		Goto SniperUnZoomAnimation;
 
 		SniperUnZoom:
 			TNT1 A 0
@@ -392,9 +388,13 @@ Class MO_HeavyRifle : MO_Weapon
 			Goto UnZoom;
 			
 		DeselectUBGL:
-			HCRG A 0 A_SetCrossHair(invoker.GetXHair(8));
-			TNT1 A 0 A_Print("Sniper/Zoom Aim Alt Fire");
-			TNT1 A 0 A_SetInventory("HCR_GLMode",0);
+			HCRG A 0 
+			{
+				A_SetCrossHair(invoker.GetXHair(8));
+				A_SetInventory("SpecialAction",0);
+				A_Print("Sniper/Zoom Aim Alt Fire");
+				A_SetInventory("HCR_GLMode",0);
+			}
 			Goto ReadyToFire;
 
 		AltFire:

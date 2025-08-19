@@ -85,6 +85,29 @@ class MO_PlayerBase : DoomPlayer
 		}
 	}
 
+	override void PlayerThink()
+	{
+		Super.PlayerThink();
+
+		if(player.cmd.buttons & BT_USER1 && !(player.oldbuttons & BT_USER1))
+		{
+			let mo_wep = MO_Weapon(player.readyweapon);
+			if(!mo_wep) return;
+			State TossThrowable = mo_wep.FindState("TossThrowable");
+			
+			if(TossThrowable != Null && (player.weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
+			{
+				player.SetPSprite(PSP_WEAPON, mo_wep.FindState("TossThrowable"));
+			}
+		}
+		
+		if(player.cmd.buttons & BT_USER4 && !(player.oldbuttons & BT_USER4))
+		{
+			A_SetInventory("SpecialAction",1);
+		}
+	}
+		
+
 	int grenadecooktimer;
 
 	Default

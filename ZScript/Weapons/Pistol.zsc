@@ -138,7 +138,11 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 		TNT1 A 0 JM_CheckInspectIfDone;
 	SelectAnimation:
 		TNT1 A 0 A_StartSound("weapons/pistol/draw",1);
+		TNT1 A 0 MO_JumpIfLessAmmo(where: "SelectEmpty");
 		PSTD ABC 1;
+		Goto Ready;
+	SelectEmpty:
+		PSTD EFG 1;
 		Goto Ready;
 
 	Deselect:
@@ -149,9 +153,15 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 			invoker.isHoldingAim = False;
 			A_ZoomFactor(1);
 		}
+		TNT1 A 0 MO_JumpIfLessAmmo(where: "DeselectEmpty");
 		PSTD CBA 1;
+	ChangeWeaponNow:
 		PSTG A 0 A_Lower(12);
 		Wait;
+
+	DeselectEmpty:
+		PSTD GFE 1;
+		Goto ChangeWeaponNow;
 
 	Fire:
 		PSTG A 0 MO_JumpIfLessAmmo(where: "Empty");
@@ -396,6 +406,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 		#### F 2;
 		#### F 2 A_StartSound("weapons/smg/modeswitch",0);
 		#### EDCBA 1;
+		#### A 0 A_SetInventory("SpecialAction",0);
 		Goto ReadyToFire;
 
 	Reload:

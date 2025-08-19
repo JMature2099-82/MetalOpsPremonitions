@@ -368,6 +368,7 @@ class MO_PlasmaRifle : MO_Weapon
 				A_Print("Heated Plasma rounds selected");
 				A_SetInventory("HeatedRoundsReady",1);
 			}
+			A_SetInventory("SpecialAction",0);
 		}
 		#### A 0 MO_SetPRCrosshair;
 		Goto ReadyToFire;
