@@ -66,7 +66,7 @@ LISTMENU "MainMenu"
 OptionMenu "MetalOpsMenu"
 {
 	class TF_TooltipOptionMenu
-	TooltipGeometry 0.0, 0.45, 2.0, 1.0, 0.5
+	TooltipGeometry 0.5, 0.0, 2.0, 1.0, 0.5
 	TooltipAppearance "", "", "tfttbg"
 	Title "$MO_MOPSETTINGS"
 
@@ -105,13 +105,14 @@ OptionMenu "MetalOpsMenu"
 	ToolTip "$MO_SSGTIP"
 	StaticText ""
 	Option "Bullet ricochet sounds", "mo_bulletsparksound", "OnOff"
-	Tooltip "$MO_RICOCHET"
+	Tooltip "MO_RICOCHET_TIP"
+	StaticText ""
 	Option "$MO_ADSOPT", "mo_aimmode", "ADSControl"
 	Tooltip "$MO_ADSTIP"
 	Tooltip "$MO_ADSTIP_CHAINGUN"
 	StaticText ""
 	Option "Disable Gun Recoil", "mo_nogunrecoil", "OnOff"
-	Tooltip "$MO_RECOIL"
+	Tooltip "$MO_RECOIL_TIP"
 	StaticText ""
 	ToolTip ""
 	Option "$MO_NVISOPTN", "mo_nvstyle", "MO_NightVisionColors"
@@ -129,7 +130,7 @@ OptionMenu "MetalOpsMenu"
 OptionMenu pc_Menu
 {
   class TF_TooltipOptionMenu
-  TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+  TooltipGeometry 0.5, 0.0, 2.0, 1.0, 0.5
   TooltipAppearance "", "", "tfttbg"
   Title      "$PC_TITLE"
   
@@ -321,7 +322,7 @@ OptionMenu "NCH_GeneralOptions"
 OptionMenu "NCH_AmmoListOptions"
 {
 	class TF_TooltipOptionMenu
-	TooltipGeometry 0.0, 0.45, 0.3, 1.0, 0.5
+	TooltipGeometry 0.5, 0.0, 2.0, 1.0, 0.5
 	TooltipAppearance "", "", "tfttbg"
 
 	Title "$NCH_OPTMNU_AMMOLIST"
