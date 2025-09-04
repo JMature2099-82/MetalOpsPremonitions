@@ -331,7 +331,7 @@ OptionMenu "NCH_AmmoListOptions"
 	ToolTip "Off: The ammo list is not drawn. \n\cfOwned weapons\c-: Only displays owned weapons. \n\cyAll\c-: Displays all of the ammo list."
 	ToolTip "\cyI recommend setting this to All!"
 	Option "$NCH_OPTION_AMMOLISTOVERRIDE", "nchud_allowammolistoverride", "YesNo", "nchud_toggleammo"
-	ToolTip "\cyHAVE THIS OPTION ON YES TO DISPLAY RESERVE ONLY AMMO!"
+	ToolTip "\cyHAVE THIS OPTION ON YES TO DISPLAY RESERVE AMMO ONLY!"
 	
 }
 
