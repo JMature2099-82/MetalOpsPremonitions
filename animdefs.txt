@@ -1,3 +1,18 @@
+
+// WEAPONS -------------------------------------------------------------------
+
+//Flamethrower
+texture F1MGA0 NoTrim
+
+//Deagle
+texture DGLZA0 NoTrim
+texture DGLZB0 NoTrim
+
+//Rocket Launcher
+texture RLAFH0 NoTrim
+
+// NC HUD -------------------------------------------------------------------
+
 // ------------------------------------------------------------------------------------------------
 //
 //   Bar frames

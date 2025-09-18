@@ -1,3 +1,4 @@
+// This will apply for English and if there is no localization for the user's language.
 [enu default]
 
 //------------------------------------------------------------------
@@ -268,29 +269,36 @@ MO_SHORTCUT_CLEANMENUTIP = "Turn this option off to scale title screen properly,
 MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
 MO_CROSSHAIR_SLIDER = "Crosshair Settings";
 
-//Gameplay Options and tips
+//Gameplay Option Values
 MO_NVISOPTN = "Night Vision Shader Color";
 MO_NVISGREN = "Green Phosphor";
 MO_NVISGREN2 = "Digital Green Phosphor";
 MO_NVISWHT = "White Phosphor";
-MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
-MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
-
-MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want to.";
-MO_ADSOPT = "ADS/Minigun Spin Control Type";
-MO_ADSTIP = "Toggle: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \nHold: Click alt fire to aim down the sights, release to unzoom. \nHybrid: Based on BDv21's system that combines both Toggle and Hold." ;
-MO_ADSTIP_CHAINGUN = "\nChaingun: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
 MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
-MO_RICOCHET = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
-MO_DISCORD_PRESENCE = "Enable Discord rich presence";
-MO_RECOIL = "Disables recoil on shootable weapons. \nIf you're not using mouse look, this MUST be turned on!";
+
+//Gameplay Options
+MO_CROSSHAIR_SLIDER = "Crosshair Settings";
+MO_ADSOPT = "ADS/Minigun Spin Control Type";
+MO_DISCORD_PRESENCE = "Discord rich presence";
+MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
+
+//Tips for options
+MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
+MO_NVISTIP_NOTICE = "Disable GZDoom's enhanced night vision before using these. A shortcut is above on \"\ckMod and GZDOOM Shortcuts\c-\".";
+MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
+MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
+MO_ADSTIP = "\cuToggle\c-: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \n\csHold\c-: Click alt fire to aim down the sights, release to unzoom. \n\cmHybrid\c-: Based on BDv21's system that combines both Toggle and Hold." ;
+MO_ADSTIP_CHAINGUN = "\cfChaingun\c-: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
+MO_RICOCHET_TIP = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
+MO_RECOIL_TIP = "Disables recoil on shootable weapons. \nIf you're not using mouse look, this MUST be turned on!";
+MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
 MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
+
+
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585
 
-// This will apply for English and if there is no localization for the user's language.
-[enu default]
 
 // Position shit
 FPP_HELM = "Helmet";

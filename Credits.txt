@@ -29,7 +29,7 @@ joeytd for the 1887 lever, hamburghannes for the model and ellyklamsky for the x
 Katana:
 HavoX, Mike12, 3D Realms - sprites
 Bethesda - Sword unsheathe and draw
-Value - Swing sound
+Valve - Swing sound
 Isolation Music - Katana hit sounds (https://www.youtube.com/watch?v=EgRvVq8mStE)
 Pickup sprite - Defeat, DaBlake, Werd (i think), Craneo
 
@@ -39,7 +39,7 @@ to create this
 - Sergeant Mark IV - My other inspiration to create this mod and other resources,
  and for Brutal Doom mentions
 - Matt - JustPressed, JustReleased and User input code
-- TiberiumSoul - Insanity's Requiem for being another inspiration for my mod, along with resources.
+- TiberiumSoul (Rest in Peace man!) - Insanity's Requiem for being another inspiration for my mod, along with resources.
 - PillowBlaster - Trailblazer styled fast attack for the Katana, and inspiration
 - Endie aka Moa Dixon - Some resources from Hellrider and Slayer's Rampage used.
 - Ravik - Some sounds taken from his add-on Raviks Badass Sounds for PB 3.0.
@@ -48,7 +48,7 @@ to create this
 - Gemini0 - Player.AttackZOffset fix
 - XxSwag masterxX - New mod logo! THANKS!
 - Running With Scissors - Postal 2 Kicking sounds
-- PellissierJP - Loading screen background
+- PellissierJP - Generic loading screen background that I used.
 - Dry Fire Sounds - Navaro
 
 Pump Shotgun:
