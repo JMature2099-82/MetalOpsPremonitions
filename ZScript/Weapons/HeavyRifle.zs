@@ -120,8 +120,8 @@ Class MO_HeavyRifle : MO_Weapon
 				A_ZoomFactor(1.0);
 				MO_SetHMRCrosshair();
 			}
-			TNT1 A 0 MO_Raise();
 		ContinueSelect:
+			TNT1 A 0 MO_Raise();
 			//Initialize empty sprite frames into memory
 			HCGG A 0;
 			HCRG A 0;
