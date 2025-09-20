@@ -13,7 +13,7 @@ class MO_AmmoBase : Ammo abstract
 
 	void CheckAmmoCount()
 	{
-		if(amount > 1 && type != 'gas') 
+		if(amount > 1 && type != 'fuel') 
 		Pk = "%ss \c-(+%d)";
 		else Pk = "%s \c-(+%d)";
 	}
@@ -234,7 +234,7 @@ class MO_Fuel : MO_AmmoBase
 	  Ammo.BackpackMaxAmount 600;
 	  Inventory.Icon "JRYCB0";
 	  Inventory.PickupSound "misc/fuel";
-	  MO_AmmoBase.AmmoType 'gas';
+	  MO_AmmoBase.AmmoType 'fuel';
 	 }
 	  States
 	  {
