@@ -156,6 +156,11 @@ TAG_MOLOTOV = "\[Brown]Molotov Cocktail";
 OB_KICK = "%k gave %o a taste of their boot.";
 OB_BERSERKKICK = "%o got Sparta kicked by %k.";
 
+//Chainsword
+GOTCHAINSWORD = "You got the \cc Razorhand Chainsword\c-! (Slot 1)";
+TAG_CHAINSWORD = "Razorhand Chainsword";
+OB_CHAINSWORD = "%o met %k's new and improved great communicator, the Chainsword!";
+
 //Katana
 TAG_KATA = "Katana";
 OB_KATANA = "%o got %p guts sliced and diced by %k's Katana.";

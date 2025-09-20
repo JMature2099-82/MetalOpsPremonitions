@@ -11,6 +11,52 @@ weapon/inspectfoley4 INSFOL4
 
 //Slot 1 ------------------------
 
+/////////////////////////////Chainsword
+$random Machete/Yum { Machete/Yum1 Machete/Yum2 Machete/Yum3 Machete/Yum4 Machete/Yum5 Machete/Yum6 }
+Machete/Yum1    MCHYUM1
+Machete/Yum2    MCHYUM2
+Machete/Yum3    MCHYUM3
+Machete/Yum4    MCHYUM4
+Machete/Yum5    MCHYUM5
+Machete/Yum6    MCHYUM6
+
+$random Chainsword/Flesh { DSSAW0 DSSAW1 DSSAW2 DSSAW3 DSSAW4 DSSAW5 DSSAW6 DSSAW7 DSSAW8 DSSAW9 }
+DSSAW1 DSSAW1
+DSSAW2 DSSAW2
+DSSAW3 DSSAW3
+DSSAW4 DSSAW4
+DSSAW5 DSSAW5
+DSSAW6 DSSAW6
+DSSAW7 DSSAW7
+DSSAW8 DSSAW8
+DSSAW9 DSSAW9
+DSSAW0 DSSAW0
+
+$random Chainsword/Hitwall {DSSAWAL1 DSSAWAL2 DSSAWAL3 DSSAWAL4 DSSAWAL5}
+DSSAWAL1 DSSAWAL1
+DSSAWAL2 DSSAWAL2
+DSSAWAL3 DSSAWAL3
+DSSAWAL4 DSSAWAL4
+DSSAWAL5 DSSAWAL5
+
+Chainsword/Idle CSWDIDL
+Chainsword/Deselect CSWDOFF
+Chainsword/Press CSWDPRS
+Chainsword/Up CSWDUP
+
+$random Chainsword/Bash {CSwordBash1 CSwordBash2}
+CSwordBash1 CSWDBSH1
+CSwordBash2 CSWDBSH2
+
+$random Chainsword/BashHit {CSwordBashHit1 CSwordBashHit2}
+CSwordBashHit1 CSWBSHT1
+CSwordBashHit2 CSWBSHT2
+
+Chainsword/SlashStart "Sounds/Weapons/Slot1/Chainsword/CSword_SlashStart.ogg"
+Chainsword/Stop "Sounds/Weapons/Slot1/Chainsword/CSword_Stop.ogg"
+Chainsword/Start "Sounds/Weapons/Slot1/Chainsword/CSword_Start.ogg"
+Chainsword/Loop "Sounds/Weapons/Slot1/Chainsword/CSword_AtkLoop.ogg"
+
 /////////////////////////////Katana
 weapons/katana/draw KATDRW
 weapons/katana/sheathe KATSHTE

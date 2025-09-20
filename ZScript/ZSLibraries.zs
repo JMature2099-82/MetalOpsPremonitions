@@ -13,6 +13,7 @@
 #include "./Weapons/BaseWeapon.zs"
 #include "./weapons/BaseWeapon_Casings.zs"
 #include "./weapons/BaseWeapon_Functions.zs"
+#include "./Weapons/Chainsword.zs"
 #include "./Weapons/Katana.zs"
 #include "./Weapons/Pistol.zsc"
 #include "./weapons/Deagle.zsc"

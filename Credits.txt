@@ -33,6 +33,10 @@ Valve - Swing sound
 Isolation Music - Katana hit sounds (https://www.youtube.com/watch?v=EgRvVq8mStE)
 Pickup sprite - Defeat, DaBlake, Werd (i think), Craneo
 
+Chainsword:
+Sprites - Craneo, iamcarrotmaster, wolchy, Motoshturman
+Sounds - Audionautics, mickyman5000, Epic Games, Infinity Ward, Activision, Raven Software
+
 Other credits
 - PA1NKI113R and all of the Project Brutality team - for supporting me through my time with y'all and inspiration
 to create this
