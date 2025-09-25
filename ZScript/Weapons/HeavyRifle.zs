@@ -492,9 +492,11 @@ Class MO_HeavyRifle : MO_Weapon
 			Goto ReadyToFire;
 
 		GrenadeFire:
+			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == false, 3);
 			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,2);
-			TNT1 A 0 A_Print("Out of Rocket Ammo");
-			Goto ReadyToFire;
+			HCRG A 1 A_Print("Out of Rocket Ammo");
+			Goto Ready;
+			TNT1 AA 0;
 			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
 			HCRA A 0 MO_SetGrenade(true);
 			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
@@ -509,9 +511,10 @@ Class MO_HeavyRifle : MO_Weapon
 			HCRH D 1;
 			HCRH EF 1 JM_GunRecoil(0.5, .10);
 			HCRH F 4 A_WeaponReady(WRF_NOFIRE);
-			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,1);
+			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,2);
 			Goto ReadyToFire;
 		ReloadGrenade:
+			TNT1 AAAA 0;
 			HRG1 AB 1 A_WeaponReady(WRF_NOFIRE);
 			HRG1 C 1 A_StartSound("hcr/grenadeopen",0);
 			TNT1 A 0 A_Jumpif(invoker.OwnerHasSpeed(), 2);
