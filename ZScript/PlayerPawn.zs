@@ -1,57 +1,6 @@
 //Player class mainly for weapons
 class SergeantClassToken : MO_ZSToken{}
 
-//Shortcut Player start item giver because too many Player.StartItem for mulitple classes is unreliable.
-class PlayerStartItemGiver : CustomInventory
-{
-	Default
-	{
-		Inventory.PickupMessage "$GOTPLACEHOLDER";
-		-INVENTORY.INVBAR
-		+INVENTORY.UNDROPPABLE
-		+INVENTORY.AUTOACTIVATE
-		-INVENTORY.ALWAYSPICKUP
-		-INVENTORY.UNTOSSABLE
-		Inventory.MaxAmount 1;
-	}
-	States
-	{
-		Spawn:
-		AMMO A -1;
-		Stop;
-
-		Pickup: Use:
-		TNT1 A 1
-		{
-			//Ammo start for both classes
-			A_SetInventory("MO_Fuel", 100);
-			A_SetInventory("MO_LowCaliber",50);
-			A_SetInventory("MO_HighCaliber",50);
-			A_SetInventory("LeverShottyAmmo",7);
-			A_SetInventory("PumpShotgunAmmo", 8);
-			A_SetInventory("ARAmmo",31);
-			A_SetInventory("HCRAmmo",12);
-			A_SetInventory("SMGAmmo",35);
-			A_SetInventory("SSGAmmo",2);
-			A_SetInventory("PlasmaAmmo",60);
-			A_GiveInventory("Katana");
-			A_SetInventory("MOLOTOVAMMO",4);
-			A_SetInventory("GrenadeAmmo", 4);
-			A_SetInventory("FragSelected",1);
-			A_SetInventory("HeatBlastFullyCharged",1);
-			A_SetInventory("HeatBlastLevel",3);
-			A_SetInventory("HeatBlastShotCount", 45);
-
-			//Never used tokens
-			A_GiveInventory("NeverUsedLAS");
-			A_GiveInventory("NeverUsedPSG");
-			A_GiveInventory("NeverUsedSMG");
-			A_GiveInventory("NeverUsedHCR");
-		}
-		Fail;
-	}
-}
-
 class MO_PlayerBase : DoomPlayer
 {
 	int specialtimer;
@@ -64,6 +13,35 @@ class MO_PlayerBase : DoomPlayer
 			Shader.SetEnabled(Player,"NiteVis",false);
 		}
 	}
+
+	override void GiveDefaultInventory() //Thank you FudgeAdventurous for showing me this function
+	{
+	  Super.GiveDefaultInventory();
+		A_SetInventory("MO_Fuel", 100);
+		A_SetInventory("MO_LowCaliber",50);
+		A_SetInventory("MO_HighCaliber",50);
+		A_SetInventory("LeverShottyAmmo",7);
+		A_SetInventory("PumpShotgunAmmo", 8);
+		A_SetInventory("ARAmmo",31);
+		A_SetInventory("HCRAmmo",12);
+		A_SetInventory("SMGAmmo",35);
+		A_SetInventory("SSGAmmo",2);
+		A_SetInventory("PlasmaAmmo",60);
+		A_SetInventory("Katana", 1);
+		A_SetInventory("MOLOTOVAMMO",4);
+		A_SetInventory("GrenadeAmmo", 4);
+		A_SetInventory("FragSelected",1);
+		A_SetInventory("HeatBlastFullyCharged",1);
+		A_SetInventory("HeatBlastLevel",3);
+		A_SetInventory("HeatBlastShotCount", 45);
+
+		//Never used weapom tokens
+		A_SetInventory("NeverUsedLAS", 1);
+		A_SetInventory("NeverUsedPSG", 1);
+		A_SetInventory("NeverUsedSMG", 1);
+		A_SetInventory("NeverUsedHCR", 1);
+	}
+
 
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
 	{
@@ -132,7 +110,6 @@ class MO_OfficerPlayer : MO_PlayerBase
 		Player.DisplayName "Officer (Pistol Start)";
 		Player.CrouchSprite "PLYC";
 		Player.StartItem "PistolMagAmmo",18;
-		Player.StartItem "PlayerStartItemGiver";
 		Player.StartItem "NeverUsedPistol";
     }
 }
@@ -146,7 +123,6 @@ class MO_SergeantPlayer : MO_PlayerBase
 		Player.CrouchSprite "PLYC";
 		Player.WeaponSlot 2, "MO_Deagle", "MO_Submachinegun";
 		Player.StartItem "MODeagleAmmo",8;
-		Player.StartItem "PlayerStartItemGiver";
 		Player.StartItem "NeverUsedPocketCannon";
     }
 }
