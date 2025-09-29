@@ -44,8 +44,8 @@ class MO_Flamethrower : MO_Weapon
 
     Default
     {
-       Weapon.AmmoUse 2;
-       Weapon.AmmoGive 50;
+       Weapon.AmmoUse1 2;
+       Weapon.AmmoGive1 50;
 		Weapon.SelectionOrder 3000;
         Weapon.AmmoType1 "MO_Fuel";
         Inventory.PickupSound "weapons/flamer/pickup";
@@ -53,14 +53,15 @@ class MO_Flamethrower : MO_Weapon
 		Tag "$TAG_FLAMER";
         +FLOORCLIP;
 		+WEAPON.NOALERT
-		+WEAPON.NOAUTOFIRE;
-		+WEAPON.AMMO_OPTIONAL;
+		+WEAPON.NOAUTOFIRE
+		+WEAPON.AMMO_OPTIONAL
+		-WEAPON.MELEEWEAPON
 		Scale 0.42;
 		Obituary "%o was burnt to a crisp by %k's Flamethrower.";
     }
     States
     {
-    Ready:
+
     ReadyToFire:
 		FLMG A 0 A_JumpIf(PressingFire(), "Fire");
         F1MG A 1 JM_WeaponReady();
@@ -71,16 +72,16 @@ class MO_Flamethrower : MO_Weapon
         FLMS DCBA 1;
 		TNT1 A 0 A_Lower(12);
         Wait;
-
     Select:
         TNT1 A 0;
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(16));
     ContinueSelect:
 		TNT1 A 0 MO_Raise();
+	Ready:
 	SelectAnimation:
         TNT1 A 0 MO_PlayFlamerRaiseSound();
         FLMS ABCD 1;
-		Goto Ready;
+		Goto ReadyToFire;
 
     Fire:
         F1MG A 1 A_WeaponOffset(0,34);
