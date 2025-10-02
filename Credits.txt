@@ -129,7 +129,7 @@ NC HUD - BlueShadow
 ///			Items			///
 ////////////////////////////
 
-Shotgun shell, rifle magazine pickups by Jekyll Grim Payne
+Shotgun shell, rifle magazine pickups by Jekyll Grim Payne, Death Egg and Franco Tieppo
 Pistol magazine pickup by TSF
 Health Kits, bonuses, Keys, and Armors by TSF
 Armor pickup sound by Rare
