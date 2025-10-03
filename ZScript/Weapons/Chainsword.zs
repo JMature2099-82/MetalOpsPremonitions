@@ -83,6 +83,7 @@ class MO_Chainsword: MO_Weapon
 		{
 			A_WeaponOffset(0,32);
 			A_StopSound(1);
+			A_StopSound(6);
 			A_StartSound("Chainsword/Deselect",0);
 		}
 		CSWS ABCD 1;
@@ -123,6 +124,31 @@ class MO_Chainsword: MO_Weapon
 		Goto Ready;
 
 	Fire:
+		SAWG A 0 
+		{
+			A_StopSound(1);
+			A_WeaponOffset(0,32);
+			A_GunFlash(NULL);
+			A_StartSound("Chainsword/Start",CHAN_AUTO, CHANF_OVERLAP);
+		}
+		CSWG EFGH 1;
+	ClassicFireHold:
+		CSWG ABAB 2
+		{
+			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
+			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
+		}
+//		SAWG A 0 A_StopSound(0);
+		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
+	ClassicFireEnd:
+		SAWG B 0 A_ReFire("ClassicFireHold");
+		SAWG A 0 A_WeaponOffset(0,32);
+		SAWG A 0 A_StopSound(6);
+		SAWG A 0 A_StartSound("Chainsword/Stop",0);
+		CSWG HGFE 1;
+		Goto Ready;
+
+	AltFire:
 		SAWG A 0 A_StopSound(1);
 		SAWG A 0 A_WeaponOffset(0,32);
 		SAWG A 0 A_GunFlash(NULL);
@@ -130,7 +156,7 @@ class MO_Chainsword: MO_Weapon
 		CSWS A 1;
 		CSWG IJK 1;
 		TNT1 A 3;
-	Swing1: 
+	Swing1:
 		CSW1 A 1;
 		CSW1 BC 1;
 //		SAWG A 0 A_StopSound(0);
@@ -150,7 +176,7 @@ class MO_Chainsword: MO_Weapon
 		Goto Ready;
 
 	SwingHitLoop:
-		CSW1 H 1 MO_CSwordAttack(BT_ATTACK, "SwingHitEnd");
+		CSW1 H 1 MO_CSwordAttack(BT_ALTATTACK, "SwingHitEnd");
 		CSW1 I 1;
 		SAWG A 0 A_JumpIfCloser(90, "SwingHitLoop");
 		Goto SwingHitEnd;
@@ -175,7 +201,7 @@ class MO_Chainsword: MO_Weapon
 		Goto Ready;
 
 	SwingHit2Loop:
-		CSW2 H 1 MO_CSwordAttack(BT_ATTACK, "SwingHit2End");
+		CSW2 H 1 MO_CSwordAttack(BT_ALTATTACK, "SwingHit2End");
 		CSW2 I 1;
 		SAWG A 0 A_JumpIfCloser(90, "SwingHit2Loop");
 		Goto SwingHit2End;
@@ -183,31 +209,6 @@ class MO_Chainsword: MO_Weapon
 	SwingHit2End:
 		CSW2 J 1;
 		Goto Swing2Finished;
-
-	AltFire:
-		SAWG A 0 
-		{
-			A_StopSound(1);
-			A_WeaponOffset(0,32);
-			A_GunFlash(NULL);
-			A_StartSound("Chainsword/Start",CHAN_AUTO, CHANF_OVERLAP);
-		}
-		CSWG EFGH 1;
-	ClassicFireHold:
-		CSWG ABAB 2
-		{
-			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
-			MO_CSwordAttack(BT_ALTATTACK, "ClassicFireEnd");
-		}
-//		SAWG A 0 A_StopSound(0);
-		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
-	ClassicFireEnd:
-		SAWG B 0 A_ReFire("ClassicFireHold");
-		SAWG A 0 A_WeaponOffset(0,32);
-		SAWG A 0 A_StopSound(6);
-		SAWG A 0 A_StartSound("Chainsword/Stop",0);
-		CSWG HGFE 1;
-		Goto Ready;
 
 	IdleAnimationOffset:
 		TNT1 C 3 A_WeaponOffset(1, -1, WOF_ADD);
