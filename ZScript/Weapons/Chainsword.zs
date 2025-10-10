@@ -76,6 +76,7 @@ class MO_Chainsword: MO_Weapon
 		TNT1 A 0 A_StartSound("Chainsword/Idle",1,CHANF_LOOPING);
 	ReadyToFire:
 		CSWG CD 3 JM_WeaponReady;
+		TNT1 A 0 A_FireProjectile("MO_CSwordSmokeSpawner", 0, 0, 6, -2);
 		Loop;
 
 	Deselect:

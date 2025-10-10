@@ -7,7 +7,7 @@ Class MO_GunSmoke : BaseVisualSFX
 	  Scale 0.25;
 	  Speed 1;
 	  Renderstyle "Add";
-	  Alpha 0.25;
+	  Alpha 0.15;
   }
   States
   {
@@ -16,6 +16,19 @@ Class MO_GunSmoke : BaseVisualSFX
     stop;
   }
 }
+
+Class MO_CSwordSmokeSpawner : BaseVisualSFX
+{
+	Default {Speed 9;}
+	States
+	{
+		Spawn:
+			TNT1 A 0;
+			TNT1 AA 0 A_SpawnProjectile("MO_GunSmoke", 0, 0, random(0,360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH, random (-180, 0));//A_SpawnItemEx("MO_GunSmoke",15, 10, 5);
+			Stop;
+	}
+}
+
 
 //Thanks sTULKER aka dimonass!
 Class SparkSpray : Actor
@@ -59,7 +72,7 @@ class GunsmokeSpray : Actor
     Speed 0;
 	Scale 0.75;
     RenderStyle 'translucent';
-    Alpha 0.8;
+    Alpha 0.75;
 	}
     States
     {
@@ -94,6 +107,7 @@ Class MO_BigGunSmoke : MO_GunSmoke
 	  Height 0;
 	  Scale 0.4;
 	  Speed 1;
+	  Alpha 0.25;
   }
 }
 
@@ -106,7 +120,7 @@ Class MO_ShotgunSmoke : MO_GunSmoke
 	  Scale 0.25;
 	  Speed 1;
 	  Renderstyle "Add";
-	  Alpha 0.25;
+	  Alpha 0.15;
   }
   States
   {
@@ -121,7 +135,6 @@ class KickSmoke : MO_ShotgunSmoke
 	Default
 	{
 		Scale .31;
-		Alpha 0.4;
 	}
 }
 
@@ -130,7 +143,7 @@ class PlasmaCoolSmoke1 : MO_ShotgunSmoke
 	Default
 	{
 		Scale .17;
-		Alpha 0.5;
+		Alpha 0.35;
 	}
 }
 
@@ -138,7 +151,7 @@ class PlasmaCoolSmoke2 : PlasmaCoolSmoke1
 {
 	Default
 	{
-		Alpha 0.3;
+		Alpha 0.25;
 	}
 }
 
@@ -147,7 +160,7 @@ class PlasmaCoolSmoke3 : PlasmaCoolSmoke1
 	Default
 	{
 		Scale .12;
-		Alpha 0.2;
+		Alpha 0.15;
 	}
 }
 Class BulletImpactSmoke : MO_GunSmoke
@@ -161,7 +174,7 @@ Class BulletSmoke : MO_GunSmoke
   {
 	  Scale 0.10;
 	  Renderstyle "Add";
-	  Alpha 0.5;
+	  Alpha 0.25;
   }
 }
 
@@ -170,7 +183,7 @@ Class EmptyCellSmoke : MO_GunSmoke
 	Default
 	{
 		Scale 0.5;
-		Alpha 0.4;
+		Alpha 0.25;
 	}
 }
 	
@@ -189,7 +202,7 @@ Class RestingCellSmoke : RestingBulletSmoke
 	Default
 	{
 		Scale 0.5;
-		Alpha 0.4;
+		Alpha 0.25;
 	}
 	States
 	{
