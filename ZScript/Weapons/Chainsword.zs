@@ -132,18 +132,22 @@ class MO_Chainsword: MO_Weapon
 			A_StartSound("Chainsword/Start",CHAN_AUTO, CHANF_OVERLAP);
 		}
 		CSWG EFGH 1;
+		TNT1 A 0 A_Quake(1.5, 1, 0, 8, "");
 		CSWG A 1 A_FireProjectile("MO_ChainswordAttack", spawnheight: 2);
-	ClassicFireHold:
-		CSWG BAB 2
+	ClassicFire:
+		CSWG BA 2
 		{
-			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
+			A_WeaponOffset(random(-2,2), random(31,35), WOF_INTERPOLATE);
 			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
+			A_Quake(1.5, 2, 0, 8, "");
 		}
 		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
-		CSWG A 2
+	ClassicFireHold:
+		CSWG BA 2
 		{
-			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
+			A_WeaponOffset(random(-2,2), random(31,35), WOF_INTERPOLATE);
 			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
+			A_Quake(1.5, 2, 0, 8, "");
 		}
 	ClassicFireEnd:
 		SAWG B 0 A_ReFire("ClassicFireHold");
@@ -164,6 +168,7 @@ class MO_Chainsword: MO_Weapon
 	Swing1:
 		CSW1 A 1;
 		CSW1 BC 1;
+		TNT1 A 0 A_Quake(3.2, 4, 0, 8, "");
 //		SAWG A 0 A_StopSound(0);
 		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
 		CSW1 D 1 A_Saw("", "Machete/Yum", 30, "MO_SawPuff",  SF_NORANDOM|SF_NOPULLIN|SF_NOTURN, 80, 3, 0);
@@ -192,6 +197,7 @@ class MO_Chainsword: MO_Weapon
 
 	Swing2:
 		CSW2 ABC 1;
+		TNT1 A 0 A_Quake(3.2, 4, 0, 8, "");
 		CSW2 D 1 A_Saw("", "Machete/Yum", 30, "MO_SawPuff2",  SF_NORANDOM|SF_NOPULLIN|SF_NOTURN, 80, 3, 0);
 		SAWG A 0 A_JumpIfCloser(80, "SwingHit2Loop");
 		CSW2 E 1;
@@ -301,13 +307,11 @@ Class MO_ChainswordAttack : FastProjectile
 		Crash:
 		TNT1 A 0 A_SpawnItemEx("MO_SawPuff");
 		TNT1 A 0 A_StartSound("Chainsword/Hitwall",CHAN_WEAPON);
-		TNT1 A 0 Radius_Quake(2,3,0,4,0);
 		TNT1 A 10;
 		Stop;
 
 		XDeath:
 		TNT1 A 0 A_StartSound("Chainsword/Flesh",CHAN_WEAPON, CHANF_OVERLAP);
-		TNT1 A 0 Radius_Quake(2,3,0,4,0);
 		TNT1 A 10;
 		Stop;
     }
