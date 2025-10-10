@@ -132,14 +132,19 @@ class MO_Chainsword: MO_Weapon
 			A_StartSound("Chainsword/Start",CHAN_AUTO, CHANF_OVERLAP);
 		}
 		CSWG EFGH 1;
+		CSWG A 1 A_FireProjectile("MO_ChainswordAttack", spawnheight: 2);
 	ClassicFireHold:
-		CSWG ABAB 2
+		CSWG BAB 2
 		{
 			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
 			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
 		}
-//		SAWG A 0 A_StopSound(0);
 		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
+		CSWG A 2
+		{
+			A_WeaponOffset(random(-2,-1), random(31,35), WOF_INTERPOLATE);
+			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
+		}
 	ClassicFireEnd:
 		SAWG B 0 A_ReFire("ClassicFireHold");
 		SAWG A 0 A_WeaponOffset(0,32);
@@ -289,7 +294,7 @@ Class MO_ChainswordAttack : FastProjectile
 	States
 	{
 		Spawn:
-			TNT1 AAA 1;
+			TNT1 AA 1;
             Stop;
 
 		Death:
@@ -301,7 +306,7 @@ Class MO_ChainswordAttack : FastProjectile
 		Stop;
 
 		XDeath:
-		TNT1 A 0 A_StartSound("Chainsword/Flesh",CHAN_WEAPON);
+		TNT1 A 0 A_StartSound("Chainsword/Flesh",CHAN_WEAPON, CHANF_OVERLAP);
 		TNT1 A 0 Radius_Quake(2,3,0,4,0);
 		TNT1 A 10;
 		Stop;
