@@ -3,7 +3,7 @@ Class MO_Soulsphere : MO_BaseInventory replaces SoulSphere
 {
 	override bool Use(bool pickup)
 	{
-		owner.GiveBody(100,0);
+		owner.GiveBody(100,200);
 		owner.A_SetBlend("Blue",0.8, 20);
 		return true;
 	}
@@ -28,7 +28,7 @@ Class MO_Megasphere : MO_BaseInventory replaces MegaSphere
 {
 	override bool Use(bool pickup)
 	{
-		owner.GiveBody(200,0);
+		owner.GiveBody(200,200);
 		owner.A_SetBlend("White",0.8, 20);
 		owner.GiveInventory("MO_HeavyArmor",1);
 		return true;
