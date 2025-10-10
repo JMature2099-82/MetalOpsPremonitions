@@ -29,3 +29,26 @@ Class ThrowableType : Inventory
 	}
 }
 
+class MO_BaseInventory : Inventory abstract
+{
+	Default
+	{
+		+COUNTITEM;
+		+DONTGIB;
+		+INVENTORY.AUTOACTIVATE;
+		+INVENTORY.ALWAYSPICKUP;
+		+INVENTORY.NOSCREENFLASH;
+	}
+
+   override bool TryPickup (in out Actor toucher)
+    {
+        if (toucher)
+        {
+            GoAwayAndDie();
+            return Super.TryPickup(toucher);
+        }
+        return false;
+    }
+}
+
+

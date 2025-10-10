@@ -1,11 +1,15 @@
 
-Class MO_Soulsphere : CustomInventory replaces SoulSphere
+Class MO_Soulsphere : MO_BaseInventory replaces SoulSphere
 {
+	override bool Use(bool pickup)
+	{
+		owner.GiveBody(100,0);
+		owner.A_SetBlend("Blue",0.8, 20);
+		return true;
+	}
+
 	Default
 	{
-		+COUNTITEM
-		+INVENTORY.ALWAYSPICKUP
-		+INVENTORY.AUTOACTIVATE
 		Inventory.PickupMessage "$GOTSUPER";
 		Inventory.PickupSound "powerup/soulsphere";
 		+floatbob;
@@ -17,24 +21,21 @@ Class MO_Soulsphere : CustomInventory replaces SoulSphere
 		Spawn:
 			SOUL ABCD 6 Bright Light ("SoulsphereLight");
 			Loop;
-		Pickup:
-			TNT1 A 0;
-			TNT1 A 1 
-			{
-				GiveBody(100,200);
-				A_SetBlend("Blue",0.8, 20);
-			}
-			Stop;
 	}
 }
 
-Class MO_Megasphere : CustomInventory replaces MegaSphere
+Class MO_Megasphere : MO_BaseInventory replaces MegaSphere
 {
+	override bool Use(bool pickup)
+	{
+		owner.GiveBody(200,0);
+		owner.A_SetBlend("White",0.8, 20);
+		owner.GiveInventory("MO_HeavyArmor",1);
+		return true;
+	}
+
 	Default
 	{
-		+COUNTITEM
-		+INVENTORY.ALWAYSPICKUP
-		+INVENTORY.AUTOACTIVATE
 		Inventory.PickupMessage "$GOTMEGA";
 		Inventory.PickupSound "powerup/megasphere";
 		+floatbob;
@@ -46,14 +47,6 @@ Class MO_Megasphere : CustomInventory replaces MegaSphere
 		Spawn:
 			MEGA ABCD 6 Bright Light ("SoulsphereLight");
 			Loop;
-		Pickup:
-			TNT1 A 0;
-			TNT1 A 1 
-			{
-				GiveBody(200,200);
-				GiveInventory("MO_HeavyArmor",1);
-			}
-			Stop;
 	}
 }
 
