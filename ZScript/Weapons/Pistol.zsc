@@ -97,6 +97,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 			if(PressingFire() && invoker.Ammo1.amount > 0) {
 			return ResolveState("Fire");
 			}
+			A_SetCrosshair(invoker.GetXHair(0));
 			return JM_WeaponReady(WRF_NOSECONDARY|WRF_ALLOWRELOAD);
 		}
 		Loop;

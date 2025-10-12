@@ -176,8 +176,7 @@ extend class MO_Weapon
 	action state MO_JumpIfLessAmmo(int m = 1, statelabel where = "Reload")
 	{
 		let wep = player.readyweapon;
-		State JumpTo = wep.FindState(where);
-		if(JumpTo != NULL && invoker.Ammo1.amount  < m)
+		if(ResolveState(where) && invoker.Ammo1.amount  < m)
 		{
 			return ResolveState(where);
 		}
@@ -222,7 +221,7 @@ extend class MO_Weapon
 		invoker.BobSpeed = prevBobSpeed;
 	}
 				
-	//By Matt. Perfect to go around the Return state/ResolveState headache
+	//By Matt. Perfect to go around the Return state/ResolveState headache (not really anymore)
 	action void SetWeaponState(statelabel st,int layer=PSP_WEAPON)
     {
         if(player) player.setpsprite(layer,invoker.findstate(st));
@@ -234,8 +233,7 @@ extend class MO_Weapon
 	action state JM_WeaponReady(int wpflags = 0)
 	{	
 		A_WeaponReady(wpflags);
-		State ActionSpecial = invoker.owner.player.ReadyWeapon.FindState("ActionSpecial");
-		if(ActionSpecial != NULL && FindInventory("SpecialAction") && CheckIfInReady())
+		if(ResolveState('ActionSpecial') && FindInventory("SpecialAction") && CheckIfInReady())
 			return ResolveState('ActionSpecial');
 		else	
 			A_SetInventory("SpecialAction",0);

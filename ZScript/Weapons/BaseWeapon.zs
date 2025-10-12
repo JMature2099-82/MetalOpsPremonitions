@@ -53,11 +53,10 @@ class MO_Weapon : Weapon
 	{
 		
 		Select:
+			TNT1 A 0 A_SetCrosshair(0);
 		ContinueSelect:
 			TNT1 A 0;
 			TNT1 A 1 MO_Raise();
-			wait;
-
 		SelectAnimation:
 			TNT1 A 0;
 			TNT1 A 1;
@@ -97,11 +96,9 @@ class MO_Weapon : Weapon
 		BackToWeapon:
 			TNT1 A 1 
 			{
-				State SelectAnim = player.readyweapon.FindState("SelectAnimation");
-				State TossFlashEnd = player.readyweapon.FindState("FlashEquipmentTossEnd");
-				if(TossFlashEnd != NULL)
+				if(ResolveState("FlashEquipmentTossEnd"))
 					{return ResolveState("FlashEquipmentTossEnd");}
-				if(SelectAnim != NULL)
+				else if(ResolveState("SelectAnimation"))
 					{return ResolveState("SelectAnimation");}
 				return ResolveState(Null);
 			}
