@@ -53,8 +53,16 @@ class MO_Weapon : Weapon
 	{
 		
 		Select:
-			TNT1 A 1 A_RAISE();
+		ContinueSelect:
+			TNT1 A 0;
+			TNT1 A 1 MO_Raise();
 			wait;
+
+		SelectAnimation:
+			TNT1 A 0;
+			TNT1 A 1;
+			Goto Ready;
+
 		ClearAudioAndResetOverlays:
 			TNT1 A 1;
 			TNT1 A 0 {
@@ -81,9 +89,11 @@ class MO_Weapon : Weapon
 		Ready:
 		FIRE:
 		ReallyReady:
+		ReadyToFire:
 			"####" A 0;
-			"####" AAAA 1 A_Jump(256, "readytofire");
+			"####" AAAA 1;
 			Loop;
+
 		BackToWeapon:
 			TNT1 A 1 
 			{

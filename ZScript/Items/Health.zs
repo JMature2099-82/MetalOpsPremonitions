@@ -90,25 +90,26 @@ Class MO_Medikit : MO_BaseHealth replaces Medikit
 }
 
 
-Class MO_Berserk : CustomInventory// replaces Berserk
+Class MO_Berserk : MO_BaseInventory// replaces Berserk
 {
 	Default
 	{
-		+COUNTITEM;
-		+INVENTORY.ALWAYSPICKUP;
 		Inventory.PickupMessage "$GOTZERK";
 		Inventory.PickupSound "misc/zerkpak";
 	}
+
+	override bool Use(bool pickup)
+	{
+		owner.GiveBody(100,0);
+		owner.A_SetBlend("Red", .9, 50);
+		owner.A_GiveInventory("MO_PowerStrength");
+		return true;
+	}
+
 	States
 	{
 		Spawn:
 		PSTR A -1;
-		Stop;
-		
-		Pickup:	
-		TNT1 A 0 A_GiveInventory("MO_PowerStrength");
-		TNT1 A 0 HealThing(100, 0);
-		TNT1 A 0 A_SetBlend("Red", .9, 50);
 		Stop;
 	}
 }
