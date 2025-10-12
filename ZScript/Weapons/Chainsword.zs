@@ -68,6 +68,7 @@ class MO_Chainsword: MO_Weapon
 		CSWS A 2;
 		TNT1 A 0 A_StartSound("Chainsword/Press",0);
 		CSWS AA 2 A_WeaponOffset(-1, 4, WOF_ADD);
+		TNT1 AA 0 MO_EjectCase("MO_GunSmoke", 20, 10, 12, random(0,1), random(-1, 1), random(-1,1));
 		TNT1 A 0 A_StartSound("Chainsword/Up", 0);
 		CSWS AA 2 A_WeaponOffset(1,-4, WOF_ADD);
 		CSWG C 3;
@@ -76,7 +77,7 @@ class MO_Chainsword: MO_Weapon
 		TNT1 A 0 A_StartSound("Chainsword/Idle",1,CHANF_LOOPING);
 	ReadyToFire:
 		CSWG CD 3 JM_WeaponReady;
-		TNT1 A 0 A_FireProjectile("MO_CSwordSmokeSpawner", 0, 0, 6, -2);
+		TNT1 AA 0 MO_EjectCase("MO_GunSmoke", 20, 10, 12, random(0,1), random(-1, 1), random(-1,1));
 		Loop;
 
 	Deselect:

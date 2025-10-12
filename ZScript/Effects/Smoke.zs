@@ -17,19 +17,6 @@ Class MO_GunSmoke : BaseVisualSFX
   }
 }
 
-Class MO_CSwordSmokeSpawner : BaseVisualSFX
-{
-	Default {Speed 9;}
-	States
-	{
-		Spawn:
-			TNT1 A 0;
-			TNT1 AA 0 A_SpawnProjectile("MO_GunSmoke", 0, 0, random(0,360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH, random (-180, 0));//A_SpawnItemEx("MO_GunSmoke",15, 10, 5);
-			Stop;
-	}
-}
-
-
 //Thanks sTULKER aka dimonass!
 Class SparkSpray : Actor
 {
