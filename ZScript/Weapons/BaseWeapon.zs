@@ -88,9 +88,8 @@ class MO_Weapon : Weapon
 		Ready:
 		FIRE:
 		ReallyReady:
-		ReadyToFire:
 			"####" A 0;
-			"####" AAAA 1;
+			"####" AAAA 1 A_Jump(256, "ReadyToFire");
 			Loop;
 
 		BackToWeapon:
@@ -258,7 +257,7 @@ class MO_Weapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowMolotov");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowMolotov");
 			Goto BackToWeapon;
 		
 		CookingGrenade:
@@ -319,7 +318,7 @@ class MO_Weapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowGrenade");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");
 			Goto BackToWeapon;
 		}
 }
