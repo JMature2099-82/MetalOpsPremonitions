@@ -131,7 +131,7 @@ class MO_Chainsword: MO_Weapon
 			A_StopSound(1);
 			A_WeaponOffset(0,32);
 			A_GunFlash(NULL);
-			A_StartSound("Chainsword/Start",CHAN_AUTO, CHANF_OVERLAP);
+			A_StartSound("Chainsword/Attack",CHAN_6, CHANF_LOOP);
 		}
 		CSWG EFGH 1;
 		TNT1 A 0 A_Quake(1.5, 1, 0, 8, "");
@@ -143,7 +143,6 @@ class MO_Chainsword: MO_Weapon
 			MO_CSwordAttack(BT_ATTACK, "ClassicFireEnd");
 			A_Quake(1.5, 2, 0, 8, "");
 		}
-		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
 	ClassicFireHold:
 		CSWG BA 2
 		{
@@ -163,16 +162,13 @@ class MO_Chainsword: MO_Weapon
 		SAWG A 0 A_StopSound(1);
 		SAWG A 0 A_WeaponOffset(0,32);
 		SAWG A 0 A_GunFlash(NULL);
-		SAWG A 0 A_StartSound("Chainsword/Start",0, CHANF_OVERLAP);
 		CSWS A 1;
 		CSWG IJK 1;
-		TNT1 A 3;
+		TNT1 A 3 A_StartSound("Chainsword/Attack",6,CHANF_LOOPING);
 	Swing1:
 		CSW1 A 1;
 		CSW1 BC 1;
 		TNT1 A 0 A_Quake(3.2, 4, 0, 8, "");
-//		SAWG A 0 A_StopSound(0);
-		TNT1 A 0 A_StartSound("Chainsword/Loop",CHAN_6,CHANF_LOOPING|CHANF_OVERLAP);
 		CSW1 D 1 A_Saw("", "Machete/Yum", 30, "MO_SawPuff",  SF_NORANDOM|SF_NOPULLIN|SF_NOTURN, 80, 3, 0);
 		SAWG A 0 A_JumpIfCloser(80, "SwingHitLoop");
 		CSW1 E 1;
@@ -296,7 +292,7 @@ Class MO_ChainswordAttack : FastProjectile
 		DamageType "CUT";
 		Obituary "$OB_CHAINSWORD";
 		+FORCEXYBILLBOARD
-		+EXTREMEDEATH
+		+NOEXTREMEDEATH
 		+BLOODSPLATTER
     }
 	States

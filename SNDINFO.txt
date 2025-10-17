@@ -54,10 +54,8 @@ $random Chainsword/BashHit {CSwordBashHit1 CSwordBashHit2}
 CSwordBashHit1 CSWBSHT1
 CSwordBashHit2 CSWBSHT2
 
-Chainsword/SlashStart "Sounds/Weapons/Slot1/Chainsword/CSword_SlashStart.ogg"
-Chainsword/Stop "Sounds/Weapons/Slot1/Chainsword/CSword_Stop.ogg"
-Chainsword/Start "Sounds/Weapons/Slot1/Chainsword/CSword_Start.ogg"
-Chainsword/Loop "Sounds/Weapons/Slot1/Chainsword/CSword_AtkLoop.ogg"
+Chainsword/Attack CSWDATK
+Chainsword/Stop CSWDSTP
 
 /////////////////////////////Katana
 weapons/katana/draw KATDRW
