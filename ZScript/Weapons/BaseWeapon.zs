@@ -214,10 +214,9 @@ class MO_Weapon : Weapon
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
 			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, "FlashEquipmentToss");
-		ActuallyThrowMolotov:
-			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, 2);
 			"####" "#" 0 A_Print("No Molotov Cocktails left");
 			Goto ReallyReady;
+		ActuallyThrowMolotov:
 			TNT1 AAA 0;
 			TNT1 A 0 A_WeaponOffset(0,32);
 			MTOV AB 1;
@@ -258,7 +257,7 @@ class MO_Weapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowMolotov");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowMolotov");
 			Goto BackToWeapon;
 		
 		CookingGrenade:
@@ -288,10 +287,9 @@ class MO_Weapon : Weapon
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
 			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, "FlashEquipmentToss");
-		ActuallyThrowGrenade:
-			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, 2);
 			"####" "#" 0 A_Print("No Frag Grenades left");
 			Goto ReallyReady;
+		ActuallyThrowGrenade:
 			TNT1 AAA 0;
 			TNT1 A 0 A_WeaponOffset(0,32);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
@@ -320,7 +318,7 @@ class MO_Weapon : Weapon
 			{
 				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
 			}
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowGrenade");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ThrowGrenade");
 			Goto BackToWeapon;
 		}
 }
