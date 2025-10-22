@@ -65,7 +65,7 @@ class MolotovThrown : Actor
         Height 3;
         Projectile;
         Speed 30;
-        Damage 0;
+        DamageFunction 5;
         Gravity 0.7;
         Scale 0.2;
         +MISSILE;
@@ -74,7 +74,6 @@ class MolotovThrown : Actor
         -EXTREMEDEATH;
         +EXPLODEONWATER;
         +SKYEXPLODE;
-        -DOOMBOUNCE;
         +FLOORCLIP;
         +DONTGIB;
         +MTHRUSPECIES;
@@ -101,37 +100,61 @@ class MolotovThrown : Actor
 	Death:
 		TNT1 A 0 A_SCREAM();
 		TNT1 A 0 A_StartSound ("Molotov/BREAK", CHAN_AUTO, CHANF_DEFAULT);
-		TNT1 AAAAAAA 0 A_SpawnProjectile("MolotovGlassParticle",random(5,60),random(-3,3),CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH,random(0,360),random(20,70));
-		TNT1 A 0 A_Explode(100,85,XF_HURTSOURCE,false,75,0,0,"","Fire");
+		TNT1 AAAAAAAAAA 0 A_SpawnProjectile("MolotovGlassParticle",random(5,60),random(-3,3),pitch+random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_SAVEPITCH,random(-70,-20));
+		TNT1 A 0 A_Explode(75,85,XF_HURTSOURCE|XF_THRUSTLESS,false,75,0,0,"","Fire");
 		TNT1 A 0 A_NoBlocking;
-		TNT1 A 0 Radius_Quake(4, 24, 0, 5, 0);
-		TNT1 AA 0 A_SpawnProjectile ("FlyingBurningFuel", 10, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (10, 30));
-		TNT1 AA 0 A_SpawnProjectile ("FlyingBurningFuel2", 10, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (10, 30));
-		TNT1 AA 0 A_SpawnProjectile ("FlyingBurningFuel3", 10, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (10, 30));
-		TNT1 AAAA 0 A_SpawnProjectile ("FireworkSFXType2", 64, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (10, 25));
-//		EXPL AAAAAAAAAA 0 A_SpawnProjectile ("FireballExplosionFlamesBig", 6, 0, random (0, 360), 2, random (0, 360));
-//		FRFX ZZZ 0 BRIGHT A_SpawnProjectile ("BigNeoSmoke", 2, 0, random (0, 360), 2, random (0, 360));
-//			EXPL AAAAA 0 A_CustomMissile ("Flames", 12, 0, random (0, 360), 2, random (50, 130));
-//		EXPL AAAAA 0 A_SpawnProjectile ("FT_GroundFireSpawner", 12, 0, random (0, 360), 2, random (40, 60));
-//		EXPL AAAAAAAAAA 0 A_SpawnProjectile ("FT_GroundFireSpawner", 12, 0, random (0, 360), 2, random (50, 130));
-		
-     //   TNT1 AAAAAA 0 A_CustomMissile ("ExplosionParticleHeavy", 0, 0, random (0, 360), 2, random (0, 180))
-		//TNT1 A 20 A_Quake(4, 20, 0, 61440)
+		TNT1 A 0 A_AlertMonsters();
+		TNT1 AA 0 A_SpawnProjectile ("MolotovFlames3", 32, 0, pitch+random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_SAVEPITCH, random (10-30, -10));
+		TNT1 AA 0 A_SpawnProjectile ("MolotovFlames2", 32, 0, pitch+random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_SAVEPITCH, random (-30, -10));
+		TNT1 AA 0 A_SpawnProjectile ("MolotovFlames3", 32, 0, pitch+random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_SAVEPITCH, random (-30, -10));
+		TNT1 AAAA 0 A_SpawnProjectile ("FireworkSFXType2", 32, 0, pitch+random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_SAVEPITCH, random (-25, -10));
+		TNT1 A 0 A_SpawnItem("MolotovFlameDamage");
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_SpawnItemEx("MolotovFlames", random(-24,24), random(-30,30), random(-16,16), 1, 2, 1, 0, 128);
 		Stop;
 	}
 }
 
+Class MolotovFlameDamage : Actor
+{
+	int flameTimer;
+	Default
+	{	
+		+DONTSPLASH
+		+NOTELEPORT
+		+NOBLOCKMAP
+		+DONTTHRUST
+		Height 32;
+		Radius 32;
+		DamageType "Fire";
+	}
+
+	override void Tick()
+	{
+		Super.Tick();
+		flameTimer++;
+		if(flameTimer >= 105) self.Destroy();
+	}
+
+	States
+	{
+		Spawn:
+		TNT1 A 0 NoDelay;
+		TNT1 A 12;
+		TNT1 A 0 A_Explode(random(10,16), 175, XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS, true, 25);
+		Loop;
+	}
+}
 Class MO_ThrownGrenade : Actor
 {
 	int timer;
 	bool grenExploded; //To fix a weird issue of the rested grenade sprite still being on screen after exploding.
 	Default
 	{
-	Radius 4;
-	Height 4;
+	Radius 6;
+	Height 12;
 	Projectile;
 	Speed 36;
-    DamageFunction (1);
+    DamageFunction (6);
     Gravity 0.7;
 	Scale 0.25;
 	Projectile;
@@ -176,6 +199,7 @@ Class MO_ThrownGrenade : Actor
 			return ResolveState(Null);
 		}
 		Loop;
+
 	Death:
 		GNDE G 0 {bXFLIP = random(0,1);}
 	RestLoop:
@@ -197,7 +221,7 @@ Class MO_ThrownGrenade : Actor
 		TNT1 A 0;
 		TNT1 A 0 A_Explode(125, 220);
 		TNT1 A 0 A_NoBlocking;
-		TNT1 A 0 A_AlertMonsters(200);
+		TNT1 A 0 A_AlertMonsters();
 		TNT1 A 0 A_StartSound("fraggrenade/explosion", 6);
 		TNT1 A 0 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 		TNT1 A 1;
@@ -221,7 +245,7 @@ class GrenadeAmmo : Ammo
         Inventory.PickupSound "FragGrenade/Pickup";
         Inventory.Icon "PGRND0";
 		Inventory.AltHUDIcon "PGRND0";
-        Scale 0.45;
+        Scale 0.6;
         // +SHOOTABLE
 		+INVENTORY.IGNORESKILL;
 	}

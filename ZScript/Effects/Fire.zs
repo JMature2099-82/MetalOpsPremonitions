@@ -32,7 +32,7 @@ Class SmallFlameTrails: FlameTrails
 		Default{Scale 0.3;}
 }
 
-Class FlyingBurningFuel : Actor
+Class MolotovFlames : Actor
 {
 	Default
 	{
@@ -61,35 +61,11 @@ Class FlyingBurningFuel : Actor
         Loop;
     Death:
 	TNT1 AAAAAA 0 A_SpawnProjectile ("FlameTrails", 0, 0, random (0, 360), 2, random (0, 180));
-  	
 	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 128, XF_HURTSOURCE);
-
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 128, 0);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 96, XF_HURTSOURCE);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 80, 0);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 80, XF_HURTSOURCE);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 80, 0);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 80, XF_HURTSOURCE);
-	
-	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
-	TNT1 A 0 A_Explode(16, 80, 0);
 	TNT1 A 0 A_SetScale(1.4, 0.7);
 	
 	NF3R ABCDFEGHIJKLMNOP 1 BRIGHT;
 	TNT1 A 0 A_SetScale(1.2, 0.6);
-	TNT1 A 0 A_Explode(8, 40, XF_HURTSOURCE);
 	NF3R ACEGIKMO 1 BRIGHT;
 	TNT1 A 0 A_SetScale(1.2, 0.5);
 	NF3R ACEGIKMO 1 BRIGHT;
@@ -106,17 +82,15 @@ Class FlyingBurningFuel : Actor
     }
 }
 
-
-
-Class FlyingBurningFuel2: FlyingBurningFuel
+Class MolotovFlames2: MolotovFlames
 {
-	Default{speed 8;}
+	Default{speed 6;}
 }
 
-Class FlyingBurningFuel3: FlyingBurningFuel
+Class MolotovFlames3: MolotovFlames
 {
-	Default{speed 15;}
-}	
+	Default{speed 9;}
+}
 
 class FireworkSFXType1 : Actor
 {
@@ -155,7 +129,8 @@ Class FireworkSFXType2: FireworkSFXType1
 	{
 	Radius 2;
 	Height 2;
-	+DOOMBOUNCE;
+	BounceType "Doom";
+	Speed 11;
 	WallBounceFactor 0.5;
 	BounceFactor 0.2;
 	}
