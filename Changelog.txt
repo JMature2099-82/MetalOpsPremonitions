@@ -188,6 +188,8 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - More sound updates
 - Molotovs have a better flame animation when destroyed
 - Fixed Katana being selected automatically when starting a new game.
+- Fixed bug with equipment when you run out.
+- Renamed empty plasma cell sprites to fix potential sprite conflicts.
 
 
 
