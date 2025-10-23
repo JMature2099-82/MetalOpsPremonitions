@@ -14,7 +14,7 @@ class Katana: MO_Weapon replaces Fist
 	  Tag "$TAG_KATA";	
 	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
-	//  +WEAPON.NODEATHDESELECT;
+	  +WEAPON.NO_AUTO_SWITCH
 	  Inventory.AltHudIcon "KATAN0";
 	  Weapon.SelectionOrder 3700;
 	  }
