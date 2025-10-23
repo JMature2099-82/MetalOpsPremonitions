@@ -163,19 +163,21 @@ class MO_Chainsword: MO_Weapon
 		SAWG A 0 A_WeaponOffset(0,32);
 		SAWG A 0 A_GunFlash(NULL);
 		CSWS A 1;
+		TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
 		CSWG IJK 1;
 		TNT1 A 3 A_StartSound("Chainsword/Attack",6,CHANF_LOOPING);
 	Swing1:
 		CSW1 A 1;
+		TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
 		CSW1 BC 1;
 		TNT1 A 0 A_Quake(3.2, 4, 0, 8, "");
 		CSW1 D 1 A_Saw("", "Machete/Yum", 30, "MO_SawPuff",  SF_NORANDOM|SF_NOPULLIN|SF_NOTURN, 80, 3, 0);
-		SAWG A 0 A_JumpIfCloser(80, "SwingHitLoop");
+		SAWG A 0 A_JumpIfCloser(100, "SwingHitLoop");
 		CSW1 E 1;
 	SwingFinished:
 		CSW1 FG 1;
 		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",1);
-		TNT1 A 8;
+		TNT1 A 8 MO_SetHasteTics(4);
 		TNT1 A 0 A_Refire("Swing2");
 		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",0);
 		TNT1 A 0 A_StopSound(6);
@@ -186,7 +188,7 @@ class MO_Chainsword: MO_Weapon
 	SwingHitLoop:
 		CSW1 H 1 MO_CSwordAttack(BT_ALTATTACK, "SwingHitEnd");
 		CSW1 I 1;
-		SAWG A 0 A_JumpIfCloser(90, "SwingHitLoop");
+		SAWG A 0 A_JumpIfCloser(100, "SwingHitLoop");
 		Goto SwingHitEnd;
 		
 	SwingHitEnd:
@@ -194,15 +196,17 @@ class MO_Chainsword: MO_Weapon
 		Goto SwingFinished;
 
 	Swing2:
-		CSW2 ABC 1;
+		CSW2 A 1;
+		TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
+		CSW2 BC 1;
 		TNT1 A 0 A_Quake(3.2, 4, 0, 8, "");
 		CSW2 D 1 A_Saw("", "Machete/Yum", 30, "MO_SawPuff2",  SF_NORANDOM|SF_NOPULLIN|SF_NOTURN, 80, 3, 0);
-		SAWG A 0 A_JumpIfCloser(80, "SwingHit2Loop");
+		SAWG A 0 A_JumpIfCloser(100, "SwingHit2Loop");
 		CSW2 E 1;
 	Swing2Finished:
 		CSW2 FG 1;
 		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",0);
-		TNT1 A 8;
+		TNT1 A 8 MO_SetHasteTics(4);
 		TNT1 A 0 A_Refire("Swing1");
 		TNT1 A 0 A_StopSound(6);
 		TNT1 A 0 A_StartSound("Chainsword/Stop",6);
@@ -212,7 +216,7 @@ class MO_Chainsword: MO_Weapon
 	SwingHit2Loop:
 		CSW2 H 1 MO_CSwordAttack(BT_ALTATTACK, "SwingHit2End");
 		CSW2 I 1;
-		SAWG A 0 A_JumpIfCloser(90, "SwingHit2Loop");
+		SAWG A 0 A_JumpIfCloser(100, "SwingHit2Loop");
 		Goto SwingHit2End;
 		
 	SwingHit2End:
