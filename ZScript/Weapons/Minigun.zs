@@ -34,14 +34,14 @@ class MO_MiniGun : MO_Weapon
 	{
 	
 	SelectAnimation:
-		TNT1 A 0 SetInventory("MinigunSpin",0);
 		MGNG A 0 A_StartSound("weapons/minigun/pickup",0);
-		MGNS ABCDEFGH 1;
+		MGNG IJKLMN 1;
 	ReadyToFire:
 	Ready:
 		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"ReadyToFire2");
 		MGNG A 1 JM_WeaponReady();
 		Loop;
+
 	Deselect:
 		TNT1 A 0 
 		{
@@ -53,9 +53,11 @@ class MO_MiniGun : MO_Weapon
 		TNT1 A 0 A_StopSound(CHAN_AUTO);
 	ActuallySwitchWeapons:
 		TNT1 A 0 SetInventory("MinigunSpin",0);
-		MGNS HGFEDCBA 1;
+		MGNG OPQRST 1;
+		TNT1 A 1;
 		MGNG A 0 A_Lower(12);
 		Wait;
+
 	Select:
 		TNT1 A 0;
 		TNT1 A 0 
@@ -65,6 +67,7 @@ class MO_MiniGun : MO_Weapon
 		}
 	ContinueSelect:
 		MGNG A 0 MO_Raise();
+		MGNG A 0 SetInventory("MinigunSpin",0);
 		Goto SelectAnimation;
 
 	NewFire:
@@ -179,22 +182,6 @@ class MO_MiniGun : MO_Weapon
 				return JM_WeaponReady(WRF_NOSECONDARY);
 		}
 		Loop;
-	MuzzleFlashStarting:
-		TNT1 A 0 A_AttachLightDef('GunLighting', 'GunFireLight');
-		TNT1 A 0 A_Jump(256, "MS1", "MS2", "MS3", "MS4");
-		Stop;
-	MS1:
-		MGF1 A 1 BRIGHT;
-		Stop;
-	MS2:
-		MGF1 B 1 BRIGHT;
-		Stop;
-	MS3:
-		MGF1 C 1 BRIGHT;
-	Stop;
-	MS4:
-		MGF1 D 1 BRIGHT;
-		Stop;
 	
 	FlashDONE:
 		TNT1 A 1 A_RemoveLight('GunLighting');
@@ -229,21 +216,21 @@ class MO_MiniGun : MO_Weapon
 	FlashKick:
 		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashKickSpin");
 		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashKickFast");
-		MG1K ABCDEFGHGFEDCBA 1;
+		MG1K ABCDEFFGGFEDCBA 1;
 		Goto ReadyToFire;
 	FlashAirKick:
-		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashKickSpin");
+		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashAirKickSpin");
 		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashAirKickFast");
-		MG1K ABCDEFGHHHGFEDCBA 1;
+		MG1K ABCDEFFGGGFFEDCBA 1;
 		Goto ReadyToFire;
 	FlashKickSpin:
 		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashKickSpinFast");
-		MG2K ABCDEFGHIJKLMNO 1;
+		MG2K ABCDEFFGGHHIJKLM 1;
 		MGNG H 1;
 		Goto ReadyToFire;
 	FlashAirKickSpin:
 		TNT1 A 0 A_JumpIfInventory("MO_POWERSPEED",1,"FlashAirKickSpinFast");
-		MG2K ABCDEFGHHHIJKLMNO 1;
+		MG2K ABCDEFFGGHHIIJKLM 1;
 		MGNG H 1;
 		Goto ReadyToFire;
 		
@@ -251,13 +238,13 @@ class MO_MiniGun : MO_Weapon
 		MG1K ABCDEFGFEDCBA 1;
 		Goto ReadyToFire;
 	FlashAirKickFast:
-		MG1K ABCDEFGHGFEDCBA 1;
+		MG1K ABCDEFGGFEDCBA 1;
 		Goto ReadyToFire;
 	FlashKickSpinFast:
-		MG2K ABCDEFJKLMNO 1;
+		MG2K ABCDEFGHIJKLM 1;
 		Goto ReadyToFire;
 	FlashAirKickSpinFast:
-		MG2K ABCDEFGHHIJKLMNO 1;
+		MG2K ABCDEFGGHIJKLM 1;
 		Goto ReadyToFire;
 	}
 }
