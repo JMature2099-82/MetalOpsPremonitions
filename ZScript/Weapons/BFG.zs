@@ -178,7 +178,7 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		B7GK ABCDEFGGGFFEDCBA 1;
 		Goto ReadyToFire;
 	FlashKickFast:
-		B7GK ABCDEFGEDCBA 1;
+		B7GK ABCDEFGGFEDCBA 1;
 		Goto ReadyToFire;
 		
 	FlashAirKick:
@@ -187,7 +187,7 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		Goto ReadyToFire;
 	FlashAirKickFast:
 		B7GK A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
-		B7GK ABCDEFGGGFFEDCBA 1;
+		B7GK ABCDEFGGGGFFFEDCBA 1;
 		Goto ReadyToFire;
 	Spawn:
 		B7UG A -1;

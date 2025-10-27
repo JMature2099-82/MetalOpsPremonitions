@@ -316,12 +316,12 @@ Class IceThrowerAttack : FlamethrowerAttack
 		Spawn:
 			TNT1 A 0;
 			DB55 ABCDE 1 BRIGHT A_SetScale(frandom(0.02, 0.08),frandom(0.02, 0.08));
-			DB55 FG 1 BRIGHT 
+			DB55 FGH 1 BRIGHT 
 			{
 				A_SetScale(Scale.X+0.1, Scale.Y+0.1);
 				A_SpawnProjectile ("IceThrowerSnowFlakes", 1, 0, random (0, 360), CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH|CMF_BADPITCH|CMF_SAVEPITCH, random (0, 360));
 			}
-			DB55 HIJKLMN 1  BRIGHT {
+			DB55 IJKLMN 1  BRIGHT {
 				A_SetScale(Scale.X+0.04, Scale.Y+0.04);
 				A_Explode(1, 85, 0);
 			}

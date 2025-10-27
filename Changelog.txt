@@ -183,13 +183,17 @@ Example: 7 Deagle rounds uses 14 pistol rounds. This is a balance change.
 - Placement of option menu tips changed.
 - SMG has a random empty reload animation that is inspired by the AK-47 mag bump reload animations.
 
-9/19/25 - 10/23/25:
+9/19/25 - 10/26/25:
 - Chainsword added, it is now a proper Chainsaw replacement.
 - More sound updates
 - Molotovs have a better flame animation when destroyed
 - Fixed Katana being selected automatically when starting a new game.
 - Fixed bug with equipment when you run out.
 - Renamed empty plasma cell sprites to fix potential sprite conflicts.
+- Plasma Rifle beam now autoaims, thanks to Agent_Ash's ZSLoRWeapons! Used the ZSLoRWeapons 
+Calamity Blade's pitch code.
+- Molotov flame damage reworked
+
 
 
 

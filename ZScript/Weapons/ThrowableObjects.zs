@@ -114,17 +114,20 @@ class MolotovThrown : Actor
 	}
 }
 
-Class MolotovFlameDamage : Actor
+Class MolotovFlameDamage : BaseVisualSFX
 {
 	int flameTimer;
 	Default
 	{	
 		+DONTSPLASH
-		+NOTELEPORT
-		+NOBLOCKMAP
 		+DONTTHRUST
-		Height 32;
-		Radius 32;
+		+NOTIMEFREEZE
+		+NOTRIGGER
+		-FORCEXYBILLBOARD
+		-CLIENTSIDEONLY
+		+BLOODLESSIMPACT
+		Height 12;
+		Radius 20;
 		DamageType "Fire";
 	}
 
@@ -140,7 +143,7 @@ Class MolotovFlameDamage : Actor
 		Spawn:
 		TNT1 A 0 NoDelay;
 		TNT1 A 12;
-		TNT1 A 0 A_Explode(random(10,16), 175, XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS, true, 25);
+		TNT1 A 0 A_Explode(random(10,16), 130, XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS, true, 25);
 		Loop;
 	}
 }

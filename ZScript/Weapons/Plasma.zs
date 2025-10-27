@@ -55,7 +55,8 @@ class MO_PlasmaRifle : MO_Weapon
 		//nvm just needed to substract hitdir to hitlocation, so it doesnt spawn in the wall
 		vector3 destpos;
 		FLineTraceData t;
-		bool hit = linetrace(angle,8000,pitch,0,height * 0.5 - floorclip + player.mo.AttackZOffset*player.crouchFactor,data:t);
+		double projPitch = BulletSlope(); //From Agent_Ash's ZScript CalamityBlade conversion
+		bool hit = linetrace(angle,8000,projPitch,0,height * 0.5 - floorclip + player.mo.AttackZOffset*player.crouchFactor,data:t);
 		
 		destpos = t.hitlocation;
 		destpos -= (t.hitdir * 2);
