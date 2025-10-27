@@ -33,6 +33,10 @@ Valve - Swing sound
 Isolation Music - Katana hit sounds (https://www.youtube.com/watch?v=EgRvVq8mStE)
 Pickup sprite - Defeat, DaBlake, Werd (i think), Craneo
 
+Chainsword:
+Sprites - Craneo, iamcarrotmaster, wolchy, Motoshturman
+Sounds - Audionautics, mickyman5000, Epic Games, Infinity Ward, Activision, Raven Software, Bethesda Softworks
+
 Other credits
 - PA1NKI113R and all of the Project Brutality team - for supporting me through my time with y'all and inspiration
 to create this
@@ -129,7 +133,7 @@ NC HUD - BlueShadow
 ///			Items			///
 ////////////////////////////
 
-Shotgun shell, rifle magazine pickups by Jekyll Grim Payne, Death Egg and Franco Tieppo
+Shotgun shell, rifle magazine pickups by Jekyll Grim Payne
 Pistol magazine pickup by TSF
 Health Kits, bonuses, Keys, and Armors by TSF
 Armor pickup sound by Rare

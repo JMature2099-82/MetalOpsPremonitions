@@ -2,7 +2,7 @@ extend class MO_Weapon
 {
 	bool OwnerHasSpeed()
 	{
-		return (owner.CountInv("MO_PowerSpeed") >= 1);
+		return (owner.FindInventory("MO_PowerSpeed"));
 	}
 
 	bool OwnerHasInfiniteAmmo()
@@ -22,7 +22,7 @@ extend class MO_Weapon
 
 	bool OwnerHasBerserk()
 	{
-		return (owner.FindInventory("MO_PowerStrength"));
+		return (owner.FindInventory("MO_PowerStrength") || owner.FindInventory("PowerStrength"));
 	}
 
 

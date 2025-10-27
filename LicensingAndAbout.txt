@@ -48,3 +48,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+Chainsaw_Stop.wav (CSWDOFF.ogg) by mickyman5000 -- https://freesound.org/s/340629/ -- License: Creative Commons 0
+
+Chainsaw_Pull_Start_3.wav (CSWDPRS.ogg) by mickyman5000 -- https://freesound.org/s/340624/ -- License: Creative Commons 0
+

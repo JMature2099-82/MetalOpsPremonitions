@@ -37,11 +37,23 @@ class MOps_Handler : EventHandler
 	
 	override void CheckReplacement(replaceEvent e)
 	{
-		PlayerInfo p = players[consoleplayer];
+		PlayerPawn p = players[consoleplayer].mo;
 		switch(e.Replacee.GetClassName())
 		{
+			case 'Chainsaw':
+			if(random(1,256) <= 32)
+			{
+				e.Replacement = "MO_Flamethrower";
+				break;
+			}
+			else
+			{
+				e.Replacement = "MO_Chainsword";
+				break;
+			}
+
 			case 'Pistol':
-				if(p.mo is "MO_SergeantPlayer")
+				if(p is "MO_SergeantPlayer")
 				{e.Replacement = "MO_Deagle";}
 				else
 				{e.Replacement = "MO_VengeanceStryker";}
@@ -54,8 +66,8 @@ class MOps_Handler : EventHandler
 				e.Replacement = "ChaingunDropper";
 				break;
 			case 'PlasmaRifle':
-				e.Replacement = "MO_PlasmaRifle";
-				break;
+					e.Replacement = "MO_PlasmaRifle";
+					break;
 
 			//Ammo
 			case 'Shell':
@@ -76,18 +88,6 @@ class MOps_Handler : EventHandler
 				e.Replacement = "MO_Cell";
 				break;
 			}
-	
-			case 'ID24Fuel':
-				e.Replacement = "MO_Fuel";
-				break;
-			
-			case 'ID24FuelTank':
-				e.Replacement = "MO_LargeFuelCan";
-				break;
-
-			case 'ID24Incinerator':
-				e.Replacement = "MO_Flamethrower";
-				break;
 
 			case 'Cellpack':
 			if(random(1,256) > 168)
@@ -100,7 +100,19 @@ class MOps_Handler : EventHandler
 				e.Replacement = "MO_CellPack";
 				break;
 			}
-		}
+		
+			case 'ID24Fuel':
+				e.Replacement = "MO_Fuel";
+				break;
+				
+			case 'ID24FuelTank':
+				e.Replacement = "MO_LargeFuelCan";
+				break;
+
+			case 'ID24Incinerator':
+				e.Replacement = "MO_Flamethrower";
+				break;			
+			}
 		e.isFinal = false;
 	}
 

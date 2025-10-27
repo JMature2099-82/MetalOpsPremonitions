@@ -76,6 +76,32 @@ Class KatanaPuff : UpdatedBulletPuff
 class KatanaPuff2 : KatanaPuff // Same as KatanaPuff but it spawns the flipped decal
 {Default {Decal "SwordSlashMarkFlipped";}}
 
+class MO_SawPuff : KatanaPuff
+{
+	Default
+	{
+		DamageType "Saw";
+	}
+
+	States
+	{
+		Spawn:
+		Melee:
+		Death:
+		Crash:
+			TNT1 A 0 A_StartSound("Chainsword/hitwall");
+			TNT1 A 0 A_SpawnDebris("Sparky");
+			TNT1 AAA 0 A_SpawnProjectile("EnhancedHitSpark1", 2, 0, frandom(0,1)*frandom (-180, 180),  flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+			TNT1 AA 0 A_SpawnProjectile("EnhancedHitSpark2", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+			TNT1 A 0 A_SpawnProjectile("EnhancedHitSpark3", 2, 0, frandom(0,1)*frandom (-180, 180), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: pitch - frandom(0,1)*frandom (30, 360));
+			BPUF ABCD 1 bright Light("BulletHitLight");
+			STOP;
+	}
+}
+
+class MO_SawPuff2 : MO_SawPuff
+{Default {Decal "SwordSlashMarkFlipped";}}
+
 class MinigunPuff : UpdatedBulletPuff
 {
 	Default
@@ -155,6 +181,22 @@ class KickingPuff : UpdatedBulletPuff
 	}
 }
 
+class ChainsawBashPuff : KickingPuff
+{
+	Default
+	{
+		Obituary "$OB_CHAINSWORDBASH";
+	}
+	States
+	{
+		Crash:
+			TNT1 A 0 A_SpawnItemEx("KickSmoke");
+			TNT1 A 1 A_StartSound("Chainsword/BashHit", 3);
+			TNT1 AA 4;
+			STOP;
+	}
+}
+
 Class BerserkKickPuff : KickingPuff
 {
 	Default
@@ -163,6 +205,14 @@ Class BerserkKickPuff : KickingPuff
 		-ALLOWPARTICLES
 		ProjectileKickback 800;
 	} 
+}
+
+class BerserkChainsawBashPuff : ChainsawBashPuff 
+{
+	Default
+	{
+		ProjectileKickback 800;
+	}
 }
 
 Class PlasmaBeamPuff : UpdatedBulletPuff
@@ -193,7 +243,6 @@ Class Sparky : Actor
 {
   Default
   {
-  +Doombounce;
   +NoTeleport;
   +ForceXYBillboard;
   +missile;
@@ -202,6 +251,7 @@ Class Sparky : Actor
   Radius 3;
   Height 6;
   Speed 0.1;
+  BounceType "Doom";
   RenderStyle "ADD";
   Alpha 0.85;
   Scale 0.04;

@@ -3,7 +3,7 @@
 //   Sprites by VriskaSerket  	//
 ///////////////////////////////////
 
-class MO_Flamethrower : MO_Weapon replaces Chainsaw
+class MO_Flamethrower : MO_Weapon
 {
 	bool altFlameMode;
 
