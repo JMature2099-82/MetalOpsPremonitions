@@ -4,10 +4,9 @@ class MOps_Handler : EventHandler
 	int kicktimer;
 	const kickcooldown = 18;
 	const fastkickcooldown = 15;
+
     override void WorldTick()
-    {
-        PlayerInfo plyr = players[ConsolePlayer];
-		
+    {		
 		if(kicktimer > 0)
 			kicktimer--;
     }
@@ -36,12 +35,14 @@ class MOps_Handler : EventHandler
 	}
 	
 	override void CheckReplacement(replaceEvent e)
-	{
-		PlayerPawn p = players[consoleplayer].mo;
+	{	
+		PlayerPawn p = players[0].mo;		
+		if(!p) return;
+
 		switch(e.Replacee.GetClassName())
 		{
 			case 'Chainsaw':
-			if(random(1,256) <= 32)
+			if(random(1,256) <= 80)
 			{
 				e.Replacement = "MO_Flamethrower";
 				break;
@@ -54,10 +55,10 @@ class MOps_Handler : EventHandler
 
 			case 'Pistol':
 				if(p is "MO_SergeantPlayer")
-				{e.Replacement = "MO_Deagle";}
+				{e.Replacement = "MO_Deagle"; break;}
 				else
-				{e.Replacement = "MO_VengeanceStryker";}
-				break;
+				{e.Replacement = "MO_VengeanceStryker"; break;}
+
 			case 'Shotgun':
 				e.Replacement = "ShotgunDropper";
 				break;
@@ -75,7 +76,7 @@ class MOps_Handler : EventHandler
 				break;
 			case 'Shellbox':
 				e.Replacement = "MO_ShellBox";
-				break;
+				break;			
 
 			case 'Cell':
 			if(random(1,256) > 168)
