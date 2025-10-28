@@ -36,9 +36,7 @@ class MOps_Handler : EventHandler
 	
 	override void CheckReplacement(replaceEvent e)
 	{	
-		PlayerPawn p = players[0].mo;		
-		if(!p) return;
-
+		PlayerPawn p = players[0].mo;
 		switch(e.Replacee.GetClassName())
 		{
 			case 'Chainsaw':
