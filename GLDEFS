@@ -94,6 +94,17 @@ pulselight BFGLight
 	attenuate 1
 }
 
+pulselight BFGLightLow
+{
+    color 0.2 1.0 0.3
+    size 72
+    secondarySize 84
+    interval 1
+    offset 0 40 0
+	attenuate 1
+	intensity 0.5
+}
+
 pulselight BFGSmallLight
 {
     color 0.2 1.0 0.3
@@ -313,15 +324,6 @@ offset 0 16 0
 Object MO_BlurSphere
 {
 Frame PINS { Light PartialInvisLight }
-}
-
-PulseLight MegaBersLight
-{
-Color 1.0 0.0 0.0
-Size 35
-SecondarySize 40
-Interval 5.0
-offset 0 16 0
 }
 
 //Added key lights

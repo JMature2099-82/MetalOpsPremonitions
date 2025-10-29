@@ -15,6 +15,8 @@ class Katana: MO_Weapon replaces Fist
 	  +WEAPON.WIMPY_WEAPON;
 	  +WEAPON.NOALERT;
 	  +WEAPON.NO_AUTO_SWITCH
+	  +INVENTORY.UNDROPPABLE
+	  +WEAPON.NOAUTOSWITCHTO
 	  Inventory.AltHudIcon "KATAN0";
 	  Weapon.SelectionOrder 3700;
 	  }

@@ -126,9 +126,10 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		Goto ReadyToFire;
 	
 	Flash:
-		TNT1 A 25 A_AttachLightDef('GunLighting', 'BFGLight');
-		TNT1 A 1 A_RemoveLight('GunLighting');
-		Stop;
+		TNT1 A 26 A_AttachLightDef('GunLighting', 'BFGLightLow');
+		TNT1 A 1;
+		TNT1 A 2 A_AttachLightDef('GunLighting', 'BFGLight');
+		Goto GunLightingDone;
 
 	BFG10KFlash:
 		TNT1 A 3 A_AttachLightDef('GunLighting', 'BFGLight');
@@ -186,7 +187,6 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		B7GK ABCDEFGGGGGFFEDCBA 1;
 		Goto ReadyToFire;
 	FlashAirKickFast:
-		B7GK A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
 		B7GK ABCDEFGGGGFFFEDCBA 1;
 		Goto ReadyToFire;
 	Spawn:
