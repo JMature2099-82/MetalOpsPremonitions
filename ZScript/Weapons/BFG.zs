@@ -126,7 +126,7 @@ class MO_BFG9000 : MO_Weapon// replaces BFG9000
 		Goto ReadyToFire;
 	
 	Flash:
-		TNT1 A 26 A_AttachLightDef('GunLighting', 'BFGLightLow');
+		TNT1 A 26 A_AttachLightDef('GunLighting', 'BFGLight');
 		TNT1 A 1;
 		TNT1 A 2 A_AttachLightDef('GunLighting', 'BFGLight');
 		Goto GunLightingDone;

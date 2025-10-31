@@ -94,7 +94,7 @@ pulselight BFGLight
 	attenuate 1
 }
 
-pulselight BFGLightLow
+/*pulselight BFGLightLow
 {
     color 0.2 1.0 0.3
     size 72
@@ -103,7 +103,7 @@ pulselight BFGLightLow
     offset 0 40 0
 	attenuate 1
 	intensity 0.5
-}
+}*/
 
 pulselight BFGSmallLight
 {
