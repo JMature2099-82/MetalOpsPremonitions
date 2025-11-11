@@ -288,6 +288,7 @@ MO_CROSSHAIR_SLIDER = "Crosshair Settings";
 MO_ADSOPT = "ADS/Minigun Spin Control Type";
 MO_DISCORD_PRESENCE = "Discord rich presence";
 MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
+MO_WEPRECOIL = "Weapon Recoil";
 
 //Tips for options
 MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
@@ -297,7 +298,7 @@ MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis opti
 MO_ADSTIP = "\cuToggle\c-: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \n\csHold\c-: Click alt fire to aim down the sights, release to unzoom. \n\cmHybrid\c-: Based on BDv21's system that combines both Toggle and Hold." ;
 MO_ADSTIP_CHAINGUN = "\cfChaingun\c-: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
 MO_RICOCHET_TIP = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
-MO_RECOIL_TIP = "Disables recoil on shootable weapons. \nIf you're not using mouse look, this MUST be turned on!";
+MO_RECOIL_TIP = "Enables/disables recoil on shootable weapons. \nIf you're not using mouse look, set this option to OFF!";
 MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
 MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
 

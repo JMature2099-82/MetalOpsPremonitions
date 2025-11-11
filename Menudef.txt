@@ -1,19 +1,11 @@
 LISTMENU "MainMenu"
 {
-	IfGame(Doom, Chex)
+	IfGame(Doom, Chex, Strife)
 	{
-		StaticPatch 62, -32, "MDOM_MOP"
-		Position 97, 74
-		IfOption(ReadThis)
-		{
-			Position 97, 72
-		}
+		StaticPatch 64, -18, "MDOM_MOP"
+		Position 94, 75
 	}
-	IfGame(Strife)
-	{
-		StaticPatch 84, 2, "M_STRIFE"
-		Position 97, 45
-	}
+
 	IfGame(Heretic)
 	{
 		StaticPatch 88, 0, "M_HTIC"
@@ -61,6 +53,7 @@ LISTMENU "MainMenu"
 		TextItem "$MNU_INFO", "i", "ReadThisMenu"
 		TextItem "$MNU_QUITGAME", "q", "QuitMenu"
 	}
+	Size Clean
 }
 
 OptionMenu "MetalOpsMenu"
@@ -111,7 +104,7 @@ OptionMenu "MetalOpsMenu"
 	Tooltip "$MO_ADSTIP"
 	Tooltip "$MO_ADSTIP_CHAINGUN"
 	StaticText ""
-	Option "Disable Gun Recoil", "mo_nogunrecoil", "OnOff"
+	Option "$MO_WEPRECOIL", "mo_nogunrecoil", "OffOn"
 	Tooltip "$MO_RECOIL_TIP"
 	StaticText ""
 	ToolTip ""

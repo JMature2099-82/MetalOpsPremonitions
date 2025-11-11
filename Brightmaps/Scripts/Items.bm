@@ -1,9 +1,9 @@
 //Items
 brightmap sprite 5TIMA0 {map "Brightmaps/Items/5TIMA0_BM.png"}
-brightmap sprite MEDIA0 {map "Brightmaps/Items/MEDIA0_BM.png"}
+brightmap sprite MEDIA0 {map "Brightmaps/Items/MEDIA0.png"}
 brightmap sprite PVISA0 {map "Brightmaps/Items/PVISA0_BM.png" DisableFullBright}
 brightmap sprite PVISB0 {map "Brightmaps/Items/PVISA0_BM.png" DisableFullBright}
-brightmap sprite PSTRA0 {map "Brightmaps/Items/MEDIA0_BM.png" DisableFullBright}
+brightmap sprite PSTRA0 {map "Brightmaps/Items/PSTRA0.png" DisableFullBright}
 
 //Keys
 brightmap sprite KEYRB0 {map "Brightmaps/Items/KEYRB0_BM.png" DisableFullBright}
