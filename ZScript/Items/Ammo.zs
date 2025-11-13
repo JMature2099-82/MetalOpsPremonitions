@@ -43,9 +43,9 @@ class MO_LowCaliber : MO_AmmoBase
 	{
 	  Tag "$TAG_LOWCALIBER";
 	  Inventory.Amount 10;
-	  Inventory.MaxAmount 150;
+	  Inventory.MaxAmount 200;
 	  Ammo.BackpackAmount 30;
-	  Ammo.BackpackMaxAmount 300;
+	  Ammo.BackpackMaxAmount 400;
 	  Inventory.Icon "CLIPB0";
 	  Inventory.PickUpSound "misc/ammopickup";
 	  Scale 0.85;
