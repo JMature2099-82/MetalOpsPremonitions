@@ -332,11 +332,17 @@ rcktxpl1 rcktxpl1
 rcktxpl2 rcktxpl2
 rcktxpl3 rcktxpl3
 
+$random FarExplosion {FAREXPL0 FAREXPL1 FAREXPL2}
+FAREXPL0 FAREXPL0
+FAREXPL1 FAREXPL1
+FAREXPL2 FAREXPL2
+
 rocket/nukeexplosion NUKEXPL
 rocket/nukeexplosionfar NKEFRXP
 rocket/flyloop "Sounds/Weapons/RocketLauncher/RocketFlyLoop.ogg"
 
 $attenuation rocket/nukeexplosion 0.3
+$attenuation FarExplosion 0.3
 
 //Magazines and casings ----------------------------
 $random casings/largemag  { largedrop1 largedrop2 largedrop3 largedrop4 largedrop5 largedrop6 }

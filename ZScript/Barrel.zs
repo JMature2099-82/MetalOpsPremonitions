@@ -59,6 +59,7 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 				A_SpawnItemEx("BarrelExplosionFX",0,0,12,0,0,0,0,SXF_NOCHECKPOSITION,0);
 				A_SpawnItemEx("MO_ShockWave",flags:SXF_NOCHECKPOSITION);
 				A_Scream();
+				A_StartSound("FarExplosion",8);
 				A_Explode();
 				A_SpawnItemEx("MO_BarrelBottomRemains", flags: SXF_NOCHECKPOSITION);
 		}
@@ -69,6 +70,7 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		TNT1 A 0
 		{
 			A_Scream();
+			A_StartSound("FarExplosion",8);
 			A_Explode();
 		}
 		b3xp DEFGHIJKLMN 2 Bright;
