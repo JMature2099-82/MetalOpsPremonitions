@@ -213,6 +213,7 @@ Pixabay - Rad suit hiss sound
 EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from Command & Conquer Red Alert 3 Uprising
 Activision, id Software, Bethesda, Raven Software - Menu select, back and confirm sounds from Wolfenstein 2009.
 Tekila - Loading bar fill graphic (NOTCH.png)
+iamcarrotmaster - nukage barrel sprites
 
 /////////////////////////////
 ///			 Flashlight++				///

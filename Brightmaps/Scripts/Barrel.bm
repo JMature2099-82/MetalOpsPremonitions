@@ -1,69 +1,65 @@
-//Barrel Brightmaps, from Smooth Doom Brightmapped Edition
+//Barrel Brightmaps, from Carrot's Vanilla Project.
 
 brightmap sprite BARLA0
 {
-	map "brightmaps/World/barrel/BARLA0.png"
+	map "brightmaps/World/barrel/BARGLW1.png"
 } 
 
 brightmap sprite BARLB0
 {
-	map "brightmaps/World/barrel/BARLB0.png"
+	map "brightmaps/World/barrel/BARGLW1.png"
 }
 
 brightmap sprite BARLC0
 {
-	map "brightmaps/World/barrel/BARLC0.png"
+	map "brightmaps/World/barrel/BARGLW1.png"
 }
 
 brightmap sprite BARLD0
 {
-	map "brightmaps/World/barrel/BARLD0.png"
+	map "brightmaps/World/barrel/BARGLW2.png"
 }
 
 brightmap sprite BARLE0
 {
-	map "brightmaps/World/barrel/BARLE0.png"
+	map "brightmaps/World/barrel/BARGLW2.png"
 }
 
 brightmap sprite BARLF0
 {
-	map "brightmaps/World/barrel/BARLF0.png"
+	map "brightmaps/World/barrel/BARGLW2.png"
 }
 
 brightmap sprite BARLG0
 {
-	map "brightmaps/World/barrel/BARLG0.png"
+	map "brightmaps/World/barrel/BARGLW2.png"
 }
 
 brightmap sprite BARLH0
 {
-	map "brightmaps/World/barrel/BARLH0.png"
+	map "brightmaps/World/barrel/BARGLW3.png"
 }
 
 brightmap sprite BARLI0
 {
-	map "brightmaps/World/barrel/BARLI0.png"
+	map "brightmaps/World/barrel/BARGLW3.png"
 }
 
 brightmap sprite BARLJ0
 {
-	map "brightmaps/World/barrel/BARLJ0.png"
+	map "brightmaps/World/barrel/BARGLW3.png"
 }
 
 brightmap sprite BARLK0
 {
-	map "brightmaps/World/barrel/BARLK0.png"
+	map "brightmaps/World/barrel/BARGLW1.png"
 }
 
 brightmap sprite BARLL0
 {
-	map "brightmaps/World/barrel/BARLL0.png"
+	map "brightmaps/World/barrel/BARGLW1.png"
 }
 
-brightmap sprite BARLM0
-{
-	map "brightmaps/World/barrel/BARLM0.png"
-}
 
 brightmap sprite B3XPA0
 {
@@ -92,11 +88,5 @@ brightmap sprite B3XPD0
 brightmap sprite B3XPE0
 {
 	map "brightmaps/World/barrel/B3XPE0.png"
-	disablefullbright
-}
-
-brightmap sprite B3XPF0
-{
-	map "brightmaps/World/barrel/B3XPF0.png"
 	disablefullbright
 }

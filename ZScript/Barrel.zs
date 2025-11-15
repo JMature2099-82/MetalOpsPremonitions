@@ -1,7 +1,8 @@
-//Mostly based on the Smooth Doom barrels
+//Mostly based on the Smooth Doom barrels.
+//Update: Now uses the CVP barrels, thanks iamcarrotmaster for giving me permission
 class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 {
-	bool isSunlust; //For Sunlust's Map 30 for the beginning crushers
+	bool isSunlust; //For Sunlust's Map 30 for the crushers as the beginning of the level.
 	int age;
 	Default
 	{
@@ -41,21 +42,20 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 	States
 	{
 	Spawn:
-		BARL abcdefghijklm 3;
+		BARL abcdefghijkl 3;
 		Loop;
 	Death:
 		B3XP A 8 BRIGHT;
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
-		B3XP D 2 BRIGHT;
 	Death.Crush:
 		BEXP E 0 A_JumpIf(invoker.isSunlust, "PerformanceDeath");
 		bexp E 0 Bright 
 		{
-				A_SpawnItemEx ("BarrelShrapnelA",0,0,5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",0,0,5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelC",0,0,5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",0,0,5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelA",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelC",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
 				A_SpawnItemEx("BarrelExplosionFX",0,0,12,0,0,0,0,SXF_NOCHECKPOSITION,0);
 				A_SpawnItemEx("MO_ShockWave",flags:SXF_NOCHECKPOSITION);
 				A_Scream();
@@ -68,11 +68,10 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 	PerformanceDeath:
 		TNT1 A 0
 		{
-			A_Log("Low quality");
 			A_Scream();
 			A_Explode();
 		}
-		b3xp EFGHIJKLMNO 2 Bright;
+		b3xp DEFGHIJKLMN 2 Bright;
 		TNT1 A 1050 Bright A_BarrelDestroy;
 		TNT1 A 5 A_Respawn;
 		Wait;

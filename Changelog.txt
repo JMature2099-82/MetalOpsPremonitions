@@ -195,5 +195,9 @@ Calamity Blade's pitch code.
 - Molotov flame damage reworked
 - Minigun sprites tweaked, mainly changed the hand and reanimated the kick and select animations.
 
+11/14/25
+- Pistol reserve ammo increase from 200 without a backpack, and 400 with backpack. This matches Rifle ammo.
+- Nukage barrel sprites changed to the CVP barrels, sprites by iamcarrotmaster.
+
 
 
