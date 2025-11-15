@@ -201,7 +201,8 @@ id Software
 Power up wear off and Invulnerability sounds from Quake by ID Software,  HQ sounds by SeanTheBermanator
 Night Vision goggles off sound from Call of Duty Modern Warfare 2007
 Night Vision goggles warning sound by sweet_trip from freesound.com
-Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, 
+Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, hit sounds by ID Software,
+SNK (armor hit sound from Samurai Shodown 2019) and electric shock sound by SoundEffectShowcase
 DreamCatcher Interactive (THQ Nordic)
 scalliano - GLDefs code for spheres, Haste sphere
 Jekyll Grim Payne - A_Eject (MO_EjectCasing) from Beautiful Doom

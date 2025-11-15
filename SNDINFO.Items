@@ -47,17 +47,18 @@ powerup/hastesphereloop "sounds/items/powerups/Haste_SphereLoop.ogg"
 powerup/hasteloop "sounds/items/powerups/Haste_ActiveLoop.ogg"
 powerup/hasteover "sounds/items/powerups/Haste_End.ogg"
 
-
 powerup/soulsphere SOULPCK
 powerup/megasphere MEGAPCK
+
 powerup/invul INVLPICK
 $random powerup/invul_loop {invul_loop1 invul_loop2}
 invul_loop1 INVLLOP1
 invul_loop2 INVLLOP2
 powerup/invul_looplayer INVLLOP3
 powerup/invul_end INVLEND
-powerup/invul_damage INVLDMG
-
+$random powerup/invul_damage {invul_dmg1 invul_dmg2}
+invul_dmg1 INVLDMG1
+invul_dmg2 INVLDMG2
 powerup/invis INVSPICK
 powerup/inviswear INVSWARN
 

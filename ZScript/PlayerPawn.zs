@@ -46,9 +46,9 @@ class MO_PlayerBase : DoomPlayer
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
 	{
 		PlayerInfo plyr = Self.Player;
-		if(plyr.mo.CountInv("MO_PowerInvul") == 1)
+		if(plyr.mo.FindInventory("MO_PowerInvul"))
 		{
-			A_StartSound("powerup/invul_damage",3);
+			A_StartSound("powerup/invul_damage",100, CHANF_OVERLAP);
 		}
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
