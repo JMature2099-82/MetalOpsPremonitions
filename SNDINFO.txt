@@ -343,6 +343,7 @@ rocket/flyloop "Sounds/Weapons/RocketLauncher/RocketFlyLoop.ogg"
 
 $attenuation rocket/nukeexplosion 0.3
 $attenuation FarExplosion 0.3
+$rolloff FarExplosion 2500 5000
 
 //Magazines and casings ----------------------------
 $random casings/largemag  { largedrop1 largedrop2 largedrop3 largedrop4 largedrop5 largedrop6 }
@@ -439,7 +440,7 @@ $limit bfg/10explfar 3
 
 $rolloff weapons/bfg/explosionfar 2500 5000
 $attenuation bfg/10expl 0.55
-$attenuation weapons/bfg/explosion 0.5
+$attenuation weapons/bfg/explosion 0.3
 $volume weapons/bfg/idleloop 0.75
 
 bfg/switch B7GSWTC
@@ -492,5 +493,14 @@ $random FragGrenade/Explosion {grnexpl1 grnexpl2 grnexpl3}
 grnexpl1 FRGEXPL1
 grnexpl2 FRGEXPL2
 grnexpl3 FRGEXPL3
+$random FragGrenade/FarExplosion {grn_farexpl1 grn_farxpl2 grn_farexpl3}
+grn_farexpl1 "Sounds/SFX/EXPLOSIONS/Frag_Far_Expl1.ogg"
+grn_farexpl2 "Sounds/SFX/EXPLOSIONS/Frag_Far_Expl2.ogg"
+grn_farexpl3 "Sounds/SFX/EXPLOSIONS/Frag_Far_Expl3.ogg"
+$attenuation FragGrenade/FarExplosion 0.2
+$rolloff FragGrenade/FarExplosion  2500 7500
 
-World/barrelExpl BAREXPL
+$random World/barrelExpl {BAREXPL1 BAREXPL2 BAREXPL3}
+BAREXPL1 BAREXPL1
+BAREXPL2 BAREXPL2
+BAREXPL3 BAREXPL3

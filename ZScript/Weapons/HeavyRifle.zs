@@ -751,6 +751,7 @@ Class HCRGrenade : Actor
 	Explode:
 		TNT1 A 0 A_StopSound(CHAN_7);
 		TNT1 A 0 A_StartSound("40mmExplosion");
+		TNT1 A 0 A_StartSound("fraggrenade/farexplosion", 8);
 		TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 		TNT1 A 0 A_Explode(125, 180, damagetype: "ExplosiveImpact");
 		TNT1 A 0 DESTROY();
