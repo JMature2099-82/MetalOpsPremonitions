@@ -52,10 +52,10 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		BEXP E 0 A_JumpIf(invoker.isSunlust, "PerformanceDeath");
 		bexp E 0 Bright 
 		{
-				A_SpawnItemEx ("BarrelShrapnelA",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelC",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),5,random (5, -5),random (5, -5),random (5, 8),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelA",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelC",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
 				A_SpawnItemEx("BarrelExplosionFX",0,0,12,0,0,0,0,SXF_NOCHECKPOSITION,0);
 				A_SpawnItemEx("MO_ShockWave",flags:SXF_NOCHECKPOSITION);
 				A_Scream();
@@ -112,7 +112,7 @@ Class BarrelShrapnelBase : actor
 	{
 		Radius 2;
 		Height 2;
-		Speed 8;
+		Speed 10;
 		Mass 1;
 		Gravity 0.9;
 		Mass 15;
