@@ -158,14 +158,11 @@ extend class MO_Weapon
 		int magCount = MagazineAmmo.amount;
 		int reserveCount = ReserveAmmo.amount;
 
-		if(magCount >= maxMag)
+		if(magCount >= maxMag || reserveCount < EqualReserve)
 		return ResolveState(fullOrEmpty);
 
-		if(!invoker.OwnerHasSpeed() && magCount > EqualReserve || magCount >= maxMag)
+		if(!invoker.OwnerHasSpeed() && magCount > 1)
 		return ResolveState(partReload);
-
-		if(reserveCount < EqualReserve)
-		return ResolveState(fullOrEmpty);
 
 		if(magCount <= 0)
 		return ResolveState(emptyreload);
