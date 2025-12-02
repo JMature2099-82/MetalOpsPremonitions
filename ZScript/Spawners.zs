@@ -91,24 +91,6 @@ class ChaingunSpawner : RandomSpawner
 	}
 }
 
-class ClipSpawner : RandomSpawner replaces Clip
-{
-	Default
-	{
-		DropItem "MO_HighCaliber";
-		DropItem "MO_LowCaliber";
-	}
-}
-
-class ClipboxSpawner : RandomSpawner replaces Clipbox
-{
-	Default
-	{
-		DropItem "MO_HighCalBox", 255;
-		DropItem "MO_LowCalBox", 255;
-	}
-}
-
 class BFGSpawner : RandomSpawner replaces BFG9000
 {
 	Default

@@ -18,6 +18,7 @@ class MOps_Handler : EventHandler
 		{
 			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
+			pl.A_Overlay(PSP_KICK, NULL);
 		}
 	}
 	
@@ -39,17 +40,10 @@ class MOps_Handler : EventHandler
 		PlayerPawn p = players[0].mo;
 		switch(e.Replacee.GetClassName())
 		{
+			//Weapons
 			case 'Chainsaw':
-			if(random(1,256) <= 80)
-			{
-				e.Replacement = "MO_Flamethrower";
-				break;
-			}
-			else
-			{
 				e.Replacement = "MO_Chainsword";
 				break;
-			}
 
 			case 'Pistol':
 				if(p is "MO_SergeantPlayer")
@@ -65,10 +59,42 @@ class MOps_Handler : EventHandler
 				e.Replacement = "ChaingunDropper";
 				break;
 			case 'PlasmaRifle':
+				if(random(1,256) <= 80)
+				{
+					e.Replacement = "MO_Flamethrower";
+					break;
+				}
+				else
+				{
 					e.Replacement = "MO_PlasmaRifle";
 					break;
+				}
 
 			//Ammo
+			case 'Clip':
+			if(random(1,256) > 180)
+			{
+				e.Replacement = "MO_LowCaliber";
+				break;
+			}
+			else
+			{
+				e.Replacement = "MO_HighCaliber";
+				break;
+			}
+
+			case 'Clipbox':
+			if(random(1,256) > 180)
+			{
+				e.Replacement = "MO_LowCalBox";
+				break;
+			}
+			else
+			{
+				e.Replacement = "MO_HighCalBox";
+				break;
+			}
+
 			case 'Shell':
 				e.Replacement = "MO_ShotShell";
 				break;
@@ -77,7 +103,7 @@ class MOps_Handler : EventHandler
 				break;			
 
 			case 'Cell':
-			if(random(1,256) > 168)
+			if(random(1,256) > 180)
 			{
 				e.Replacement = "MO_Fuel";
 				break;
@@ -111,6 +137,12 @@ class MOps_Handler : EventHandler
 			case 'ID24Incinerator':
 				e.Replacement = "MO_Flamethrower";
 				break;			
+
+			//Compatibility shit
+			case 'ExplosiveBarrel1':
+				e.Replacement = "MO_ExplosiveBarrel";
+				break;
+
 			}
 		e.isFinal = false;
 	}
@@ -133,7 +165,7 @@ class MOps_Handler : EventHandler
         PlayerPawn pl = players[e.Player].mo;
         if(!pl)
          return;
-
+		
         if (e.Name ~== "PrevThrowable")
         {
             let moweap = MO_Weapon(pl.player.readyweapon);
@@ -211,7 +243,7 @@ class MOps_Handler : EventHandler
 					State FlashAirKick = wp.FindState("FlashAirKick");
 					if(Kick != Null && !mo_wep.isZoomed)
 					{
-						pl.player.SetPSprite(-999, wp.FindState("Kick"));
+						pl.player.SetPSprite(PSP_KICK, wp.FindState("Kick"));
 						if(FlashKick != NULL && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
 						{
 								if(FlashAirKick != Null && pl.Vel.Z != 0)
