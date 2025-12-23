@@ -333,60 +333,90 @@ class MO_Deagle : MO_Weapon// replaces Pistol
 		TNT1 A 0 A_WeaponOffset(0,32);
 		PSTG A 0 MO_CheckReload(7,2, "EmptyReload", "PartialReload", "ReadyToFire");
 	Reload.NormalAnimation:
-		PSTG A 0 A_JumpIf(invoker.IsZoomed, "Reload.Zoomed");
-		PSTG A 0 A_ZoomFactor(1.0);
-		PSTG A 0 A_SetCrosshair(invoker.GetXHair(1));
+		TNT1 A 0 A_JumpIf(invoker.IsZoomed, "Reload.Zoomed");
+		TNT1 A 0 A_ZoomFactor(1.0);
+		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(1));
+		TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "Reload.Fast");
 		DGLR ABCD 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DGLR E 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_Overlay(-12, "MagazineDrop");
 		DGLR F 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_StartSound("weapons/deag/magoutempty",CHAN_7);
 		DGLR GH 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_StartSound("weapons/deag/magout",CHAN_AUTO);
-		DGLR I 12 
-		{
-			JM_WeaponReady(WRF_NOFIRE);
-			MO_SetHasteTics(6);
-		}
+		DGLR I 12 JM_WeaponReady(WRF_NOFIRE);
+		DGLR JKL 1 JM_WeaponReady(WRF_NOFIRE);
+		TNT1 A 0 A_StartSound("weapons/deag/magin",CHAN_AUTO);
+		DGLR M 1 JM_WeaponReady(WRF_NOFIRE);
+		DGLR N 1 JM_WeaponReady(WRF_NOFIRE);
+		DGLR O 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "MO_LowCaliber",8,2);
+		DGLR PQ 1 JM_WeaponReady(WRF_NOFIRE);
+		DGLR R 8 JM_WeaponReady(WRF_NOFIRE);
+		DGLR STUV 1;
+		Goto ReadyToFire;
+
+	Reload.Fast:
+		DGLR ABCD 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 A_Overlay(-12, "MagazineDrop");
+		DGLR F 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 A_StartSound("weapons/deag/magoutempty",CHAN_7);
+		DGLR GH 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 A_StartSound("weapons/deag/magout",CHAN_AUTO);
+		DGLR I 6 JM_WeaponReady(WRF_NOFIRE);
 		DGLR JKL 1 JM_WeaponReady(WRF_NOFIRE);
 		TNT1 A 0 A_StartSound("weapons/deag/magin",CHAN_AUTO);
 		DGLR M 1 JM_WeaponReady(WRF_NOFIRE);
 		DGLR N 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-		DGLR O 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "MO_LowCaliber",8,2);
 		DGLR PQ 1 JM_WeaponReady(WRF_NOFIRE);
-		DGLR R 8 
-		{
-			JM_WeaponReady(WRF_NOFIRE);
-			MO_SetHasteTics(4);
-		}
+		DGLR R 4;
 		DGLR STUV 1;
 		Goto ReadyToFire;
 
 	Reload.Zoomed:
 		PSTG A 0 A_ZoomFactor(1.17);
 		PSTG A 0 A_WeaponOffset(0,32);
+		TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "Reload.FastZoomed");
 		DEZ2 ABCD 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DEZ2 E 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG AA 0;
 		PSTG A 0 A_StartSound("weapons/deag/magout",CHAN_7);
 		DEZ2 FGH 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_StartSound("weapons/deag/magoutempty",CHAN_AUTO);
-		DEZ2 H 12 
-		{
-			JM_WeaponReady(WRF_NOFIRE);
-			MO_SetHasteTics(6);
-		}
+		DEZ2 H 12 JM_WeaponReady(WRF_NOFIRE);
 		DEZ2 HG 1 JM_WeaponReady(WRF_NOFIRE);
 		TNT1 A 0 A_StartSound("weapons/deag/magin",CHAN_AUTO);
 		DEZ2 IJK 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 		DEZ2 LM 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "MO_LowCaliber",8,2);
-		DEZ2 N 8 MO_SetHasteTics(4);
+		DEZ2 N 8;
+		DEZ2 OPQR 1 A_WeaponOffset(0,32);
+		DGZ1 A 1;
+		PSTG A 0
+		{
+			if(invoker.isZoomed && invoker.isHoldingAim && PressingAltFire()) {return ResolveState("ADSHOLD");}
+			else if(!PressingAltFire() && invoker.isHoldingAim)
+			{
+				return ResolveState("UnZoom");
+			}
+			return ResolveState(null);
+		}
+		Goto ReadyToFire;
+
+	Reload.FastZoomed:
+		DEZ2 ABCD 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 A_StartSound("weapons/deag/magout",CHAN_7);
+		DEZ2 FGH 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 A_StartSound("weapons/deag/magoutempty",CHAN_AUTO);
+		DEZ2 H 6 JM_WeaponReady(WRF_NOFIRE);
+		DEZ2 HG 1 JM_WeaponReady(WRF_NOFIRE);
+		TNT1 A 0 A_StartSound("weapons/deag/magin",CHAN_AUTO);
+		DEZ2 IJK 1 JM_WeaponReady(WRF_NOFIRE);
+		DEZ2 M 1 JM_WeaponReady(WRF_NOFIRE);
+		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "MO_LowCaliber",8,2);
+		DEZ2 N 4;
 		DEZ2 OPQR 1 A_WeaponOffset(0,32);
 		DGZ1 A 1;
 		PSTG A 0
@@ -597,8 +627,6 @@ class MO_Deagle : MO_Weapon// replaces Pistol
 //Fast Reload No Ammo		
 	FastEmptyReload:
 		DG1R ABCD 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTG A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-		DG1R E 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_Overlay(-12, "MagazineDrop");
 		DG1R F 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 A_StartSound("weapons/deag/magoutempty",CHAN_7);
@@ -606,15 +634,12 @@ class MO_Deagle : MO_Weapon// replaces Pistol
 		PSTG A 0 A_StartSound("weapons/deag/magout",CHAN_AUTO);
 		DG1R I 6;
 		DG1R J 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTG A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
 		DG1R KL 1 JM_WeaponReady(WRF_NOFIRE);
 		TNT1 A 0 A_StartSound("weapons/deag/magin",CHAN_AUTO);
 		DG1R M 1 JM_WeaponReady(WRF_NOFIRE);
 		DG1R N 1 JM_WeaponReady(WRF_NOFIRE);
-		PSTF A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-		DG1R O 1 JM_WeaponReady(WRF_NOFIRE);
 		PSTG A 0 JM_ReloadGun("MODeagleAmmo", "MO_LowCaliber",7,2);
-		DG1R PQ 1 JM_WeaponReady(WRF_NOFIRE);
+		DG1R PQ 1;
 		DG1R R 5;
 		DG1R S 1;
 		DG1R T 1 A_StartSound("weapons/deag/slideforward",0);

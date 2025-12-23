@@ -25,6 +25,11 @@ extend class MO_Weapon
 		return (owner.FindInventory("MO_PowerStrength") || owner.FindInventory("PowerStrength"));
 	}
 
+	action void MO_UseAmmo(int a = 1)
+	{
+		for(int i = a; i > 0; --i)
+		if (!invoker.DepleteAmmo(false, true)){return;}
+	}
 
 //This is a custom function that replaces A_Raise for Metal Ops weapns!
 //This function gets rid of the need for TNT1 AAAAAAAAAAAAAAAAAA 0 A_Raise(),
@@ -119,7 +124,7 @@ extend class MO_Weapon
 		else
 		return 0;
 	}
-	
+
 	action void JM_SetWeaponSprite(string s)
 	{
 		if(!player) return;
@@ -148,7 +153,7 @@ extend class MO_Weapon
 	//How doees this function work?
 	//maxMag = The maximum amount of ammo for the gun magazine. Invoker.Ammo1.MaxAmount could be used.
 	//EqualReserve = The reserve ammo that each gun uses per bullet.
-	//emptyreload = The state used if the weapon has a different reload animation. Pass Null (without "") if this isn't the case.
+	//emptyreload = The state used if the weapon has a different reload animation. Pass Null (without "") if this isn't the case, unless you have a chamber animation.
 	//partReload = The state used if the weapon has a partial reload, such as a tactical reload. Pass Null (without "") if this isn't the case.
 	//fullOrEmpty = The state used if the weapon has no ammo or is full. Example: ReadyToFire, Empty, Ready.Empty
 	action state MO_CheckReload(int maxMag, int EqualReserve, statelabel emptyreload, statelabel partReload, statelabel fullOrEmpty)
@@ -158,11 +163,14 @@ extend class MO_Weapon
 		int magCount = MagazineAmmo.amount;
 		int reserveCount = ReserveAmmo.amount;
 
-		if(magCount >= maxMag || reserveCount < EqualReserve)
+		if(magCount >= maxMag)
 		return ResolveState(fullOrEmpty);
 
-		if(!invoker.OwnerHasSpeed() && magCount > 1)
+		if(!invoker.OwnerHasSpeed() && magCount > 1 && reserveCount != 0)
 		return ResolveState(partReload);
+
+		if(reserveCount < EqualReserve)
+		return ResolveState(fullOrEmpty);
 
 		if(magCount <= 0)
 		return ResolveState(emptyreload);

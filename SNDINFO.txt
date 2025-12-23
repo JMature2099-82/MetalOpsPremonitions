@@ -117,6 +117,7 @@ weapons/smg/modeswitch SMGSWTC
 smg/akreloadhit "Sounds/Weapons/Slot2/SMG/SMG_MagHit.ogg"
 SMG/Pump1 SMGPMP1
 SMG/Pump2 SMGPMP2
+weapons/SMG/TactReload_End "Sounds/Weapons/Slot2/SMG/SMG_TactReload_End.ogg"
 
 
 //Deagle

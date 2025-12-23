@@ -211,7 +211,7 @@ class MO_MiniGun : MO_Weapon
 		MGF1 CD 1 BRIGHT;
 		Goto FlashDone;
 	Spawn:
-		MGUN A -1;
+		MGUN Z -1;
 		Stop;
 	FlashKick:
 		TNT1 A 0 A_JumpIfInventory("MinigunSpin",1,"FlashKickSpin");

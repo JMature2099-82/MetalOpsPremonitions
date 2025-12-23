@@ -29,43 +29,6 @@ Class MO_HeavyRifle : MO_Weapon
 		+WEAPON.AMMO_OPTIONAL
     }
 
-	action void MO_SetGrenade(bool fired = false)
-	{
-		invoker.hcrFiredGrenade = fired;
-	}
-
-	action void MO_SetHMRCrosshair()
-	{
-		{
-				if(FindInventory("HCR_GLMode"))
-				{
-					A_SetCrossHair(invoker.GetXHair(17));
-				}
-				else 
-				{A_SetCrossHair(invoker.GetXHair(8));}
-		}
-	}
-
-	override void PostBeginPlay()
-	{
-		Super.PostBeginPlay();
-		hcrFiredGrenade = false;
-		isZoomed = false;
-		isHoldingAim = false;
-	}
-
-	action void MO_FireHMR()
-	{
-		A_FireBullets(5.6, 0, 1, 55, "UpdatedBulletPuff",FBF_NORANDOM);
-		A_StartSound("hcr/fire", 0);
-		A_AlertMonsters();
-	}
-
-	action void MO_SetEmptyHMRSprite(string lump)
-	{
-		if(invoker.Ammo1.amount < 1) {MO_SetWeaponSprite(lump, OverlayID());}
-	}
-
     States
     {
 		Inspect:
@@ -492,12 +455,12 @@ Class MO_HeavyRifle : MO_Weapon
 			Goto ReadyToFire;
 
 		GrenadeFire:
-			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == false, 3);
+			HCRA A 0 A_JumpIf(MO_UBGLFired() == false, 3);
 			TNT1 A 0 A_JumpIfInventory("MO_RocketAmmo",1,2);
 			HCRG A 1 A_Print("Out of Rocket Ammo");
 			Goto Ready;
 			TNT1 AA 0;
-			HCRA A 0 A_JumpIf(invoker.hcrFiredGrenade == true, "ReloadGrenade");
+			HCRA A 0 A_JumpIf(MO_UBGLFired() == true, "ReloadGrenade");
 			HCRA A 0 MO_SetGrenade(true);
 			HCRA A 0 A_TakeInventory("MO_RocketAmmo",1,TIF_NOTAKEINFINITE);
 			HCRH A 1  bright
@@ -686,6 +649,49 @@ Class MO_HeavyRifle : MO_Weapon
 			HR4K ABCDEFGHIJKLMO 1;// JM_WeaponReady();
 			Goto ReadyToFire;
     }
+
+	action void MO_SetGrenade(bool fired = false)
+	{
+		invoker.hcrFiredGrenade = fired;
+	}
+
+	action bool MO_UBGLFired()
+	{
+		return invoker.hcrFiredGrenade;
+	}
+
+	action void MO_SetHMRCrosshair()
+	{
+		{
+				if(FindInventory("HCR_GLMode"))
+				{
+					A_SetCrossHair(invoker.GetXHair(17));
+				}
+				else 
+				{A_SetCrossHair(invoker.GetXHair(8));}
+		}
+	}
+
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		hcrFiredGrenade = false;
+		isZoomed = false;
+		isHoldingAim = false;
+	}
+
+	action void MO_FireHMR()
+	{
+		A_FireBullets(5.6, 0, 1, 55, "UpdatedBulletPuff",FBF_NORANDOM);
+		A_StartSound("hcr/fire", 0);
+		A_AlertMonsters();
+	}
+
+	action void MO_SetEmptyHMRSprite(string lump)
+	{
+		if(invoker.Ammo1.amount < 1) {MO_SetWeaponSprite(lump, OverlayID());}
+	}
+
 } 
 
 Class HCRAmmo : Ammo

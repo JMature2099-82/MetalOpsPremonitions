@@ -37,7 +37,10 @@ class MOps_Handler : EventHandler
 	
 	override void CheckReplacement(replaceEvent e)
 	{	
-		PlayerPawn p = players[0].mo;
+		for (int i = 0; i < MAXPLAYERS; i++)
+		{
+			PlayerPawn p = players[i].mo;
+
 		switch(e.Replacee.GetClassName())
 		{
 			//Weapons
@@ -145,6 +148,7 @@ class MOps_Handler : EventHandler
 
 			}
 		e.isFinal = false;
+		}
 	}
 
 	/*override bool InputProcess(InputEvent e) 

@@ -53,6 +53,7 @@ Class AssaultRifle : MO_Weapon
         ReadyToFire:
             AR1G A 1 
 			{
+				A_SetCrossHair(invoker.GetXHair(7));
 				if(invoker.isZoomed) {return ResolveState("Ready2");}
 				if(PressingAltFire() && invoker.ADSMode >= 1) {
 				return ResolveState("AltFire");
@@ -75,7 +76,7 @@ Class AssaultRifle : MO_Weapon
 				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
 			}
-			TNT1 A 0 A_SetCrosshair(invoker.GetXHair(7));
+			TNT1 A 0 A_SetCrossHair(invoker.GetXHair(7));
 		ContinueSelect:
 			TNT1 A 0 MO_Raise();
 			Goto SelectAnimation;
@@ -200,7 +201,7 @@ Class AssaultRifle : MO_Weapon
 				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
 				A_StartSound("weapon/adsdown",0);
-				A_SetCrosshair(invoker.GetXHair(7));
+				A_SetCrossHair(invoker.GetXHair(7));
 			}
 			AR1Z EDCBA 1 JM_WeaponReady(WRF_NOFIRE);
 			Goto ReadyToFire;
@@ -249,7 +250,7 @@ Class AssaultRifle : MO_Weapon
 				invoker.isZoomed = false;
 				invoker.isHoldingAim = False;
 				A_ZoomFactor(1);
-				A_SetCrosshair(invoker.GetXHair(7));
+				A_SetCrossHair(invoker.GetXHair(7));
 			}
             AR1S EFGH 1;
             TNT1 A 0 A_Lower(12);

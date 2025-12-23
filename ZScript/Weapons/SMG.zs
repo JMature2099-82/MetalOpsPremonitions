@@ -161,10 +161,6 @@ Class MO_SubMachineGun : MO_Weapon
 			}
             Goto Ready2;
 
-	DryFire:
-		TNT1 A 0 A_StartSound("weapon/pistolempty",0);
-		Goto ReadyTofire;
-
 		Flash:
 			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');
 			TNT1 A 1 A_AttachLightDef('GunLighting', 'GunFireLight');
@@ -258,7 +254,7 @@ Class MO_SubMachineGun : MO_Weapon
         
         Reload:
 			TNT1 AAA 0;
-			TNT1 A 0 MO_CheckReload(34,1,"DoAnEmptyReload", null, "ReadyToFire");
+			TNT1 A 0 MO_CheckReload(34,1,"DoAnEmptyReload", "TacticalReload", "ReadyToFire");
 		NormalReloadAnimation:
 			TNT1 A 0 A_JumpIf(Invoker.isZoomed, "ReloadZoomed");
 			TNT1 A 0 
@@ -311,6 +307,7 @@ Class MO_SubMachineGun : MO_Weapon
 				}
 			}
 	DoneReload:
+			TNT1 A 0 A_SetInventory("SMGIsEmpty",0);
 			SMR1 VV 1;
 			SMR1 WW 1;
 			SM5G A 0 A_JumpIf(invoker.OwnerHasSpeed(),2);
@@ -324,8 +321,72 @@ Class MO_SubMachineGun : MO_Weapon
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SMR1 ] 1;
             SMR2 AB 1;
-			SM5G A 0 A_JumpIfInventory("SMGIsEmpty",1,"Chamber");
             Goto ReadyToFire;
+
+	TacticalReload:
+		TNT1 A 0 A_JumpIf(Invoker.isZoomed, "TacReloadZoomed");
+			TNT1 A 0
+			{
+				invoker.isZoomed = False;
+				invoker.isHoldingAim = False;
+				A_ZoomFactor(1.0);
+			}
+			SR01 AB 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 CD 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 EFG 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 H 4 JM_WeaponReady(WRF_NOFIRE);
+			SR01 IJKL 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 MN 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 O 1 A_StartSound("weapons/SMG/magout", CHAN_AUTO, CHANF_DEFAULT);
+			SR01 PRQ 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 RSS 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 TTT 1 JM_WeaponReady(WRF_NOFIRE);
+			SR01 UUV 1 JM_WeaponReady(wrf_nofire);
+			SM5G A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			SR01 W 1 JM_WeaponReady(wrf_nofire);
+			TNT1 A 0 JM_ReloadGun(invoker.AmmoType1, invoker.AmmoType2, 35, 1);
+			SR01 XYYZ 1 JM_WeaponReady(WRF_NOFIRE);
+			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			SR01 ZZ 1;
+			SR02 AAB 1;
+			SR02 CDEF 1;
+			SR02 GHI 1;
+			SR02 I 3;
+			SR02 J 1 A_StartSound("weapons/SMG/TactReload_End", CHAN_AUTO);
+			SR02 KLM 1;
+			SR02 NOP 1;
+			SM5G A 1;
+			Goto ReadyToFire;
+
+	TacReloadZoomed:
+			TNT1 AAA 0;
+			TNT1 A 0 A_ZoomFactor(1.2);
+			SZ01 AB 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 CDE 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 F 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 G 5 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 GGG 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 HH 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 I 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
+			SZ01 IJKKK 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 LLLL 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 MM 1 JM_WeaponReady(WRF_NOFIRE);
+			SZ01 NO 1 JM_WeaponReady(WRF_NOFIRE);
+			TNT1 A 0 JM_ReloadGun("SMGAmmo","MO_LowCaliber",35,1);
+			SMR1 A 0 A_StartSound("weapons/SMG/magin", CHAN_AUTO, CHANF_DEFAULT);
+			SZ01 PQQRR 1;
+			SZ01 RQQPO 1;
+			SZ01 OOP 1;
+			TNT1 A 0 A_StartSound("weapons/SMG/TactReload_End", CHAN_AUTO);
+            SZ01 PQ 1;
+			SM5G A 0 A_ZoomFactor(1.3);
+            SZ01 R 1;
+			SZ01 STUV 1;
+			SZ01 WXY 1;
+			SM5G A 0 A_JumpIf(invoker.isHoldingAim == true, "ADSHold");
+            Goto ReadyToFire;
+
+			
 
 	DoAnEmptyReload:
 		SM5G A 0 A_SetInventory("SMGIsEmpty",1);
@@ -388,7 +449,7 @@ Class MO_SubMachineGun : MO_Weapon
 			SM5G A 0 A_JumpIf(invoker.OwnerHasSpeed(), 2);
 			SMR4 IJK 1;
 			SMR4 L 2;
-			Goto Chamber;
+			Goto ReadyToFire;
 
 		ZoomedAKReload: //Random reload animation based on the AK-47 style reload
 			TNT1 A 0 A_ZoomFactor(1.2);
@@ -426,7 +487,7 @@ Class MO_SubMachineGun : MO_Weapon
 			SM5G AAA 0 A_ZoomFactor(1.3);
 			SMZ1 "[\]" 1;
 			SMZ1 A 4;
-			Goto ChamberZoomed;
+			Goto ReadyToFire;
 
 	ReloadZoomed:
 			TNT1 AAA 0;
@@ -443,6 +504,8 @@ Class MO_SubMachineGun : MO_Weapon
 			}
 			SZ01 H 1 A_StartSound("weapons/smg/magout", CHAN_AUTO);
 			SZ01 IIJK 1 JM_WeaponReady(WRF_NOFIRE);
+			SMR1 A 0 A_JumpIf(CountInv("SMGAmmo") >= 1, 2);
+			SMR1 A 0 MO_EjectCase('EmptySMGMagazine',25, 7, 8, random(-1,2), random(-5,-2), random(0,1));
 			SZ01 L 1 JM_WeaponReady(WRF_NOFIRE);
 			SZ01 L 4 
 			 {
@@ -468,6 +531,7 @@ Class MO_SubMachineGun : MO_Weapon
 				}
 			}
 	DoneReloadZoomed:
+			TNT1 A 0 A_SetInventory("SMGIsEmpty",0);
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SZ01 RQQPO 1;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
@@ -481,7 +545,6 @@ Class MO_SubMachineGun : MO_Weapon
 			SZ01 STUV 1;
 			"####" A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
 			SZ01 WXY 1;
-			SM5G A 0 A_JumpIfInventory("SMGIsEmpty",1,"ChamberZoomed");
 			SM5G A 0 A_JumpIf(invoker.isHoldingAim == true, "ADSHold");
             Goto ReadyToFire;
 
