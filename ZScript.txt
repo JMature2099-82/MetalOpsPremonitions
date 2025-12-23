@@ -6,6 +6,8 @@ version "4.5.0"
 #include "ZScript/ZSLibraries.zs"
 #include "ZScript/Spawners.zs"
 
+const 	PSP_KICK = -999;
+
 Class BaseVisualSFX : Actor// From Particle Fire Enhancer Mod (v0.8) by Z86
 {
 	Default
