@@ -13,6 +13,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 	{
 		Weapon.AmmoUse1 1;
 		Weapon.AmmoGive2 10;
+		Weapon.SelectionOrder 1900;
 		Weapon.AmmoType1 "PistolMagAmmo";
 		Weapon.AmmoType2 "MO_LowCaliber";
 		Obituary "$OBMO_VENPISTOL";
@@ -64,7 +65,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 
 	action void MO_FirePistol()
 	{
-		if (!invoker.DepleteAmmo(false, true)){return;}
+		MO_UseAmmo();
 		A_FireBullets (5.6, 0, 1, 14, "UpdatedBulletPuff", FBF_NORANDOM,0,"MO_BulletTracer", 0);
 		A_StartSound("weapons/pistol/fire", CHAN_WEAPON);
 		A_AlertMonsters();

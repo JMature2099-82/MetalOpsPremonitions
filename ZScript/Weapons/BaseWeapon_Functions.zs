@@ -25,6 +25,11 @@ extend class MO_Weapon
 		return (owner.FindInventory("MO_PowerStrength") || owner.FindInventory("PowerStrength"));
 	}
 
+//How to use MO_UseAmmo. This is a shortcut of if (!invoker.DepleteAmmo(false, true)).
+//First, AmmoUse1 on each weapon needs to be 1. This works like the old A_TakeInventory.
+//Second, if your weapon takes 1 from either reserve or a magazine, this is how it would look like: MO_UseAmmo(1);
+//Third, for weapons like the BFG, which takes 40 cells from reserve, you would do it like this: MO_UseAmmo(40);
+//More examples: MO_UseAmmo(3), MO_UseAmmo(10), MO_UseAmmo(2);
 	action void MO_UseAmmo(int a = 1)
 	{
 		for(int i = a; i > 0; --i)
