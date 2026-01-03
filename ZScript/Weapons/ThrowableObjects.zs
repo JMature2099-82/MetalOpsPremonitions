@@ -38,7 +38,7 @@ class MolotovGlassParticle: Actor //LargeGlassParticle1
         +noteleport;
         +missile;
         +bounceonactors;
-        +doombounce;
+        BounceType "Doom";
         +forcexybillboard;
         +CLIENTSIDEONLY;
         Gravity 0.7;

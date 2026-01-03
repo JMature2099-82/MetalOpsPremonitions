@@ -53,11 +53,6 @@
 #include "./Flashlight++/FPP_Handler.zs"
 #include "./Flashlight++/FPP_Light.zs"
 
-//LibTool Tips
-#include "./Util/libtooltipmenu/Tooltips.zsc"
-#include "./Util/libtooltipmenu/TooltipOptionMenu.zsc"
-#include "./Util/libtooltipmenu/TooltipListMenu.zsc"
-
 //MK_Matrix
 #include "./Util/mk_matrix.zsc"
 
