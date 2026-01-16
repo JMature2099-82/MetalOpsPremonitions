@@ -5,9 +5,9 @@ class MolotovAmmo : Ammo
     Default
     {
         Inventory.Amount 1;
-        Inventory.MaxAmount 6;
+        Inventory.MaxAmount 3;
         Ammo.BackPackAmount 3;
-        Ammo.BackPackMaxAmount 12;
+        Ammo.BackPackMaxAmount 6;
         Inventory.PickUpMessage "You got a Molotov Cocktail.";
         Inventory.PickupSound "MOLPKUP";
         Inventory.Icon "MOLOV0";
@@ -242,9 +242,9 @@ class GrenadeAmmo : Ammo
     Default
     {
         Inventory.Amount 1;
-        Inventory.MaxAmount 8;
-        Ammo.BackPackAmount 5;
-        Ammo.BackPackMaxAmount 16;
+        Inventory.MaxAmount 3;
+        Ammo.BackPackAmount 3;
+        Ammo.BackPackMaxAmount 6;
         Inventory.PickUpMessage "You picked up a Frag Grenade.";
         Inventory.PickupSound "FragGrenade/Pickup";
         Inventory.Icon "PGRND0";

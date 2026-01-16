@@ -18,6 +18,7 @@ class MOps_Handler : EventHandler
 		{
 			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
+			pl.SetInventory("GrenadeCookTimer",0);
 			pl.A_Overlay(PSP_KICK, NULL);
 		}
 	}
