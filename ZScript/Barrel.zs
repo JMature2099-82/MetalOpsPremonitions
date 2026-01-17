@@ -42,6 +42,9 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 	States
 	{
 	Spawn:
+		TNT1 A 0 Nodelay;
+		TNT1 A 0 Thing_ChangeTID(0, 1999);
+	Idle:
 		BARL abcdefghijkl 3;
 		Loop;
 	Death:
@@ -73,10 +76,34 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 			A_StartSound("FarExplosion",8);
 			A_Explode();
 		}
-		b3xp DEFGHIJKLMN 2 Bright;
+		B3XP D 4;
+		b3xp EFGHIJKLMN 2 Bright;
 		TNT1 A 1050 Bright A_BarrelDestroy;
 		TNT1 A 5 A_Respawn;
 		Wait;
+
+	IsValiant: //For Valiant's Map07
+		TNT1 A 0;
+		TNT1 A 1 A_Die("Valiant"); //Probably not necessary but adding just in case. 
+		Loop;
+
+	Death.Valiant:
+		TNT1 A 1;
+		TNT1 A 0 A_SpawnItem("MO_ValiantBarrel");
+		Stop;
+	}
+}
+
+class MO_ValiantBarrel : MO_ExplosiveBarrel //For Valiant's Map07
+{
+	States
+	{
+		Death:
+		Death.Crush:
+		B3XP A 8 BRIGHT;
+		B3XP B 6 BRIGHT;
+		B3XP C 4 BRIGHT;
+		Goto Super::PerformanceDeath;
 	}
 }
 
