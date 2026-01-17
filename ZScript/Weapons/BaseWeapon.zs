@@ -53,6 +53,7 @@ class MO_Weapon : Weapon
 	{
 		
 		Select:
+			TNT1 A 0 A_SetCrosshair(0);
 		ContinueSelect:
 			TNT1 A 0;
 			TNT1 A 1 MO_Raise();
@@ -88,7 +89,7 @@ class MO_Weapon : Weapon
 		FIRE:
 		ReallyReady:
 			"####" A 0;
-			"####" AAAA 1 A_Jump(256, "readytofire");
+			"####" AAAA 1 A_Jump(256, "ReadyToFire");
 			Loop;
 
 		BackToWeapon:
@@ -193,14 +194,15 @@ class MO_Weapon : Weapon
 			Goto Ready;
 			
 		FlashEquipmentToss:
+			TNT1 A 1;
 		ThrowThatShitForReal:
 			TNT1 A 1;
 			TNT1 A 0
 			{
 				if(CountInv("ThrowableType") == 1)
-				{return ResolveState("PrepareMolotovToss");}
+				{return ResolveState("ActuallyThrowMolotov");}
 				else
-				{return ResolveState("PrepareGrenadeToss");}
+				{return ResolveState("ActuallyThrowGrenade");}
 				return resolvestate(null);
 			}
 			Goto Ready;
@@ -211,10 +213,8 @@ class MO_Weapon : Weapon
 			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 0 MO_CheckEquipmentToss("MolotovAmmo",1, "PrepareMolotovToss");
-			"####" "#" 0 A_Print("No Molotov Cocktails left");
-			Goto ReallyReady;
-		PrepareMolotovToss:
+			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, "FlashEquipmentToss");
+		ActuallyThrowMolotov:
 			"####" "#" 0 A_JumpIfInventory("MolotovAmmo", 1, 2);
 			"####" "#" 0 A_Print("No Molotov Cocktails left");
 			Goto ReallyReady;
@@ -223,103 +223,91 @@ class MO_Weapon : Weapon
 			MTOV AB 1;
 			TNT1 A 0 A_StartSound("Molotov/Open",0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV DEE 1;
+			MTOV CDE 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV FGH 1;
-			MTOV I 1 A_StartSound("Molotov/Lit",1);
-			MTOV JKL 1;
+			MTOV FG 1;
+			MTOV H 2 {
+				A_StartSound("Molotov/Lit",1);
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(1);}
+			}
+			MTOV I 1 A_StartSound("Molotov/Flame",0,CHANF_DEFAULT,2.0);
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV MNO 1;
+			MTOV JKK 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV P 1;
-			MTOV Q 1 A_StartSound("Molotov/Flame",0,CHANF_DEFAULT,2.0);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV RSTU 1;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			MTOV V 1;
+			MTOV LLM 1;
+//			MOLO FG 2 A_SpawnItemEx ("FlameTrails",cos(pitch)*1,0,0-(sin(pitch))*-10,cos(pitch)*20,0,-sin(pitch)*20,0,SXF_NOCHECKPOSITION);
 			MOLO A 0 A_StartSound("Molotov/Close", 5);
-			MTOV WX 1;
+//			MOLO H 2 A_SpawnItemEx ("FlameTrails",cos(pitch)*1,0,0-(sin(pitch))*-10,cos(pitch)*20,0,-sin(pitch)*20,0,SXF_NOCHECKPOSITION);
+			MTOV N 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
+			MTOV OP 1;
 			TNT1 A 0;
-			TNT1 A 4 MO_SetHasteTics(2);
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "PrepareMolotovHold");
-			Goto TossMolotov;
-
-		PrepareMolotovHold:
-			TNT1 A 0 A_Overlay(-10, "AimThrowable");	
-		HoldMolotov:
-			TNT1 A 1;
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "HoldMolotov");
-			TNT1 A 0 A_Overlay(-10, "StopHandAim");	
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
+			TNT1 AAAA 1;
 			//HND1 I 2
-		TossMolotov:
-			TNT1 A 2;
 			TNT1 A 0 A_StartSound("MOLTHRW",0,CHANF_DEFAULT,2.0);
-			GRE1 AB 1;
-			GRE1 C 1;
+			MTOV QRS 1;
 			MTOV A 0 
 			{
-				A_FireProjectile("MO_MolotovThrown",0,0,0,0,FPF_NOAUTOAIM,0);
+				A_FireProjectile("MolotovThrown",0,0,0,0,FPF_NOAUTOAIM,0);
 				A_TakeInventory("MolotovAmmo", 1, TIF_NOTAKEINFINITE);
 			}
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			GRE1 DEFG 1;
-			GRE1 HI 1;
-			TNT1 A 5 MO_SetHasteTics(3);
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "PrepareMolotovToss");
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
+			MTOV TUVW 1;
+			TNT1 A 5
+			{
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
+			}
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowMolotov");
 			Goto BackToWeapon;
-
-		AimThrowable:
-			GRNH EDCB 1;
-		AimThrowableLoop:
-			GRNH A 1;
-			Loop;
-
-		StopHandAim:
-			GRNH BCDE 1;
-			TNT1 A 1;
-			Stop;
+		
+		CookingGrenade:
+			TNT1 A 0;
+			TNT1 A 0 ACS_Execute(2098,0,0,0,0);
+		CookingGrenadeHold:
+			TNT1 A 1 A_GiveInventory("GrenadeCookTimer", 1);			
+			TNT1 A 0 A_JumpIf(CountInv("GrenadeCookTimer") == 105, "ExplodeOnYerFace");
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "CookingGrenadeHold");
+			Goto TossTheGrenade;
 		
 		ExplodeOnYerFace:
 			TNT1 A 1
 			{
-					A_Overlay(-10,"StopHandAim");
-	//				ACS_NamedTerminate("GrenadeFuseTick",0);
+					ACS_Terminate(2098,0);
 					A_Explode(125, 220,XF_HURTSOURCE);
-					A_AlertMonsters();
-					A_StartSound("rocket/explosion", 0);
+					A_AlertMonsters(200);
+					A_StartSound("rocket/explosion", 6);
 					A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 					A_SetInventory("GrenadeCookTimer",0);
 			}
-			TNT1 AAAAAA 1;
+			TNT1 AAA 1;
 			Goto BackToWeapon;
 			
 		ThrowGrenade:
 			"####" "#" 0 A_ZoomFactor(1.0);
 			"####" "#" 0 A_StopSound(6);
 			"####" "#" 0 A_StopSound(CHAN_VOICE);
-			"####" "#" 0 MO_CheckEquipmentToss("GrenadeAmmo",1, "PrepareGrenadeToss");
-			"####" "#" 0 A_Print("No Frag Grenades left");
-			Goto ReallyReady;
-		PrepareGrenadeToss:
+			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, "FlashEquipmentToss");
+		ActuallyThrowGrenade:
 			"####" "#" 0 A_JumpIfInventory("GrenadeAmmo", 1, 2);
-			"####" "#" 0 A_Print("No Molotov Cocktails left");
+			"####" "#" 0 A_Print("No Frag Grenades left");
 			Goto ReallyReady;
 			TNT1 AAA 0;
 			TNT1 A 0 A_WeaponOffset(0,32);
-			GREP ABCD 1;
 			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			GREP EFG 1;
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,1);
-			GREP GH 1;
+			GREP AABCD 1;
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
+			GREP EFGII 1;
 			TNT1 A 0 A_StartSound("FragGrenade/Pin",0);
-			GREP H 1;
+			GREP K 1;
 			TNT1 A 0 A_TakeInventory("GrenadeAmmo", 1, TIF_NOTAKEINFINITE);
-			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,2);
-			GREP IJKL 1;
-			TNT1 A 3 MO_SetHasteTics(1);
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
+			GREP LMNOPQ 1;
 			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "CookingGrenade");
+			TNT1 A 0 A_JumpIfInventory("MO_PowerSpeed",1,3);
+			TNT1 AAAAA 1;
 		TossTheGrenade:
-//			TNT1 A 2 ACS_NamedTerminate("GrenadeFuseTick",0);
+			TNT1 A 0 ACS_Terminate(2098,0);
 			GRE1 AB 1;
 			TNT1 A 0 A_StartSound("FragGrenade/Throw",0,CHANF_DEFAULT,2.0);
 			GRE1 C 1;
@@ -328,28 +316,12 @@ class MO_Weapon : Weapon
 			GRE1 DEFG 1;
 			TNT1 A 0 A_SetInventory("GrenadeCookTimer",0);
 			GRE1 HI 1;
-			TNT1 A 4 MO_SetHasteTics(2);
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "PrepareGrenadeToss");
+			TNT1 A 4
+			{
+				if(CountInv("MO_PowerSpeed") == 1) {A_SetTics(2);}
+			}
+			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "ActuallyThrowGrenade");
 			Goto BackToWeapon;
-
-		CookingGrenade:
-//			TNT1 A 0 ACS_NamedExecute("GrenadeFuseTick",0);
-			TNT1 A 0 A_StartSound("FragGrenade/Timer", 7);
-			TNT1 A 2;
-			TNT1 A 0 A_Overlay(-10, "AimThrowable");	
-//			TNT1 A 0 A_JumpIf(invoker.isCookingGrenade, "HoldGrenade");
-		CookingGrenadeHold:
-			TNT1 A 1 A_GiveInventory("GrenadeCookTimer", 1);			
-			TNT1 A 0 A_JumpIf(CountInv("GrenadeCookTimer") == 105, "ExplodeOnYerFace");
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "CookingGrenadeHold");
-			TNT1 A 0 A_Overlay(-10, "StopHandAim");
-			Goto TossTheGrenade;
-
-		HoldGrenade:
-			TNT1 A 1;
-			TNT1 A 0 A_JumpIf(PressingWhichInput(BT_USER1), "HoldGrenade");
-			TNT1 A 0 A_Overlay(-10, "StopHandAim");
-			Goto TossTheGrenade;
 		}
 }
 

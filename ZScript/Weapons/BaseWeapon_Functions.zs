@@ -58,7 +58,7 @@ extend class MO_Weapon
 		A_ZoomFactor(1);
 		SetPlayerProperty(0,0,0);
 		A_ClearOverlays(-8,8);
-		A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
+		A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, FALSE);
 		A_RemoveLight('GunLighting');
 	}
 
