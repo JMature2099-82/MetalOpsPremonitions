@@ -8,3 +8,4 @@
 #include Brightmaps/Scripts/Items.bm
 #include Brightmaps/Scripts/SMG.bm
 #include Brightmaps/Scripts/SSG.txt
+#include Brightmaps/Scripts/Barrel.bm

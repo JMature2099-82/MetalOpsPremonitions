@@ -51,7 +51,6 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		B3XP A 8 BRIGHT;
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
-	Death.Crush:
 		BEXP E 0 A_JumpIf(invoker.isSunlust, "PerformanceDeath");
 		bexp E 0 Bright 
 		{
@@ -99,7 +98,6 @@ class MO_ValiantBarrel : MO_ExplosiveBarrel //For Valiant's Map07
 	States
 	{
 		Death:
-		Death.Crush:
 		B3XP A 8 BRIGHT;
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
