@@ -18,6 +18,7 @@ class MOps_Handler : EventHandler
 		{
 			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
+			pl.SetInventory("GrenadeCookTimer",0);
 			pl.A_Overlay(PSP_KICK, NULL);
 		}
 	}
@@ -143,6 +144,7 @@ class MOps_Handler : EventHandler
 
 			//Compatibility shit
 			case 'ExplosiveBarrel1':
+			case 'msxBarrel':
 				e.Replacement = "MO_ExplosiveBarrel";
 				break;
 
@@ -150,19 +152,6 @@ class MOps_Handler : EventHandler
 		e.isFinal = false;
 		}
 	}
-
-	/*override bool InputProcess(InputEvent e) 
-	{
-		int KeyBind = e.KeyScan;
-		for(int i = 0; i <= 10; ++i)
-		{
-			if (isKeyForCommand(KeyBind, "+User1") && e.type == InputEvent.Type_KeyDown) 
-			{
-				EventHandler.SendNetworkEvent("ThrowEquipment");
-			}
-		}
-		return false;
-	}*/
 
     override void NetworkProcess(ConsoleEvent e)
     {

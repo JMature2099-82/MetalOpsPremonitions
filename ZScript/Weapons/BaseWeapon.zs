@@ -72,7 +72,7 @@ class MO_Weapon : Weapon
 				A_STOPSOUND(CHAN_7);
 				SetPlayerProperty(0,0,0);
 				A_ClearOverlays(-8,8);
-				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, FALSE);
+				A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, FALSE);
 				A_RemoveLight('GunLighting');
 				}
 			TNT1 A 0 A_Jump(255, "ContinueSelect");
@@ -112,9 +112,9 @@ class MO_Weapon : Weapon
 			"####" A 0 
 			{
 				SetPlayerProperty(0,1,0);
-				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
-				A_OverlayFlags(-999, PSPF_ADDWEAPON, FALSE);
-				A_OverlayOffset(-999, -1, 32);
+				A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, TRUE);
+				A_OverlayFlags(PSP_KICK, PSPF_ADDWEAPON, FALSE);
+				A_OverlayOffset(PSP_KICK, -1, 32);
 				If(invoker.OwnerHasSpeed()) {return ResolveState("KickFaster");}
 				{return ResolveState(Null);}
 			}
@@ -124,7 +124,7 @@ class MO_Weapon : Weapon
 			KCK1 G 1 MO_KickAttack;
 			KCK1 GHG 1;
 			KCK1 FEDCBA 1;
-			TNT1 A 0 A_OverlayFlags(-999,PSPF_PLAYERTRANSLATED,FALSE);
+			TNT1 A 0 A_OverlayFlags(PSP_KICK,PSPF_PLAYERTRANSLATED,FALSE);
 			TNT1 A 0 SetPlayerProperty(0,0,0);
 			Stop;
 		
@@ -135,16 +135,16 @@ class MO_Weapon : Weapon
 			KCK1 G 1 MO_KickAttack;
 			KCK1 HG 1;
 			KCK1 FEDCA 1;
-			TNT1 A 0 A_OverlayFlags(-999,PSPF_PLAYERTRANSLATED,FALSE);
+			TNT1 A 0 A_OverlayFlags(PSP_KICK,PSPF_PLAYERTRANSLATED,FALSE);
 			TNT1 A 0 SetPlayerProperty(0,0,0);
 			Stop;
 		AirKick: //18 frames
 			"####" A 0 ThrustThing(angle * 256 / 360, 3, 0, 0);
 			"####" A 0 
 			{
-				A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, TRUE);
-				A_OverlayFlags(-999, PSPF_ADDWEAPON, FALSE);
-				A_OverlayOffset(-999, -1, 32);
+				A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, TRUE);
+				A_OverlayFlags(PSP_KICK, PSPF_ADDWEAPON, FALSE);
+				A_OverlayOffset(PSP_KICK, -1, 32);
 			}
 			"####" A 0 A_JumpIf(invoker.OwnerHasSpeed(), "AirKickFaster");
 			KCK2 ABC 1;
@@ -153,7 +153,7 @@ class MO_Weapon : Weapon
 			KCK2 F 1 MO_KickAttack;
 			KCK2 GHHHHII 1;
 			KCK2 JKLMN 1;
-			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
+			"####" A 0 A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, false);
 			Stop;
 		
 		AirKickFaster:
@@ -163,7 +163,7 @@ class MO_Weapon : Weapon
 			KCK2 F 1 MO_KickAttack;
 			KCK2 GHHII 1;
 			KCK2 JKLN 1;
-			"####" A 0 A_OverlayFlags(-999, PSPF_PLAYERTRANSLATED, false);
+			"####" A 0 A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, false);
 			Stop;
 				
 		FlashKick:

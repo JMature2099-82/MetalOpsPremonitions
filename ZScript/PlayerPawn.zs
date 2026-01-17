@@ -28,8 +28,8 @@ class MO_PlayerBase : DoomPlayer
 		A_SetInventory("SSGAmmo",2);
 		A_SetInventory("PlasmaAmmo",60);
 		A_SetInventory("Katana", 1);
-		A_SetInventory("MOLOTOVAMMO",4);
-		A_SetInventory("GrenadeAmmo", 4);
+		A_SetInventory("MOLOTOVAMMO",1);
+		A_SetInventory("GrenadeAmmo", 2);
 		A_SetInventory("FragSelected",1);
 		A_SetInventory("HeatBlastFullyCharged",1);
 		A_SetInventory("HeatBlastLevel",3);
