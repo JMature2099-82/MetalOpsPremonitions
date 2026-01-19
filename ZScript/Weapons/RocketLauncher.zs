@@ -309,7 +309,7 @@ Class MO_Rocket : Rocket// replaces rocket
         SeeSound "NULLSND";
 	    DeathSound "rocket/explosion";
 		Scale 0.5;
-		DamageFunction (random(50, 70));
+		DamageFunction 40 * random(2,6);
 		DamageType "Explosive";
 		Decal "Scorch";
 		Obituary "$OB_MOROCKET";
@@ -332,7 +332,7 @@ Class MO_Rocket : Rocket// replaces rocket
 			TNT1 A 0 A_StartSound("rocket/explosion");
 			TNT1 A 0 A_StartSound("FarExplosion",8);
 			TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			TNT1 A 0 A_Explode(200, 180, damagetype: "ExplosiveImpact");
+			TNT1 A 0 A_Explode(160, 180, damagetype: "ExplosiveImpact");
 			TNT1 A 1;
 			Stop;
     }
