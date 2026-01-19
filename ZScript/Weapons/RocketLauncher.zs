@@ -332,7 +332,7 @@ Class MO_Rocket : Rocket// replaces rocket
 			TNT1 A 0 A_StartSound("rocket/explosion");
 			TNT1 A 0 A_StartSound("FarExplosion",8);
 			TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			TNT1 A 0 A_Explode(160, 180, damagetype: "ExplosiveImpact");
+			TNT1 A 0 A_Explode(180, 180, damagetype: "ExplosiveImpact");
 			TNT1 A 1;
 			Stop;
     }
