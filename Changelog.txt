@@ -195,9 +195,16 @@ Calamity Blade's pitch code.
 - Molotov flame damage reworked
 - Minigun sprites tweaked, mainly changed the hand and reanimated the kick and select animations.
 
-11/14/25
+Changes since 11/14/25:
 - Pistol reserve ammo increase from 200 without a backpack, and 400 with backpack. This matches Rifle ammo.
 - Nukage barrel sprites changed to the CVP barrels, sprites by iamcarrotmaster.
-
-
-
+- Fixed stack overflow crash with Valiant, particularly on Map 07 and Map 18.
+- Fixed tactical reload animations
+- Fixed magazine drop sound being cut off.
+- Heavy Marksman Rifle optic is easier to see.
+- Rocket Launcher projectiles buffed.
+- Flamethrower spawns in place of the Plasma Rifle now.
+- Grenades and Molotovs have a lower count. Maximum of three without a backpack, and six with a backpack.
+- Plasma beam autoaims when autoaim is on. Thanks to Agent_Ash's ZSLoRWeapons!
+- Invulnerability hit sounds updated
+- Tactical reload animation added for the SMG.
