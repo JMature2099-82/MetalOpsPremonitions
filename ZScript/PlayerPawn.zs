@@ -99,6 +99,8 @@ class MO_PlayerBase : DoomPlayer
 		Player.WeaponSlot 6, "MO_PlasmaRifle";
 		Player.WeaponSlot 7, "MO_BFG9000", "MO_Unmaker";
 		Player.WeaponSlot 8, "MO_Flamethrower";
+		DamageFactor "Use", 0.0; DamageFactor "Taunt", 0.0; damagefactor "Trample", 0.0;
+		DamageFactor "KillMe", 0.0; DamageFactor "KillMeBot", 0.0;
 	}
 }
 
