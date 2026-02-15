@@ -46,7 +46,7 @@ class MO_Flamethrower : MO_Weapon
     {
        Weapon.AmmoUse1 2;
        Weapon.AmmoGive1 50;
-		Weapon.SelectionOrder 120;
+		Weapon.SelectionOrder 3000;
         Weapon.AmmoType1 "MO_Fuel";
         Inventory.PickupSound "weapons/flamer/pickup";
         Inventory.PickupMessage "$GOTFLAMER";
