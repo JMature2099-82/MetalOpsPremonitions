@@ -10,3 +10,10 @@ gameinfo
 	AddEventHandlers = "NCH_Handler", "FPP_Handler"
 	addEventHandlers = "StepEventHandler", "MOps_Handler","pc_EventHandler"
 }
+
+
+DoomEdNums
+{
+	//Decorations
+	29011 = MO_PerformanceBarrel
+}

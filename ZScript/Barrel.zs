@@ -1,19 +1,24 @@
 //Mostly based on the Smooth Doom barrels.
 //Update: Now uses the CVP barrels, thanks iamcarrotmaster for giving me permission
-class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
+class MO_ExplosiveBarrel : Actor
 {
-	bool isSunlust; //For Sunlust's Map 30 for the crushers as the beginning of the level.
 	int age;
 	Default
 	{
-		DeathSound "world/barrelexpl";
+		Health 20;
+		Radius 10;
+		Height 42;
+		+SOLID
+		+SHOOTABLE
+		+NOBLOOD
+		+ACTIVATEMCROSS
+		+DONTGIB
+		+NOICEDEATH
+		+OLDRADIUSDMG
 		Obituary "$OB_BARREL";
+		damagefactor "Blood", 0.0; damagefactor "BlueBlood", 0.0; damagefactor "GreenBlood", 0.0;	damagefactor "Avoid", 0.0;
+		damagefactor "KillMe", 0.0;  damagefactor "TeleportRemover", 0.0; damagefactor "Slide", 0.0;
 		+Windthrust
-	}
-
-	override void PostBeginPlay()
-	{
-		isSunlust = true;
 	}
 
 	override int DamageMobj (Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
@@ -25,25 +30,12 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 			return 0;
 		}
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
-	}
-
-	//This is for Sunlust's Map 30 when the barrels at the beginning get crushed when the map starts.
-	override void Tick()
-	{
-		super.Tick();
-		age++;
-		if(age >= 35)
-		{
-			self.isSunlust = false;
-		}
-	}
-		
+	}		
 
 	States
 	{
 	Spawn:
 		TNT1 A 0 Nodelay;
-		TNT1 A 0 Thing_ChangeTID(0, 1999);
 	Idle:
 		BARL abcdefghijkl 3;
 		Loop;
@@ -51,49 +43,16 @@ class MO_ExplosiveBarrel : ExplosiveBarrel replaces ExplosiveBarrel
 		B3XP A 8 BRIGHT;
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
-		BEXP E 0 A_JumpIf(invoker.isSunlust, "PerformanceDeath");
-		bexp E 0 Bright 
-		{
-				A_SpawnItemEx ("BarrelShrapnelA",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelC",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
-				A_SpawnItemEx("BarrelExplosionFX",0,0,12,0,0,0,0,SXF_NOCHECKPOSITION,0);
-				A_SpawnItemEx("MO_ShockWave",flags:SXF_NOCHECKPOSITION);
-				A_Scream();
-				A_StartSound("FarExplosion",8);
-				A_Explode();
-				A_SpawnItemEx("MO_BarrelBottomRemains", flags: SXF_NOCHECKPOSITION);
-		}
+		TNT1 A 0 A_SpawnItemEx("BarrelExplosion",flags:SXF_NOCHECKPOSITION);
 		TNT1 A 1050 BRIGHT A_BarrelDestroy;
 		TNT1 A 5 A_Respawn;
 		Wait;
-	PerformanceDeath:
-		TNT1 A 0
-		{
-			A_Scream();
-			A_StartSound("FarExplosion",8);
-			A_Explode();
-		}
-		B3XP D 4;
-		b3xp EFGHIJKLMN 2 Bright;
-		TNT1 A 1050 Bright A_BarrelDestroy;
-		TNT1 A 5 A_Respawn;
-		Wait;
-
-	IsValiant: //For Valiant's Map07
-		TNT1 A 0;
-		TNT1 A 1 A_Die("Valiant"); //Probably not necessary but adding just in case. 
-		Loop;
-
-	Death.Valiant:
-		TNT1 A 1;
-		TNT1 A 0 A_SpawnItem("MO_ValiantBarrel");
-		Stop;
 	}
 }
 
-class MO_ValiantBarrel : MO_ExplosiveBarrel //For Valiant's Map07
+//This is basically the standard barrel but it has a lower quality explosion.
+ //This was mainly made for Valiant: Vaccinated Editon's MAP17 and MAP18, and Sunlust's MAP30.
+class MO_PerformanceBarrel : MO_ExplosiveBarrel
 {
 	States
 	{
@@ -101,7 +60,10 @@ class MO_ValiantBarrel : MO_ExplosiveBarrel //For Valiant's Map07
 		B3XP A 8 BRIGHT;
 		B3XP B 6 BRIGHT;
 		B3XP C 4 BRIGHT;
-		Goto Super::PerformanceDeath;
+		TNT1 A 0 A_SpawnItemEx("CheapBarrelExplosion",flags:SXF_NOCHECKPOSITION);
+		TNT1 A 1050 Bright A_BarrelDestroy;
+		TNT1 A 5 A_Respawn;
+		Wait;
 	}
 }
 
@@ -199,3 +161,76 @@ Class BarrelShrapnelC : BarrelShrapnelBase
 		BarrelShrapnelBase.ShrapnelFrame 2;
 	}
 }
+
+Class BarrelExplosion : BaseVisualSFX
+{
+	Default
+	{
+		DamageType "Explosive";
+		+NOGRAVITY
+		+NOINTERACTION
+		Obituary "$OB_BARREL";
+		+BLOODLESSIMPACT
+	}
+	States
+	{
+		Spawn:
+		TNT1 A 0 NoDelay Bright 
+		{
+				A_SpawnItemEx ("BarrelShrapnelA",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelC",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx ("BarrelShrapnelB",random(0,3),random(0,3),random(4,8),random (5, -2),random (5, -2),random (6, 10),0,SXF_NOCHECKPOSITION | SXF_SETMASTER,0);
+				A_SpawnItemEx("BarrelExplosionFX",0,0,15,0,0,0,0,SXF_NOCHECKPOSITION,0);
+				A_SpawnItemEx("MO_ShockWave",0,0,12, flags:SXF_NOCHECKPOSITION);
+				A_StartSound("world/barrelexpl");
+				A_StartSound("FarExplosion",8);
+				RadiusAttack(self, 200, 200); //FIXED THE INCORRECT OBITUARY BUG!
+				A_SpawnItemEx("MO_BarrelBottomRemains", flags: SXF_NOCHECKPOSITION);
+		}
+		TNT1 AAAA 0 A_SpawnItemEx("MO_BigSlowExplosionSmoke", 0, 0, 0, 0.10*random(-11, 11), 0.10*random(-11, 11), 0.10*random(1, 11));
+		TNT1 AAAAAAAAA 0 A_SpawnItemEx("MO_ExplosionSmoke", 0, 0, 0, 0.10*random(-11, 11), 0.10*random(-11, 11), 0.10*random(1, 11));
+		TNT1 AAAA 0 A_SpawnItemEx("MO_SmallFastExplosionSmoke", 0, 0, 0, 0.10*random(-11, 11), 0.10*random(-11, 11), 0.10*random(1, 11));
+		TNT1 A 1 bright;
+		Stop;
+	}
+}
+Class CheapBarrelExplosion : BarrelExplosion
+{
+	States
+	{
+		Spawn:
+		TNT1 A 0 Nodelay
+		{
+			A_StartSound("world/barrelexpl");
+			A_StartSound("FarExplosion",8);
+			RadiusAttack(self, 200, 200); //FIXED THE INCORRECT OBITUARY BUG!
+		}
+		B3XP D 4;
+		b3xp EFGHIJKLMN 2 Bright;
+		Stop;
+	}
+}
+
+class PerformanceBarrelLPP : LevelPostProcessor //Replaces the barrel with another one with a low quality explosion
+{
+	protected void Apply(Name checksum, String mapname)
+    {
+		switch(checksum)
+		{
+			case 'FD332E22812A10FDCF438A2AE9847AE2': //Valiant VE MAP07
+			case 'E4EAA1C784272D128257DD42BF99107C': // Valiant VE MAP18
+			case '41EFE03223E41935849F64114C5CB471': // Sunlust MAP30
+				for (int i = 0; i < GetThingCount(); i++)
+				{
+					int ednum = GetThingEdNum(i);
+					if(ednum == 2035)
+					{
+						SetThingEdNum(i, 29011); 
+					}
+				}
+				break;
+		}
+	}
+}
+

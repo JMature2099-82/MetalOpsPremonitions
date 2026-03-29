@@ -204,17 +204,18 @@ extend class MO_Weapon
 		return invoker.isFirstTime;
 	}
 
-	action void JM_CheckInspectIfDone()
+	//Made this into an action state so that it works better.
+	action state JM_CheckInspectIfDone()
 	{
 			Actor theOwner = invoker.owner;
 			let wep = player.readyweapon;
-			State Inspect = wep.FindState("Inspect");
 			bool notInspected = invoker.inspectToken != "" && theOwner.CountInv(invoker.inspectToken);
-			if(notInspected && Inspect != NULL)
+			if(notInspected && ResolveState('Inspect'))//Inspect != NULL)
 			{
 				theOwner.TakeInventory(invoker.inspectToken,1);
-				theOwner.player.SetPSprite(PSP_WEAPON,wep.FindState("Inspect"));
+				return ResolveState("Inspect");
 			}
+			return ResolveState(Null);
 	}
 
 	action void MO_ZoomBob()

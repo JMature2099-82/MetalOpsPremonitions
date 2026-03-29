@@ -92,7 +92,7 @@ class MO_Deagle : MO_Weapon// replaces Pistol
 		TNT1 A 0;
 		TNT1 A 0 A_SetCrosshair(invoker.GetXHair(1));
 	ContinueSelect:
-		TNT1 A 0 MO_Raise();
+		TNT1 A 1 MO_Raise;
 		TNT1 A 0 JM_CheckInspectIfDone;
 		Goto SelectAnimation;
 

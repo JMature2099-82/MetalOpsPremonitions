@@ -61,16 +61,3 @@ script 2098 (void) //Check for grenade timer]
 	delay(1);
 	Restart;
 }
-
-script "ValiantBarrelCheck" Open
-{
-	str levelname = strParam(n:PRINTNAME_LEVELNAME);
-	str lumpname = strParam(n:PRINTNAME_LEVEL);
-	int levelcount;
-//	print(n:PRINTNAME_LEVEL, s:": ", n:PRINTNAME_LEVELNAME);
-	if((StrICmp(levelname, StrParam(s: "The Mancubian Candidate")) == 0) && (StrICmp(lumpname, StrParam(s: "MAP07")) == 0) ||
-	(StrICmp(levelname, StrParam(s: "Crush Depth")) == 0) && (StrICmp(lumpname, StrParam(s: "MAP18")) == 0))
-	{
-		SetActorState(1999, "IsValiant");
-	}
-}
