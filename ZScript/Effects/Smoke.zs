@@ -252,20 +252,6 @@ Class MO_GrenadeSmokeTrail : MO_RocketSmokeTrail
 	}
 }
 
-Class MO_NukeRocketSmokeTrail: MO_RocketSmokeTrail
-{
-	States
-    {
-		Spawn:  
-			TNT1 A 0;
-			TNT1 A 1 A_SetScale(0.63, 0.60);
-			TNT1 A 1 A_SetRoll(random(0,360));
-			SMK3 ABCDEFGHI 1 A_SetScale(Scale.X+0.03, Scale.Y+0.03);
-			SMK3 JJKKLLMM 1;
-			Stop;
-	}
-}
-
 Class BlackSmokeFromFire : Actor
 {
 	Default
@@ -308,40 +294,96 @@ Class BlackSmokeFromFire : Actor
     }
 }
 
-Class MO_NukeSmoke: Actor
+Class MO_ExplosionSmoke : BaseVisualSFX
 {
 	Default
 	{
-	Scale 2.5;
-	Speed 0;
-	Alpha 0.1;
-	+SKYEXPLODE;
-	+FORCEXYBILLBOARD;
-	PROJECTILE;
-	+CLIENTSIDEONLY;
-	+MISSILE;
-	+THRUACTORS;
-	+DOOMBOUNCE;
-	Radius 1;
-	Height 1;
-	Renderstyle "Translucent";
+		Radius 0;
+		Height 0;
+		RenderStyle "Translucent";
+		Alpha 0.1;
+		Scale 0.4;
+		Speed 0;
 	}
-States
+	States
     {
     Spawn:  
-	    SMk2 AAAAAAAAAAAA 2 A_FadeIn(0.05);
-		SMk2 A 600;
-	Death:	
-		SMk2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 10 A_FadeOut(0.02);
-		Stop;		
-}
-}
-
-Class MO_NukeSmokeBig : Mo_NukeSmoke
-{
-	Default
-	{
-		XScale 8.0;
-		YScale 6.0;
+	Death:
+	    SMk2 AAAA random(1,4)
+		{
+			A_FadeIn(0.05);
+			A_SetScale(scale.x * 1.3);
+		}
+		SMk2 AAAAAAAAAA random(1,4)
+		{
+			A_FadeOut(0.02);
+			A_SetScale(scale.x * 1.07);
+		}
+	FadeOut:
+		SMk2 AAAAAAAAAAAAAAAAAAAAAAAAAAAA random(1,4) A_FadeOut(0.01);
+		Loop;
 	}
 }
+
+Class MO_SlowExplosionSmoke : MO_ExplosionSmoke
+{
+	States
+    {
+    Spawn:  
+	Death:
+	    SMk2 AAAA random(2,6)
+		{
+			A_FadeIn(0.05);
+			A_SetScale(scale.x * 1.3);
+		}
+		SMk2 AAAAAAAAAAAAA random(2,6)
+		{
+			A_FadeOut(0.02);
+			A_SetScale(scale.x * 1.07);
+		}
+	FadeOut:
+		SMk2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA random(3,5) A_FadeOut(0.005);
+		Loop;	
+	}
+}
+
+
+Class MO_FastExplosionSmoke : MO_ExplosionSmoke
+{
+	States
+    {
+    Spawn:  
+	Death:
+	    SMk2 AAAA random(1,2)
+		{
+			A_FadeIn(0.05);
+			A_SetScale(scale.x * 1.3);
+		}
+		SMk2 AAAAAAAAAAAAA random(1,2)
+		{
+			A_FadeOut(0.02);
+			A_SetScale(scale.x * 1.07);
+		}
+	FadeOut:
+		SMk2 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 1 A_FadeOut(0.005);
+		Loop;	
+	}
+}
+
+Class MO_SmallExplosionSmoke : MO_ExplosionSmoke
+{Default{Scale 0.2;}}
+
+Class MO_SmallSlowExplosionSmoke : MO_SlowExplosionSmoke
+{Default{Scale 0.2;}}
+
+Class MO_SmallFastExplosionSmoke : MO_FastExplosionSmoke
+{Default{Scale 0.2;}}
+
+Class MO_BigExplosionSmoke : MO_ExplosionSmoke
+{Default{Scale 0.7;}}
+
+Class MO_BigSlowExplosionSmoke : MO_SlowExplosionSmoke
+{Default{Scale 0.7;}}
+
+Class MO_BigFastExplosionSmoke : MO_FastExplosionSmoke
+{Default{Scale 0.7;}}

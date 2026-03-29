@@ -26,7 +26,7 @@ class MO_PlayerBase : DoomPlayer
 		A_SetInventory("HCRAmmo",12);
 		A_SetInventory("SMGAmmo",35);
 		A_SetInventory("SSGAmmo",2);
-		A_SetInventory("MO_PlasmaAmmo",60);
+		A_SetInventory("PlasmaAmmo",60);
 		A_SetInventory("Katana", 1);
 		A_SetInventory("MOLOTOVAMMO",1);
 		A_SetInventory("GrenadeAmmo", 2);
@@ -34,7 +34,6 @@ class MO_PlayerBase : DoomPlayer
 		A_SetInventory("HeatBlastFullyCharged",1);
 		A_SetInventory("HeatBlastLevel",3);
 		A_SetInventory("HeatBlastShotCount", 45);
-		A_SetInventory("MO_EquipmentSelector2",1);
 		//Never used weapom tokens
 		A_SetInventory("NeverUsedLAS", 1);
 		A_SetInventory("NeverUsedPSG", 1);
