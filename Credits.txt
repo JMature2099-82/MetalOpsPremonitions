@@ -75,7 +75,7 @@ Sounds: Magmacow, Infinity Ward, Activision
 Plasma Rifle:
 Sounds : Bethesda Game Studios/Softworks, Zenimax, Gameloft
 Obsidian Entertainment, ID Software, Splash Damage Ltd
-Sprites : TSF (Based on an abandoned plasma sprite he worked on)
+Sprites : TSF (Based on an abandoned plasma sprite he worked on), Gemini0 (pickup)
 
 Super Shotgun
 Sprites: TSF, Metalman (shellbacks and shells used for reload)

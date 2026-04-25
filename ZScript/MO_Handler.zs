@@ -1,15 +1,6 @@
 
 class MOps_Handler : EventHandler
 {
-	int kicktimer;
-	const kickcooldown = 18;
-	const fastkickcooldown = 15;
-
-    override void WorldTick()
-    {		
-		if(kicktimer > 0)
-			kicktimer--;
-    }
 
 	override void PlayerDied(PlayerEvent e) //destroy gun lighting on Death
 	{
@@ -208,45 +199,6 @@ class MOps_Handler : EventHandler
 			if(TossThrowable != Null && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
 			{
 				pl.player.SetPSprite(PSP_WEAPON, mo_wep.FindState("TossThrowable"));
-			}
-		}
-
-		if (e.Name ~== "KickEm")
-		{	
-			if(kicktimer == 0)
-			{
-				
-				//If the Player is alive, do the kick attack. If dead, do nothing.
-				if((players[e.Player].playerstate == PST_LIVE))
-				{
-					let mo_wep = MO_Weapon(pl.player.readyweapon);
-					if(!mo_wep)
-					return;
-	
-					//set the cooldown
-					if(mo_wep && mo_wep.OwnerHasSpeed())
-					kicktimer = fastkickcooldown;
-					else
-					kicktimer = kickcooldown;
-					
-					let wp = pl.player.readyweapon;
-					if(!wp)
-					return;
-					State Kick = wp.FindState("Kick");
-					State FlashKick = wp.FindState("FlashKick");
-					State FlashAirKick = wp.FindState("FlashAirKick");
-					if(Kick != Null && !mo_wep.isZoomed)
-					{
-						pl.player.SetPSprite(PSP_KICK, wp.FindState("Kick"));
-						if(FlashKick != NULL && (players[e.Player].weaponstate & WF_WEAPONREADY) || (mo_wep && mo_wep.CheckIfInReady()))
-						{
-								if(FlashAirKick != Null && pl.Vel.Z != 0)
-								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashAirKick"));
-								else
-								pl.player.SetPSprite(PSP_Weapon, wp.FindState("FlashKick"));
-						}
-					}
-				}
 			}
 		}
 	}

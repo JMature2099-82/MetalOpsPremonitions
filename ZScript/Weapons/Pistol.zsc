@@ -587,7 +587,7 @@ class MO_VengeanceStryker : MO_Weapon// replaces Pistol
 		Goto ReadyToFire;
 	FlashAirKickFast:
 		#### ABCDEF 1;
-		#### FFFF 1;
+		#### FFF 1;
 		#### FEDCBA 1;
 		Goto ReadyToFire;
 	FlashEquipmentToss:

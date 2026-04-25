@@ -122,9 +122,7 @@ weapons/SMG/TactReload_End "Sounds/Weapons/Slot2/SMG/SMG_TactReload_End.ogg"
 
 //Deagle
 weapons/deag/draw DEGSLCT
-$random weapons/deag/fire {deagfire1 deagfire2}
-deagfire1 degfir1
-deagfire2 degfir2
+weapons/deag/fire DEGFIRE
 weapons/deag/reloadraise "Sounds/Weapons/Slot2/Deagle/DE_ReloadRaise.ogg"
 weapons/deag/reloadend "Sounds/Weapons/Slot2/Deagle/DE_ReloadEnd.ogg"
 weapons/deag/reloadendempty "Sounds/Weapons/Slot2/Deagle/DE_ReloadEmptyEnd.ogg"

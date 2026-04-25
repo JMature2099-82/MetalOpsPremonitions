@@ -215,3 +215,12 @@ Changes since 11/14/25:
 - Removed the black background of the explosion graphics
 - Fixed Deagle inspect animation being skipped
 - Removed black background from explosion graphics 
+
+4/22/26:
+- The Kick attack is no longer part of base weapon and it no longer gets interrupted when switching weapons
+- Plasma Rifle pickup sprite changed, sprite by Gemini0
+- Cooldown for count for plasma rifle increased from 25 to 50 so that you can use it more.
+- Deagle firing sound updated, mixed in the COD4 Deagle firing sound with the older firing sound.
+- Plasma rifle cooldown has an indicator on the hud.
+- Lever shotgun ammo rearranged
+- Removed Super Heated rounds from the Plasma Rifle because the implentation was hot garbage.

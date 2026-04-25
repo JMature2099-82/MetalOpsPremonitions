@@ -457,14 +457,26 @@ Class AssaultRifle : MO_Weapon
 			GOTO ReadyToFire;
 		
 		FlashKick:
-			AR1K ABCDEFG 1;// JM_WeaponReady();
-			AR1K GGFFEDCBA 1;// JM_WeaponReady();
+			TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
+			AR1K ABCDEFG 1;
+			AR1K GGFFEDCBA 1;
 			Goto ReadyToFire;
 		
 		FlashAirKick:
-			AR1K ABCDEFG 1;// JM_WeaponReady();
-			AR1K G 5;
-			AR1K GGFEDCBA 1;// JM_WeaponReady();
+			TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashAirKickFast");
+			AR1K ABCDEF 1;
+			AR1K G 6;
+			AR1K FEDCBA 1;
+			Goto ReadyToFire;
+
+		FlashKickFast:
+			AR1K ABCDEF 1;
+			AR1K GFEDCBA 1;
+			Goto ReadyToFire;
+		
+		FlashAirKickFast:
+			AR1K ABCDEFG 1;
+			AR1K GFFEDCBA 1;
 			Goto ReadyToFire;
     }
 } 

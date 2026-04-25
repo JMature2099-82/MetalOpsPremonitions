@@ -65,6 +65,8 @@ class NCH_BaseHUD : BaseStatusBar
 	InventoryBarState nch_diparms;
 	string nch_invbox;
 	name nch_curbgcolor, nch_curhicolor;
+	DynamicValueInterpolator nch_PlasmaCooldownDVI;
+	DynamicValueInterpolator nch_AmmoDVI;
 
 	// Used to store the stats items.
 	Array<NCH_StatItem> nch_statslist;
@@ -130,6 +132,10 @@ class NCH_BaseHUD : BaseStatusBar
 
 		nch_invbox = "H_INVBOX";
 
+		//Plasma Cooldown interpolator bar.
+		nch_PlasmaCooldownDVI = DynamicValueInterpolator.Create(0, 0.25, 1, 60);
+		nch_AmmoDVI = DynamicValueInterpolator.Create(0, 0.25, 1, 64);
+
 		// Note: the graphics passed here are only used for data setup. What graphic that
 		// are drawn in the end are determined by the NCHF_DrawInventoryBar function.
 		nch_diparms = InventoryBarState.Create(nch_bfont, boxgfx : String.Format("graphics/backgrounds/blue/\%s.png", nch_invbox),
@@ -180,6 +186,23 @@ class NCH_BaseHUD : BaseStatusBar
 		}
 	}
 
+	Override void Tick()
+	{
+		Super.Tick();
+		
+		
+		if (CPlayer.mo)
+        {
+			int plasmaCoolCount = GetAmount("PlasmaRifleCooldownCount");
+            nch_PlasmaCooldownDVI.Update(plasmaCoolCount);
+        }
+	}
+
+	override void NewGame()
+	{
+		Super.NewGame();
+		nch_PlasmaCooldownDVI.Reset(0);
+	}
 	// -------------------------------------------------------------------------------------------------
 	//
 	//
@@ -1241,6 +1264,7 @@ class NCH_BaseHUD : BaseStatusBar
 	virtual void NCHF_DrawWeaponAmmo ()
 	{
 		let invsel = CPlayer.mo.InvSel;
+
 		bool drawinv = !level.NoInventoryBar && invsel;
 
 		let wpn = CPlayer.ReadyWeapon;
@@ -1267,6 +1291,17 @@ class NCH_BaseHUD : BaseStatusBar
 			DrawImage(NCHF_GetBackgroundGFX("H_BGRIT2"), rightbgpos, DI_ITEM_RIGHT_TOP);
 		}
 
+		// Plasma Cooldown Background ----------------------------------------------------
+
+		vector2 heatbgpos = (-125, -178);
+		int curheatval;
+
+		if(wpn.GetClassName() == "MO_PlasmaRifle")
+		{
+			NCHF_DrawString(nch_bfont, "HEAT", (-136, -128), DI_TEXT_ALIGN_RIGHT);
+			DrawImage(NCHF_GetBackgroundGFX("H_BGRIT2"), heatbgpos, DI_ITEM_RIGHT_TOP, scale:(0.81, 0.9));
+			NCHF_DrawBar("PL_COLFG", "PL_COLBG", nch_PlasmaCooldownDVI.GetValue(), 60, (-184, -170), 0, SHADER_HORZ, DI_ITEM_RIGHT_TOP);
+		}
 		// Selected inventory --------------------------------------------------------------------
 
 		if(drawinv)
@@ -1656,7 +1691,7 @@ class NCH_BaseHUD : BaseStatusBar
 				}
 				else
 				{
-						 valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == rweap.AmmoType2))) ? nch_curhicolor : 'NCHLightGray';
+					 valuecolor = (rweap && ((ammo.type == rweap.AmmoType1) || (ammo.type == rweap.AmmoType2))) ? nch_curhicolor : 'NCHLightGray';
 				}
 				DrawImage(NCHF_GetBackgroundGFX(bg), bgpos, DI_ITEM_RIGHT_TOP);
 				DrawTexture(ammo.icon, iconpos, DI_ITEM_CENTER, box : (18, 18));
@@ -1919,19 +1954,20 @@ class NCH_BaseHUD : BaseStatusBar
 
 	virtual void NCHF_DrawThrowableBox()
 	{
-		vector2 ammopos = (-162, -128);
+		vector2 pos = (-271, -34);
+		vector2 ammopos = (-280, -50);
 		let plr = CPlayer.mo;
-		DrawImage(NCHF_GetBackgroundGFX("H_BGRIT3"), (-135,-111), DI_ITEM_RIGHT, scale: (0.95,0.95));
+		DrawImage(NCHF_GetBackgroundGFX("H_BGRIT3"), pos, DI_ITEM_RIGHT);
 		if(CPlayer.ReadyWeapon)
 		{   
 			switch(plr.CountInv("ThrowableType"))
 			{
 				case 1:
-				DrawImage("MOLOICO", (-146, -116), DI_ITEM_RIGHT_BOTTOM);
+				DrawImage("MOLOICO", (-284, -42), DI_ITEM_RIGHT_BOTTOM);
 				NCHF_DrawString(nch_bfont, FormatNumber(plr.CountInv("MolotovAmmo"), 0, 4), ammopos, DI_TEXT_ALIGN_RIGHT);
 				break;
 				default:
-				DrawImage("GRENICO", (-141, -118), DI_ITEM_RIGHT_BOTTOM, scale: (0.9,0.9));
+				DrawImage("GRENICO", (-278, -47), DI_ITEM_RIGHT_BOTTOM, scale: (0.9,0.9));
 				NCHF_DrawString(nch_bfont, FormatNumber(plr.CountInv("GrenadeAmmo"), 0, 4), ammopos, DI_TEXT_ALIGN_RIGHT);
 				break;
 			}
