@@ -269,7 +269,7 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
 		FlashKick:
 			TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(),"FlashKickFast");
 			RLAK ABCDEFFG 1;
-			RLAK HFEIJKLM 1;
+			RLAK HFFEIJKLM 1;
 			Goto ReadyToFire;
 		
 		FlashAirKick:
