@@ -103,7 +103,8 @@ class MO_Weapon : Weapon
 				return ResolveState(Null);
 			}
 			Goto ReallyReady;
-							
+		
+
 		FlashKick:
 				TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(), "FlashKickFast");
 				TNT1 A 16;
