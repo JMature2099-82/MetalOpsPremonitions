@@ -52,14 +52,11 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
         SelectAnimation:
             TNT1 A 0 A_StartSound("weapons/rocket/draw", 0);
             RLAS A 1;
-			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
 			RLAS A 0;
 			"####" BCDEF 1;
 		Ready:
         ReadyToFire:
-			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
-			RLAS A 0;
-            "####" F 1 JM_WeaponReady;
+            RLAS F 1 JM_WeaponReady;
             Loop;
 
 		Select:
@@ -71,9 +68,7 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
 
 		Deselect:
 			TNT1 A 0 A_SETCROSSHAIR(Invoker.GetXHair(10));
-			RNAS A 0 A_JumpIfInventory("MiniNukeMode",1,2);
-			RLAS A 0;
-			"####" FEDCB 1;
+			RLAS FEDCB 1;
 			RLAS A 1;
 			TNT1 A 0 A_lower(12);
 			Wait;
@@ -127,7 +122,6 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
             Goto REadyToFire;
 
         AltFire:
-			TNT1 A 0 A_JumpIfInventory("MiniNukeMode",1,"NoAltForNuke");
 			TNT1 A 0 A_JumpIf(CountInv("MO_RocketAmmo") < 1,"ReadyToFire");
             RLAF A 1 BRIGHT
             {
@@ -206,9 +200,6 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
 			}
 			TNT1 A 0 A_JumpIf(PressingAltFire(), "AltFire");
             Goto ReadyToFire;
-		NoAltForNuke:
-			"####" A 0;// A_Print("You can't do alt fire on nuke mode");
-			Goto ReadyTofire;
         MuzzleFlash:
             MUZR ABC 1 BRIGHT A_AttachLightDef('GunLighting', 'GunFireLight');
 			MUZR D 1 BRIGHT A_RemoveLight('GunLighting'); 
@@ -276,18 +267,25 @@ class MO_RocketLauncher : MO_Weapon replaces RocketLauncher
 			RNUK A 1;
 			Stop;*/
 		FlashKick:
-			RNAK A 0 A_JumpIfInventory("MiniNukeMode",1,2);
-			RLAK A 0;
-			"####" ABCDEFG 1;// JM_WeaponReady();
-			"####" GGFFEDCBA 1;// JM_WeaponReady();
+			TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(),"FlashKickFast");
+			RLAK ABCDEFFG 1;
+			RLAK HFEIJKLM 1;
 			Goto ReadyToFire;
 		
 		FlashAirKick:
-			RNAK A 0 A_JumpIfInventory("MiniNukeMode",1,2);
-			RLAK A 0;
-			"####" ABCDEFG 1;// JM_WeaponReady();
-			"####" G 5;
-			"####" GGFEDCBA 1;// JM_WeaponReady();
+			TNT1 A 0 A_JumpIf(invoker.OwnerHasSpeed(),"FlashAirKickFast");
+			RLAK ABCDEFFGG 1;
+			RLAK HHFFEIJKLM 1;
+			Goto ReadyToFire;
+
+		FlashKickFast:
+			RLAK ABCDEFG 1;
+			RLAK HFIJKLM 1;
+			Goto ReadyToFire;
+		
+		FlashAirKickFast:
+			RLAK ABCDEFG 1;
+			RLAK HHFEIJKLM 1;
 			Goto ReadyToFire;
     }
 }
@@ -332,7 +330,7 @@ Class MO_Rocket : Rocket// replaces rocket
 			TNT1 A 0 A_StartSound("rocket/explosion");
 			TNT1 A 0 A_StartSound("FarExplosion",8);
 			TNT1 A 1 A_SpawnItemEx("RocketExplosionFX",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			TNT1 A 0 A_Explode(180, 180, damagetype: "ExplosiveImpact");
+			TNT1 A 0 RadiusAttack(target, 180, 200, "ExplosiveImpact");
 			TNT1 A 1;
 			Stop;
     }

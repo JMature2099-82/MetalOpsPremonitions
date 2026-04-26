@@ -224,3 +224,5 @@ Changes since 11/14/25:
 - Plasma rifle cooldown has an indicator on the hud.
 - Lever shotgun ammo rearranged
 - Removed Super Heated rounds from the Plasma Rifle because the implentation was hot garbage.
+- Updated some Rocket Launcher animations, mainly kicking. 
+- Fixed the Rocket Launcher not being able to be selected.
