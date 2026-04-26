@@ -9,11 +9,11 @@ class MO_DickKickEm : CustomInventory
 		+INVENTORY.UNDROPPABLE
 		-INVENTORY.INVBAR
 		+INVENTORY.UNTOSSABLE
+		Inventory.PickUpMessage "$GOTPLACEHOLDER";
     }
 	States
 	{
 		Use:
-			TNT1 A 0 A_JumpIf(A_CheckZoomed(), 3);
 	        TNT1 A 0 A_Overlay(-999, "Kick",true);
 			TNT1 A 0 A_OverlayOffset(-999, -1, 32);
 			TNT1 AAA 0;
@@ -93,9 +93,12 @@ class MO_DickKickEm : CustomInventory
 		
 		if(owner is "PlayerPawn" && JustPressedKick() && !kicking)
 		{
-			owner.UseInventory(self);
-			kicking = true;
-			CheckForFlashState();
+			if(!CheckZoomed())
+			{
+				owner.UseInventory(self);
+				kicking = true;
+				CheckForFlashState();
+			}
 		}
     }
 	
@@ -128,9 +131,9 @@ class MO_DickKickEm : CustomInventory
 		}
 	}
 	
-	action bool A_CheckZoomed()
+	bool CheckZoomed()
 	{
-		let weapon = MO_Weapon(player.readyweapon);
+		let weapon = MO_Weapon(owner.player.readyweapon);
 		
 		return weapon.isZoomed;
 	}
