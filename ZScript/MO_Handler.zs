@@ -10,16 +10,8 @@ class MOps_Handler : EventHandler
 			pl.A_RemoveLight('GunLighting');
 			pl.SetInventory("GrenadeCookTimer",0);
 			pl.A_ClearOverlays(-100,PSP_KICK,true);
-			pl.SetInventory("MO_DickKickEm",0);
 	}
 
-	override void PlayerRespawned(PlayerEvent e) //give back the kick when resurrected.
-	{
-		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
-		if(!pl) return;
-			pl.SetInventory("MO_DickKickEm",1);
-	}
-	
 // Key bind code by m8f
 	private static ui bool isKeyForCommand(int key, string command)
 	{
