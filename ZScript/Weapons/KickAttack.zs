@@ -69,8 +69,8 @@ class MO_DickKickEm : CustomInventory
 		AirKickFaster: //15 frames
 			KCK2 ABC 1;
 			TNT1 A 0 A_StartSound("playerkick",0);
-			KCK2 DE 1;
-			KCK2 F 1 MO_KickAttack();
+			KCK2 DEF 1;
+			KCK2 G 1 MO_KickAttack();
 			KCK2 GHHII 1;
 			KCK2 JKLN 1;
 			TNT1 A 0 A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, false);
@@ -84,7 +84,7 @@ class MO_DickKickEm : CustomInventory
         Super.DoEffect();
 		if(!owner) return;
 		
-		if(owner is "PlayerPawn" && owner.health >= 1 && JustPressedKick() && !kicking)
+		if(owner is "PlayerPawn" && JustPressedKick() && !kicking)
 		{
 			if(!CheckZoomed())
 			{
