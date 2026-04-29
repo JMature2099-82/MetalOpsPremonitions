@@ -9,7 +9,7 @@ class MOps_Handler : EventHandler
 			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
 			pl.SetInventory("GrenadeCookTimer",0);
-			pl.A_ClearOverlays(-100,PSP_KICK,true);
+			pl.A_ClearOverlays(PSP_KICK,-100,true);
 			pl.SetInventory("MO_DickKickEm",0);
 	}
 
@@ -19,7 +19,7 @@ class MOps_Handler : EventHandler
 		if(!pl) return;
 			pl.SetInventory("MO_DickKickEm",1);
 	}
-	
+
 // Key bind code by m8f
 	private static ui bool isKeyForCommand(int key, string command)
 	{
