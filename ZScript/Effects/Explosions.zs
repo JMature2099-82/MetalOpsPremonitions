@@ -38,7 +38,7 @@ Class RocketExplosionFX : Actor
 			X006 FGHIJKLMNOP 1 bright;
 			Stop;
 		Effect5:
-			X007 A 0 A_SetScale (.70);
+			X007 A 0 A_SetScale (1);
 			X007 ABCDE 1 bright;
 			X007 FGHIJKLMNOPQ 1 bright;
 			Stop;
@@ -53,17 +53,17 @@ Class BarrelExplosionFX : RocketExplosionFX
 			TNT1 A 0;
 			TNT1 A 1 A_Jump(256, "Effect1", "Effect2", "Effect3");
 		Effect1:
-			X203 ABCDE 1 bright;
-			X203 FGHIJKLMNOPQ 1 bright;
+			X203 CDE 1 bright;
+			X203 FGHIJKLMNOPQRSTUVWXYZ 1 bright;
 			Stop;
 		Effect2:
-			X005 ABCDE 1 bright;
-			X005 FGHIJKLMNOPQ 1 bright;
+			X005 CDE 1 bright;
+			X005 FGHIJKLMNOPQRSTUVWX 1 bright;
 			Stop;
 		Effect3:
-			X007 A 0 A_SetScale (.70);
+			X007 A 0 A_SetScale (1);
 			X007 ABCDE 1 bright;
-			X007 FGHIJJKKLMNO 1 bright;
+			X007 FGHIJKLMNOPQ 1 bright;
 			Stop;
     }
 }

@@ -17,6 +17,7 @@ Class FlameTrails : Actor
 		damagetype "fire";
 		Scale 0.5;
 		Gravity 0;
+		Alpha 0.75;
 	}
 	States
 	{
@@ -31,6 +32,10 @@ Class SmallFlameTrails: FlameTrails
 {
 		Default{Scale 0.3;}
 }
+
+Class MO_FlameTrails : FlameTrails{}
+
+Class MO_SmallFlameTrails : SmallFlameTrails{}
 
 Class MolotovFlames : Actor
 {

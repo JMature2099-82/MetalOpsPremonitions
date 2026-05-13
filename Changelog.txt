@@ -208,3 +208,10 @@ Changes since 11/14/25:
 - Plasma beam autoaims when autoaim is on. Thanks to Agent_Ash's ZSLoRWeapons!
 - Invulnerability hit sounds updated
 - Tactical reload animation added for the SMG.
+
+3/28/26:
+- Valiant and Sunlust barrel checks use LevelPostProcessor instead of ACS or Tick checks.
+- Added a ThingEdNum for the performance friendly barrel for the replacement code to work. 
+- Removed the black background of the explosion graphics
+- Fixed Deagle inspect animation being skipped
+- Removed black background from explosion graphics 

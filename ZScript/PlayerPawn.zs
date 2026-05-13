@@ -34,7 +34,6 @@ class MO_PlayerBase : DoomPlayer
 		A_SetInventory("HeatBlastFullyCharged",1);
 		A_SetInventory("HeatBlastLevel",3);
 		A_SetInventory("HeatBlastShotCount", 45);
-
 		//Never used weapom tokens
 		A_SetInventory("NeverUsedLAS", 1);
 		A_SetInventory("NeverUsedPSG", 1);
@@ -53,7 +52,7 @@ class MO_PlayerBase : DoomPlayer
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 
-	override void PostBeginPlay()
+ 	override void PostBeginPlay()
 	{
 		//Voodoo Doll Check
 		Super.PostBeginPlay();
@@ -91,6 +90,14 @@ class MO_PlayerBase : DoomPlayer
 	Default
 	{
 		Player.AttackZOffset 11; //Attacks should actually hit on the same spot as the crosshair now. Thanks Gemini0! -JM
+		Speed 1;
+		Health 100;
+		Radius 16;
+		Height 56;
+		Mass 100;
+		PainChance 255;
+		Player.ColorRange 112, 127;
+		Player.CrouchSprite "PLYC";
 		Player.WeaponSlot 1, "MO_Chainsword", "Katana";
 		Player.WeaponSlot 2, "MO_VengeanceStryker", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
@@ -110,7 +117,6 @@ class MO_OfficerPlayer : MO_PlayerBase
     {
         Player.StartItem "MO_VengeanceStryker";
 		Player.DisplayName "Officer (Pistol Start)";
-		Player.CrouchSprite "PLYC";
 		Player.StartItem "PistolMagAmmo",18;
 		Player.StartItem "NeverUsedPistol";
     }
@@ -122,7 +128,6 @@ class MO_SergeantPlayer : MO_PlayerBase
     {
         Player.StartItem "MO_Deagle";
 		Player.DisplayName "Sergeant (Deagle Start)";
-		Player.CrouchSprite "PLYC";
 		Player.WeaponSlot 2, "MO_Deagle", "MO_Submachinegun";
 		Player.StartItem "MODeagleAmmo",8;
 		Player.StartItem "NeverUsedPocketCannon";

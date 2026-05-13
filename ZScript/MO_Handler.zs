@@ -19,7 +19,7 @@ class MOps_Handler : EventHandler
 			pl.A_StopAllSounds();
 			pl.A_RemoveLight('GunLighting');
 			pl.SetInventory("GrenadeCookTimer",0);
-			pl.A_Overlay(PSP_KICK, NULL);
+			pl.A_ClearOverlays(-100,PSP_KICK,true);
 		}
 	}
 	
@@ -143,6 +143,7 @@ class MOps_Handler : EventHandler
 				break;			
 
 			//Compatibility shit
+			case 'ExplosiveBarrel':
 			case 'ExplosiveBarrel1':
 			case 'msxBarrel':
 				e.Replacement = "MO_ExplosiveBarrel";
