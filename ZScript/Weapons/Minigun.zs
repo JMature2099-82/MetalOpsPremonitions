@@ -238,13 +238,13 @@ class MO_MiniGun : MO_Weapon
 		MG1K ABCDEFGFEDCBA 1;
 		Goto ReadyToFire;
 	FlashAirKickFast:
-		MG1K ABCDEFGGFEDCBA 1;
+		MG1K ABCDEFGGGFEDCBA 1;
 		Goto ReadyToFire;
 	FlashKickSpinFast:
 		MG2K ABCDEFGHIJKLM 1;
 		Goto ReadyToFire;
 	FlashAirKickSpinFast:
-		MG2K ABCDEFGGHIJKLM 1;
+		MG2K ABCDEFGGHHIJKLM 1;
 		Goto ReadyToFire;
 	}
 }

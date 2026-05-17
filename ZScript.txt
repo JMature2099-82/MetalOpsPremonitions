@@ -53,4 +53,42 @@ class MO_BaseInventory : Inventory abstract
     }
 }
 
-
+Class MO_EquipmentSelector2 : CustomInventory
+{  
+    Default
+    {
+		+INVENTORY.UNDROPPABLE
+		-INVENTORY.INVBAR
+		+Inventory.Untossable;
+    }
+	States
+	{
+	Use:
+        TNT1 A 0 A_Overlay(-2, "ChangeEquipment");
+        TNT1 A 0;
+        Fail;
+	ChangeEquipment:
+		TNT1 A 0
+		{
+			switch(CountInv("ThrowableType"))
+			{
+				//case 1: //new equipment
+                //   GiveInventory("ThrowableType", 1);
+                //    A_Print("New Equipment Selected"); //replace new equipment with the name of this new equipment
+                //    S_StartSound("MOLPKUP",3); //replace this sound with a new one
+                //    break;
+                case 1: //back to grenades
+                    A_SetInventory("ThrowableType", 0);
+                    A_Print("Frag Grenades Selected");
+                    A_StartSound("FragGrenade/Pickup",30);
+                    break;
+                default: //Switch to molotov
+                    A_GiveInventory("ThrowableType", 1);
+                    A_Print("Molotov Cocktails Selected");
+                    A_StartSound("MOLPKUP",30);
+                    break;
+			}
+		}
+		Stop;
+	}
+}

@@ -12,6 +12,7 @@ class MO_Deagle : MO_Weapon// replaces Pistol
 		A_Overlay(PSP_MUZZLE, "MuzzleFlash");
 		A_FireBullets (5.6, 0, 1, 70, "UpdatedBulletPuff", FBF_NORANDOM, 0,"MO_BulletTracer",0);
 		A_StartSound("weapons/deag/fire", CHAN_WEAPON);
+		A_StartSound("weapons/deag/tail", CHAN_5, volume: 0.5);
 		A_AlertMonsters();
 		JM_CheckForQuadDamage();
 	}

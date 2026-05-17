@@ -1500,4 +1500,18 @@ Graphic "GRENICO", 56, 61
 	Patch "GNDEC0", 1, 7
 }
 
+Graphic "PL_COLFG", 49, 18
+{
+	XScale 0.400
+	YScale 0.400
+	Patch "PLASB0", 0, 0
+}
+
+Graphic "PL_COLBG", 49, 18
+{
+	XScale 0.400
+	YScale 0.400
+	Patch "PLASA0", 0, 0
+}
+
 // End of texture definitions

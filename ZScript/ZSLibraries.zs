@@ -29,6 +29,7 @@
 #include "./weapons/bfg.zs"
 #include "./Weapons/Flamethrower.zs"
 #include "./weapons/Unmaker.zc"
+#include "./weapons/KickAttack.zs"
 
 //HUD
 #include "./NCHUD/nch_basehud.zsc"

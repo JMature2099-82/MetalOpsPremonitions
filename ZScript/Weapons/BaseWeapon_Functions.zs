@@ -2,7 +2,7 @@ extend class MO_Weapon
 {
 	bool OwnerHasSpeed()
 	{
-		return (owner.FindInventory("MO_PowerSpeed"));
+		return (owner.FindInventory("MO_PowerSpeed") || owner.FindInventory("PowerSpeed"));
 	}
 
 	bool OwnerHasInfiniteAmmo()
@@ -58,7 +58,6 @@ extend class MO_Weapon
 		A_ZoomFactor(1);
 		SetPlayerProperty(0,0,0);
 		A_ClearOverlays(-8,8);
-		A_OverlayFlags(PSP_KICK, PSPF_PLAYERTRANSLATED, FALSE);
 		A_RemoveLight('GunLighting');
 	}
 

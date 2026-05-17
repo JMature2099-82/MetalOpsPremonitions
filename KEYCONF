@@ -2,13 +2,12 @@ addkeysection "Metal Ops Keybinds" MOBinds
 addmenukey "Toss Throwable" +user1
 defaultbind G +user1
 
-addmenukey "Kick Attack" dickkickem
-alias dickkickem "netevent KickEm"
-defaultbind Q dickkickem
+addmenukey "Kick Attack" +zoom
+defaultbind Q +zoom
 
 //In the future, this will be changed.
 addmenukey "Switch Throwables" PrevThrow
-alias PrevThrow "netevent PrevThrowable"
+alias PrevThrow "use MO_EquipmentSelector2"
 defaultbind N
 
 addmenukey "Weapon Action Special" +user4
