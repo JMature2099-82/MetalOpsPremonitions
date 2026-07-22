@@ -4,13 +4,30 @@ class SergeantClassToken : MO_ZSToken{}
 class MO_PlayerBase : DoomPlayer
 {
 	int specialtimer;
+	Line curDoor;
+	int doorTics;
+
 	override Void Tick()
 	{
-		Super.Tick();
+		if (player) {
+			let r = player.readyWeapon;
+			let l = player.pendingWeapon;
+			
+		if (!(r is "MO_KeyWeapon") && !(l is "MO_KeyWeapon")) {
+				A_TakeInventory("MO_RedCardWeapon");
+				A_TakeInventory("MO_YellowCardWeapon");
+				A_TakeInventory("MO_BlueCardWeapon");
+				A_TakeInventory("MO_RedSkullWeapon");
+				A_TakeInventory("MO_YellowSkullWeapon");
+				A_TakeInventory("MO_BlueSkullWeapon");
+			}
 		//Destroy the night vision shader if a new level is started or if player dies.
 		If(!FindInventory("MO_PowerLightAmp"))
 		{
 			Shader.SetEnabled(Player,"NiteVis",false);
+		}
+		Super.Tick();
+		
 		}
 	}
 
@@ -27,7 +44,7 @@ class MO_PlayerBase : DoomPlayer
 		A_SetInventory("SMGAmmo",35);
 		A_SetInventory("SSGAmmo",2);
 		A_SetInventory("MO_PlasmaAmmo",60);
-		A_SetInventory("Katana", 1);
+		A_SetInventory("MO_Katana", 1);
 		A_SetInventory("MOLOTOVAMMO",1);
 		A_SetInventory("GrenadeAmmo", 2);
 		A_SetInventory("FragSelected",1);
@@ -87,6 +104,14 @@ class MO_PlayerBase : DoomPlayer
 			if (player.weaponstate & WF_WEAPONREADY || (mo_wep && mo_wep.CheckIfInReady()))
 			A_SetInventory("SpecialAction",1);
 		}
+		// Keycard animations
+		if (doorTics > 0) {
+			--doorTics;
+			
+			if (doorTics <= 0 && curDoor) {
+				curDoor.Activate(self, 1, SPAC_Use);
+			}
+		}
 	}
 
 	Default
@@ -100,7 +125,7 @@ class MO_PlayerBase : DoomPlayer
 		PainChance 255;
 		Player.ColorRange 112, 127;
 		Player.CrouchSprite "PLYC";
-		Player.WeaponSlot 1, "MO_Chainsword", "Katana";
+		Player.WeaponSlot 1, "MO_Chainsword", "MO_Katana";
 		Player.WeaponSlot 2, "MO_VengeanceStryker", "MO_Submachinegun";
 		Player.WeaponSlot 3, "LeverShotgun", "MO_PumpShotgun", "MO_SSG";
 		Player.WeaponSlot 4, "AssaultRifle", "MO_MiniGun", "MO_HeavyRifle";

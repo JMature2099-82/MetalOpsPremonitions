@@ -124,7 +124,6 @@ TAG_HEAVYARM = "\c[Darkgray]Heavy Combat Armor";
 TAG_WEAKARM = "\c[Black]Cheap Tactical Vest";
 
 //Keys
-
 GOTREDCARD = "Picked up a \c[Red] Red Keycard\c-.";
 GOTYELWCARD = "Picked up a \c[Yellow] Yellow Keycard\c-.";
 GOTBLUECARD = "Picked up a \c[Blue] Blue Keycard\c-.";
@@ -282,6 +281,8 @@ MO_NVISWHT = "White Phosphor";
 MO_ADSTOGGLE = "Toggle";
 MO_ADSHOLD = "Hold";
 MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
+MO_KEYOPT = "Display keycard animation on locked doors";
+
 
 //Gameplay Options
 MO_CROSSHAIR_SLIDER = "Crosshair Settings";
@@ -301,6 +302,7 @@ MO_RICOCHET_TIP = "Toggle the bullet ricochet sounds when bullet based hitscan a
 MO_RECOIL_TIP = "Enables/disables recoil on shootable weapons. \nIf you're not using mouse look, set this option to OFF!";
 MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
 MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
+MO_KEYTIP = "Display a keycard animation when you press use on a locked door (ex. a lock door requires a \nBlue keycard), like in Duke Nukem 3D.";
 
 
 // Flashlight++ - https:// forum.zdoom.org/viewtopic.php?t=75585

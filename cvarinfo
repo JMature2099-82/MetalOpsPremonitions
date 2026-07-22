@@ -7,6 +7,7 @@ server noarchive int casingvelZ = 0;*/
 
 server noarchive int xtext = 0;
 server noarchive int ytext = 0;
+server bool sv_ntm_keycard = true;
 
 server noarchive bool mo_classicssgfire = false;
 

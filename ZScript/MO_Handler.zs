@@ -2,6 +2,17 @@
 class MOps_Handler : EventHandler
 {
 
+	void TakeAwayKeyWeps(PlayerPawn plr)
+	{
+		plr.A_TakeInventory("MO_RedCardWeapon");
+		plr.A_TakeInventory("MO_YellowCardWeapon");
+		plr.A_TakeInventory("MO_BlueCardWeapon");
+		plr.A_TakeInventory("MO_RedSkullWeapon");
+		plr.A_TakeInventory("MO_YellowSkullWeapon");
+		plr.A_TakeInventory("MO_BlueSkullWeapon");
+		plr.A_TakeInventory("CheatGiver",999);
+	}
+
 	override void PlayerDied(PlayerEvent e) //destroy gun lighting on Death
 	{
 		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
@@ -11,13 +22,146 @@ class MOps_Handler : EventHandler
 			pl.SetInventory("GrenadeCookTimer",0);
 			pl.A_ClearOverlays(PSP_KICK,-100,true);
 			pl.SetInventory("MO_DickKickEm",0);
+			TakeAwayKeyWeps(pl);
 	}
 
 	override void PlayerRespawned(PlayerEvent e) //give back the kick when resurrected.
 	{
 		let pl = MO_PlayerBase(players[e.PlayerNumber].mo);
 		if(!pl) return;
+			TakeAwayKeyWeps(pl);
 			pl.SetInventory("MO_DickKickEm",1);
+	}
+
+	override void PlayerEntered(PlayerEvent e)
+	{
+		let pmo = players[e.playerNumber].mo;
+		
+		if (pmo is "MO_PlayerBase") {
+			TakeAwayKeyWeps(pmo);
+			MO_PlayerBase nmo = MO_PlayerBase(pmo);
+			nmo.doorTics = 0;
+			nmo.curDoor = null;
+		}
+	}
+
+//First person keycard bullshit by Cant Sleep
+	override void WorldLinePreActivated(WorldEvent e)
+	{
+		let mo = e.thing;
+		Line l = e.activatedLine;
+		
+		// If this is a locked door, check if we can play a keycard animation
+		if (mo is "MO_PlayerBase" && l.special == 13 && sv_ntm_keycard)
+		{
+			bool lock = false;
+			MO_PlayerBase pmo = MO_PlayerBase(mo);
+			if (pmo.curDoor != l) {
+				switch (l.args[3]) {
+					case 1:
+						if (UseKey(e, "MO_RedCard", "MO_RedCardWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 2:
+						if (UseKey(e, "MO_BlueCard", "MO_BlueCardWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 3:
+						if (UseKey(e, "MO_YellowCard", "MO_YellowCardWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 4:
+						if (UseKey(e, "MO_RedSkull", "MO_RedSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 5:
+						if (UseKey(e, "MO_BlueSkull", "MO_BlueSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 6:
+						if (UseKey(e, "MO_YellowSkull", "MO_YellowSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 100:
+						if (UseKey(e, "MO_RedCard", "MO_RedCardWeapon") || UseKey(e, "MO_RedSkull", "MO_RedSkullWeapon")
+						    || UseKey(e, "MO_BlueCard", "MO_BlueCardWeapon") || UseKey(e, "MO_BlueSkull", "MO_BlueSkullWeapon")
+							|| UseKey(e, "MO_YellowCard", "MO_YellowCardWeapon") || UseKey(e, "MO_YellowSkull", "MO_YellowSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 129:
+					case 132:
+						if (UseKey(e, "MO_RedCard", "MO_RedCardWeapon") || UseKey(e, "MO_RedSkull", "MO_RedSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 130:
+					case 133:
+						if (UseKey(e, "MO_BlueCard", "MO_BlueCardWeapon") || UseKey(e, "MO_BlueSkull", "MO_BlueSkullWeapon")) {
+							lock = true;
+						}
+					break;
+					
+					case 131:
+					case 134:
+						if (UseKey(e, "MO_YellowCard", "MO_YellowCardWeapon") || UseKey(e, "MO_YellowSkull", "MO_YellowSkullWeapon")) {
+							lock = true;
+						}
+					break;
+				}
+			}
+
+			if (lock)
+			{
+				pmo.A_SetInventory("UsingAKey",1);
+				pmo.curDoor = l;
+				pmo.doorTics = 24;
+				e.shouldActivate = false;
+			}
+		}
+	}
+
+	bool UseKey(WorldEvent e, class<Key> keyItem, class<MO_KeyWeapon> keyAnim) 
+	{
+		Actor pmo = e.thing;
+		
+		if (pmo.CountInv(keyItem)) {
+			let p = pmo.player;
+			
+			if (p && !(p.readyWeapon is keyAnim)) {
+				let prevWeapon = p.readyWeapon;
+				
+				pmo.A_GiveInventory(keyAnim);
+				
+				let keycard = MO_KeyWeapon(pmo.FindInventory(keyAnim));
+				
+				if (keycard) {
+					keycard.prevWeapon = prevWeapon.GetClassName();
+					p.pendingWeapon = keycard;
+					p.cheats |= CF_FROZEN;
+				} else {
+					return false;
+				}
+				
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 // Key bind code by m8f

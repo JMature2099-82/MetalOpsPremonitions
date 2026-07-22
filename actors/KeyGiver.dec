@@ -1,0 +1,38 @@
+//Fake CustomInventory given to the player to replace the default DoomKeys and Heavy Armor
+
+actor CheatGiver : CustomInventory
+{
+	Inventory.Amount 1
+	Inventory.MaxAmount 2
+	Inventory.Icon "AMMOA0"
+	Inventory.PickUpMessage "$GOTPLACEHOLDER"
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.ALWAYSPICKUP
+	States
+	{
+		Spawn:
+			AMMO A -1
+			Stop
+		PickUp:
+		Use:
+			TNT1 A 0
+			{
+				A_GiveInventory("MO_RedCard");
+				A_GiveInventory("MO_YellowCard");
+				A_GiveInventory("MO_BlueCard");
+				A_GiveInventory("MO_RedSkull");
+				A_GiveInventory("MO_YellowSkull");
+				A_GiveInventory("MO_BlueSkull");
+				A_TakeInventory("RedCard");
+				A_TakeInventory("YellowCard");
+				A_TakeInventory("BlueCard");
+				A_TakeInventory("RedSkull");
+				A_TakeInventory("YellowSkull");
+				A_TakeInventory("BlueSkull");
+				A_GiveInventory("MO_HeavyArmor");
+				A_TakeInventory("MO_KeyWeapon");
+			}
+			Stop
+	}
+}

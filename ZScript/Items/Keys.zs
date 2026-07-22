@@ -13,10 +13,7 @@ class MO_KeyClass : Key abstract
 
 class MO_SkullKeyClass : MO_KeyClass
 {
-	Default
-	{
-		Inventory.PickUpSound "misc/skullkey";
-	}
+		Default{Inventory.PickUpSound "misc/skullkey";}
 }
 
 class MO_RedCard : MO_KeyClass replaces RedCard

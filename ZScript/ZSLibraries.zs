@@ -30,6 +30,7 @@
 #include "./Weapons/Flamethrower.zs"
 #include "./weapons/Unmaker.zc"
 #include "./weapons/KickAttack.zs"
+#include "./weapons/KeyWeapons.zs"
 
 //HUD
 #include "./NCHUD/nch_basehud.zsc"

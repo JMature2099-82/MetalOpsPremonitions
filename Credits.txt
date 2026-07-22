@@ -103,6 +103,11 @@ Unmaker:
 Sprites by Enchanter, Zaero, DeathStalker (base)
 Sounds: Soundbible (thecheeseman), People Can Fly, DreamCatcher Interactive (THQ Nordic)
 
+First Person Keys from Nobody Told Me About ID:
+Keycards: Hellfire, totallyrealrei
+Skull keys: TSF (modified from BDv22's Lost Soul grab)
+Code: Can't Sleep
+
 _______________
 Glass Bottle Break Sound Effect Sound is from Zapsplat.com
 https://www.zapsplat.com/
@@ -199,7 +204,7 @@ Smoke trail for grenade inspired by Black Mesa by Crowbar Collective
 Megasphere sound from Doom 2016 by id Software, Soulsphere sound from Doom3 by
 id Software
 Power up wear off and Invulnerability sounds from Quake by ID Software,  HQ sounds by SeanTheBermanator
-Night Vision goggles off sound from Call of Duty Modern Warfare 2007
+Night Vision goggles off sound from Call of Duty 4 Modern Warfare 2007
 Night Vision goggles warning sound by sweet_trip from freesound.com
 Invulnerability loop sounds from Doom 2016, layered sounds and invul end by People Can Fly, hit sounds by ID Software,
 SNK (armor hit sound from Samurai Shodown 2019) and electric shock sound by SoundEffectShowcase
@@ -214,6 +219,15 @@ EA Los Angeles (aka Danger Close Games) - Pause menu pop up and exit sounds from
 Activision, id Software, Bethesda, Raven Software - Menu select, back and confirm sounds from Wolfenstein 2009.
 Tekila - Loading bar fill graphic (NOTCH.png)
 iamcarrotmaster - nukage barrel sprites
+
+
+
+/////////////////////////////
+///			Other names				///
+////////////////////////////
+
+- Agent Ash is also known as Jekyll Grim Payne
+- TSF is also known is SoniK.O.fan, and vice versa.
 
 /////////////////////////////
 ///			 Flashlight++				///

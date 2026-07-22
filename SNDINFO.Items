@@ -1,6 +1,8 @@
 misc/keycard KEYPICK
 misc/skullkey SKULLPIK
 
+KEYUSE KEYUSE
+
 misc/armorup ARMORUP
 misc/armorbonus ARMRBON
 gemarmorbonus ARMRBON2

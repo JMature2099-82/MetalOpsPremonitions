@@ -6,7 +6,9 @@ class KatanaBeamMode : MO_ZSToken{}
 
 class LeftKatanaAttack : MO_ZSToken{} //For the JM_KatanaAttack function
 
-class Katana: MO_Weapon replaces Fist
+class SelectKatanaFromKeys : MO_Token{}
+
+class MO_Katana: MO_Weapon replaces Fist
 {
 	  Default 
 	  {	
@@ -49,6 +51,31 @@ class Katana: MO_Weapon replaces Fist
 			A_CustomPunch(dmg * random(1,3), TRUE, CPF_NOTURN, puff, 96, 0, 0, "none", "weapons/katana/hit");
 	  }
 
+	action void MO_KatanaAttack()
+	{
+			FTranslatedLineTarget t;
+			double ang = angle + Random2() * (5.625 / 256);
+			double pitch = AimLineAttack(ang, 88, null, 0., ALF_CHECK3D);
+			int dmg = 25; 
+			Class<Actor> puff;
+			bool leftSwing = FindInventory("LeftKatanaAttack");
+
+			if(invoker.OwnerHasBerserk()) {
+				if(health < 30) 
+				dmg = dmg * 4;
+				else dmg = dmg * 2;
+				}
+		
+		if(leftSwing) {puff = "KatanaPuff2";}
+		else {puff = "KatanaPuff";}
+		LineAttack(ang, 96, pitch, dmg * random(1,3), 'Cut', puff, LAF_ISMELEEATTACK,t);
+
+		 if (t.linetarget)
+        {
+			A_StartSound("weapons/katana/hit",4);
+		}
+	}
+
 	 action void JM_KatanaAltFire()
 	 {
 			int dmg = 75; 
@@ -70,6 +97,7 @@ class Katana: MO_Weapon replaces Fist
 
 	  Deselect:
 		TNT1 A 0 A_SetCrosshair(99);
+		TNT1 A 0 A_JumpIfInventory("UsingAKey",1,"DeadDeselect");
 		TNT1 A 0 A_JumpIfHealthLower(0, "DeadDeselect");
 		KTAG BCDEFG 1;
 		KTAG HIJ 1;
@@ -86,6 +114,7 @@ class Katana: MO_Weapon replaces Fist
 		  TNT1 A 0 MO_Raise(); 
 	 SelectAnimation:
 		TNT1 A 2;
+		TNT1 A 0 A_JumpIfInventory("SelectKatanaFromKeys",1,"FlashEquipmentTossEnd");
 		TNT1 A 0 A_StartSound("weapons/katana/draw",CHAN_AUTO);
 		KTAG PONMLKJI 1;
 		KTAG GFECB 1;
@@ -231,5 +260,14 @@ class Katana: MO_Weapon replaces Fist
 		KTAK F 6;
 		KTAK EEDCBA 1;
 		Goto ReadyToFire;
+
+	FlashEquipmentToss:
+		KTAK ABCDEF 1;
+		Goto ThrowThatShitForReal;
+
+	FlashEquipmentTossEnd:
+		TNT1 A 0 A_SetInventory("SelectKatanaFromKeys",0);
+		KTAK FEDCBA 1;
+		Goto Ready;
    }
 }

@@ -36,6 +36,8 @@ Class SpecialAction : MO_ZSToken{}
 
 Class SpecialAction2 : MO_ZSToken{}
 
+Class UsingAKey : MO_Token{}
+
 //-------------------------------------------------- |
 //			 			Weapon  tokens				                  |
 //---------------------------------------------------| 

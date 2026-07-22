@@ -1,2 +1,3 @@
 #include "Actors/FlamerEffects.dec"
 #include "Actors/Flares.dec"
+#include "Actors/KeyGiver.dec"
