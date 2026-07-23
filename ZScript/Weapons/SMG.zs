@@ -31,8 +31,9 @@ Class MO_SubMachineGun : MO_Weapon
 	}
 
 	action void MO_FireSMG()
-	{		
-			if (!invoker.DepleteAmmo(false, true)) {return;}
+	{
+			MO_UseAmmo(1);
+//			if (!invoker.DepleteAmmo(false, true)) {return;}
 			A_FireBullets(5.6, 0, 1, 10, "UpdatedBulletPuff",FBF_NORANDOM, 0,"MO_BulletTracer",0);
 			A_StartSound("weapons/smg/fire", 0);
 			A_AlertMonsters();
@@ -117,7 +118,11 @@ Class MO_SubMachineGun : MO_Weapon
         Fire:
 			SM5G A 0 MO_JumpIfLessAmmo(1,"Empty");
 			SM5G A 0 A_JumpIf(invoker.isZoomed, "Fire2");
-            SM5F A 1 BRIGHT MO_FireSMG;
+            SM5F A 1 BRIGHT 
+			{
+				MO_FireSMG();
+				MO_GunFlash(alp: frandom(0.8, 1.0));
+			}
             SM5F B 1 BRIGHT 
 			{
 				JM_GunRecoil(-0.4, .03);
@@ -131,7 +136,11 @@ Class MO_SubMachineGun : MO_Weapon
 
 		Fire2:
 			SM5G A 0 MO_JumpIfLessAmmo(1,"Empty");
-		    SM5Z E 1 BRIGHT MO_FireSMG;
+		    SM5Z E 1 BRIGHT 
+			{
+				MO_FireSMG();
+				A_Overlay(-5, "ZoomedFlash", true);
+			}
             SM5Z F 1 BRIGHT 
 			{
 				JM_GunRecoil(-0.2, .03);
@@ -160,6 +169,25 @@ Class MO_SubMachineGun : MO_Weapon
 				return JM_WeaponReady(WRF_NOFIRE|WRF_ALLOWRELOAD);
 			}
             Goto Ready2;
+
+		MuzzleFlash:
+			TNT1 A 0 A_Jump(128, "MuzzleFlash2", "MuzzleFlash3");
+			SM5M A 1 BRIGHT;
+			Stop;
+		MuzzleFlash2:
+			SM5M B 1 BRIGHT;
+			Stop;
+		MuzzleFlash3:
+			SM5M C 1 BRIGHT;
+			Stop;
+
+		ZoomedFlash:
+			TNT1 A 0 A_Jump(128, "ZoomedFlash2");
+			SMZM A 1 BRIGHT;
+			Stop;
+		ZoomedFlash2:
+			SMZM B 1 BRIGHT;
+			Stop;
 
 		Flash:
 			TNT1 A 2 A_AttachLightDef('GunLighting', 'GunFireLight');

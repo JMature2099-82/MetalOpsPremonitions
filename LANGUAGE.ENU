@@ -226,7 +226,7 @@ TAG_MO_BFG9000 = "BFG9K";
 MO_XHAIR_BFG10KMODE = "BFG9K 10K Mode";
 OBMO_BFG9000  = "\cg%o\c- felt the extreme power of \cy%k's\c- BFG9K.";
 OBMO_BFG9000SPLSH = "\cg%o\c- couldn't escape from \cy%k's\c- BFG9K.";
-OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG10K.";
+OBMO_BFG10K = "\cg%o\c- got vaporized by \cy%k's\c- BFG9K's BFG10K shots.";
 
 //Heavy Combat Rifle
 TAG_HEAVYRIFLE = "Heavy Marksman Rifle";

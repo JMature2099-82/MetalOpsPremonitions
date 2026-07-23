@@ -113,6 +113,15 @@ extend class MO_Weapon
         }
 	}
 
+	action void MO_GunFlash(int layer = -100, double alp = 1.0, statelabel state = "MuzzleFlash")
+	{
+			A_Overlay(layer, state);
+			A_OverlayFlags(layer, PSPF_RENDERSTYLE|PSPF_FORCEALPHA, true);
+			A_OverlayRenderstyle(layer, STYLE_ADD);
+			A_OverlayAlpha(OverlayID(), alp);
+	}
+	
+
 //Holy shit I can't believe I got this working
 	int GetXHair(int w)
 	{
