@@ -4,6 +4,7 @@ class ChainswordSwingLeft : MO_Token{}
 
 class MO_Chainsword: MO_Weapon
 {
+	bool swingLeft;
 	Default	
 	{
 		Weapon.KickBack 0;
@@ -18,6 +19,12 @@ class MO_Chainsword: MO_Weapon
 		+WEAPON.NOAUTOFIRE;
 	}
 
+	override void PostBeginPlay()
+	{
+		Super.PostBeginPlay();
+		swingLeft = false;
+	}
+
 //This is a shortcut function for the chainsword's sawing attack when the attack buttons are released.
 //attack = the button used for attack. Example: BT_ATTACK
 //st = The state label to jump to when the attack button is released.
@@ -29,6 +36,16 @@ class MO_Chainsword: MO_Weapon
 			}
 		else
 		{SetWeaponState(st);}
+	}
+
+	action state MO_CSwordSwingRefire()
+	{
+		if(PressingAltFire())
+		{
+			if(invoker.swingLeft) {return ResolveState("Swing2");}
+			else {return ResolveState("Swing1");}
+		}
+		return ResolveState(null);
 	}
 
 	action void MO_CSwordBash()
@@ -176,10 +193,11 @@ class MO_Chainsword: MO_Weapon
 		CSW1 E 1;
 	SwingFinished:
 		CSW1 FG 1;
-		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",1);
+	CheckSwingAfterFinish:
+		TNT1 A 0 {invoker.swingLeft = !invoker.swingLeft;}
 		TNT1 A 8 MO_SetHasteTics(4);
-		TNT1 A 0 A_Refire("Swing2");
-		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",0);
+		TNT1 A 0 MO_CSwordSwingRefire();
+		TNT1 A 0 {invoker.swingLeft = false;}
 		TNT1 A 0 A_StopSound(6);
 		TNT1 A 0 A_StartSound("Chainsword/Stop",6);
 		CSWG KJI 1;
@@ -205,13 +223,7 @@ class MO_Chainsword: MO_Weapon
 		CSW2 E 1;
 	Swing2Finished:
 		CSW2 FG 1;
-		TNT1 A 0 A_SetInventory("ChainswordSwingLeft",0);
-		TNT1 A 8 MO_SetHasteTics(4);
-		TNT1 A 0 A_Refire("Swing1");
-		TNT1 A 0 A_StopSound(6);
-		TNT1 A 0 A_StartSound("Chainsword/Stop",6);
-		CSWG KJI 1;
-		Goto Ready;
+		Goto CheckSwingAfterFinish;
 
 	SwingHit2Loop:
 		CSW2 H 1 MO_CSwordAttack(BT_ALTATTACK, "SwingHit2End");

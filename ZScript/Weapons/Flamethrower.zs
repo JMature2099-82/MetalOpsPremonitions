@@ -287,13 +287,16 @@ Class FlamethrowerAttack : Actor
 				A_SetScale(Scale.X+0.04, Scale.Y+0.04);
 				A_Explode(1, 85, 0);
 			}
-			TNT1 A 0 A_SpawnItemEx("FlamerAttackExplosion",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			Stop;
 		Death:
+			TNT1 A 0 
+			{
+					A_Explode(8, 150, 0);
+					A_SpawnProjectile ("FlamerAttackParticles", 6, 0, random (0, 360), 2, random (10, 90));
+					A_SpawnItemEx("GroundFlameSpawner",random (-25, 25), random (-15, 15),0,5);
+			}
 			TNT1 A 0 A_Explode(8, 150, 0);
-			TNT1 A 0 A_CheckFloor(1);
-			TNT1 A 0 A_SpawnItemEx("GroundFlameSpawner",random (-25, 25), random (-15, 15),0,5);
-			TNT1 A 0 A_SpawnItemEx("FlamerAttackExplosion",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+			TNT1 AAA 0;
+			DB54 EFGHIJKLMNOPQR 1 BRIGHT;
 			Stop;
     }
 }
@@ -334,12 +337,15 @@ Class IceThrowerAttack : FlamethrowerAttack
 				A_SetScale(Scale.X+0.04, Scale.Y+0.04);
 				A_Explode(1, 85, 0);
 			}
-			TNT1 A 0 A_SpawnItemEx("IcethrowerAttackExplosion",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
 
 		Death:
-			TNT1 A 0 A_Explode(8, 150, 0);
-			TNT1 A 0 A_SpawnItemEx("IcicleSpawner",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
-			TNT1 A 1 A_SpawnItemEx("IcethrowerAttackExplosion",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+			TNT1 A 0 
+			{
+					A_Explode(8, 150, 0);
+					A_SpawnProjectile ("IceThrowerAttackParticles", 6, 0, random (0, 360), 0, random (10, 90));
+					A_SpawnItemEx("IcicleSpawner",0,0,0,0,0,0,SXF_NOCHECKPOSITION,0);
+			}
+			DB54 EFGHIJKLMNOPQR 1 BRIGHT;
 			Stop;
 	}
 }
