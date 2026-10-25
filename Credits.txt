@@ -47,7 +47,6 @@ to create this
 - PillowBlaster - Trailblazer styled fast attack for the Katana, and inspiration
 - Endie aka Moa Dixon - Some resources from Hellrider and Slayer's Rampage used.
 - Ravik - Some sounds taken from his add-on Raviks Badass Sounds for PB 3.0.
-- ToxicFrog - LibToolTipMenu
 - Alexander 'm8f' Kromm - Precise Crosshair
 - Gemini0 - Player.AttackZOffset fix
 - XxSwag masterxX - New mod logo! THANKS!

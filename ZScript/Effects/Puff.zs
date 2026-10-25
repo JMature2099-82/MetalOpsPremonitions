@@ -20,8 +20,8 @@ Class MO_BulletPuff : BulletPuff //Inherits from base BulletPuff to fix a sound 
 	States
 	{
 		Spawn:
-		NULL A 0;
-		NULL A 0 A_SpawnItemEX("BulletImpactSmoke");
+		TNT1 A 0;
+		TNT1 A 0 A_SpawnItemEX("BulletImpactSmoke");
 		SPRK AAA 0 A_SpawnProjectile("MO_RocketSmokeTrail", 2, 0, random(0, 360), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: random(0, 360));
 		SPRK A 0 A_SpawnItemEx("SparkSpray", 2, 0, 0, 0, 0, 0, 0);
 		SPRK A 0 A_SpawnItemEx("GunsmokeSpray", -2, random(-2, 2), random(-2, 2), 0, 1.5+random(0,10)*0.1, random(-5,5)*0.1, 0);
@@ -34,7 +34,7 @@ Class MO_BulletPuff : BulletPuff //Inherits from base BulletPuff to fix a sound 
 			{return resolvestate("NoSound");}
 			return resolvestate(null);
 		}
-		NULL A 0 A_StartSound("ricochet",7);
+		TNT1 A 0 A_StartSound("ricochet",7);
 		NoSound:
 		TNT1 A 1 A_SpawnItemEx("BulletRicochet",0,0,0,0,0,0);
 		TNT1 A 1 BRIGHT;
@@ -123,8 +123,8 @@ class ShotgunPuff20GA : ShotgunShellPuff
 	States
 	{
 		Spawn:
-		NULL A 0;
-		NULL A 0 A_SpawnItemEX("BulletImpactSmoke");
+		TNT1 A 0;
+		TNT1 A 0 A_SpawnItemEX("BulletImpactSmoke");
 		SPRK A 0 A_SpawnItemEx("SparkSpray", 2, 0, 0, 0, 0, 0, 0);
 		SPRK AAA 0 A_SpawnProjectile("MO_RocketSmokeTrail", 2, 0, random(0, 360), flags:CMF_AIMDIRECTION|CMF_ABSOLUTEPITCH|CMF_OFFSETPITCH, pitch: random(0, 360));
 		SPRK A 0 A_SpawnItemEx("LittleGunsmokeSpray", -2, random(-2, 2), random(-2, 2), 0, 1.5+random(0,10)*0.1, random(-5,5)*0.1, 0);
@@ -137,7 +137,7 @@ class ShotgunPuff20GA : ShotgunShellPuff
 			{return resolvestate("NoSound");}
 			return resolvestate(null);
 		}
-		NULL A 0 A_StartSound("ricochet",7);
+		TNT1 A 0 A_StartSound("ricochet",7);
 		NoSound:
 		TNT1 A 1 A_SpawnItemEx("BulletRicochet",0,0,0,0,0,0);
 		TNT1 A 1 BRIGHT;
@@ -287,7 +287,7 @@ Class MO_BulletTracer : FastProjectile
 		TRAC A 1 bright;
 		loop;
 	Death:
-		NULL A 0;
+		TNT1 A 0;
 		stop;
 	}
 }

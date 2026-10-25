@@ -58,16 +58,13 @@ LISTMENU "MainMenu"
 
 OptionMenu "MetalOpsMenu"
 {
-	class TF_TooltipOptionMenu
-	TooltipGeometry 0.5, 0.0, 2.0, 1.0, 0.5
-	TooltipAppearance "", "", "tfttbg"
 	Title "$MO_MOPSETTINGS"
 
 	StaticText ""
 	StaticText "$MO_PREFERENCE", Yellow
 	StaticText ""
 	Submenu "$NCH_OPTMNU_TITLE", "NCHUD"
-	ToolTip "Metal Ops: Premonitions HUD Options \cn(NCHUD by BlueShadow)"
+	ToolTip "$NCH_OPTMNU_TOOLTIP"
 	StaticText ""
 	SubMenu "$FPP_TITOP", "FlashlightPlusOptions"
 	ToolTip "Flashlight++ options (by GenericNameGuy)"
@@ -76,7 +73,7 @@ OptionMenu "MetalOpsMenu"
 	ToolTip "Customizable Crosshairs option menu"
 	StaticText ""
 	SubMenu "$PC_TITLE", pc_Menu
-	ToolTip "Precise Crosshairs option menu \cd(by m8f)"
+	ToolTip "$PC_TOOLTIP"
 	StaticText ""
 
 	StaticText "$MO_SHORTCUTS", Yellow
@@ -102,7 +99,6 @@ OptionMenu "MetalOpsMenu"
 	StaticText ""
 	Option "$MO_ADSOPT", "mo_aimmode", "ADSControl"
 	Tooltip "$MO_ADSTIP"
-	Tooltip "$MO_ADSTIP_CHAINGUN"
 	StaticText ""
 	Option "$MO_WEPRECOIL", "mo_nogunrecoil", "OffOn"
 	Tooltip "$MO_RECOIL_TIP"
@@ -113,7 +109,6 @@ OptionMenu "MetalOpsMenu"
 	StaticText ""
 	Option "NVG Shader scanlines", "mo_nvscanlines", "OnOff"
 	ToolTip "$MO_SCAN_TIP"
-	ToolTip "$MO_NVISTIP_NOTICE"
 	StaticText ""
 	Option "$MO_DISCORD_PRESENCE", "i_discordrpc","YesNo"
 	ToolTip "$MO_DISCORD_TIP"
@@ -123,9 +118,6 @@ OptionMenu "MetalOpsMenu"
 
 OptionMenu pc_Menu
 {
-  class TF_TooltipOptionMenu
-  TooltipGeometry 0.5, 0.0, 2.0, 1.0, 0.5
-  TooltipAppearance "", "", "tfttbg"
   Title      "$PC_TITLE"
   
   StaticText "$PC_ENGINE"          , 1
@@ -315,16 +307,11 @@ OptionMenu "NCH_GeneralOptions"
 
 OptionMenu "NCH_AmmoListOptions"
 {
-	class TF_TooltipOptionMenu
-	TooltipGeometry 0.5, 0.25, 2.0, 1.0, 0.5
-	TooltipAppearance "", "", "tfttbg"
-
 	Title "$NCH_OPTMNU_AMMOLIST"
 	Option "$NCH_OPTION_DRAWMODE", "nchud_toggleammo", "NCH_AmmoListDrawModes"
-	ToolTip "Off: The ammo list is not drawn. \n\cfOwned weapons\c-: Only displays owned weapons. \n\cyAll\c-: Displays all of the ammo list."
-	ToolTip "\cyI recommend setting this to All!"
+	ToolTip "$NCH_TOOLTIP_DRAWMODE"
 	Option "$NCH_OPTION_AMMOLISTOVERRIDE", "nchud_allowammolistoverride", "YesNo", "nchud_toggleammo"
-	ToolTip "\cyHAVE THIS OPTION ON YES TO DISPLAY RESERVE AMMO ONLY!"
+	ToolTip "$NCH_TOOLTIP_AMMOLISTOVERRIDE"
 	
 }
 

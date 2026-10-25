@@ -12,7 +12,7 @@ Class FlameTrails : Actor
 		+FORCEXYBILLBOARD;
 		+CLIENTSIDEONLY;
 		+THRUACTORS;
-		+DOOMBOUNCE;
+		BounceType "Doom";
 		RenderStyle "Add";
 		damagetype "fire";
 		Scale 0.5;
@@ -153,7 +153,7 @@ Class MO_ExplosionFlames: FlameTrails
 	{
 	Scale 2.2;
 	Speed 2;
-	+DOOMBOUNCE;
+	BounceType "Doom";
 	}
 	States
 	{

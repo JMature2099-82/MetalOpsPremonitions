@@ -211,8 +211,8 @@ Class MO_BFGBall : BFGBall replaces BFGBall
   States
   {
   Spawn:
-    NULL A 0;
-	NULL A 0 A_StartSound("weapons/bfg/ballfly",6,CHANF_LOOPING,1);
+    TNT1 A 0;
+	TNT1 A 0 A_StartSound("weapons/bfg/ballfly",6,CHANF_LOOPING,1);
 	TNT1 A 0
 	{
 		for(int i = 3; i > 0; i--)
@@ -225,22 +225,22 @@ Class MO_BFGBall : BFGBall replaces BFGBall
     BFS1 AB 2 bright Light("BFGBallLight") A_SpawnItem("BFGTrail");
     loop;
   Death:
-    NULL A 0;
-	NULL A 0 A_StartSound("weapons/bfg/explosionfar",7,CHANF_DEFAULT,0.65);
-	NULL A 0 A_StopSound(6);
-    NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
-	NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
-	NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
-	NULL AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
-    NULL A 0;
-	NULL A 0 A_Explode(250, 200,0);
+    TNT1 A 0;
+	TNT1 A 0 A_StartSound("weapons/bfg/explosionfar",7,CHANF_DEFAULT,0.65);
+	TNT1 A 0 A_StopSound(6);
+    TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
+	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_SpawnItemEx("BFGParticle", 0,0,0, (Random(-5,5)), (Random(-5,5)), (Random(-5,5)), 0, SXF_ABSOLUTEMOMENTUM|SXF_NOCHECKPOSITION);
+    TNT1 A 0;
+	TNT1 A 0 A_Explode(250, 200,0);
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG8", 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG2", 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG3", 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 112);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningLarge", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 144);
-	NULL A 0 A_SpawnItem("BFGExplosion");
-	NULL A 0 A_SpawnItem("MO_GreenShockWave");
+	TNT1 A 0 A_SpawnItem("BFGExplosion");
+	TNT1 A 0 A_SpawnItem("MO_GreenShockWave");
 	TNT1 A 4 bright;
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningLarge", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
@@ -258,26 +258,26 @@ Class MO_BFGBall : BFGBall replaces BFGBall
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG5", 0, -24, 0, 0, 0, 0, 0, 0, 0)
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG5", 0, 24, 0, 0, 0, 0, 0, 0, 0)
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningHuge", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 112);
-    NULL A 8 bright A_BFGSpray;  // See BFGExtra	
+    TNT1 A 8 bright A_BFGSpray;  // See BFGExtra	
 	TNT1 AAAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 192);
-	NULL A 3 bright;
+	TNT1 A 3 bright;
 	TNT1 AAAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 192);
-	NULL A 3 bright;
+	TNT1 A 3 bright;
 	TNT1 AAAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 192);
-	NULL A 10 bright;
+	TNT1 A 10 bright;
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 192);
-	NULL A 3 bright;
+	TNT1 A 3 bright;
 	TNT1 AAAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningMedium", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 192);
-	NULL A 3 bright;
+	TNT1 A 3 bright;
 	TNT1 AAAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);
     stop;
@@ -300,7 +300,7 @@ class BFGExplosion : BaseVisualSFX
   Spawn:
     TNT1 A 0;
 	TNT1 A 0 A_SpawnItemEx("GreenExplosionFlare", 0, 0, 6, 0, 0, 0, 0, 0, 0);
-	//NULL A 0 A_SpawnItem("BoomGreen")
+	//TNT1 A 0 A_SpawnItem("BoomGreen")
     TNT1 AAAAAAAAAAAAAA 0 A_SpawnItemEx("LLGreenFireLarge", Random(-3, 3), Random(-8, 8), Random(-3, 3), (0.01)*Random(-90, 90), (0.016)*Random(-90, 90), (0.01)*Random(-90, 90), 0, SXF_NOCHECKPOSITION, 8);
     BFGB ABCDEFG 2 Bright A_FadeOut(0.05);
     stop;
@@ -319,7 +319,7 @@ class BFG10KExplosion : BFGExplosion
   Spawn:
     TNT1 A 0;
 	TNT1 A 0 A_SpawnItemEx("GreenExplosionFlare", 0, 0, 6, 0, 0, 0, 0, 0, 0);
-	//NULL A 0 A_SpawnItem("BoomGreen")
+	//TNT1 A 0 A_SpawnItem("BoomGreen")
     TNT1 AAAAAAA 0 A_SpawnItemEx("LLGreenFireLarge", Random(-3, 3), Random(-8, 8), Random(-3, 3), (0.01)*Random(-90, 90), (0.016)*Random(-90, 90), (0.01)*Random(-90, 90), 0, SXF_NOCHECKPOSITION, 8);
     BFGB ABCDEFG 1 Bright;
     stop;
@@ -350,7 +350,7 @@ Class BFGParticle : Actor
 	  +NOTELEPORT;
 	  +ForceXYBillboard;
 	  +CLIENTSIDEONLY;
-	  +Doombounce;
+	  BounceType "Doom";
 	  +missile;
 	  +THRUACTORS;
 	  +dontsplash;
@@ -381,14 +381,14 @@ class MO_BFGExtra : BFGExtra replaces BFGExtra
   States
   {
   Spawn:
-    NULL A 0;
-	NULL A 0;//A_SpawnDebris("GreenPlasmaSpark");
-	NULL A 0;// A_SpawnItem("GreenPlasmaSmoke");
-	NULL A 0 A_SpawnItem("GreenExplosionFlareSmallFaded");
+    TNT1 A 0;
+	TNT1 A 0;//A_SpawnDebris("GreenPlasmaSpark");
+	TNT1 A 0;// A_SpawnItem("GreenPlasmaSmoke");
+	TNT1 A 0 A_SpawnItem("GreenExplosionFlareSmallFaded");
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG2", 0, 0, 0, 0, 0, 0, 0, 0, 0)
 	//TNT1 A 0 A_SpawnItemEx("GreenFlareBFG3", 0, 0, 0, 0, 0, 0, 0, 0, 0)
 	TNT1 AAAAAAAAAAAAAA 0 A_SpawnItemEx("LLGreenFireSmall", Random(-3, 3), Random(-4, 4), Random(-3, 3), (0.01)*Random(-90, 90), (0.01)*Random(-90, 90), (0.01)*Random(-90, 90), 0, SXF_NOCHECKPOSITION, 8);
-	//NULL A 0 A_SpawnItem("BoomGreenSmall")
+	//TNT1 A 0 A_SpawnItem("BoomGreenSmall")
 	BFXF A 6 bright Light("BFGXLight1");
 	TNT1 AAA 0 A_SpawnItemEx("GreenLightningTiny", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 96);
 	TNT1 AA 0 A_SpawnItemEx("GreenLightningSmall", Random(-8, 8), Random(-8, 8), Random(-8, 8), 0, 0, 0, 0, 0, 128);

@@ -263,7 +263,7 @@ Class BlackSmokeFromFire : Actor
     +CLIENTSIDEONLY
     +NOINTERACTION
 	+NOGRAVITY
-	+DOOMBOUNCE
+	BounceType "Doom";
 	+THRUACTORS
 	Health 99999;
 	BounceFactor 0.5;

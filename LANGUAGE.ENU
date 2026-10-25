@@ -23,7 +23,7 @@ NCH_LABEL_HEATLEVEL = "Heat Level";
 // Used by Faspons patch.
 NCH_LABEL_ADRENALINE = "Adrenaline";
 
-// Used by MetaDoom patch.f
+// Used by MetaDoom patch.
 NCH_LABEL_POINTS = "P";
 
 // ------------------------------------------------------------------------------------------------
@@ -33,6 +33,7 @@ NCH_LABEL_POINTS = "P";
 // ------------------------------------------------------------------------------------------------
 
 NCH_OPTMNU_TITLE = "Metal Ops HUD Options";
+NCH_OPTMNU_TOOLTIP = "Metal Ops: Premonitions HUD Options\n\cn(NCHUD by BlueShadow)";
 
 NCH_OPTVAL_COUNTERS = "Counters";
 NCH_OPTVAL_COUNTERS_AND_PRC = "Counters and %";
@@ -57,7 +58,9 @@ NCH_OPTION_RECDMG = "Received damage";
 NCH_OPTION_AIRBAR = "Air supply bar";
 NCH_OPTION_APOWERUPS = "Active powerups";
 NCH_OPTION_DRAWMODE = "Draw mode";
+NCH_TOOLTIP_DRAWMODE = "Off: The ammo list is not drawn.\n\cfOwned weapons\c-: Only displays owned weapons.\n\cyAll\c-: Displays all of the ammo list.\n\cyI recommend setting this to All!";
 NCH_OPTION_AMMOLISTOVERRIDE = "Allow list override?";
+NCH_TOOLTIP_AMMOLISTOVERRIDE = "\cyHAVE THIS OPTION ON YES TO DISPLAY RESERVE AMMO ONLY!";
 NCH_OPTION_MODE = "Mode";
 NCH_OPTION_BARMAXOUT = "Bar maxes out at";
 NCH_OPTION_HEALTH = "Health";
@@ -80,6 +83,7 @@ NCH_AMMOLISTSHORT = "Override ammo list shortcut and draw all";
 //------------------------------------------------------------------
 
 PC_TITLE  = "Precise Crosshair";
+PC_TOOLTIP = "Precise Crosshairs option menu\n\cd(by m8f)";
 
 PC_ENGINE = "Engine Crosshair Options";
 PC_OFF    = "This must be OFF:";
@@ -260,18 +264,18 @@ SECRETMESSAGE4 = "You found a secret area!";
 //Metal Ops Options
 MNU_MOSETTINGS = "Metal Ops Settings";
 MO_MOPSETTINGS = "Metal Ops: Premonitions Settings";
-MO_SHORTCUTS = " ----------------------------------- Mod and GZDOOM Shortcuts -----------------------------------";
+MO_SHORTCUTS = " ----------------------------------- Mod and UZDoom Shortcuts -----------------------------------";
 MO_PREFERENCE = "----------------------------------- Preferences -----------------------------------";
 MO_GAMEPLAY = "----------------------------------- Gameplay Options -----------------------------------";
 
 //Shortcuts
-MO_SHORTCUT_DISABLEGZNIGHT = "Disable GZDoom's enhanced night vision";
+MO_SHORTCUT_DISABLEGZNIGHT = "Disable UZDoom's enhanced night vision";
 MO_SHORTCUT_GZNIGHTTIP = "Click this option in order for the Night Vision shaders to work!";
 MO_SHORTCUT_AMMOLISTTIP = "Click on this to get the reserve ammo bars!";
 MO_SHORTCUT_CLEANMENUTIP = "Turn this option off to scale title screen properly, and leave this option off.";
 
 //Preference Options
-MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
+MO_CROSSHAIR_SHORTCUT = "UZDoom Crosshair Option Menu to apply to Custom Crosshairs";
 MO_CROSSHAIR_SLIDER = "Crosshair Settings";
 
 //Gameplay Option Values
@@ -287,19 +291,16 @@ MO_ADSHYBRID = "Hybrid (BDv21 aim style)";
 MO_CROSSHAIR_SLIDER = "Crosshair Settings";
 MO_ADSOPT = "ADS/Minigun Spin Control Type";
 MO_DISCORD_PRESENCE = "Discord rich presence";
-MO_CROSSHAIR_SHORTCUT = "GZDoom Crosshair Option Menu to apply to Custom Crosshairs";
+MO_CROSSHAIR_SHORTCUT = "UZDoom Crosshair Option Menu to apply to Custom Crosshairs";
 MO_WEPRECOIL = "Weapon Recoil";
 
 //Tips for options
-MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility. \n\cdGreen Phosphor: \c-The classic green that everyone knows and loves." ;
-MO_NVISTIP_NOTICE = "Disable GZDoom's enhanced night vision before using these. A shortcut is above on \"\ckMod and GZDOOM Shortcuts\c-\".";
-MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
-MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want too.";
-MO_ADSTIP = "\cuToggle\c-: Click alt fire once to aim down the sights, click alt fire again to to unzoom. \n\csHold\c-: Click alt fire to aim down the sights, release to unzoom. \n\cmHybrid\c-: Based on BDv21's system that combines both Toggle and Hold." ;
-MO_ADSTIP_CHAINGUN = "\cfChaingun\c-: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both.";
+MO_NVISTIP = "\czWhite Phosphor: \c-A modern teal color, may have better visibility\n\cdGreen Phosphor: \c-The classic green that everyone knows and loves";
+MO_SSGTIP = "The SSG will randomly spawn in place of the Shotgun. \n\cuThis option should only be used if you're playing Doom 1 or Freedoom Phase 1 if you want to.";
+MO_ADSTIP = "\cuToggle\c-: Click alt fire once to aim down the sights, click alt fire again to to unzoom.\n\csHold\c-: Click alt fire to aim down the sights, release to unzoom.\n\cmHybrid\c-: Based on BDv21's system that combines both Toggle and Hold.\n\cfChaingun\c-: Toggle is pressing once to spin the barrel, and press again to stop. \nHold is pressing once to spin the barrel, release to stop it. Hybrid combines both." ;
 MO_RICOCHET_TIP = "Toggle the bullet ricochet sounds when bullet based hitscan attacks hit the wall, ceiling or floor.";
-MO_RECOIL_TIP = "Enables/disables recoil on shootable weapons. \nIf you're not using mouse look, set this option to OFF!";
-MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders";
+MO_RECOIL_TIP = "Enables/disables recoil on shootable weapons.\nIf you're not using mouse look, set this option to OFF!";
+MO_SCAN_TIP = "Enable/Disable scanlines on night vision shaders.\nDisable UZDoom's enhanced night vision before using these.\nA shortcut is above on \"\ckMod and UZDoom Shortcuts\c-\".";
 MO_DISCORD_TIP = "Enable/Disable Discord Rich Presence";
 
 
@@ -408,5 +409,5 @@ FPP_NOISE = "Noise";
 FPP_NOISE_DESC = "The light flickers according to the minimum set in the option below";
 FPP_NOISE_MIN = "Minimum noise";
 FPP_INTERPOLATE = "Interpolate Movement";
-FPP_INTERPOLATE_DESC = "Control whether GZDoom's movement interpolation should be used";
+FPP_INTERPOLATE_DESC = "Control whether UZDoom's movement interpolation should be used";
 FPP_INTERPOLATE_DESC2 = "Will make the light look jerky when moving quickly";

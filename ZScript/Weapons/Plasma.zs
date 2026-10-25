@@ -522,10 +522,10 @@ class JM_PlasmaBall : FastProjectile replaces PlasmaBall
 		PB01 ABCDE 1 Bright Light("PlasmaBallLight");
 		Loop;
 	Death:
-	    NULL A 0;
-		NULL A 0 A_Scream();
-		NULL A 0; //A_SpawnDebris("PlasmaSpark")
-		NULL A 0 A_SpawnItem("MO_PlasmaSmoke");
+	    TNT1 A 0;
+		TNT1 A 0 A_Scream();
+		TNT1 A 0; //A_SpawnDebris("PlasmaSpark")
+		TNT1 A 0 A_SpawnItem("MO_PlasmaSmoke");
 		TNT1 A 0; //bright A_SpawnItem("BoomBlue")
 		TNT1 AAA 0 A_SpawnItemEx("BlueLightningMini", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 64);
 		TNT1 AA 0 A_SpawnItemEx("BlueLightningTiny", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 128);
@@ -552,10 +552,10 @@ class JM_HeatedPlasmaBall : JM_PlasmaBall
 		PB02 ABCDE 1 Bright Light("HeatedPlasmaBallLight");
 		Loop;
 	Death:
-		NULL A 0;
-		NULL A 0; //A_SpawnDebris("PlasmaSpark")
-		NULL A 0 A_Scream();
-		NULL A 0 A_SpawnItem("MO_PlasmaSmoke");
+		TNT1 A 0;
+		TNT1 A 0; //A_SpawnDebris("PlasmaSpark")
+		TNT1 A 0 A_Scream();
+		TNT1 A 0 A_SpawnItem("MO_PlasmaSmoke");
 		TNT1 A 0; //bright A_SpawnItem("BoomBlue")
 		TNT1 AAA 0 A_SpawnItemEx("RedLightningMini", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 64);
 		TNT1 AA 0 A_SpawnItemEx("RedLightningTiny", Random(-4, 4), Random(-4, 4), Random(-4, 4), 0, 0, 0, 0, 0, 128);
@@ -581,8 +581,8 @@ class PlasmaExplosion : BaseVisualSFX
 	States
 	  {
 	  Spawn:
-		NULL A 0;
-		NULL A 0; //A_SpawnItem("BlueExplosionFlare")
+		TNT1 A 0;
+		TNT1 A 0; //A_SpawnItem("BlueExplosionFlare")
 		PLXP ABCDEFGH 2 Bright A_FadeOut(0.05);
 		stop;
 	  }
@@ -593,8 +593,8 @@ class HeatedPlasmaExplosion : PlasmaExplosion
 	States
 	  {
 	  Spawn:
-		NULL A 0;
-		NULL A 0; //A_SpawnItem("BlueExplosionFlare")
+		TNT1 A 0;
+		TNT1 A 0; //A_SpawnItem("BlueExplosionFlare")
 		PHXP ABCDEFGH 2 Bright A_FadeOut(0.05);
 		stop;
 	  }
